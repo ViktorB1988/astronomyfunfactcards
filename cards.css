@@ -1,9 +1,11 @@
 /* ============================================================
    Astronomy fact cards – print layout
    Three formats from one data source:
-     .f-a6   105 x 148,5  mm   4 cards per A4 sheet (2 x 2)
-     .f-a6q  148,5 x 105  mm   4 cards per A4 sheet, landscape
-     .f-a7   105 x  74,25 mm   8 cards per A4 sheet (2 x 4)
+     .f-a6    97 x 140,5  mm   4 cards per A4 sheet (2 x 2)
+     .f-a6q  140,5 x  97  mm   4 cards per A4 sheet, landscape
+     .f-a7    97 x  70,25 mm   8 cards per A4 sheet (2 x 4)
+   Sizes follow from A4 minus the printer margin, not from the DIN
+   series - see the note on --rand below.
    Strictly black and white: under red light only neutral greys stay
    distinguishable, colours do not.
    ============================================================ */
@@ -28,21 +30,37 @@ html, body {
 
 /* ---------- Sheet ---------- */
 
+/* The card block is inset from the paper edge by --rand. No consumer
+   printer reaches the edge - every one of them keeps 3 to 5 mm to itself -
+   and a layout that fills the sheet exactly leaves the driver two choices,
+   both bad: shrink everything to fit, or clip. Shrinking is the usual one,
+   and it is what makes the outer cards end up a different size from the
+   inner ones: the inner edges are cut on the printed lines, the outer ones
+   are not cut at all and keep the white frame the driver added.
+
+   With the margin every cut line is printable, all four sides of every
+   card are cut, and the result stops depending on what the driver decided.
+   The cards are no longer exactly A7 or A6 - that is the price.
+
+   RAND in build_cards.py has to carry the same number, since it places the
+   cut lines where this padding leaves room. The build checks that. */
 .sheet {
+  --rand: 8mm;
   position: relative;
   width: 210mm; height: 297mm;
+  padding: var(--rand);
   display: grid;
   page-break-after: always;
   overflow: hidden;
 }
 .sheet:last-child { page-break-after: auto; }
 
-.sheet.f-a6 { grid-template-columns: 105mm 105mm; grid-template-rows: 148.5mm 148.5mm; }
-.sheet.f-a7 { grid-template-columns: 105mm 105mm; grid-template-rows: repeat(4, 74.25mm); }
+.sheet.f-a6 { grid-template-columns: 97mm 97mm; grid-template-rows: 140.5mm 140.5mm; }
+.sheet.f-a7 { grid-template-columns: 97mm 97mm; grid-template-rows: repeat(4, 70.25mm); }
 
 /* A6 landscape: the sheet itself is turned */
 .sheet.landscape { width: 297mm; height: 210mm; }
-.sheet.f-a6q { grid-template-columns: 148.5mm 148.5mm; grid-template-rows: 105mm 105mm; }
+.sheet.f-a6q { grid-template-columns: 140.5mm 140.5mm; grid-template-rows: 97mm 97mm; }
 
 /* Cutting aids. Drawn as borders, never as filled areas: browsers only
    print background colours when "background graphics" is ticked in the
@@ -53,14 +71,18 @@ html, body {
 .cut.h { left: 0; right: 0; height: 0; margin-top: -0.1mm;
          border-top: 0.2mm solid #8c8c8c; }
 
+/* Registration marks fill the margin, from the paper edge in to the corner
+   of the card block. The stretch nearest the paper is what the printer
+   swallows, so the part that survives is the part that matters - the end
+   that meets the cut line. */
 .tick { position: absolute; z-index: 6; }
-.tick.v-top    { top: 0;    width: 0; height: 5mm; margin-left: -0.17mm;
+.tick.v-top    { top: 0;    width: 0; height: var(--rand); margin-left: -0.17mm;
                  border-left: 0.35mm solid #000; }
-.tick.v-bottom { bottom: 0; width: 0; height: 5mm; margin-left: -0.17mm;
+.tick.v-bottom { bottom: 0; width: 0; height: var(--rand); margin-left: -0.17mm;
                  border-left: 0.35mm solid #000; }
-.tick.h-left   { left: 0;   height: 0; width: 5mm; margin-top: -0.17mm;
+.tick.h-left   { left: 0;   height: 0; width: var(--rand); margin-top: -0.17mm;
                  border-top: 0.35mm solid #000; }
-.tick.h-right  { right: 0;  height: 0; width: 5mm; margin-top: -0.17mm;
+.tick.h-right  { right: 0;  height: 0; width: var(--rand); margin-top: -0.17mm;
                  border-top: 0.35mm solid #000; }
 
 /* ---------- Card, shared base ---------- */
@@ -95,7 +117,7 @@ sup { font-size: 0.62em; line-height: 0; vertical-align: 0.5em; }
 
 /* ---------- Format A6 ---------- */
 
-.f-a6 .card { width: 105mm; height: 148.5mm; padding: 10mm 10mm 10mm 10mm; }
+.f-a6 .card { width: 97mm; height: 140.5mm; padding: 8.5mm 8mm 8.5mm 8mm; }
 .f-a6 .card-head { padding-bottom: 2.5mm; margin-bottom: 5mm; gap: 4mm; }
 .f-a6 .theme  { font-size: 8.5pt; }
 .f-a6 .number { font-size: 30pt; }
@@ -113,10 +135,10 @@ sup { font-size: 0.62em; line-height: 0; vertical-align: 0.5em; }
 .f-a6 .more-text { font-size: 13pt; line-height: 1.35; }
 
 /* ---------- Format A6 landscape ---------- */
-/* Same area as A6 portrait, but a much wider text column: 128,5 instead
-   of 85 mm. That means fewer line breaks. */
+/* Same area as A6 portrait, but a much wider text column: 124,5 instead
+   of 81 mm. That means fewer line breaks. */
 
-.f-a6q .card { width: 148.5mm; height: 105mm; padding: 8mm 10mm 6.5mm 10mm; }
+.f-a6q .card { width: 140.5mm; height: 97mm; padding: 7mm 8mm 5.5mm 8mm; }
 .f-a6q .card-head { padding-bottom: 1.8mm; margin-bottom: 3.5mm; gap: 4mm; }
 .f-a6q .theme  { font-size: 8.5pt; }
 .f-a6q .number { font-size: 23pt; }
@@ -137,7 +159,7 @@ sup { font-size: 0.62em; line-height: 0; vertical-align: 0.5em; }
 /* Half the area of A6 – font sizes scale down accordingly. The footer is
    dropped, title and text move closer together. */
 
-.f-a7 .card { width: 105mm; height: 74.25mm; padding: 5.5mm 7mm 4.5mm 7mm; }
+.f-a7 .card { width: 97mm; height: 70.25mm; padding: 5mm 5.5mm 4mm 5.5mm; }
 .f-a7 .card-head { padding-bottom: 1.3mm; margin-bottom: 2.4mm; gap: 3mm; }
 .f-a7 .theme  { font-size: 6.2pt; }
 .f-a7 .number { font-size: 16pt; }

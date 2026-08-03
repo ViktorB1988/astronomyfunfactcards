@@ -985,7 +985,7 @@ function addCard(){
 
 /* ---------- Preview at real size ---------- */
 function drawRuler(){
-  const width = FORMATS[S.fmt].landscape ? 148.5 : 105;
+  const width = FORMATS[S.fmt].w;   // card width in mm, straight from the format
   const l = $("#ruler"); l.innerHTML = "";
   l.style.width = width + "mm";
   for (let mm = 0; mm <= width; mm += 5){

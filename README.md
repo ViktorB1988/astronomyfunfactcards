@@ -8,7 +8,10 @@ neutrale Graustufen bleiben lesbar.
 
 ## Dateien
 
-| Datei | Karten/Bogen | Bögen | Schriftgrad Fakt |
+Die Schriftgrade unten sind Anhaltswerte. Den genauen Bereich meldet
+`build_cards.py` bei jedem Lauf – er hängt am Text der Karten.
+
+| Datei | Karten/Bogen | Bögen | Schriftgrad Fakt ≈ |
 |---|---|---|---|
 | `astro-karten-A7.pdf` | 8 | 22 | 10,3–13,7 pt |
 | `astro-karten-A7-nur-fakt.pdf` | 8 | 22 | **13,3–14,1 pt** |
@@ -40,12 +43,15 @@ braucht, ist mit A6 besser bedient.
 
 | Format | Kartengröße | Bogen |
 |---|---|---|
-| A7 | 105 × 74,25 mm (quer) | A4 hoch, 8 Karten |
-| A6 hoch | 105 × 148,5 mm | A4 hoch, 4 Karten |
-| A6 quer | 148,5 × 105 mm | A4 quer, 4 Karten |
+| A7 | 97 × 70,25 mm (quer) | A4 hoch, 8 Karten |
+| A6 hoch | 97 × 140,5 mm | A4 hoch, 4 Karten |
+| A6 quer | 140,5 × 97 mm | A4 quer, 4 Karten |
+
+Die Maße sind **bewusst etwas kleiner als DIN A7 bzw. A6**. Rundherum
+bleiben 8 mm Rand – siehe [Schneiden](#schneiden).
 
 **A6 quer lohnt sich.** Die Fläche ist dieselbe wie bei A6 hoch, aber die
-Textspalte ist mit 128,5 statt 85 mm deutlich breiter. Das ergibt weniger
+Textspalte ist mit 124,5 statt 81 mm deutlich breiter. Das ergibt weniger
 Zeilenumbrüche und damit größere Schrift – vor allem bei den langen Karten:
 Der kleinste Schriftgrad steigt von 12,1 auf 14,3 pt, im Median von 15,1
 auf 16,5 pt. Ohne „Mehr dazu“ liegt A6 quer bei durchweg 18 pt und mehr.
@@ -83,7 +89,9 @@ Im Skript steht der Schalter als `DUPLEX` oben in `build_cards.py`.
 
 1. **Papier:** 250–300 g/m² Karton, **matt** (glänzend spiegelt Stirnlampen).
 2. **Skalierung: 100 % / „Tatsächliche Größe"** – *nicht* „An Seite anpassen".
-   Sonst stimmen die Schnittmarken nicht mehr.
+   Sonst stimmen die Maße nicht mehr. Seit die Bögen einen Rand haben,
+   ist ein versehentliches Verkleinern allerdings kein Beinbruch mehr:
+   die Karten werden dann gleichmäßig etwas kleiner, statt ungleich.
 3. **Einseitig** – außer bei den `-duplex`-Dateien, siehe oben.
    Die Einstellung „Hintergrundgrafiken" ist egal – die Schnittlinien
    sind Rahmen und drucken immer mit.
@@ -92,19 +100,32 @@ Im Skript steht der Schalter als `DUPLEX` oben in `build_cards.py`.
 
 Die Karten stehen fortlaufend auf dem Bogen, zeilenweise von links oben:
 A7-Bogen 1 trägt die Karten 1–8, Bogen 2 die Karten 9–16 und so weiter.
-Der letzte A7-Bogen enthält die Karten 97–100 und vier Leerfelder.
+Der letzte A7-Bogen trägt die Karten 169–170 und sechs Leerfelder.
 
 ## Schneiden
 
-- Schnittlinien: die feinen grauen Linien auf dem Bogen.
-  A7: eine senkrechte, drei waagerechte. A6: je eine.
+- **Alle vier Seiten werden geschnitten**, die außen liegenden
+  eingeschlossen. Rundherum stehen 8 mm Rand, der wegfällt.
+- Schnittlinien: die feinen grauen Linien auf dem Bogen. A7: drei
+  senkrechte, fünf waagerechte. A6: je drei.
   Abschaltbar über `CUT_LINES = False` in `build_cards.py`
   bzw. das Kästchen „Schnittlinien drucken" im Editor.
-- Zusätzlich schwarze Marken an den Bogenrändern zum Anlegen.
-- Außenkanten müssen nicht geschnitten werden – die Karten liegen
-  exakt auf dem A4-Raster.
+- Zusätzlich schwarze Marken im Rand zum Anlegen. Sie laufen von der
+  Papierkante bis zur Ecke des Kartenblocks; das äußere Stück schluckt
+  der Drucker, das innere bleibt stehen.
 - Mit Stapelschneider mehrere Bögen gleichzeitig: erst alle waagerechten
   Schnitte, dann die senkrechten.
+
+**Warum überhaupt ein Rand?** Kein Bürodrucker druckt bis an die
+Papierkante; 3 bis 5 mm bleiben immer frei. Ein Layout, das den Bogen
+exakt ausfüllt, lässt dem Treiber nur zwei Möglichkeiten: alles
+verkleinern oder abschneiden. Verkleinern ist der Normalfall – und genau
+das führte dazu, dass die außen liegenden Karten nach dem Schneiden
+anders aussahen als die inneren: innen wurde auf der gedruckten Linie
+geschnitten, außen gar nicht, dort blieb der weiße Rand des Treibers
+stehen. Mit dem Rand liegt jede Schnittlinie im druckbaren Bereich, jede
+Karte wird auf allen vier Seiten geschnitten, und das Ergebnis hängt
+nicht mehr davon ab, was der Treiber entschieden hat.
 
 ## Themen
 

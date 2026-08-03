@@ -119,6 +119,16 @@ davon ab, ob das System ein deutsches Trennwörterbuch mitbringt – Windows
 ja, Linux-Container nein. Sonst wäre die Ausgabe maschinenabhängig.
 Selbst gesetzte bedingte Trennstriche (U+00AD) wirken weiterhin.
 
+**Der Bogen hat 8 mm Rand, und der muss bleiben.** Kein Bürodrucker
+druckt bis an die Papierkante. Füllt das Layout den Bogen exakt aus,
+verkleinert der Treiber die Seite – und dann werden die äußeren Karten
+anders als die inneren, weil außen der weiße Treiberrand stehen bleibt,
+wo innen auf der Linie geschnitten wurde. Deshalb liegt eine Schnittlinie
+auf **jeder** Kartenkante, die äußeren eingeschlossen, und geschnitten
+wird rundherum. Der Rand steht in `cards.css` als `--rand` und in
+`build_cards.py` als `RAND`; laufen sie auseinander, sitzen die Linien
+nicht mehr auf den Kartenkanten – der Bau prüft das und bricht ab.
+
 **Alle Linien und Marken sind Rahmen, keine Hintergrundflächen.**
 Browser drucken Hintergründe nur, wenn im Dialog „Hintergrundgrafiken"
 angehakt ist – standardmäßig aus. Mit `background` verschwinden
@@ -148,13 +158,19 @@ In `FORMATS` (`build_cards.py`) definiert, vom Editor übernommen.
 
 | Schlüssel | Karte | Bogen | pro Bogen |
 |---|---|---|---|
-| `a7` | 105 × 74,25 mm | A4 hoch | 8 |
-| `a6` | 105 × 148,5 mm | A4 hoch | 4 |
-| `a6q` | 148,5 × 105 mm | **A4 quer** | 4 |
+| `a7` | 97 × 70,25 mm | A4 hoch | 8 |
+| `a6` | 97 × 140,5 mm | A4 hoch | 4 |
+| `a6q` | 140,5 × 97 mm | **A4 quer** | 4 |
 
-Ein neues Format braucht: Eintrag in `FORMATS`, `.f-<key>`-Block in
-`cards.css`, bei Querformat zusätzlich `landscape: True` (setzt `@page` auf
-`landscape` und die Klasse `landscape` auf den Bogen).
+Die Maße sind kein Zufall und keine DIN-Reihe: Bogen minus zweimal
+`RAND` (8 mm), geteilt durch Spalten bzw. Zeilen. Die Schnittlinien
+rechnet `build_cards.py` daraus aus – `vlines`/`hlines` stehen nicht
+mehr von Hand im Format.
+
+Ein neues Format braucht: Eintrag in `FORMATS` mit `w`/`h`, `.f-<key>`-Block
+in `cards.css`, bei Querformat zusätzlich `landscape: True` (setzt `@page`
+auf `landscape` und die Klasse `landscape` auf den Bogen). Karten plus
+Ränder müssen den Bogen exakt füllen; der Bau bricht sonst ab.
 
 ### Schalter oben in `build_cards.py`
 

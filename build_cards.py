@@ -24,6 +24,7 @@ visitors, and the printed text is the product.
 """
 
 import json
+import re
 import sys
 import pathlib
 import html as htmlmod
@@ -56,22 +57,56 @@ THEMES = data["themes"]
 CARDS = data["cards"]
 FOOTER = data["meta"].get("footer", "Faktenkarte")
 
-# Format definition: cards per sheet, columns, cutting lines in mm,
-# minimum font sizes for the auto-fit
+# Distance from the paper edge to the card block, in mm. Has to match
+# --rand in cards.css; checked below, because the two drifting apart would
+# put the cut lines somewhere other than the card edges and nothing would
+# look obviously wrong until the paper is cut.
+RAND = 8.0
+
+# Format definition: card size in mm, cards per sheet, columns, minimum
+# font sizes for the auto-fit. The cutting lines follow from the size and
+# are computed afterwards - there is nothing to keep in step by hand.
 FORMATS = {
-    "a6": {"per_sheet": 4, "columns": 2, "landscape": False,
-           "vlines": [105.0], "hlines": [148.5],
-           "title_long": 30, "minText": 11.0, "maxText": 21.0, "minTitle": 14.0,
+    "a6": {"w": 97.0, "h": 140.5, "per_sheet": 4, "columns": 2, "landscape": False,
+           "title_long": 28, "minText": 11.0, "maxText": 21.0, "minTitle": 14.0,
            "minFront": 15.0, "maxFront": 34.0},
-    "a6q": {"per_sheet": 4, "columns": 2, "landscape": True,
-            "vlines": [148.5], "hlines": [105.0],
-            "title_long": 34, "minText": 11.0, "maxText": 20.0, "minTitle": 14.0,
+    "a6q": {"w": 140.5, "h": 97.0, "per_sheet": 4, "columns": 2, "landscape": True,
+            "title_long": 32, "minText": 11.0, "maxText": 20.0, "minTitle": 14.0,
             "minFront": 15.0, "maxFront": 32.0},
-    "a7": {"per_sheet": 8, "columns": 2, "landscape": False,
-           "vlines": [105.0], "hlines": [74.25, 148.5, 222.75],
-           "title_long": 26, "minText": 7.5, "maxText": 14.0, "minTitle": 9.0,
+    "a7": {"w": 97.0, "h": 70.25, "per_sheet": 8, "columns": 2, "landscape": False,
+           "title_long": 24, "minText": 7.5, "maxText": 14.0, "minTitle": 9.0,
            "minFront": 10.0, "maxFront": 22.0},
 }
+
+# A line on every card edge, outer ones included: with the margin, all four
+# sides get cut, and only then do the cards come out the same on every side.
+for _f in FORMATS.values():
+    _rows = _f["per_sheet"] // _f["columns"]
+    _f["vlines"] = [round(RAND + i * _f["w"], 4) for i in range(_f["columns"] + 1)]
+    _f["hlines"] = [round(RAND + i * _f["h"], 4) for i in range(_rows + 1)]
+
+
+def _pruefe_rand():
+    """The margin lives in two files; make sure it is the same number."""
+    m = re.search(r"--rand:\s*([\d.]+)mm", CSS)
+    if not m:
+        raise SystemExit("cards.css enthaelt kein --rand mehr - "
+                         "build_cards.py kann die Schnittlinien nicht setzen.")
+    if abs(float(m.group(1)) - RAND) > 1e-9:
+        raise SystemExit(f"Rand geht auseinander: cards.css sagt {m.group(1)} mm, "
+                         f"build_cards.py sagt {RAND} mm.")
+    # And the cards plus margins have to fill the sheet exactly.
+    for key, f in FORMATS.items():
+        w, h = (297.0, 210.0) if f["landscape"] else (210.0, 297.0)
+        rows = f["per_sheet"] // f["columns"]
+        soll_w = 2 * RAND + f["columns"] * f["w"]
+        soll_h = 2 * RAND + rows * f["h"]
+        if abs(soll_w - w) > 0.01 or abs(soll_h - h) > 0.01:
+            raise SystemExit(f"Format {key} passt nicht auf den Bogen: "
+                             f"{soll_w} x {soll_h} statt {w} x {h} mm.")
+
+
+_pruefe_rand()
 
 
 def esc(s: str) -> str:
