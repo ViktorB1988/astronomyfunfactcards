@@ -1231,15 +1231,27 @@ function redrawAll(){ drawList(); drawForm(); preview(); }
    attribute sits there unused and all three columns stay visible. */
 let paneTimer;
 
+/* Read from the stylesheet instead of repeating the breakpoint here: the
+   tab bar exists only on the narrow layout, so its visibility is the
+   answer, and the number stays in one place. */
+const narrow = () => getComputedStyle($("#tabs")).display !== "none";
+
 function setPane(name){
   const from = document.body.dataset.pane;
   if (from === name) return;
   document.body.dataset.pane = name;
   $("#tabs").querySelectorAll("button").forEach(b =>
     b.setAttribute("aria-selected", String(b.dataset.pane === name)));
-  // The pane was display:none, so nothing inside it could be measured -
-  // the gauge would be showing a number taken from a zero-height card.
-  if (name === "card") preview();
+  if (name === "card"){
+    // The pane was display:none, so nothing inside it could be measured -
+    // the gauge would be showing a number taken from a zero-height card.
+    preview();
+    /* The page keeps its scroll position across the change, so a card
+       opened from far down the list would open halfway through its own
+       form. Only on the narrow layout: beside a visible list, jumping the
+       page to the top on every click would be its own annoyance. */
+    if (narrow()) scrollTo(0, 0);
+  }
 
   /* Hold the leaving pane on screen for the length of the crossing. The
      stylesheet does the rest; once the class goes, the ordinary
