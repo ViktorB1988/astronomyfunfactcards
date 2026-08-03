@@ -380,8 +380,10 @@ body.dragover::after{
   .tabs button[aria-selected="true"]{color:var(--text);border-bottom-color:var(--accent)}
 
   /* The sliding pane sticks out sideways for a moment; without this the
-     page grows a horizontal scrollbar for the length of the animation. */
-  main{min-height:0;overflow-x:hidden}
+     page grows a horizontal scrollbar for the length of the animation.
+     position:relative anchors the pane that gets lifted out of the flow
+     while the two cross. */
+  main{min-height:0;overflow-x:hidden;position:relative}
   .rows{max-height:none}
   .form{padding:16px 16px 32px}
   .preview{padding:16px;overflow-x:hidden}
@@ -393,26 +395,42 @@ body.dragover::after{
   body[data-pane="card"] .list{display:none}
 }
 
-/* Switching panes swaps display outright, which lands hard. The arriving
-   pane slides in from the side it sits on in the tab bar: Karte is the
-   right tab, so it comes in from the right, and Liste comes back from the
-   left. The direction is the point - a movement that contradicts the tabs
-   would be worse than none. Only the arriving pane is animated; the one
-   leaving is already gone. */
-@keyframes pane-from-right{
-  from{opacity:0;transform:translateX(18px)}
-  to{opacity:1;transform:none}
-}
-@keyframes pane-from-left{
-  from{opacity:0;transform:translateX(-18px)}
-  to{opacity:1;transform:none}
-}
+/* Switching panes: the two cross, following the tab order. On the way to
+   Karte the list travels out to the left while the card arrives from the
+   right; on the way back, the reverse. Karte is the right-hand tab, so
+   rightwards is forwards.
+
+   For that the leaving pane has to stay on screen, which display:none does
+   not allow. Whichever side is a single element is lifted out of the flow
+   and laid over the other - that way both occupy the same space and the
+   page does not change height mid-slide. Going forward that is the list;
+   coming back it is the list again, since the card side is two elements
+   and stacking those on each other would look wrong. */
+@keyframes pane-in-right { from{opacity:0;transform:translateX(26px)}  to{opacity:1;transform:none} }
+@keyframes pane-in-left  { from{opacity:0;transform:translateX(-26px)} to{opacity:1;transform:none} }
+@keyframes pane-out-left { from{opacity:1;transform:none} to{opacity:0;transform:translateX(-26px)} }
+@keyframes pane-out-right{ from{opacity:1;transform:none} to{opacity:0;transform:translateX(26px)} }
+
 @media (max-width:820px) and (prefers-reduced-motion:no-preference){
-  body[data-pane="card"] .form,
-  body[data-pane="card"] .preview{animation:pane-from-right .19s ease-out both}
-  body[data-pane="list"] .list{animation:pane-from-left .19s ease-out both}
-  /* after the shorthand above, which would otherwise reset the delay */
-  body[data-pane="card"] .preview{animation-delay:.03s}
+  /* Liste -> Karte: the list leaves to the left, over the arriving card */
+  body.pane-move[data-dir="fwd"] .list{
+    display:flex !important;
+    position:absolute;left:0;top:0;width:100%;z-index:3;pointer-events:none;
+    animation:pane-out-left .22s ease-in both;
+  }
+  body.pane-move[data-dir="fwd"] .form,
+  body.pane-move[data-dir="fwd"] .preview{animation:pane-in-right .22s ease-out both}
+
+  /* Karte -> Liste: the card leaves to the right, the list comes over it */
+  body.pane-move[data-dir="back"] .form,
+  body.pane-move[data-dir="back"] .preview{
+    display:flex !important;pointer-events:none;
+    animation:pane-out-right .22s ease-in both;
+  }
+  body.pane-move[data-dir="back"] .list{
+    position:absolute;left:0;top:0;width:100%;z-index:3;
+    animation:pane-in-left .22s ease-out both;
+  }
 }
 
 /* --- Touch: fingers are not mouse pointers ---
@@ -1192,14 +1210,27 @@ function redrawAll(){ drawList(); drawForm(); preview(); }
 /* ---------- Narrow screens: two panes ----------
    Only the tab bar's stylesheet cares about this; on a wide screen the
    attribute sits there unused and all three columns stay visible. */
+let paneTimer;
+
 function setPane(name){
-  if (document.body.dataset.pane === name) return;
+  const from = document.body.dataset.pane;
+  if (from === name) return;
   document.body.dataset.pane = name;
   $("#tabs").querySelectorAll("button").forEach(b =>
     b.setAttribute("aria-selected", String(b.dataset.pane === name)));
   // The pane was display:none, so nothing inside it could be measured -
   // the gauge would be showing a number taken from a zero-height card.
   if (name === "card") preview();
+
+  /* Hold the leaving pane on screen for the length of the crossing. The
+     stylesheet does the rest; once the class goes, the ordinary
+     display:none takes over again. Skipped entirely when motion is not
+     wanted - then the two would just sit stacked for a fifth of a second. */
+  if (!matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
+  document.body.dataset.dir = name === "card" ? "fwd" : "back";
+  document.body.classList.add("pane-move");
+  clearTimeout(paneTimer);
+  paneTimer = setTimeout(() => document.body.classList.remove("pane-move"), 240);
 }
 
 $("#tabs").addEventListener("click", e => {
