@@ -113,7 +113,12 @@ function start(){
     } else {
       bSignIn.textContent = "Anmelden";
     }
-    bStore.hidden = !mayWrite;
+    /* Greyed out rather than hidden, same as the buttons in the form: a
+       locked "Speichern" tells a reader that editing exists here and only
+       needs a sign-in. A button that vanishes tells them nothing. */
+    bStore.hidden = false;
+    bStore.disabled = !mayWrite;
+    bStore.title = mayWrite ? "" : "Zum Speichern anmelden";
     bStore.classList.toggle("primary", mayWrite);
     bSave.classList.toggle("primary", !mayWrite);
     E.setWritable(mayWrite);
@@ -244,7 +249,7 @@ function start(){
       E.status(t, true);
     } finally {
       saving = false;
-      bStore.disabled = false;
+      bStore.disabled = !mayWrite;
       bStore.textContent = "Speichern";
       if (queued){ queued = false; save(auto); }
     }

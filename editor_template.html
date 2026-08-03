@@ -688,7 +688,10 @@ function drawForm(){
     b.type = "button"; b.onclick = fn; b.disabled = !!off; w.append(b); return b; };
   // Only online, and only where it is needed: reordering and deleting write
   // themselves through, so this button is really for the typed text.
-  if (store) mk("Speichern", "primary", () => store());
+  if (store){
+    const b = mk("Speichern", "primary", () => store());
+    if (!writable) b.title = "Zum Speichern anmelden";
+  }
   mk("Nach oben",   "", () => move(-1), S.sel === 0);
   mk("Nach unten",  "", () => move(1),  S.sel === S.cards.length - 1);
   mk("Duplizieren", "", duplicate);
