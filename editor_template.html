@@ -364,8 +364,13 @@ body.dragover::after{
 
 @media (max-width:820px){
   /* The tab bar takes over the sticky slot - two sticky bars would eat a
-     third of the screen. Nothing in the bar may wrap: it is two buttons. */
-  .topbar{position:static;gap:10px;padding:11px 12px;flex-wrap:nowrap}
+     third of the screen.
+     The bar itself may wrap, the button group may not: once the unsaved
+     marker appears there is no longer room for name and buttons on one
+     line, and with nothing able to give way they would overlap. This way
+     the whole group drops to a second line and the buttons stay together
+     on it. Without the marker everything still fits on one line. */
+  .topbar{position:static;gap:10px 12px;padding:11px 12px;flex-wrap:wrap}
   .topbar .right{flex-wrap:nowrap;gap:7px}
   .topbar .btn{padding:9px 12px;font-size:13px}
   .brand{min-width:0;font-size:14px}
