@@ -1226,9 +1226,13 @@ function notes(r, state){
 /* ---------- Loading and saving ---------- */
 function saveFile(){
   renumber();
-  // The internal id stays out - facts.json keeps exactly the fields that
-  // the file format documents.
-  const cards = S.cards.map(({id, ...rest}) => rest);
+  /* The id goes into the file. It is what a card is, independent of its
+     wording: with it, a text can be rewritten and a title replaced and the
+     card is still recognised on the way back in. Without it the only
+     handle left is the title, and renaming a card would silently split it
+     into an old one and a new one. */
+  const cards = S.cards.map(k => ({id: k.id, no: k.no, theme: k.theme,
+                                   title: k.title, text: k.text, more: k.more}));
   const json = JSON.stringify({meta: S.meta, themes: S.themes, cards}, null, 2) + "\n";
   const a = el("a");
   a.href = URL.createObjectURL(new Blob([json], {type: "application/json"}));
@@ -1284,20 +1288,39 @@ function importJson(file){
            + "Erwartet wird eine facts.json wie im Projektordner.", true); return;
     }
 
+    /* Recognised by id first, by title only as a fallback for files that
+       predate the id. That is the whole point of writing the id out: with
+       it a card survives being renamed, and a rewritten title updates the
+       card instead of splitting it into an old one and a new one. */
     const schluessel = s => String(s || "").trim().toLowerCase();
-    const offen = new Map();
-    S.cards.forEach(k => { if (!offen.has(schluessel(k.title))) offen.set(schluessel(k.title), k); });
+    const offen = new Map();          // id -> Karte, was noch zu haben ist
+    const nachTitel = new Map();      // Titel -> id, nur als Rückfalllinie
+    S.cards.forEach(k => {
+      offen.set(k.id, k);
+      const s = schluessel(k.title);
+      if (!nachTitel.has(s)) nachTitel.set(s, k.id);
+    });
 
-    let neu = 0, geaendert = 0, gleich = 0;
+    let neu = 0, geaendert = 0, gleich = 0, ueberTitel = 0;
     const cards = d.cards.map(k => {
       const feld = {theme: k.theme || "", title: k.title || "",
                     text: k.text || "", more: k.more || ""};
-      const s = schluessel(feld.title);
-      const alt = offen.get(s);
+      let alt = k.id ? offen.get(k.id) : null;
+      if (!alt){
+        const treffer = nachTitel.get(schluessel(feld.title));
+        alt = treffer ? offen.get(treffer) : null;
+        if (alt) ueberTitel++;
+      }
       // Jede vorhandene Karte nur einmal beanspruchen, sonst bekämen zwei
-      // gleichnamige Karten aus der Datei dieselbe Kennung.
-      if (!alt){ neu++; return {id: newId(), no: 0, ...feld}; }
-      offen.delete(s);
+      // Karten aus der Datei dieselbe Kennung.
+      if (!alt){
+        neu++;
+        // Kennung aus der Datei behalten, sofern sie frei ist: dann ist ein
+        // zweites Einspielen derselben Datei folgenlos.
+        return {id: (k.id && !offen.has(k.id)) ? k.id : newId(), no: 0, ...feld};
+      }
+      offen.delete(alt.id);
+      nachTitel.delete(schluessel(alt.title));
       if (alt.theme === feld.theme && alt.title === feld.title
           && alt.text === feld.text && alt.more === feld.more) gleich++;
       else geaendert++;
@@ -1306,6 +1329,7 @@ function importJson(file){
 
     const bleiben = [...offen.values()];
     const zeilen = [`${neu} neu`, `${geaendert} geändert`, `${gleich} unverändert`];
+    if (ueberTitel) zeilen.push(`${ueberTitel} ohne Kennung, über den Titel erkannt`);
     if (bleiben.length) zeilen.push(`${bleiben.length} nicht in der Datei – bleiben erhalten`);
     if (!confirm(`${file.name} einspielen?\n\n` + zeilen.join("\n")
                + `\n\nGeschrieben wird erst mit „Speichern“.`)) return;

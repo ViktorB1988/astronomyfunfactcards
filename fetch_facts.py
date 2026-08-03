@@ -105,7 +105,14 @@ def main():
 
     # The order comes from pos, not from the response: the REST interface
     # sorts by document id, which is arbitrary here.
-    cards = [fields(d) for d in raw]
+    # The document name carries the id, and it is written out: it is what a
+    # card is, independent of its wording, and it is what lets the file go
+    # back in without every card arriving as a new one.
+    cards = []
+    for d in raw:
+        k = fields(d)
+        k["id"] = d["name"].rsplit("/", 1)[-1]
+        cards.append(k)
     cards.sort(key=lambda k: k.get("pos", 0))
 
     meta = fields(fetch(f"{ROOT.format(pid=pid)}/config/meta"))
@@ -118,7 +125,8 @@ def main():
         "themes": themes,
         # `no` is assigned here - it is not stored in the database, it is
         # purely derived from the order.
-        "cards": [{"no": i + 1,
+        "cards": [{"id": k["id"],
+                   "no": i + 1,
                    "theme": k.get("theme", ""),
                    "title": k.get("title", ""),
                    "text": k.get("text", ""),

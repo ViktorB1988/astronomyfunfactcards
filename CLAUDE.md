@@ -63,12 +63,16 @@ lassen, sonst enthalten Editor und Seite einen veralteten Stand.
   "meta":   { "title": "...", "footer": "Faktenkarte" },
   "themes": ["SONNENSYSTEM", "..."],
   "cards": [
-    { "no": 1, "theme": "SONNENSYSTEM", "title": "...",
-      "text": "...", "more": "..." }
+    { "id": "kmsdl1jave79g39", "no": 1, "theme": "SONNENSYSTEM",
+      "title": "...", "text": "...", "more": "..." }
   ]
 }
 ```
 
+- `id` ist die Kennung der Karte und zugleich ihr Dokumentschlüssel in der
+  Datenbank. Nicht von Hand vergeben, nicht ändern: daran wird eine Karte
+  beim Einspielen wiedererkannt, auch wenn Titel und Text sich geändert
+  haben.
 - `theme` **muss** in `themes` vorkommen.
 - Reihenfolge in `themes` bestimmt die Reihenfolge der Karten im Stapel.
 - `no` wird beim Sortieren neu vergeben, nie von Hand pflegen.
@@ -251,11 +255,19 @@ schreibt das Speichern danach die Unterschiede statt alles neu.
 speichern, fasste jedes Umsortieren alle 170 Dokumente an. Geordnet wird
 über `pos`, `no` entsteht beim Laden neu.
 
-Jede Karte trägt zusätzlich eine `id`, die nur im Browser lebt: sie ist der
-Dokumentschlüssel. Ohne sie wäre nach einem Umsortieren nicht mehr
+Jede Karte trägt eine `id`, und die ist zugleich der Dokumentschlüssel.
+Sie beantwortet die Frage, *welche* Karte gemeint ist – unabhängig davon,
+wie sie gerade heißt. Ohne sie wäre nach einem Umsortieren nicht mehr
 feststellbar, welche Karte welches Dokument ist, und Speichern vertauschte
-Karten, statt sie zu ändern. In `facts.json` taucht sie nicht auf – das
-Dateiformat bleibt wie dokumentiert.
+Karten, statt sie zu ändern.
+
+**Die `id` steht auch in `facts.json`.** Sie stand dort früher nicht, damit
+das Dateiformat schlank bleibt – das war ein Fehler: Beim Einspielen blieb
+als einziges Erkennungsmerkmal der Titel, eine umbenannte Karte kam als
+neue an, und die alte blieb daneben stehen. `fetch_facts.py` schreibt die
+Kennung aus dem Dokumentnamen mit, der Editor schreibt sie beim Sichern
+mit, und das Einspielen erkennt Karten daran wieder. Dateien ohne Kennung
+funktionieren weiterhin, dann greift ersatzweise der Titel.
 
 ### Fallen der Online-Fassung
 

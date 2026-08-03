@@ -212,9 +212,11 @@ Für den umgekehrten Weg – viele Karten auf einmal in die Datenbank – gibt
 es **„JSON einspielen"**. Der Knopf erscheint nur für Konten, die in
 `config/editors` zusätzlich unter `import` eingetragen sind.
 
-Eingespielt wird **zusammengeführt, nicht ersetzt**: Karten werden über
-ihren Titel wiedererkannt und behalten dann ihre Kennung, sodass das
-anschließende Speichern nur die tatsächlichen Unterschiede schreibt.
+Eingespielt wird **zusammengeführt, nicht ersetzt**: Karten werden an
+ihrer `id` wiedererkannt und behalten sie, sodass das anschließende
+Speichern nur die tatsächlichen Unterschiede schreibt. Eine umbenannte
+Karte bleibt dadurch dieselbe Karte. Nur bei Dateien ohne Kennung – etwa
+einer von Hand geschriebenen – dient ersatzweise der Titel als Merkmal.
 Karten, die in der Datei fehlen, bleiben erhalten – ein Import fügt hinzu
 und ändert, er räumt nicht auf. Vor dem Übernehmen zeigt eine Rückfrage,
 wie viele Karten neu, geändert und unverändert sind.
@@ -534,6 +536,7 @@ Alles steht in `facts.json`:
 
 ```json
 {
+  "id": "kmsdl1jave79g39",
   "no": 101,
   "theme": "SONNENSYSTEM",
   "title": "Kurzer Titel",
@@ -541,6 +544,10 @@ Alles steht in `facts.json`:
   "more": "Ein Satz Zusatzinfo für den Absatz „Mehr dazu\"."
 }
 ```
+
+Die `id` bleibt, wie sie ist. Daran wird die Karte beim Einspielen
+wiedererkannt – auch dann, wenn Titel und Text sich geändert haben. Neue
+Karten legt man ohne `id` an; der Editor vergibt sie.
 
 Die Feldnamen sind englisch, die Inhalte deutsch – im ganzen Projekt so
 gehalten: Code englisch, alles Sichtbare deutsch.
