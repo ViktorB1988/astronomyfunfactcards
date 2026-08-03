@@ -106,8 +106,10 @@ Der letzte A7-Bogen trägt die Karten 169–170 und sechs Leerfelder.
 
 - **Alle vier Seiten werden geschnitten**, die außen liegenden
   eingeschlossen. Rundherum stehen 8 mm Rand, der wegfällt.
-- Schnittlinien: die feinen grauen Linien auf dem Bogen. A7: drei
-  senkrechte, fünf waagerechte. A6: je drei.
+- Schnittlinien: die feinen grauen **gepunkteten** Linien auf dem Bogen.
+  A7: drei senkrechte, fünf waagerechte. A6: je drei. Gepunktet, damit
+  ein nicht ganz genauer Schnitt Pünktchen an der Kartenkante hinterlässt
+  statt eines durchgezogenen Strichs.
   Abschaltbar über `CUT_LINES = False` in `build_cards.py`
   bzw. das Kästchen „Schnittlinien drucken" im Editor.
 - Zusätzlich schwarze Marken im Rand zum Anlegen. Sie laufen von der

@@ -64,12 +64,18 @@ html, body {
 
 /* Cutting aids. Drawn as borders, never as filled areas: browsers only
    print background colours when "background graphics" is ticked in the
-   print dialog. Borders always come out. */
+   print dialog. Borders always come out.
+
+   Dotted, not solid: what the blade leaves behind is then a row of specks
+   along the card edge rather than a drawn line. Slightly thicker than a
+   solid line would be, because a dotted border is half gaps - at 0,2 mm
+   the dots start dropping out at print resolution. The registration marks
+   below stay solid; those are for lining up, not for cutting along. */
 .cut { position: absolute; z-index: 5; }
-.cut.v { top: 0; bottom: 0; width: 0; margin-left: -0.1mm;
-         border-left: 0.2mm solid #8c8c8c; }
-.cut.h { left: 0; right: 0; height: 0; margin-top: -0.1mm;
-         border-top: 0.2mm solid #8c8c8c; }
+.cut.v { top: 0; bottom: 0; width: 0; margin-left: -0.125mm;
+         border-left: 0.25mm dotted #8c8c8c; }
+.cut.h { left: 0; right: 0; height: 0; margin-top: -0.125mm;
+         border-top: 0.25mm dotted #8c8c8c; }
 
 /* Registration marks fill the margin, from the paper edge in to the corner
    of the card block. The stretch nearest the paper is what the printer
