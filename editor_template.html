@@ -187,6 +187,9 @@ main>*{background:var(--panel);min-height:100%}
   padding-bottom:12px;border-bottom:1px solid var(--edge);
 }
 .form h2 em{font-style:normal;color:var(--faint);font-family:var(--mono);letter-spacing:0}
+/* Only on narrow screens, where the list is a pane away rather than beside
+   the form and there is nowhere else to go back from. */
+.form h2 .back{display:none}
 .field{display:flex;flex-direction:column;gap:7px}
 .field label{font-size:11px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--dim)}
 .field .hint{color:var(--faint);font-weight:400;text-transform:none;letter-spacing:0;font-size:12px}
@@ -386,6 +389,15 @@ body.dragover::after{
   main{min-height:0;overflow-x:hidden;position:relative}
   .rows{max-height:none}
   .form{padding:16px 16px 32px}
+  .form h2{align-items:center;gap:6px}
+  .form h2 .back{
+    display:flex;align-items:center;justify-content:center;
+    width:40px;height:40px;margin:-8px 2px -8px -8px;
+    padding:0;border:0;border-radius:var(--radius);
+    background:none;color:var(--text);font:20px/1 var(--ui);cursor:pointer;
+  }
+  .form h2 .back:active{background:var(--raised)}
+  .form h2 .label{margin-left:auto}   /* card number to the right of the arrow */
   .preview{padding:16px;overflow-x:hidden}
   /* Millimetres mean nothing on a phone - the screen has no known size. */
   .ruler{display:none}
@@ -791,8 +803,15 @@ function drawForm(){
     f.append(el("p", "empty", "Keine Karte ausgewählt. Links eine Karte anklicken oder eine neue hinzufügen."));
     return;
   }
-  const h = el("h2", null, "Karte " + k.no + " ");
-  h.append(el("em", null, "von " + S.cards.length));
+  const h = el("h2");
+  const back = el("button", "back", "←");
+  back.type = "button";
+  back.title = "Zurück zur Liste";
+  back.setAttribute("aria-label", "Zurück zur Liste");
+  back.onclick = backToList;
+  const label = el("span", "label", "Karte " + k.no + " ");
+  label.append(el("em", null, "von " + S.cards.length));
+  h.append(back, label);
   f.append(h);
 
   const dTh = el("div", "field");
@@ -1237,6 +1256,22 @@ $("#tabs").addEventListener("click", e => {
   const b = e.target.closest("button[data-pane]");
   if (b) setPane(b.dataset.pane);
 });
+
+/* Back to the list, standing on the card just left. Without this the list
+   opens wherever it was last scrolled to, which after a few taps is
+   nowhere near the card in hand. The row is already marked; it only has to
+   be brought into view, and instantly - a smooth scroll would fight the
+   pane sliding in. */
+function backToList(){
+  setPane("list");
+  /* Straight away, not in a frame callback: requestAnimationFrame does not
+     fire while the tab is in the background, and the scroll would then be
+     silently skipped. scrollIntoView forces layout by itself, so the list
+     being displayed one statement earlier is enough. Instant, too - a
+     smooth scroll would fight the pane sliding in. */
+  const row = $('#rows .row[aria-current="true"]');
+  if (row) row.scrollIntoView({block: "center"});
+}
 
 let fitTimer;
 addEventListener("resize", () => {
