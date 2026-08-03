@@ -1,5 +1,6 @@
 # Erzeugnisse
 out/
+site/
 
 # Python
 __pycache__/

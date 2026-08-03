@@ -1,0 +1,76 @@
+# Builds the online version and publishes it to GitHub Pages.
+#
+# Built on Ubuntu rather than locally: that is where DejaVu Sans sits in
+# the place fonts.py looks for. Without the embedded font the page would
+# compute a different print size than build_cards.py and therefore show
+# the wrong number.
+#
+# playwright is installed only because build_cards.py imports it - the
+# browser itself (playwright install) is not needed here, the page builds
+# no PDF.
+
+name: Build and publish the site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'facts.json'
+      - 'cards.css'
+      - 'editor_template.html'
+      - 'build_cards.py'
+      - 'build_web.py'
+      - 'fonts.py'
+      - 'web/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Do not cut off a running publish, but do not stack them either.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Provide DejaVu Sans
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq fonts-dejavu-core
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Python packages
+        run: pip install --quiet playwright fonttools brotli
+
+      - name: Build the site
+        run: python3 build_web.py
+
+      - name: Font really embedded?
+        # A silent failure would be the worst case: the page would look
+        # right and still report the wrong print sizes.
+        run: |
+          grep -q 'font/woff2;base64' site/index.html \
+            || { echo "No font embedded - aborting."; exit 1; }
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.pages.outputs.page_url }}
+    steps:
+      - id: pages
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,78 @@
+rules_version = '2';
+
+/* Security rules of the fact-card database.
+ *
+ * This file is the actual barrier. The page sits publicly on GitHub Pages,
+ * its source including the Firebase key is readable by anyone - what a
+ * browser is allowed to do is decided here and nowhere else. The read-only
+ * mode in the editor is a courtesy, not a protection.
+ *
+ * Publish with:
+ *   Firebase console -> Firestore Database -> Rules -> paste -> Publish
+ *   or:  firebase deploy --only firestore:rules
+ *
+ * Who may write is listed in config/editors (field `emails`, a list of
+ * lowercase addresses). That document is created by hand in the console
+ * and is not writable through these rules - otherwise an editor account
+ * could quietly add further accounts and the list would stop being a
+ * boundary.
+ */
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function editors() {
+      return get(/databases/$(database)/documents/config/editors).data.emails;
+    }
+
+    /* Require a verified address: without this check, a provider account
+       with a freely chosen, unverified mail address could claim an editor
+       address. With Google sign-in it is always verified, so the check
+       costs nothing. */
+    function mayWrite() {
+      return request.auth != null
+          && request.auth.token.email_verified == true
+          && request.auth.token.email.lower() in editors();
+    }
+
+    function isCard(d) {
+      return d.keys().hasOnly(['pos', 'theme', 'title', 'text', 'more'])
+          && d.pos is number
+          && d.theme is string && d.theme.size() <= 100
+          && d.title is string && d.title.size() <= 300
+          && d.text is string && d.text.size() <= 4000
+          && d.more is string && d.more.size() <= 4000;
+    }
+
+    /* Anyone may read the cards: the page should be shareable so that
+       someone can print a set without needing an account. */
+    match /cards/{id} {
+      allow read: if true;
+      allow create, update: if mayWrite() && isCard(request.resource.data);
+      allow delete: if mayWrite();
+    }
+
+    /* Title, footer and the theme list. The order of the themes determines
+       the order of the cards in the stack, hence a list. */
+    match /config/meta {
+      allow read: if true;
+      allow write: if mayWrite()
+                   && request.resource.data.themes is list
+                   && request.resource.data.themes.size() <= 100
+                   && request.resource.data.title is string
+                   && request.resource.data.footer is string;
+    }
+
+    /* Only signed-in accounts may read the editor list; the interface uses
+       it to decide whether to unlock the fields. Public read access would
+       needlessly expose mail addresses. */
+    match /config/editors {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

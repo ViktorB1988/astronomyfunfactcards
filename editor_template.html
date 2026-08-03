@@ -7,390 +7,415 @@
 <style>
 /*__FONTS__*/
 
-/* ===== Layout der Karten, unveraendert aus cards.css ===== */
-/*__KARTEN_CSS__*/
+/* ===== Card layout, taken unchanged from cards.css ===== */
+/*__CARDS_CSS__*/
 
-/* ===== Oberflaeche: Nachtpult ==================================
-   Dunkel gehalten, damit die Karte als einziges helles Element
-   heraussticht - sie ist das Produkt, alles andere ist Werkzeug.
-   Farbe gibt es nur an einer Stelle: an der Lesbarkeitsanzeige.
+/* ===== Interface: night desk ==================================
+   Kept dark so the card stands out as the only bright element -
+   it is the product, everything else is tooling.
+   Colour appears in exactly one place: the readability gauge.
    ================================================================ */
 :root{
-  --nacht:#0e111a; --tafel:#151a26; --hebung:#1c2231; --hebung2:#232a3b;
-  --kante:#2a3244; --kante-hell:#39435a;
-  --text:#e7eaf3; --matt:#9aa3b8; --leise:#8892a8;
-  --akzent:#e0b661; --akzent-tief:#8a6d2f;
-  --gut:#5fce9b; --knapp:#e8b64a; --eng:#ef7361;
+  --night:#0e111a; --panel:#151a26; --raised:#1c2231; --raised2:#232a3b;
+  --edge:#2a3244; --edge-light:#39435a;
+  --text:#e7eaf3; --dim:#9aa3b8; --faint:#8892a8;
+  --accent:#e0b661; --accent-deep:#8a6d2f;
+  --good:#5fce9b; --borderline:#e8b64a; --cramped:#ef7361;
   --ui:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --mono:ui-monospace,"SF Mono",Consolas,"DejaVu Sans Mono",monospace;
-  --rund:5px;
+  --radius:5px;
 }
 *{box-sizing:border-box}
-html{background:var(--nacht)}
+html{background:var(--night)}
 body{
-  margin:0;background:var(--nacht);color:var(--text);
+  margin:0;background:var(--night);color:var(--text);
   font:14px/1.55 var(--ui);
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
 }
 button,input,select,textarea{font:inherit;color:inherit}
-:focus-visible{outline:2px solid var(--akzent);outline-offset:2px;border-radius:3px}
-::selection{background:var(--akzent-tief);color:#fff}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+::selection{background:var(--accent-deep);color:#fff}
 
-/* --- Kopfzeile --- */
-.kopf{
+/* --- Top bar --- */
+.topbar{
   position:sticky;top:0;z-index:20;
   display:flex;align-items:center;gap:22px;flex-wrap:wrap;
   padding:13px 20px;background:rgba(21,26,38,.88);
   backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--kante);
+  border-bottom:1px solid var(--edge);
 }
-.marke{
+.brand{
   font-weight:650;letter-spacing:-.015em;font-size:15px;
   display:flex;align-items:center;gap:9px;
 }
-.marke::before{ /* kleiner Kartenstapel als Zeichen */
+.brand::before{ /* a small card stack as the mark */
   content:"";width:13px;height:17px;border-radius:2px;
-  background:linear-gradient(105deg,#fff 0 62%,var(--matt) 62%);
+  background:linear-gradient(105deg,#fff 0 62%,var(--dim) 62%);
   box-shadow:2px 2px 0 rgba(255,255,255,.16);
 }
-.marke span{color:var(--leise);font-weight:400}
-.bilanz{display:flex;gap:18px;flex-wrap:wrap;font:11.5px/1.4 var(--mono);color:var(--leise)}
-.bilanz b{color:var(--text);font-weight:600}
-.kopf .rechts{margin-left:auto;display:flex;gap:9px;align-items:center;
-              flex-wrap:wrap;justify-content:flex-end}
+.brand span{color:var(--faint);font-weight:400}
+.tally{display:flex;gap:18px;flex-wrap:wrap;font:11.5px/1.4 var(--mono);color:var(--faint)}
+.tally b{color:var(--text);font-weight:600}
+.topbar .right{margin-left:auto;display:flex;gap:9px;align-items:center;
+               flex-wrap:wrap;justify-content:flex-end}
 
-.knopf{
-  border:1px solid var(--kante-hell);background:var(--hebung);color:var(--text);
-  border-radius:var(--rund);padding:7px 14px;cursor:pointer;white-space:nowrap;
+.btn{
+  border:1px solid var(--edge-light);background:var(--raised);color:var(--text);
+  border-radius:var(--radius);padding:7px 14px;cursor:pointer;white-space:nowrap;
 }
-.knopf:hover{background:var(--hebung2);border-color:var(--akzent-tief)}
-.knopf:active{transform:translateY(1px)}
-.knopf.primaer{
-  background:var(--akzent);border-color:var(--akzent);color:#221a08;font-weight:600;
+.btn:hover{background:var(--raised2);border-color:var(--accent-deep)}
+.btn:active{transform:translateY(1px)}
+.btn.primary{
+  background:var(--accent);border-color:var(--accent);color:#221a08;font-weight:600;
 }
-.knopf.primaer:hover{background:#eec474;border-color:#eec474}
-.knopf.gefahr:hover{border-color:var(--eng);color:var(--eng);background:var(--hebung)}
-.knopf[disabled]{opacity:.35;cursor:default;background:var(--hebung);border-color:var(--kante)}
-.merker{
-  font:11px/1 var(--mono);color:var(--knapp);
+.btn.primary:hover{background:#eec474;border-color:#eec474}
+.btn.danger:hover{border-color:var(--cramped);color:var(--cramped);background:var(--raised)}
+.btn[disabled]{opacity:.35;cursor:default;background:var(--raised);border-color:var(--edge)}
+.unsaved{
+  font:11px/1 var(--mono);color:var(--borderline);
   border:1px solid currentColor;border-radius:99px;padding:5px 10px;
   visibility:hidden;
 }
-.merker.an{visibility:visible}
+.unsaved.on{visibility:visible}
 
-.versteckt{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+/* --- Online version only: connection, sign-in ---
+   The buttons carry hidden in the source and are revealed by the Firebase
+   module. Without that module (offline editor as a single file) the top
+   bar therefore looks exactly as it did before. */
+.cloud{
+  font:11px/1 var(--mono);color:var(--faint);
+  display:flex;align-items:center;gap:6px;white-space:nowrap;
+}
+.cloud::before{content:"";width:7px;height:7px;border-radius:99px;background:currentColor}
+.cloud.connected{color:var(--good)}
+.cloud.error{color:var(--cramped)}
+[hidden]{display:none !important}
+
+/* Read-only: fields stay visible but untouchable. Hiding them would be
+   worse - the card text would be gone, and reading is the normal case in
+   the online version. */
+body.readonly .form input,
+body.readonly .form textarea,
+body.readonly .form select{opacity:.7;cursor:default}
+body.readonly .remove{display:none}
+body.readonly .grip{visibility:hidden}
+
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
   overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
-/* --- Dreispalter --- */
+/* --- Three columns --- */
 main{
-  display:grid;gap:1px;background:var(--kante);
+  display:grid;gap:1px;background:var(--edge);
   grid-template-columns:minmax(258px,1fr) minmax(360px,1.4fr) auto;
   align-items:start;min-height:calc(100vh - 53px);
 }
-main>*{background:var(--tafel);min-height:100%}
+main>*{background:var(--panel);min-height:100%}
 
-/* --- Spalte 1: Liste --- */
-.liste{display:flex;flex-direction:column;max-height:calc(100vh - 53px);position:sticky;top:53px}
-.filter{padding:12px;display:flex;gap:7px;border-bottom:1px solid var(--kante)}
+/* --- Column 1: list --- */
+.list{display:flex;flex-direction:column;max-height:calc(100vh - 53px);position:sticky;top:53px}
+.filter{padding:12px;display:flex;gap:7px;border-bottom:1px solid var(--edge)}
 .filter input,.filter select{
-  flex:1;min-width:0;padding:7px 10px;border:1px solid var(--kante-hell);
-  border-radius:var(--rund);background:var(--nacht);color:var(--text);
+  flex:1;min-width:0;padding:7px 10px;border:1px solid var(--edge-light);
+  border-radius:var(--radius);background:var(--night);color:var(--text);
 }
-.filter input::placeholder{color:var(--leise)}
-.rollen{overflow-y:auto;flex:1;list-style:none;margin:0;padding:6px}
-.rollen li+li{margin-top:2px}
-.rollen li{position:relative}
-.zeile{
+.filter input::placeholder{color:var(--faint)}
+.rows{overflow-y:auto;flex:1;list-style:none;margin:0;padding:6px}
+.rows li+li{margin-top:2px}
+.rows li{position:relative}
+.row{
   display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;
   width:100%;text-align:left;padding:9px 34px 9px 10px;border:0;background:none;
-  color:inherit;cursor:pointer;border-radius:var(--rund);position:relative;
+  color:inherit;cursor:pointer;border-radius:var(--radius);position:relative;
 }
-.zeile{cursor:grab}
-.zeile:active{cursor:grabbing}
-.zeile:hover{background:var(--hebung)}
-.zeile.zieht{opacity:.35}
-/* Einfügemarke beim Ziehen */
-.zeile.ziel-vor::after,.zeile.ziel-nach::after{
+.row{cursor:grab}
+.row:active{cursor:grabbing}
+.row:hover{background:var(--raised)}
+.row.dragging{opacity:.35}
+/* Insertion marker while dragging */
+.row.drop-before::after,.row.drop-after::after{
   content:"";position:absolute;left:6px;right:6px;height:2px;
-  background:var(--akzent);border-radius:2px;
+  background:var(--accent);border-radius:2px;
 }
-.zeile.ziel-vor::after{top:-2px}
-.zeile.ziel-nach::after{bottom:-2px}
-.griff{
+.row.drop-before::after{top:-2px}
+.row.drop-after::after{bottom:-2px}
+.grip{
   position:absolute;right:30px;top:50%;transform:translateY(-50%);
   width:9px;height:12px;opacity:0;pointer-events:none;
-  background:radial-gradient(circle,var(--leise) 1px,transparent 1px) 0 0/4.5px 4px;
+  background:radial-gradient(circle,var(--faint) 1px,transparent 1px) 0 0/4.5px 4px;
 }
-.zeile:hover .griff{opacity:.9}
+.row:hover .grip{opacity:.9}
 
-/* Loeschen direkt aus der Liste. Liegt neben der Zeile, nicht darin -
-   ein Knopf im Knopf waere ungueltiges Markup. */
-.weg{
+/* Delete straight from the list. Sits next to the row, not inside it -
+   a button within a button would be invalid markup. */
+.remove{
   position:absolute;right:6px;top:50%;transform:translateY(-50%);
   width:22px;height:22px;padding:0;border:0;border-radius:4px;
-  background:none;color:var(--leise);cursor:pointer;
+  background:none;color:var(--faint);cursor:pointer;
   font:16px/1 var(--ui);opacity:0;
 }
-.rollen li:hover .weg,.weg:focus-visible{opacity:1}
-.weg:hover{background:var(--eng);color:#fff}
-@media (hover:none){ .weg{opacity:.8} }
-.zeile[aria-current="true"]{background:var(--hebung2)}
-.zeile[aria-current="true"]::before{
+.rows li:hover .remove,.remove:focus-visible{opacity:1}
+.remove:hover{background:var(--cramped);color:#fff}
+@media (hover:none){ .remove{opacity:.8} }
+.row[aria-current="true"]{background:var(--raised2)}
+.row[aria-current="true"]::before{
   content:"";position:absolute;left:0;top:9px;bottom:9px;width:2px;
-  background:var(--akzent);border-radius:2px;
+  background:var(--accent);border-radius:2px;
 }
-.zeile .nr{font:600 12px/1.5 var(--mono);color:var(--leise);text-align:right}
-.zeile[aria-current="true"] .nr{color:var(--akzent)}
-.zeile .txt{overflow:hidden}
-.zeile .tl{display:block;font-weight:550;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .no{font:600 12px/1.5 var(--mono);color:var(--faint);text-align:right}
+.row[aria-current="true"] .no{color:var(--accent)}
+.row .txt{overflow:hidden}
+.row .tl{display:block;font-weight:550;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-.thema-name{display:block;margin-top:5px;
-  font:10px/1 var(--mono);color:var(--leise);letter-spacing:.05em;
+.theme-name{display:block;margin-top:5px;
+  font:10px/1 var(--mono);color:var(--faint);letter-spacing:.05em;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-.leer{padding:28px 14px;color:var(--leise);text-align:center;font-size:13px}
-.listenfuss{padding:12px;border-top:1px solid var(--kante);display:flex;gap:7px}
-.listenfuss .knopf{flex:1;text-align:center;padding-left:8px;padding-right:8px}
+.empty{padding:28px 14px;color:var(--faint);text-align:center;font-size:13px}
+.list-foot{padding:12px;border-top:1px solid var(--edge);display:flex;gap:7px}
+.list-foot .btn{flex:1;text-align:center;padding-left:8px;padding-right:8px}
 
-/* --- Spalte 2: Formular --- */
+/* --- Column 2: form --- */
 .form{padding:22px 24px 48px;display:flex;flex-direction:column;gap:18px}
 .form h2{
   margin:0;font-size:13px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
-  color:var(--matt);display:flex;align-items:baseline;gap:9px;
-  padding-bottom:12px;border-bottom:1px solid var(--kante);
+  color:var(--dim);display:flex;align-items:baseline;gap:9px;
+  padding-bottom:12px;border-bottom:1px solid var(--edge);
 }
-.form h2 em{font-style:normal;color:var(--leise);font-family:var(--mono);letter-spacing:0}
-.feld{display:flex;flex-direction:column;gap:7px}
-.feld label{font-size:11px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--matt)}
-.feld .hilfe{color:var(--leise);font-weight:400;text-transform:none;letter-spacing:0;font-size:12px}
-.feld input,.feld select,.feld textarea{
-  padding:10px 12px;border:1px solid var(--kante-hell);border-radius:var(--rund);
-  background:var(--nacht);color:var(--text);font-family:var(--ui);
+.form h2 em{font-style:normal;color:var(--faint);font-family:var(--mono);letter-spacing:0}
+.field{display:flex;flex-direction:column;gap:7px}
+.field label{font-size:11px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--dim)}
+.field .hint{color:var(--faint);font-weight:400;text-transform:none;letter-spacing:0;font-size:12px}
+.field input,.field select,.field textarea{
+  padding:10px 12px;border:1px solid var(--edge-light);border-radius:var(--radius);
+  background:var(--night);color:var(--text);font-family:var(--ui);
 }
-.feld textarea{resize:vertical;line-height:1.6}
-.feld input:focus,.feld textarea:focus,.feld select:focus{
-  border-color:var(--akzent-tief);outline:none;
+.field textarea{resize:vertical;line-height:1.6}
+.field input:focus,.field textarea:focus,.field select:focus{
+  border-color:var(--accent-deep);outline:none;
   box-shadow:0 0 0 3px rgba(224,182,97,.13);
 }
-.zaehler{font:11px/1 var(--mono);color:var(--leise);align-self:flex-end}
-.werkzeuge{display:flex;gap:7px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--kante)}
+.counter{font:11px/1 var(--mono);color:var(--faint);align-self:flex-end}
+.tools{display:flex;gap:7px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--edge)}
 
-/* --- Spalte 3: Vorschau --- */
-.vorschau{
+/* --- Column 3: preview --- */
+.preview{
   padding:22px;position:sticky;top:53px;
   display:flex;flex-direction:column;gap:14px;width:max-content;
   background:
     radial-gradient(120% 60% at 50% 22%, rgba(224,182,97,.055), transparent 70%),
-    var(--tafel);
+    var(--panel);
 }
-.schalter{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.schalter .satz{display:flex;border:1px solid var(--kante-hell);border-radius:var(--rund);overflow:hidden}
-.schalter .satz button{
-  border:0;background:var(--hebung);color:var(--matt);
+.switches{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.switches .group{display:flex;border:1px solid var(--edge-light);border-radius:var(--radius);overflow:hidden}
+.switches .group button{
+  border:0;background:var(--raised);color:var(--dim);
   padding:6px 14px;cursor:pointer;font:12px/1.4 var(--mono);
 }
-.schalter .satz button+button{border-left:1px solid var(--kante-hell)}
-.schalter .satz button[aria-pressed="true"]{background:var(--akzent);color:#221a08;font-weight:600}
-.schalter label{display:flex;gap:7px;align-items:center;font-size:12px;color:var(--matt);cursor:pointer}
-.schalter input[type=checkbox]{accent-color:var(--akzent);width:14px;height:14px}
+.switches .group button+button{border-left:1px solid var(--edge-light)}
+.switches .group button[aria-pressed="true"]{background:var(--accent);color:#221a08;font-weight:600}
+.switches label{display:flex;gap:7px;align-items:center;font-size:12px;color:var(--dim);cursor:pointer}
+.switches input[type=checkbox]{accent-color:var(--accent);width:14px;height:14px}
 
-/* Millimeterleiste: zeigt, dass die Vorschau echte Groesse hat */
-.leiste{position:relative;height:14px}
-.leiste .strich{position:absolute;top:0;width:1px;height:5px;background:var(--kante-hell)}
-.leiste .strich.zehn{height:9px;background:var(--matt)}
-.leiste .zahl{position:absolute;top:0;font:9px/1 var(--mono);color:var(--leise);transform:translateX(3px)}
+/* Millimetre ruler: shows that the preview is at real size */
+.ruler{position:relative;height:14px}
+.ruler .mark{position:absolute;top:0;width:1px;height:5px;background:var(--edge-light)}
+.ruler .mark.ten{height:9px;background:var(--dim)}
+.ruler .num{position:absolute;top:0;font:9px/1 var(--mono);color:var(--faint);transform:translateX(3px)}
 
-/* Buehne: die Karte liegt beleuchtet auf dem dunklen Pult */
-.rahmen{position:relative;padding:10px}
-.rahmen::before,.rahmen::after{
+/* Stage: the card lies lit on the dark desk */
+.frame{position:relative;padding:10px}
+.frame::before,.frame::after{
   content:"";position:absolute;width:18px;height:18px;pointer-events:none;
-  border:1px solid var(--kante-hell);
+  border:1px solid var(--edge-light);
 }
-.rahmen::before{left:0;top:0;border-right:0;border-bottom:0}
-.rahmen::after{right:0;bottom:0;border-left:0;border-top:0}
-.stapel{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
-.seitenlabel{
-  font:10px/1 var(--mono);color:var(--leise);letter-spacing:.12em;
+.frame::before{left:0;top:0;border-right:0;border-bottom:0}
+.frame::after{right:0;bottom:0;border-left:0;border-top:0}
+.stack{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.side-label{
+  font:10px/1 var(--mono);color:var(--faint);letter-spacing:.12em;
   text-transform:uppercase;margin-bottom:5px;display:block;
 }
-.buehne{
+.stage{
   width:fit-content;
   background:#fff;border-radius:2px;
   box-shadow:0 0 0 1px rgba(255,255,255,.09), 0 18px 40px -12px rgba(0,0,0,.75),
              0 3px 10px rgba(0,0,0,.4);
 }
-.buehne .card{background:#fff}
+.stage .card{background:#fff}
 
-/* Lesbarkeitsanzeige: Zahl plus Skala mit den drei Bereichen */
-.anzeige{
+/* Readability gauge: number plus a scale with the three bands */
+.gauge{
   display:flex;align-items:center;gap:16px;
-  padding:13px 15px;background:var(--hebung);
-  border:1px solid var(--kante-hell);border-radius:var(--rund);
+  padding:13px 15px;background:var(--raised);
+  border:1px solid var(--edge-light);border-radius:var(--radius);
 }
-.ablesung{display:flex;align-items:baseline;gap:4px;font-family:var(--mono)}
-.ablesung .wert{font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1}
-.ablesung .einheit{font-size:11px;color:var(--leise)}
-.skala{flex:1;min-width:190px;display:flex;flex-direction:column;gap:5px}
-.zonen{position:relative;display:flex;height:5px;border-radius:99px;overflow:hidden;background:var(--nacht)}
-.zonen i{display:block;height:100%;opacity:.42}
-.zonen .z-eng{background:var(--eng)} .zonen .z-knapp{background:var(--knapp)} .zonen .z-gut{background:var(--gut)}
-.nadel{
+.readout{display:flex;align-items:baseline;gap:4px;font-family:var(--mono)}
+.readout .value{font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1}
+.readout .unit{font-size:11px;color:var(--faint)}
+.scale{flex:1;min-width:190px;display:flex;flex-direction:column;gap:5px}
+.zones{position:relative;display:flex;height:5px;border-radius:99px;overflow:hidden;background:var(--night)}
+.zones i{display:block;height:100%;opacity:.42}
+.zones .z-cramped{background:var(--cramped)} .zones .z-borderline{background:var(--borderline)} .zones .z-good{background:var(--good)}
+.needle{
   position:absolute;top:-3px;width:3px;height:11px;border-radius:2px;
-  background:var(--text);box-shadow:0 0 0 2px var(--hebung);
+  background:var(--text);box-shadow:0 0 0 2px var(--raised);
   transform:translateX(-50%);left:0;
 }
-.skala-text{display:flex;justify-content:space-between;font:10px/1 var(--mono);color:var(--leise)}
-.skala-text .lage{letter-spacing:.1em;text-transform:uppercase;font-weight:600}
-.anzeige.gut   .wert,.anzeige.gut   .lage{color:var(--gut)}
-.anzeige.knapp .wert,.anzeige.knapp .lage{color:var(--knapp)}
-.anzeige.eng   .wert,.anzeige.eng   .lage{color:var(--eng)}
-@media (prefers-reduced-motion:no-preference){ .nadel{transition:left .18s ease-out} }
+.scale-text{display:flex;justify-content:space-between;font:10px/1 var(--mono);color:var(--faint)}
+.scale-text .band{letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+.gauge.good       .value,.gauge.good       .band{color:var(--good)}
+.gauge.borderline .value,.gauge.borderline .band{color:var(--borderline)}
+.gauge.cramped    .value,.gauge.cramped    .band{color:var(--cramped)}
+@media (prefers-reduced-motion:no-preference){ .needle{transition:left .18s ease-out} }
 
-.hinweise{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px;max-width:min(420px,100%)}
-.hinweise li{
-  font-size:12.5px;line-height:1.5;padding:9px 11px;background:var(--hebung);
-  border:1px solid var(--kante);border-left:2px solid var(--kante-hell);
-  border-radius:var(--rund);color:var(--matt);
+.notes{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px;max-width:min(420px,100%)}
+.notes li{
+  font-size:12.5px;line-height:1.5;padding:9px 11px;background:var(--raised);
+  border:1px solid var(--edge);border-left:2px solid var(--edge-light);
+  border-radius:var(--radius);color:var(--dim);
 }
-.hinweise li.warn{border-left-color:var(--knapp);color:var(--text)}
-.hinweise li.fehler{border-left-color:var(--eng);color:var(--text)}
-.hinweise li.ok{border-left-color:var(--gut)}
+.notes li.warn{border-left-color:var(--borderline);color:var(--text)}
+.notes li.error{border-left-color:var(--cramped);color:var(--text)}
+.notes li.ok{border-left-color:var(--good)}
 
-/* Rueckmeldung nach Laden und Sichern */
+/* Feedback after loading and saving */
 .status{
   position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:60;
-  max-width:min(560px,92vw);padding:12px 18px;border-radius:var(--rund);
-  background:var(--hebung2);color:var(--text);border:1px solid var(--kante-hell);
+  max-width:min(560px,92vw);padding:12px 18px;border-radius:var(--radius);
+  background:var(--raised2);color:var(--text);border:1px solid var(--edge-light);
   font-size:13px;line-height:1.45;
   box-shadow:0 14px 36px -10px rgba(0,0,0,.8);
   opacity:0;pointer-events:none;
 }
-.status.an{opacity:1}
-.status.fehler{border-color:var(--eng);color:#ffd9d2}
+.status.on{opacity:1}
+.status.error{border-color:var(--cramped);color:#ffd9d2}
 @media (prefers-reduced-motion:no-preference){ .status{transition:opacity .2s} }
 
-/* Datei auf das Fenster ziehen */
-body.ziehen::after{
+/* Dragging a file onto the window */
+body.dragover::after{
   content:"facts.json hier ablegen";
   position:fixed;inset:12px;z-index:70;display:grid;place-items:center;
-  border:2px dashed var(--akzent);border-radius:8px;
-  background:rgba(14,17,26,.9);color:var(--akzent);font-weight:600;letter-spacing:.02em;
+  border:2px dashed var(--accent);border-radius:8px;
+  background:rgba(14,17,26,.9);color:var(--accent);font-weight:600;letter-spacing:.02em;
 }
 
-/* Startmeldung: bleibt stehen, wenn das Skript nicht laeuft. */
-.startmeldung{
+/* Boot message: stays up if the script does not run. */
+.bootmsg{
   position:fixed;inset:0;z-index:100;display:grid;place-items:center;
-  padding:26px;background:var(--nacht);
+  padding:26px;background:var(--night);
 }
-.startmeldung .kasten{
-  max-width:560px;background:var(--tafel);border:1px solid var(--kante-hell);
-  border-left:3px solid var(--eng);border-radius:var(--rund);padding:24px 26px;
+.bootmsg .box{
+  max-width:560px;background:var(--panel);border:1px solid var(--edge-light);
+  border-left:3px solid var(--cramped);border-radius:var(--radius);padding:24px 26px;
 }
-.startmeldung h1{margin:0 0 12px;font-size:17px;letter-spacing:-.01em}
-.startmeldung p{margin:0 0 11px;line-height:1.6;color:var(--matt)}
-.startmeldung ol{margin:0 0 11px;padding-left:20px;line-height:1.7;color:var(--matt)}
-.startmeldung code{
-  font:12px/1.4 var(--mono);background:var(--hebung2);color:var(--text);
+.bootmsg h1{margin:0 0 12px;font-size:17px;letter-spacing:-.01em}
+.bootmsg p{margin:0 0 11px;line-height:1.6;color:var(--dim)}
+.bootmsg ol{margin:0 0 11px;padding-left:20px;line-height:1.7;color:var(--dim)}
+.bootmsg code{
+  font:12px/1.4 var(--mono);background:var(--raised2);color:var(--text);
   padding:2px 6px;border-radius:3px;
 }
-.startmeldung .klein{font-size:12px;color:var(--leise)}
-.startmeldung pre{
+.bootmsg .small{font-size:12px;color:var(--faint)}
+.bootmsg pre{
   font:11px/1.5 var(--mono);background:rgba(239,115,97,.09);color:#ffb3a7;
-  border:1px solid var(--eng);border-radius:var(--rund);padding:10px;margin:12px 0 0;
+  border:1px solid var(--cramped);border-radius:var(--radius);padding:10px;margin:12px 0 0;
   white-space:pre-wrap;word-break:break-word;
 }
 
-/* Druckflaeche: liegt normalerweise ausserhalb des Sichtfelds, wird aber
-   ausgelegt - nur so lassen sich die Karten vor dem Druck vermessen. */
-.druckflaeche{position:absolute;left:-20000px;top:0;width:210mm}
-.druckflaeche:empty{display:none}
+/* Print area: normally sits outside the viewport but is laid out - that
+   is the only way to measure the cards before printing. */
+.printarea{position:absolute;left:-20000px;top:0;width:210mm}
+.printarea:empty{display:none}
 
 @media print{
   body>*{display:none !important}
-  body>.druckflaeche{
+  body>.printarea{
     display:block !important;position:static;left:auto;width:auto;
   }
-  .druckflaeche .sheet{box-shadow:none}
+  .printarea .sheet{box-shadow:none}
 }
 
 @media (max-width:1100px){
   main{grid-template-columns:minmax(0,1fr)}
-  .liste,.vorschau{position:static;max-height:none;width:auto}
-  .rollen{max-height:340px}
-  .vorschau{max-width:100%;overflow-x:auto}
-  .rahmen,.leiste{flex:0 0 auto}
+  .list,.preview{position:static;max-height:none;width:auto}
+  .rows{max-height:340px}
+  .preview{max-width:100%;overflow-x:auto}
+  .frame,.ruler{flex:0 0 auto}
 }
 @media (prefers-reduced-motion:no-preference){
-  .zeile,.knopf,.filter input,.feld input,.feld textarea{transition:background .13s,color .13s,border-color .13s,box-shadow .13s}
+  .row,.btn,.filter input,.field input,.field textarea{transition:background .13s,color .13s,border-color .13s,box-shadow .13s}
 }
 </style>
 </head>
 <body>
 
-<header class="kopf">
-  <div class="marke">Faktenkarten <span>· Editor</span></div>
-  <div class="bilanz" id="bilanz"></div>
-  <div class="rechts">
-    <span class="merker" id="merker">nicht gesichert</span>
-    <button class="knopf" id="laden">facts.json laden</button>
-    <input type="file" id="datei" class="versteckt" accept=".json,application/json"
+<header class="topbar">
+  <div class="brand">Faktenkarten <span>· Editor</span></div>
+  <div class="tally" id="tally"></div>
+  <div class="right">
+    <span class="cloud" id="cloud" hidden></span>
+    <span class="unsaved" id="unsaved">nicht gesichert</span>
+    <button class="btn" id="load">facts.json laden</button>
+    <input type="file" id="file" class="visually-hidden" accept=".json,application/json"
            tabindex="-1" aria-hidden="true">
-    <button class="knopf" id="drucken">PDF drucken</button>
-    <button class="knopf primaer" id="sichern">facts.json sichern</button>
+    <button class="btn" id="print">PDF drucken</button>
+    <button class="btn primary" id="save">facts.json sichern</button>
+    <button class="btn" id="signin" hidden>Anmelden</button>
+    <button class="btn" id="store" hidden>In die Datenbank speichern</button>
   </div>
 </header>
 
 <main>
-  <section class="liste">
+  <section class="list">
     <div class="filter">
-      <input id="suche" type="search" placeholder="Suchen …" aria-label="Karten durchsuchen">
-      <select id="themenfilter" aria-label="Nach Thema filtern"></select>
+      <input id="search" type="search" placeholder="Suchen …" aria-label="Karten durchsuchen">
+      <select id="themefilter" aria-label="Nach Thema filtern"></select>
     </div>
-    <ol class="rollen" id="rollen"></ol>
-    <div class="listenfuss">
-      <button class="knopf" id="neu">Karte hinzufügen</button>
-      <button class="knopf" id="sortieren" title="Karten nach der Themenreihenfolge gruppieren und neu durchnummerieren">Nach Thema sortieren</button>
+    <ol class="rows" id="rows"></ol>
+    <div class="list-foot">
+      <button class="btn" id="add">Karte hinzufügen</button>
+      <button class="btn" id="sort" title="Karten nach der Themenreihenfolge gruppieren und neu durchnummerieren">Nach Thema sortieren</button>
     </div>
   </section>
 
   <section class="form" id="form"></section>
 
-  <aside class="vorschau">
-    <div class="schalter">
-      <div class="satz" id="formatwahl">
+  <aside class="preview">
+    <div class="switches">
+      <div class="group" id="formatpick">
         <button data-fmt="a7" aria-pressed="true">A7</button>
         <button data-fmt="a6" aria-pressed="false">A6 hoch</button>
         <button data-fmt="a6q" aria-pressed="false">A6 quer</button>
       </div>
-      <label><input type="checkbox" id="zusatz" checked> „Mehr dazu“ mitdrucken</label>
-      <label title="Feine Linien zwischen den Karten und Anlegemarken am Bogenrand"><input type="checkbox" id="schnitt" checked> Schnittlinien drucken</label>
+      <label><input type="checkbox" id="withmore" checked> „Mehr dazu“ mitdrucken</label>
+      <label title="Feine Linien zwischen den Karten und Anlegemarken am Bogenrand"><input type="checkbox" id="cutlines" checked> Schnittlinien drucken</label>
       <label title="Vorderseite zeigt nur Thema und Titel, der Text steht auf der Rückseite"><input type="checkbox" id="duplex"> Duplex: Titel vorn, Text hinten</label>
     </div>
-    <div class="leiste" id="leiste"></div>
-    <div class="rahmen"><div class="stapel" id="stapel"></div></div>
-    <div class="anzeige" id="anzeige">
-      <div class="ablesung"><span class="wert">–</span><span class="einheit">pt</span></div>
-      <div class="skala">
-        <div class="zonen">
-          <i class="z-eng"></i><i class="z-knapp"></i><i class="z-gut"></i>
-          <span class="nadel" id="nadel"></span>
+    <div class="ruler" id="ruler"></div>
+    <div class="frame"><div class="stack" id="stack"></div></div>
+    <div class="gauge" id="gauge">
+      <div class="readout"><span class="value">–</span><span class="unit">pt</span></div>
+      <div class="scale">
+        <div class="zones">
+          <i class="z-cramped"></i><i class="z-borderline"></i><i class="z-good"></i>
+          <span class="needle" id="needle"></span>
         </div>
-        <div class="skala-text">
-          <span id="skala-min"></span><span class="lage"></span><span id="skala-max"></span>
+        <div class="scale-text">
+          <span id="scale-min"></span><span class="band"></span><span id="scale-max"></span>
         </div>
       </div>
     </div>
-    <ul class="hinweise" id="hinweise"></ul>
+    <ul class="notes" id="notes"></ul>
   </aside>
 </main>
 
-<style id="druckseite"></style>
-<div class="druckflaeche" id="druckflaeche" aria-hidden="true"></div>
+<style id="pagerule"></style>
+<div class="printarea" id="printarea" aria-hidden="true"></div>
 
 <div class="status" id="status" role="status" aria-live="polite"></div>
 
-<div class="startmeldung" id="startmeldung">
-  <div class="kasten">
+<div class="bootmsg" id="bootmsg">
+  <div class="box">
     <h1>Der Editor läuft gerade nicht</h1>
     <p>Diese Seite braucht JavaScript. Bleibt diese Meldung stehen, wird das
        Skript blockiert – meistens, weil die Datei in einer Vorschau
@@ -399,10 +424,10 @@ body.ziehen::after{
       <li><code>karten-editor.html</code> herunterladen und lokal speichern.</li>
       <li>Die gespeicherte Datei doppelklicken.</li>
     </ol>
-    <p class="klein">Erscheint hier gleich eine rote Fehlermeldung, dann ist es
+    <p class="small">Erscheint hier gleich eine rote Fehlermeldung, dann ist es
        kein Vorschauproblem, sondern ein Fehler im Editor – dann bitte den
        Text melden.</p>
-    <pre id="startfehler" hidden></pre>
+    <pre id="booterror" hidden></pre>
   </div>
 </div>
 
@@ -410,360 +435,409 @@ body.ziehen::after{
 <script>
 "use strict";
 
-// Fehler sichtbar machen statt die Seite leer stehen zu lassen
+// Surface errors instead of leaving the page blank
 addEventListener("error", e => {
-  const k = document.getElementById("startmeldung");
-  const f = document.getElementById("startfehler");
-  if (!k || !f) return;
-  k.style.display = "grid";
-  k.querySelector("h1").textContent = "Fehler im Editor";
+  const b = document.getElementById("bootmsg");
+  const f = document.getElementById("booterror");
+  if (!b || !f) return;
+  b.style.display = "grid";
+  b.querySelector("h1").textContent = "Fehler im Editor";
   f.hidden = false;
   f.textContent = (e.message || e.error) + "\n" + (e.filename || "") + ":" + (e.lineno || "?");
 });
 
-const DATEN   = /*__DATEN__*/;
-const FORMATE = /*__FORMATE__*/;
+const DATA    = /*__DATA__*/;
+const FORMATS = /*__FORMATS__*/;
 const autofit = /*__AUTOFIT__*/;
 
-// Ab diesen Druckgroessen ist Vorlesen im Halbdunkel erfahrungsgemaess machbar
-const LESBAR = { a7: {gut: 12.5, knapp: 10.5}, a6: {gut: 15, knapp: 12.5},
-                 a6q: {gut: 15, knapp: 12.5} };
+// From these print sizes upwards, reading aloud in near-darkness is
+// experience-tested to be workable
+const READABLE = { a7: {good: 12.5, borderline: 10.5}, a6: {good: 15, borderline: 12.5},
+                   a6q: {good: 15, borderline: 12.5} };
+
+/* ---------- Identifiers ----------
+   Every card carries an id that survives reordering, renaming and
+   renumbering. Offline it is irrelevant; online it is the key of the
+   database document - without it, after a reorder there would be no way
+   to tell which card is which document, and saving would swap cards
+   around instead of changing them.
+   It deliberately does not appear in facts.json: the file format stays
+   exactly as documented, and `no` remains the only visible ordering. */
+const newId = () => "k" + Date.now().toString(36)
+                  + Math.random().toString(36).slice(2, 8);
 
 const S = {
-  karten: DATEN.karten.map(k => ({...k})),
-  themen: DATEN.themen.slice(),
-  meta:   {...DATEN.meta},
-  sel: 0, fmt: "a7", zusatz: true, schnitt: true, duplex: false,
-  suche: "", thema: "", dirty: false
+  cards:  DATA.cards.map(k => ({...k, id: k.id || newId()})),
+  themes: DATA.themes.slice(),
+  meta:   {...DATA.meta},
+  sel: 0, fmt: "a7", withMore: true, cutLines: true, duplex: false,
+  query: "", theme: "", dirty: false
 };
+
+/* ---------- Write permission ----------
+   Offline the data belongs to whoever opened the file - so writing is
+   always allowed. Online the Firebase module sets this, depending on
+   whether someone is signed in whom the security rules let write. The
+   rules in the database are the actual barrier; this is only the
+   interface for it, so that nobody types into the void. */
+let writable = true;
+
+function requireWrite(){
+  if (writable) return true;
+  status("Nur Lesen. Zum Ändern oben rechts anmelden.", true);
+  return false;
+}
+
+function setWritable(on){
+  writable = !!on;
+  document.body.classList.toggle("readonly", !writable);
+  $("#add").disabled = !writable;
+  $("#sort").disabled = !writable;
+  redrawAll();
+}
 
 const $  = s => document.querySelector(s);
 const el = (t, c, txt) => { const n = document.createElement(t);
   if (c) n.className = c; if (txt != null) n.textContent = txt; return n; };
 const esc = s => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
-// <sup> bleibt erhalten, alles andere wird escaped – wie im Druckskript
-const inhalt = s => esc(s).replace(/&lt;sup&gt;/g, "<sup>").replace(/&lt;\/sup&gt;/g, "</sup>");
-const roh = s => String(s).replace(/<\/?sup>/g, "");
-const stufe = t => { const n = roh(t).length;
+// <sup> survives, everything else is escaped - same as in the print script
+const markup = s => esc(s).replace(/&lt;sup&gt;/g, "<sup>").replace(/&lt;\/sup&gt;/g, "</sup>");
+const plain = s => String(s).replace(/<\/?sup>/g, "");
+const level = t => { const n = plain(t).length;
   return n < 170 ? "s1" : n < 215 ? "s2" : n < 265 ? "s3" : "s4"; };
 
-function schmutzig(an = true){ S.dirty = an; $("#merker").classList.toggle("an", an); }
+function setDirty(on = true){ S.dirty = on; $("#unsaved").classList.toggle("on", on); }
 
-let statusUhr;
-function status(text, fehler){
+let statusTimer;
+function status(text, isError){
   const n = $("#status");
   n.textContent = text;
-  n.classList.toggle("fehler", !!fehler);
-  n.classList.add("an");
-  clearTimeout(statusUhr);
-  statusUhr = setTimeout(() => n.classList.remove("an"), fehler ? 8000 : 4500);
+  n.classList.toggle("error", !!isError);
+  n.classList.add("on");
+  clearTimeout(statusTimer);
+  statusTimer = setTimeout(() => n.classList.remove("on"), isError ? 8000 : 4500);
 }
 
-function nummerieren(){ S.karten.forEach((k, i) => k.nr = i + 1); }
+function renumber(){ S.cards.forEach((k, i) => k.no = i + 1); }
 
-/* ---------- Kopfzeile ---------- */
-function bilanz(){
-  const n = S.karten.length;
-  const teile = [`<b>${n}</b> ${n === 1 ? "Karte" : "Karten"}`];
+/* ---------- Top bar ---------- */
+function tally(){
+  const n = S.cards.length;
+  const parts = [`<b>${n}</b> ${n === 1 ? "Karte" : "Karten"}`];
   for (const key of ["a7","a6"]){
-    const pro = FORMATE[key].pro_bogen;
-    const b = Math.ceil(n / pro), leer = b * pro - n;
-    teile.push(`<b>${b}</b> ${b === 1 ? "Bogen" : "Bögen"} ${key.toUpperCase()}`
-      + (leer ? ` (${leer} ${leer === 1 ? "Leerfeld" : "Leerfelder"})` : ""));
+    const per = FORMATS[key].per_sheet;
+    const s = Math.ceil(n / per), free = s * per - n;
+    parts.push(`<b>${s}</b> ${s === 1 ? "Bogen" : "Bögen"} ${key.toUpperCase()}`
+      + (free ? ` (${free} ${free === 1 ? "Leerfeld" : "Leerfelder"})` : ""));
   }
-  $("#bilanz").innerHTML = teile.join("");
+  $("#tally").innerHTML = parts.join("");
 }
 
-/* ---------- Liste ---------- */
-function passt(k){
-  if (S.thema && k.thema !== S.thema) return false;
-  if (!S.suche) return true;
-  const q = S.suche.toLowerCase();
-  return [k.titel, k.text, k.nachschlag, String(k.nr)]
+/* ---------- List ---------- */
+function matches(k){
+  if (S.theme && k.theme !== S.theme) return false;
+  if (!S.query) return true;
+  const q = S.query.toLowerCase();
+  return [k.title, k.text, k.more, String(k.no)]
     .some(v => String(v).toLowerCase().includes(q));
 }
 
-// Umsortieren per Ziehen. Funktioniert auch bei gefilterter Liste:
-// abgelegt wird immer relativ zur Karte, auf der man loslaesst.
-let zieht = null;
+// Reordering by dragging. Works with a filtered list too: the drop is
+// always relative to the card it is released on.
+let dragFrom = null;
 
-function listeAnbinden(){
-  const ol = $("#rollen");
+function bindList(){
+  const ol = $("#rows");
   ol.addEventListener("dragstart", e => {
-    const z = e.target.closest(".zeile"); if (!z) return;
-    zieht = +z.dataset.pos;
-    z.classList.add("zieht");
+    const r = e.target.closest(".row"); if (!r) return;
+    if (!writable){ e.preventDefault(); return; }
+    dragFrom = +r.dataset.pos;
+    r.classList.add("dragging");
     e.dataTransfer.effectAllowed = "move";
-    e.dataTransfer.setData("text/plain", "karte:" + zieht);
+    e.dataTransfer.setData("text/plain", "card:" + dragFrom);
   });
   ol.addEventListener("dragend", () => {
-    zieht = null;
-    ol.querySelectorAll(".zieht,.ziel-vor,.ziel-nach")
-      .forEach(z => z.classList.remove("zieht", "ziel-vor", "ziel-nach"));
+    dragFrom = null;
+    ol.querySelectorAll(".dragging,.drop-before,.drop-after")
+      .forEach(r => r.classList.remove("dragging", "drop-before", "drop-after"));
   });
   ol.addEventListener("dragover", e => {
-    if (zieht === null) return;
-    const z = e.target.closest(".zeile"); if (!z) return;
+    if (dragFrom === null) return;
+    const r = e.target.closest(".row"); if (!r) return;
     e.preventDefault();
     e.dataTransfer.dropEffect = "move";
-    const r = z.getBoundingClientRect();
-    const oben = e.clientY < r.top + r.height / 2;
-    ol.querySelectorAll(".ziel-vor,.ziel-nach").forEach(x => x.classList.remove("ziel-vor","ziel-nach"));
-    if (+z.dataset.pos !== zieht) z.classList.add(oben ? "ziel-vor" : "ziel-nach");
+    const box = r.getBoundingClientRect();
+    const above = e.clientY < box.top + box.height / 2;
+    ol.querySelectorAll(".drop-before,.drop-after").forEach(x => x.classList.remove("drop-before","drop-after"));
+    if (+r.dataset.pos !== dragFrom) r.classList.add(above ? "drop-before" : "drop-after");
   });
   ol.addEventListener("drop", e => {
-    if (zieht === null) return;
-    const z = e.target.closest(".zeile"); if (!z) return;
+    if (dragFrom === null) return;
+    const r = e.target.closest(".row"); if (!r) return;
     e.preventDefault(); e.stopPropagation();
-    const ziel = +z.dataset.pos;
-    if (ziel === zieht) return;
-    const r = z.getBoundingClientRect();
-    const oben = e.clientY < r.top + r.height / 2;
-    const karte = S.karten[zieht];
-    const zielkarte = z._karte;
-    S.karten.splice(zieht, 1);
-    // Zielposition nach dem Herausnehmen neu bestimmen
-    const neu = S.karten.indexOf(zielkarte);
-    S.karten.splice(oben ? neu : neu + 1, 0, karte);
-    S.sel = S.karten.indexOf(karte);
-    zieht = null;
-    nummerieren(); schmutzig(); alles();
-    status(`„${karte.titel}“ ist jetzt Karte ${karte.nr}.`);
+    const to = +r.dataset.pos;
+    if (to === dragFrom) return;
+    const box = r.getBoundingClientRect();
+    const above = e.clientY < box.top + box.height / 2;
+    const card = S.cards[dragFrom];
+    const target = r._card;
+    S.cards.splice(dragFrom, 1);
+    // Recompute the target position after the removal
+    const at = S.cards.indexOf(target);
+    S.cards.splice(above ? at : at + 1, 0, card);
+    S.sel = S.cards.indexOf(card);
+    dragFrom = null;
+    renumber(); setDirty(); redrawAll();
+    status(`„${card.title}“ ist jetzt Karte ${card.no}.`);
   });
 }
 
-function listeZeichnen(){
-  const ol = $("#rollen"); ol.innerHTML = "";
-  const sichtbar = S.karten.filter(passt);
-  if (!sichtbar.length){
-    ol.append(el("li", "leer", "Keine Karte gefunden. Suche oder Themenfilter ändern."));
+function drawList(){
+  const ol = $("#rows"); ol.innerHTML = "";
+  const visible = S.cards.filter(matches);
+  if (!visible.length){
+    ol.append(el("li", "empty", "Keine Karte gefunden. Suche oder Themenfilter ändern."));
     return;
   }
-  for (const k of sichtbar){
-    const i = S.karten.indexOf(k);
+  for (const k of visible){
+    const i = S.cards.indexOf(k);
     const li = el("li");
-    const b = el("button", "zeile");
+    const b = el("button", "row");
     b.type = "button";
     b.setAttribute("aria-current", i === S.sel ? "true" : "false");
-    b.append(el("span", "nr", k.nr));
+    b.append(el("span", "no", k.no));
     const t = el("span", "txt");
-    t.append(el("span", "tl", k.titel || "Ohne Titel"));
-    t.append(el("span", "thema-name",
-                (k.thema || "ohne Thema").replace("LOECHER", "LÖCHER")));
+    t.append(el("span", "tl", k.title || "Ohne Titel"));
+    t.append(el("span", "theme-name",
+                (k.theme || "ohne Thema").replace("LOECHER", "LÖCHER")));
     b.append(t);
-    b.onclick = () => { S.sel = i; alles(); };
-    b.draggable = true;
+    b.onclick = () => { S.sel = i; redrawAll(); };
+    b.draggable = writable;
     b.dataset.pos = i;
-    b._karte = k;
-    b.append(el("span", "griff"));
-    const weg = el("button", "weg", "\u00d7");
-    weg.type = "button";
-    weg.title = `Karte ${k.nr} löschen`;
-    weg.setAttribute("aria-label", `Karte ${k.nr} „${k.titel}“ löschen`);
-    weg.onclick = ev => { ev.stopPropagation(); loeschen(S.karten.indexOf(k)); };
-    li.append(b, weg); ol.append(li);
+    b._card = k;
+    b.append(el("span", "grip"));
+    const kill = el("button", "remove", "×");
+    kill.type = "button";
+    kill.title = `Karte ${k.no} löschen`;
+    kill.setAttribute("aria-label", `Karte ${k.no} „${k.title}“ löschen`);
+    kill.onclick = ev => { ev.stopPropagation(); removeCard(S.cards.indexOf(k)); };
+    li.append(b, kill); ol.append(li);
   }
 }
 
-/* ---------- Formular ---------- */
-function feld(id, label, hilfe, wert, mehrzeilig, zeilen){
-  const d = el("div", "feld");
+/* ---------- Form ---------- */
+function field(id, label, hint, value, multiline, rows){
+  const d = el("div", "field");
   const l = el("label", null, label); l.htmlFor = id;
-  if (hilfe) l.append(el("span", "hilfe", " – " + hilfe));
-  const inp = mehrzeilig ? el("textarea") : el("input");
-  inp.id = id; inp.value = wert || "";
-  if (mehrzeilig) inp.rows = zeilen || 4;
+  if (hint) l.append(el("span", "hint", " – " + hint));
+  const inp = multiline ? el("textarea") : el("input");
+  inp.id = id; inp.value = value || "";
+  if (multiline) inp.rows = rows || 4;
   d.append(l, inp);
-  if (mehrzeilig){ const z = el("div", "zaehler"); d.append(z); }
+  if (multiline){ const c = el("div", "counter"); d.append(c); }
   return d;
 }
 
-function formZeichnen(){
+function drawForm(){
   const f = $("#form"); f.innerHTML = "";
-  const k = S.karten[S.sel];
+  const k = S.cards[S.sel];
   if (!k){
-    f.append(el("p", "leer", "Keine Karte ausgewählt. Links eine Karte anklicken oder eine neue hinzufügen."));
+    f.append(el("p", "empty", "Keine Karte ausgewählt. Links eine Karte anklicken oder eine neue hinzufügen."));
     return;
   }
-  const h = el("h2", null, "Karte " + k.nr + " ");
-  h.append(el("em", null, "von " + S.karten.length));
+  const h = el("h2", null, "Karte " + k.no + " ");
+  h.append(el("em", null, "von " + S.cards.length));
   f.append(h);
 
-  const dTh = el("div", "feld");
-  const lTh = el("label", null, "Thema"); lTh.htmlFor = "f-thema";
-  lTh.append(el("span", "hilfe", " – bestimmt Reihenfolge und Nummernblock"));
-  const sel = el("select"); sel.id = "f-thema";
-  S.themen.forEach(t => { const o = el("option", null, t.replace("LOECHER","LÖCHER"));
-    o.value = t; if (t === k.thema) o.selected = true; sel.append(o); });
+  const dTh = el("div", "field");
+  const lTh = el("label", null, "Thema"); lTh.htmlFor = "f-theme";
+  lTh.append(el("span", "hint", " – bestimmt Reihenfolge und Nummernblock"));
+  const sel = el("select"); sel.id = "f-theme";
+  S.themes.forEach(t => { const o = el("option", null, t.replace("LOECHER","LÖCHER"));
+    o.value = t; if (t === k.theme) o.selected = true; sel.append(o); });
   dTh.append(lTh, sel); f.append(dTh);
 
-  f.append(feld("f-titel", "Titel", "kurz, steht groß auf der Karte", k.titel));
-  f.append(feld("f-text", "Fakt", "zwei bis drei Sätze, ohne die anderen Karten verständlich",
-                k.text, true, 6));
-  f.append(feld("f-nach", "Mehr dazu", "Zusatz für Rückfragen, muss ebenfalls für sich stehen",
-                k.nachschlag, true, 4));
+  f.append(field("f-title", "Titel", "kurz, steht groß auf der Karte", k.title));
+  f.append(field("f-text", "Fakt", "zwei bis drei Sätze, ohne die anderen Karten verständlich",
+                 k.text, true, 6));
+  f.append(field("f-more", "Mehr dazu", "Zusatz für Rückfragen, muss ebenfalls für sich stehen",
+                 k.more, true, 4));
 
-  const w = el("div", "werkzeuge");
-  const mk = (txt, cls, fn, aus) => { const b = el("button", "knopf" + (cls ? " " + cls : ""), txt);
-    b.type = "button"; b.onclick = fn; b.disabled = !!aus; w.append(b); return b; };
-  mk("Nach oben",   "", () => schieben(-1), S.sel === 0);
-  mk("Nach unten",  "", () => schieben(1),  S.sel === S.karten.length - 1);
-  mk("Duplizieren", "", duplizieren);
-  mk("Löschen", "gefahr", loeschen);
+  const w = el("div", "tools");
+  const mk = (txt, cls, fn, off) => { const b = el("button", "btn" + (cls ? " " + cls : ""), txt);
+    b.type = "button"; b.onclick = fn; b.disabled = !!off; w.append(b); return b; };
+  mk("Nach oben",   "", () => move(-1), S.sel === 0);
+  mk("Nach unten",  "", () => move(1),  S.sel === S.cards.length - 1);
+  mk("Duplizieren", "", duplicate);
+  mk("Löschen", "danger", removeCard);
   f.append(w);
 
-  const bind = (id, schluessel) => {
+  const bind = (id, key) => {
     const n = document.getElementById(id);
     n.addEventListener("input", () => {
-      k[schluessel] = n.value;
-      schmutzig();
-      zaehlerAktualisieren();
-      vorschau();
-      listeZeichnen();
+      k[key] = n.value;
+      setDirty();
+      updateCounters();
+      preview();
+      drawList();
     });
   };
-  bind("f-titel", "titel"); bind("f-text", "text"); bind("f-nach", "nachschlag");
-  sel.addEventListener("change", () => { k.thema = sel.value; schmutzig(); alles(); });
-  zaehlerAktualisieren();
+  bind("f-title", "title"); bind("f-text", "text"); bind("f-more", "more");
+  sel.addEventListener("change", () => { k.theme = sel.value; setDirty(); redrawAll(); });
+
+  // Without write permission, freeze the fields rather than hide them:
+  // reading and reading aloud is the more common case online.
+  if (!writable){
+    f.querySelectorAll("input, textarea").forEach(n => { n.readOnly = true; });
+    sel.disabled = true;
+    w.querySelectorAll("button").forEach(b => { b.disabled = true; });
+  }
+  updateCounters();
 }
 
-function zaehlerAktualisieren(){
-  [["f-text", 265], ["f-nach", 170]].forEach(([id, weich]) => {
+function updateCounters(){
+  [["f-text", 265], ["f-more", 170]].forEach(([id, soft]) => {
     const n = document.getElementById(id); if (!n) return;
-    const z = n.parentElement.querySelector(".zaehler");
-    const l = roh(n.value).length;
-    z.textContent = l + " Zeichen" + (l > weich ? " · länger als üblich" : "");
-    z.style.color = l > weich ? "var(--gelb)" : "";
+    const c = n.parentElement.querySelector(".counter");
+    const l = plain(n.value).length;
+    c.textContent = l + " Zeichen" + (l > soft ? " · länger als üblich" : "");
+    c.style.color = l > soft ? "var(--borderline)" : "";
   });
 }
 
-/* ---------- Bearbeiten ---------- */
-function schieben(d){
+/* ---------- Editing ---------- */
+function move(d){
+  if (!requireWrite()) return;
   const i = S.sel, j = i + d;
-  if (j < 0 || j >= S.karten.length) return;
-  [S.karten[i], S.karten[j]] = [S.karten[j], S.karten[i]];
-  S.sel = j; nummerieren(); schmutzig(); alles();
+  if (j < 0 || j >= S.cards.length) return;
+  [S.cards[i], S.cards[j]] = [S.cards[j], S.cards[i]];
+  S.sel = j; renumber(); setDirty(); redrawAll();
 }
-function duplizieren(){
-  const k = S.karten[S.sel];
-  S.karten.splice(S.sel + 1, 0, {...k, titel: k.titel + " (Kopie)"});
-  S.sel += 1; nummerieren(); schmutzig(); alles();
+function duplicate(){
+  if (!requireWrite()) return;
+  const k = S.cards[S.sel];
+  // its own id, otherwise the copy would be the same database document
+  S.cards.splice(S.sel + 1, 0, {...k, id: newId(), title: k.title + " (Kopie)"});
+  S.sel += 1; renumber(); setDirty(); redrawAll();
 }
-function loeschen(index){
+function removeCard(index){
+  if (!requireWrite()) return;
   const i = index === undefined ? S.sel : index;
-  const k = S.karten[i];
+  const k = S.cards[i];
   if (!k) return;
-  if (!confirm(`Karte ${k.nr} „${k.titel}“ löschen? Die folgenden Karten rücken auf.`)) return;
-  S.karten.splice(i, 1);
-  // Auswahl mitziehen: gelöschte Karte -> gleiche Position, sonst Abstand halten
+  if (!confirm(`Karte ${k.no} „${k.title}“ löschen? Die folgenden Karten rücken auf.`)) return;
+  S.cards.splice(i, 1);
+  // Carry the selection along: deleted card -> same position, else keep distance
   S.sel = S.sel > i ? S.sel - 1 : S.sel;
-  S.sel = Math.max(0, Math.min(S.sel, S.karten.length - 1));
-  nummerieren(); schmutzig(); alles();
-  status(`Karte „${k.titel}“ gelöscht. Noch ${S.karten.length} Karten.`);
+  S.sel = Math.max(0, Math.min(S.sel, S.cards.length - 1));
+  renumber(); setDirty(); redrawAll();
+  status(`Karte „${k.title}“ gelöscht. Noch ${S.cards.length} Karten.`);
 }
-function sortieren(){
-  const gemerkt = S.karten[S.sel];
-  const rang = {};
-  S.themen.forEach((t, i) => { rang[t] = i; });
-  // stabil: innerhalb eines Themas bleibt die Reihenfolge erhalten
-  S.karten.sort((a, b) => (rang[a.thema] === undefined ? 999 : rang[a.thema])
-                        - (rang[b.thema] === undefined ? 999 : rang[b.thema]));
-  nummerieren();
-  if (gemerkt) S.sel = S.karten.indexOf(gemerkt);
-  schmutzig(); alles();
-  const bloecke = S.themen
-    .map(t => { const n = S.karten.filter(k => k.thema === t); return n.length
-        ? `${t.replace("LOECHER","LÖCHER")} ${n[0].nr}–${n[n.length - 1].nr}` : null; })
+function sortByTheme(){
+  if (!requireWrite()) return;
+  const kept = S.cards[S.sel];
+  const rank = {};
+  S.themes.forEach((t, i) => { rank[t] = i; });
+  // stable: within a theme the order is preserved
+  S.cards.sort((a, b) => (rank[a.theme] === undefined ? 999 : rank[a.theme])
+                       - (rank[b.theme] === undefined ? 999 : rank[b.theme]));
+  renumber();
+  if (kept) S.sel = S.cards.indexOf(kept);
+  setDirty(); redrawAll();
+  const blocks = S.themes
+    .map(t => { const n = S.cards.filter(k => k.theme === t); return n.length
+        ? `${t.replace("LOECHER","LÖCHER")} ${n[0].no}–${n[n.length - 1].no}` : null; })
     .filter(Boolean);
-  status("Nach Themen sortiert und neu durchnummeriert: " + bloecke.join(", ") + ".");
+  status("Nach Themen sortiert und neu durchnummeriert: " + blocks.join(", ") + ".");
 }
 
-function neu(){
-  S.karten.push({nr: 0, thema: S.thema || S.themen[0], titel: "Neue Karte",
-                 text: "", nachschlag: ""});
-  S.sel = S.karten.length - 1;
-  S.suche = ""; $("#suche").value = "";
-  nummerieren(); schmutzig(); alles();
-  const t = document.getElementById("f-titel"); if (t){ t.focus(); t.select(); }
+function addCard(){
+  if (!requireWrite()) return;
+  S.cards.push({id: newId(), no: 0, theme: S.theme || S.themes[0],
+                title: "Neue Karte", text: "", more: ""});
+  S.sel = S.cards.length - 1;
+  S.query = ""; $("#search").value = "";
+  renumber(); setDirty(); redrawAll();
+  const t = document.getElementById("f-title"); if (t){ t.focus(); t.select(); }
 }
 
-/* ---------- Vorschau in echter Groesse ---------- */
-function leisteZeichnen(){
-  const breite = FORMATE[S.fmt].quer ? 148.5 : 105;
-  const l = $("#leiste"); l.innerHTML = "";
-  l.style.width = breite + "mm";
-  for (let mm = 0; mm <= breite; mm += 5){
-    const s = el("i", "strich" + (mm % 10 === 0 ? " zehn" : ""));
-    s.style.left = mm + "mm"; l.append(s);
-    if (mm % 20 === 0 && mm < breite - 8){
-      const z = el("span", "zahl", mm); z.style.left = mm + "mm"; l.append(z);
+/* ---------- Preview at real size ---------- */
+function drawRuler(){
+  const width = FORMATS[S.fmt].landscape ? 148.5 : 105;
+  const l = $("#ruler"); l.innerHTML = "";
+  l.style.width = width + "mm";
+  for (let mm = 0; mm <= width; mm += 5){
+    const m = el("i", "mark" + (mm % 10 === 0 ? " ten" : ""));
+    m.style.left = mm + "mm"; l.append(m);
+    if (mm % 20 === 0 && mm < width - 8){
+      const z = el("span", "num", mm); z.style.left = mm + "mm"; l.append(z);
     }
   }
 }
 
-// Baut eine Karte genau so auf wie build_cards.py
-// seite: null = einseitig, "vorne" = nur Titel, "hinten" = Text
-function kartenHtml(k, fmt, seite){
-  const f = FORMATE[fmt];
-  const lang = (k.titel || "").length > f.titel_lang ? " long" : "";
-  const thema = esc((k.thema || "").replace("LOECHER", "LÖCHER"));
-  const kopf = b => `<div class="card-head"><div class="thema">${b || thema}</div>`
-                  + `<div class="nummer">${k.nr}</div></div>`;
+// Builds a card exactly the way build_cards.py does
+// side: null = single-sided, "front" = title only, "back" = text
+function cardHtml(k, fmt, side){
+  const f = FORMATS[fmt];
+  const long = (k.title || "").length > f.title_long ? " long" : "";
+  const theme = esc((k.theme || "").replace("LOECHER", "LÖCHER"));
+  const head = b => `<div class="card-head"><div class="theme">${b || theme}</div>`
+                  + `<div class="number">${k.no}</div></div>`;
 
-  if (seite === "vorne"){
+  if (side === "front"){
     return `
-    <div class="card vorne" data-nr="${k.nr}"
-         data-max="${f.maxVorne}" data-min="${f.minVorne}">
-      ${kopf()}
-      <div class="titel${lang}">${inhalt(k.titel || "")}</div>
+    <div class="card front" data-no="${k.no}"
+         data-max="${f.maxFront}" data-min="${f.minFront}">
+      ${head()}
+      <div class="title${long}">${markup(k.title || "")}</div>
       <div class="card-foot">bitte wenden</div>
     </div>`;
   }
-  const mehr = S.zusatz
-    ? `<div class="mehr"><div class="mehr-label">Mehr dazu</div>`
-      + `<div class="nachschlag">${inhalt(k.nachschlag || "")}</div></div>` : "";
-  const fuss = seite === "hinten" ? thema
-             : `${esc(S.meta.fusszeile || "Faktenkarte")} ${k.nr} / ${S.karten.length}`;
+  const more = S.withMore
+    ? `<div class="more"><div class="more-label">Mehr dazu</div>`
+      + `<div class="more-text">${markup(k.more || "")}</div></div>` : "";
+  const foot = side === "back" ? theme
+             : `${esc(S.meta.footer || "Faktenkarte")} ${k.no} / ${S.cards.length}`;
   return `
-    <div class="card${seite === "hinten" ? " hinten" : ""}" data-nr="${k.nr}">
-      ${kopf(seite === "hinten" ? "Antwort" : null)}
-      <div class="titel${lang}">${inhalt(k.titel || "")}</div>
-      <div class="fakt ${stufe(k.text || "")}">${inhalt(k.text || "")}</div>
-      ${mehr}
-      <div class="card-foot">${fuss}</div>
+    <div class="card${side === "back" ? " back" : ""}" data-no="${k.no}">
+      ${head(side === "back" ? "Antwort" : null)}
+      <div class="title${long}">${markup(k.title || "")}</div>
+      <div class="fact ${level(k.text || "")}">${markup(k.text || "")}</div>
+      ${more}
+      <div class="card-foot">${foot}</div>
     </div>`;
 }
 
-function grenzen(fmt){
-  const f = FORMATE[fmt];
-  return {minText: f.minText, maxText: f.maxText, minTitel: f.minTitel};
+function limits(fmt){
+  const f = FORMATS[fmt];
+  return {minText: f.minText, maxText: f.maxText, minTitle: f.minTitle};
 }
 
-function vorschau(){
-  const k = S.karten[S.sel], st = $("#stapel");
-  if (!k){ st.innerHTML = ""; anzeigen(null); return; }
-  const blatt = (label, seite) =>
-    `<div class="seite">${label ? `<span class="seitenlabel">${label}</span>` : ""}`
-    + `<div class="buehne f-${S.fmt}">${kartenHtml(k, S.fmt, seite)}</div></div>`;
+function preview(){
+  const k = S.cards[S.sel], st = $("#stack");
+  if (!k){ st.innerHTML = ""; showGauge(null); return; }
+  const sheet = (label, side) =>
+    `<div class="side">${label ? `<span class="side-label">${label}</span>` : ""}`
+    + `<div class="stage f-${S.fmt}">${cardHtml(k, S.fmt, side)}</div></div>`;
   st.innerHTML = S.duplex
-    ? blatt("Vorderseite", "vorne") + blatt("Rückseite", "hinten")
-    : blatt(null, null);
-  // exakt dieselbe Rechnung wie beim PDF-Bau
-  const bericht = autofit(grenzen(S.fmt));
-  // Im Duplexmodus zaehlt die Textseite - dort steht der Fliesstext
-  anzeigen(bericht[bericht.length - 1] || null);
+    ? sheet("Vorderseite", "front") + sheet("Rückseite", "back")
+    : sheet(null, null);
+  // exactly the same computation as the PDF build
+  const report = autofit(limits(S.fmt));
+  // In duplex mode the text side counts - that is where the body text is
+  showGauge(report[report.length - 1] || null);
 }
 
-/* ---------- Drucken ---------- */
-function schnittmarken(f){
-  if (!S.schnitt) return "";
+/* ---------- Printing ---------- */
+function cutMarks(f){
+  if (!S.cutLines) return "";
   let m = "";
-  f.vlinien.forEach(x => {
+  f.vlines.forEach(x => {
     m += `<div class="cut v" style="left:${x}mm"></div>`
        + `<div class="tick v-top" style="left:${x}mm"></div>`
        + `<div class="tick v-bottom" style="left:${x}mm"></div>`;
   });
-  f.hlinien.forEach(y => {
+  f.hlines.forEach(y => {
     m += `<div class="cut h" style="top:${y}mm"></div>`
        + `<div class="tick h-left" style="top:${y}mm"></div>`
        + `<div class="tick h-right" style="top:${y}mm"></div>`;
@@ -771,229 +845,280 @@ function schnittmarken(f){
   return m;
 }
 
-// Rueckseiten fuers Wenden an der langen Kante zeilenweise spiegeln
-function spiegeln(zellen, spalten){
+// Mirror the back sheets row by row for flipping along the long edge
+function mirror(cells, columns){
   const out = [];
-  for (let i = 0; i < zellen.length; i += spalten)
-    out.push(...zellen.slice(i, i + spalten).reverse());
+  for (let i = 0; i < cells.length; i += columns)
+    out.push(...cells.slice(i, i + columns).reverse());
   return out;
 }
 
-function drucken(){
-  const f = FORMATE[S.fmt], n = f.pro_bogen, flaeche = $("#druckflaeche");
-  const leer = '<div class="card"></div>';
-  const quer = f.quer ? " quer" : "";
-  $("#druckseite").textContent = f.quer
+function printSheets(){
+  const f = FORMATS[S.fmt], n = f.per_sheet, area = $("#printarea");
+  const blank = '<div class="card"></div>';
+  const land = f.landscape ? " landscape" : "";
+  $("#pagerule").textContent = f.landscape
     ? "@page { size: A4 landscape; margin: 0; }" : "@page { size: A4 portrait; margin: 0; }";
-  const bogen = zellen =>
-    `<div class="sheet f-${S.fmt}${quer}">${schnittmarken(f)}${zellen.join("")}</div>`;
-  const boegen = [];
-  for (let i = 0; i < S.karten.length; i += n){
-    const gruppe = S.karten.slice(i, i + n);
-    const fehlt = Array(n - gruppe.length).fill(leer);
+  const sheet = cells =>
+    `<div class="sheet f-${S.fmt}${land}">${cutMarks(f)}${cells.join("")}</div>`;
+  const sheets = [];
+  for (let i = 0; i < S.cards.length; i += n){
+    const group = S.cards.slice(i, i + n);
+    const missing = Array(n - group.length).fill(blank);
     if (!S.duplex){
-      boegen.push(bogen(gruppe.map(k => kartenHtml(k, S.fmt, null)).concat(fehlt)));
+      sheets.push(sheet(group.map(k => cardHtml(k, S.fmt, null)).concat(missing)));
       continue;
     }
-    boegen.push(bogen(gruppe.map(k => kartenHtml(k, S.fmt, "vorne")).concat(fehlt)));
-    boegen.push(bogen(spiegeln(gruppe.map(k => kartenHtml(k, S.fmt, "hinten")).concat(fehlt), f.spalten)));
+    sheets.push(sheet(group.map(k => cardHtml(k, S.fmt, "front")).concat(missing)));
+    sheets.push(sheet(mirror(group.map(k => cardHtml(k, S.fmt, "back")).concat(missing), f.columns)));
   }
-  flaeche.innerHTML = boegen.join("");
+  area.innerHTML = sheets.join("");
 
-  // Vorschaukarten kurz aus der Messung nehmen, sonst zaehlen sie doppelt
-  const weg = [...$("#stapel").querySelectorAll(".card[data-nr]")];
-  const merk = weg.map(c => c.dataset.nr);
-  weg.forEach(c => delete c.dataset.nr);
-  const bericht = autofit(grenzen(S.fmt));
-  weg.forEach((c, i) => { c.dataset.nr = merk[i]; });
+  // Take the preview cards out of the measurement briefly, else they count twice
+  const shown = [...$("#stack").querySelectorAll(".card[data-no]")];
+  const keep = shown.map(c => c.dataset.no);
+  shown.forEach(c => delete c.dataset.no);
+  const report = autofit(limits(S.fmt));
+  shown.forEach((c, i) => { c.dataset.no = keep[i]; });
 
-  const eng = bericht.filter(x => x.eng || x.langwort).map(x => x.nr);
-  status(`${boegen.length} Bögen ${S.fmt.toUpperCase()} vorbereitet`
+  const tight = report.filter(x => x.tight || x.longWord).map(x => x.no);
+  status(`${sheets.length} Bögen ${S.fmt.toUpperCase()} vorbereitet`
        + (S.duplex ? ", Duplex (Wenden an der langen Kante)" : "")
-       + (S.schnitt ? ", mit Schnittlinien" : ", ohne Schnittlinien")
+       + (S.cutLines ? ", mit Schnittlinien" : ", ohne Schnittlinien")
        + `. Im Druckdialog „Als PDF speichern“ wählen, Skalierung 100 %, `
        + `Ränder auf „keine“.`
-       + (eng.length ? ` Achtung: Karte ${eng.join(", ")} zu lang.` : ""));
+       + (tight.length ? ` Achtung: Karte ${tight.join(", ")} zu lang.` : ""));
 
   setTimeout(() => {
     window.print();
-    setTimeout(() => { flaeche.innerHTML = ""; vorschau(); }, 400);
+    setTimeout(() => { area.innerHTML = ""; preview(); }, 400);
   }, 60);
 }
 
-function anzeigen(r){
-  const a = $("#anzeige"), g = LESBAR[S.fmt], f = FORMATE[S.fmt];
-  const wert = a.querySelector(".wert"), lage = a.querySelector(".lage");
-  const von = f.minText, bis = f.maxText, spanne = bis - von;
+function showGauge(r){
+  const a = $("#gauge"), g = READABLE[S.fmt], f = FORMATS[S.fmt];
+  const value = a.querySelector(".value"), band = a.querySelector(".band");
+  const low = f.minText, high = f.maxText, span = high - low;
 
-  // Skala einteilen: zu klein | grenzwertig | gut lesbar
-  a.querySelector(".z-eng").style.flex   = (g.knapp - von) / spanne;
-  a.querySelector(".z-knapp").style.flex = (g.gut - g.knapp) / spanne;
-  a.querySelector(".z-gut").style.flex   = (bis - g.gut) / spanne;
-  $("#skala-min").textContent = von.toFixed(1).replace(".", ",") + " pt";
-  $("#skala-max").textContent = bis.toFixed(1).replace(".", ",") + " pt";
+  // Split the scale: too small | borderline | comfortably readable
+  a.querySelector(".z-cramped").style.flex    = (g.borderline - low) / span;
+  a.querySelector(".z-borderline").style.flex = (g.good - g.borderline) / span;
+  a.querySelector(".z-good").style.flex       = (high - g.good) / span;
+  $("#scale-min").textContent = low.toFixed(1).replace(".", ",") + " pt";
+  $("#scale-max").textContent = high.toFixed(1).replace(".", ",") + " pt";
 
-  a.className = "anzeige";
+  a.className = "gauge";
   if (!r){
-    wert.textContent = "–"; lage.textContent = "";
-    $("#nadel").style.display = "none"; hinweise(null); return;
+    value.textContent = "–"; band.textContent = "";
+    $("#needle").style.display = "none"; notes(null); return;
   }
-  wert.textContent = r.pt.toFixed(1).replace(".", ",");
-  const stand = r.eng ? "eng" : r.pt >= g.gut ? "gut" : r.pt >= g.knapp ? "knapp" : "eng";
-  a.classList.add(stand);
-  lage.textContent = {gut: "gut lesbar", knapp: "grenzwertig", eng: "zu klein"}[stand];
-  const n = $("#nadel");
+  value.textContent = r.pt.toFixed(1).replace(".", ",");
+  const state = r.tight ? "cramped" : r.pt >= g.good ? "good"
+              : r.pt >= g.borderline ? "borderline" : "cramped";
+  a.classList.add(state);
+  band.textContent = {good: "gut lesbar", borderline: "grenzwertig", cramped: "zu klein"}[state];
+  const n = $("#needle");
   n.style.display = "";
-  n.style.left = Math.max(0, Math.min(100, (r.pt - von) / spanne * 100)) + "%";
-  hinweise(r, stand);
+  n.style.left = Math.max(0, Math.min(100, (r.pt - low) / span * 100)) + "%";
+  notes(r, state);
 }
 
-/* ---------- Hinweise ---------- */
-// Textblock beginnt mit einem Wort, das ohne die Vorderseite ins Leere laeuft
-const HAENGT = /^(Er|Sie|Es|Ihn|Ihr|Ihre|Ihrer|Dieser|Diese|Dieses|Dort|Dabei|Damit|Dadurch|Deshalb|Trotzdem|Dasselbe|Derselbe|Dieselbe)\b/;
+/* ---------- Notes ---------- */
+// Text block starts with a word that dangles without the card before it
+const DANGLING = /^(Er|Sie|Es|Ihn|Ihr|Ihre|Ihrer|Dieser|Diese|Dieses|Dort|Dabei|Damit|Dadurch|Deshalb|Trotzdem|Dasselbe|Derselbe|Dieselbe)\b/;
 
-function hinweise(r, stand){
-  const u = $("#hinweise"); u.innerHTML = "";
-  const k = S.karten[S.sel];
-  const sag = (txt, cls) => u.append(el("li", cls, txt));
+function notes(r, state){
+  const u = $("#notes"); u.innerHTML = "";
+  const k = S.cards[S.sel];
+  const say = (txt, cls) => u.append(el("li", cls, txt));
   if (!k) return;
 
-  if (!String(k.titel || "").trim()) sag("Der Titel fehlt.", "fehler");
-  if (!String(k.text || "").trim())  sag("Der Fakt fehlt.", "fehler");
-  if (S.zusatz && !String(k.nachschlag || "").trim())
-    sag("„Mehr dazu“ ist leer – der Absatz bleibt auf der Karte weg.", "warn");
+  if (!String(k.title || "").trim()) say("Der Titel fehlt.", "error");
+  if (!String(k.text || "").trim())  say("Der Fakt fehlt.", "error");
+  if (S.withMore && !String(k.more || "").trim())
+    say("„Mehr dazu“ ist leer – der Absatz bleibt auf der Karte weg.", "warn");
 
-  if (r && r.eng)
-    sag(`Der Text passt selbst bei ${r.pt.toFixed(1).replace(".",",")} pt nicht auf die Karte. Kürzen.`, "fehler");
-  else if (stand === "knapp")
-    sag("Im Halbdunkel grenzwertig. Kürzen, A6 wählen oder „Mehr dazu“ abschalten.", "warn");
-  else if (stand === "eng")
-    sag("Zum Vorlesen unter Rotlicht zu klein.", "fehler");
-  else if (stand === "gut")
-    sag("Größe reicht zum Vorlesen.", "ok");
+  if (r && r.tight)
+    say(`Der Text passt selbst bei ${r.pt.toFixed(1).replace(".",",")} pt nicht auf die Karte. Kürzen.`, "error");
+  else if (state === "borderline")
+    say("Im Halbdunkel grenzwertig. Kürzen, A6 wählen oder „Mehr dazu“ abschalten.", "warn");
+  else if (state === "cramped")
+    say("Zum Vorlesen unter Rotlicht zu klein.", "error");
+  else if (state === "good")
+    say("Größe reicht zum Vorlesen.", "ok");
 
-  if (r && r.langwort){
-    const w = r.langwort;
-    const kurz = w.length > 26 ? w.slice(0, 26) + "…" : w;
-    sag(`Das Wort „${kurz}“ (${w.length} Zeichen) ist breiter als die Karte `
+  if (r && r.longWord){
+    const w = r.longWord;
+    const short = w.length > 26 ? w.slice(0, 26) + "…" : w;
+    say(`Das Wort „${short}“ (${w.length} Zeichen) ist breiter als die Karte `
       + `und wird mitten im Wort umbrochen. Kürzeres Wort wählen – oder mit `
       + `einem bedingten Trennstrich (Windows: Alt + 0173) selbst festlegen, `
-      + `wo getrennt wird.`, "fehler");
+      + `wo getrennt wird.`, "error");
   }
 
-  [["Fakt", k.text], ["„Mehr dazu“", k.nachschlag]].forEach(([name, t]) => {
-    if (t && HAENGT.test(t.trim()))
-      sag(`${name} beginnt mit „${t.trim().split(/\s+/)[0]}“ – jede Karte wird einzeln vorgelesen, das Wort braucht sein Bezugswort auf derselben Karte.`, "warn");
+  [["Fakt", k.text], ["„Mehr dazu“", k.more]].forEach(([name, t]) => {
+    if (t && DANGLING.test(t.trim()))
+      say(`${name} beginnt mit „${t.trim().split(/\s+/)[0]}“ – jede Karte wird einzeln vorgelesen, das Wort braucht sein Bezugswort auf derselben Karte.`, "warn");
   });
 
-  const doppelt = S.karten.filter((x, i) => i !== S.sel &&
-    (x.titel || "").trim().toLowerCase() === (k.titel || "").trim().toLowerCase());
-  if (doppelt.length) sag(`Titel doppelt – auch auf Karte ${doppelt.map(d => d.nr).join(", ")}.`, "warn");
+  const dupes = S.cards.filter((x, i) => i !== S.sel &&
+    (x.title || "").trim().toLowerCase() === (k.title || "").trim().toLowerCase());
+  if (dupes.length) say(`Titel doppelt – auch auf Karte ${dupes.map(d => d.no).join(", ")}.`, "warn");
 }
 
-/* ---------- Laden und Sichern ---------- */
-function sichern(){
-  nummerieren();
-  const inhalt = JSON.stringify({meta: S.meta, themen: S.themen, karten: S.karten}, null, 2) + "\n";
+/* ---------- Loading and saving ---------- */
+function saveFile(){
+  renumber();
+  // The internal id stays out - facts.json keeps exactly the fields that
+  // the file format documents.
+  const cards = S.cards.map(({id, ...rest}) => rest);
+  const json = JSON.stringify({meta: S.meta, themes: S.themes, cards}, null, 2) + "\n";
   const a = el("a");
-  a.href = URL.createObjectURL(new Blob([inhalt], {type: "application/json"}));
+  a.href = URL.createObjectURL(new Blob([json], {type: "application/json"}));
   a.download = "facts.json";
   a.click();
   URL.revokeObjectURL(a.href);
-  schmutzig(false);
-  status(`facts.json gesichert – ${S.karten.length} `
-       + `${S.karten.length === 1 ? "Karte" : "Karten"}. `
+  setDirty(false);
+  status(`facts.json gesichert – ${S.cards.length} `
+       + `${S.cards.length === 1 ? "Karte" : "Karten"}. `
        + `Datei über die alte legen, dann build_cards.py laufen lassen.`);
 }
 
-function laden(datei){
-  const leser = new FileReader();
-  leser.onload = () => {
+function loadFile(file){
+  const reader = new FileReader();
+  reader.onload = () => {
     let d;
-    try { d = JSON.parse(leser.result); }
+    try { d = JSON.parse(reader.result); }
     catch(e){ status("Die Datei ist kein gültiges JSON: " + e.message, true); return; }
-    if (!Array.isArray(d.karten) || !Array.isArray(d.themen)){
-      status("In der Datei fehlen die Felder „karten“ und „themen“. "
+    if (!Array.isArray(d.cards) || !Array.isArray(d.themes)){
+      status("In der Datei fehlen die Felder „cards“ und „themes“. "
            + "Erwartet wird eine facts.json wie im Projektordner.", true); return;
     }
-    S.karten = d.karten.map(k => ({nr: 0, thema: k.thema || "", titel: k.titel || "",
-                                   text: k.text || "", nachschlag: k.nachschlag || ""}));
-    S.themen = d.themen.slice();
+    S.cards = d.cards.map(k => ({id: k.id || newId(), no: 0,
+                                 theme: k.theme || "", title: k.title || "",
+                                 text: k.text || "", more: k.more || ""}));
+    S.themes = d.themes.slice();
     S.meta = d.meta || S.meta;
-    S.sel = 0; S.thema = ""; S.suche = "";
-    $("#suche").value = "";
-    nummerieren(); schmutzig(false); themenfilter(); alles();
-    status(`${datei.name} geladen: ${S.karten.length} `
-         + `${S.karten.length === 1 ? "Karte" : "Karten"}, ${S.themen.length} `
-         + `${S.themen.length === 1 ? "Thema" : "Themen"}.`);
+    S.sel = 0; S.theme = ""; S.query = "";
+    $("#search").value = "";
+    renumber(); setDirty(false); fillThemeFilter(); redrawAll();
+    status(`${file.name} geladen: ${S.cards.length} `
+         + `${S.cards.length === 1 ? "Karte" : "Karten"}, ${S.themes.length} `
+         + `${S.themes.length === 1 ? "Thema" : "Themen"}.`);
   };
-  leser.onerror = () => status("Die Datei konnte nicht gelesen werden.", true);
-  leser.readAsText(datei, "utf-8");
+  reader.onerror = () => status("Die Datei konnte nicht gelesen werden.", true);
+  reader.readAsText(file, "utf-8");
 }
 
-/* ---------- Aufbau ---------- */
-function themenfilter(){
-  const s = $("#themenfilter"); s.innerHTML = "";
-  const alle = el("option", null, "Alle Themen"); alle.value = ""; s.append(alle);
-  S.themen.forEach(t => { const o = el("option", null, t.replace("LOECHER","LÖCHER"));
+/* ---------- Wiring ---------- */
+function fillThemeFilter(){
+  const s = $("#themefilter"); s.innerHTML = "";
+  const all = el("option", null, "Alle Themen"); all.value = ""; s.append(all);
+  S.themes.forEach(t => { const o = el("option", null, t.replace("LOECHER","LÖCHER"));
     o.value = t; s.append(o); });
-  s.value = S.thema;
+  s.value = S.theme;
 }
 
-function alles(){ bilanz(); listeZeichnen(); formZeichnen(); vorschau(); }
+function redrawAll(){ tally(); drawList(); drawForm(); preview(); }
 
-$("#suche").addEventListener("input", e => { S.suche = e.target.value; listeZeichnen(); });
-$("#themenfilter").addEventListener("change", e => { S.thema = e.target.value; listeZeichnen(); });
-$("#neu").onclick = neu;
-$("#sortieren").onclick = sortieren;
-$("#drucken").onclick = drucken;
-$("#sichern").onclick = sichern;
-$("#laden").onclick = () => $("#datei").click();
-$("#datei").addEventListener("change", e => { if (e.target.files[0]) laden(e.target.files[0]); e.target.value = ""; });
+$("#search").addEventListener("input", e => { S.query = e.target.value; drawList(); });
+$("#themefilter").addEventListener("change", e => { S.theme = e.target.value; drawList(); });
+$("#add").onclick = addCard;
+$("#sort").onclick = sortByTheme;
+$("#print").onclick = printSheets;
+$("#save").onclick = saveFile;
+$("#load").onclick = () => $("#file").click();
+$("#file").addEventListener("change", e => { if (e.target.files[0]) loadFile(e.target.files[0]); e.target.value = ""; });
 
-// Datei aufs Fenster ziehen geht auch
-let ziehZaehler = 0;
-const hatDatei = e => e.dataTransfer && [...e.dataTransfer.types].indexOf("Files") >= 0;
+// Dragging a file onto the window works too
+let dragDepth = 0;
+const hasFiles = e => e.dataTransfer && [...e.dataTransfer.types].indexOf("Files") >= 0;
 addEventListener("dragenter", e => {
-  if (!hatDatei(e)) return;                  // internes Umsortieren, kein Dateiimport
+  if (!hasFiles(e)) return;                  // internal reordering, not a file import
   e.preventDefault();
-  if (++ziehZaehler === 1) document.body.classList.add("ziehen");
+  if (++dragDepth === 1) document.body.classList.add("dragover");
 });
-addEventListener("dragover", e => { if (hatDatei(e)) e.preventDefault(); });
-addEventListener("dragleave", e => { if (!hatDatei(e)) return;
-  if (--ziehZaehler <= 0){ ziehZaehler = 0; document.body.classList.remove("ziehen"); } });
+addEventListener("dragover", e => { if (hasFiles(e)) e.preventDefault(); });
+addEventListener("dragleave", e => { if (!hasFiles(e)) return;
+  if (--dragDepth <= 0){ dragDepth = 0; document.body.classList.remove("dragover"); } });
 addEventListener("drop", e => {
-  if (!hatDatei(e)) return;
-  e.preventDefault(); ziehZaehler = 0; document.body.classList.remove("ziehen");
+  if (!hasFiles(e)) return;
+  e.preventDefault(); dragDepth = 0; document.body.classList.remove("dragover");
   const f = e.dataTransfer.files[0];
   if (!f) return;
   if (!/\.json$/i.test(f.name)){ status(`„${f.name}“ ist keine JSON-Datei.`, true); return; }
-  laden(f);
+  loadFile(f);
 });
-$("#zusatz").addEventListener("change", e => { S.zusatz = e.target.checked; vorschau(); });
-$("#schnitt").addEventListener("change", e => { S.schnitt = e.target.checked; });
-$("#duplex").addEventListener("change", e => { S.duplex = e.target.checked; vorschau(); });
-$("#formatwahl").addEventListener("click", e => {
+$("#withmore").addEventListener("change", e => { S.withMore = e.target.checked; preview(); });
+$("#cutlines").addEventListener("change", e => { S.cutLines = e.target.checked; });
+$("#duplex").addEventListener("change", e => { S.duplex = e.target.checked; preview(); });
+$("#formatpick").addEventListener("click", e => {
   const b = e.target.closest("button[data-fmt]"); if (!b) return;
   S.fmt = b.dataset.fmt;
   [...e.currentTarget.children].forEach(x => x.setAttribute("aria-pressed", x === b));
-  leisteZeichnen();
-  vorschau();
+  drawRuler();
+  preview();
 });
 document.addEventListener("keydown", e => {
-  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s"){ e.preventDefault(); sichern(); }
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s"){ e.preventDefault(); saveFile(); }
 });
 window.addEventListener("beforeunload", e => { if (S.dirty){ e.preventDefault(); e.returnValue = ""; } });
 
-nummerieren();
-listeAnbinden();
-themenfilter();
-leisteZeichnen();
-alles();
+renumber();
+bindList();
+fillThemeFilter();
+drawRuler();
+redrawAll();
 
-// Ab hier laeuft alles. Die Startmeldung wird nur ausgeblendet, nicht
-// entfernt - so kann sie bei einem spaeteren Fehler wieder auftauchen.
-document.getElementById("startmeldung").style.display = "none";
+/* ---------- Interface for the online version ----------
+   The database layer runs as its own <script type="module"> and therefore
+   strictly after this script. It never touches the state directly, only
+   through this interface. Without the module - the offline editor as a
+   single file - an unused object simply stays here and the editor behaves
+   exactly as before. */
+window.Editor = {
+  S, status, redrawAll, setDirty, renumber, fillThemeFilter, newId,
+  setWritable,
+  seedData: DATA,
+
+  /* The state as it belongs in the database: with an id and an explicit
+     position. `no` is not stored, it follows from the order on load. */
+  getState(){
+    renumber();
+    return {
+      meta: {...S.meta},
+      themes: S.themes.slice(),
+      cards: S.cards.map((k, i) => ({
+        id: k.id, pos: i,
+        theme: k.theme || "", title: k.title || "",
+        text: k.text || "", more: k.more || ""
+      }))
+    };
+  },
+
+  /* Take a state from the database. The selection is carried over by id:
+     if a snapshot arrives while someone is editing, the cursor should stay
+     on the same card and not jump to whichever card now happens to sit at
+     that position. */
+  setState(d){
+    const kept = S.cards[S.sel] ? S.cards[S.sel].id : null;
+    S.cards = d.cards.map(k => ({
+      id: k.id || newId(), no: 0,
+      theme: k.theme || "", title: k.title || "",
+      text: k.text || "", more: k.more || ""
+    }));
+    if (Array.isArray(d.themes) && d.themes.length) S.themes = d.themes.slice();
+    if (d.meta) S.meta = {...S.meta, ...d.meta};
+    const i = S.cards.findIndex(k => k.id === kept);
+    S.sel = i >= 0 ? i : 0;
+    renumber(); setDirty(false); fillThemeFilter(); redrawAll();
+  }
+};
+
+// Everything runs from here. The boot message is only hidden, not removed -
+// so it can reappear if something fails later.
+document.getElementById("bootmsg").style.display = "none";
 </script>
+<!--__FIREBASE__-->
 </body>
 </html>

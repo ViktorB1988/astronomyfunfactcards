@@ -1,22 +1,26 @@
 #!/usr/bin/env python3
 """
-Astronomie-Faktenkarten -> druckfertige PDFs
+Astronomy fact cards -> print-ready PDFs
 
-  python3 build_cards.py            # beide Formate
-  python3 build_cards.py a7         # nur A7
+  python3 build_cards.py            # every format
+  python3 build_cards.py a7         # a single format
   python3 build_cards.py a6
 
-Einseitig. Die Karten stehen fortlaufend von 1 bis 100 auf den Boegen,
-zeilenweise von links oben nach rechts unten. Die Rueckseite bleibt leer.
+Single-sided. The cards run consecutively across the sheets, row by row
+from the top left. The back stays empty.
 
-Erzeugt im Ordner ./out:
-  astro-karten-A7.pdf      13 Boegen, 8 Karten je Bogen
-  astro-karten-A6.pdf      25 Boegen, 4 Karten je Bogen
-  astro-karten-index.pdf   Uebersichtsliste zum schnellen Finden
+Writes into ./out:
+  astro-karten-A7.pdf      22 sheets, 8 cards per sheet
+  astro-karten-A6.pdf      43 sheets, 4 cards per sheet
+  astro-karten-index.pdf   overview for looking things up quickly
 
-Daten liegen in facts.json, Layout in cards.css.
-Nach dem Rendern misst das Skript jede Karte und verkleinert den Text
-so weit noetig, damit nichts abgeschnitten wird.
+Data lives in facts.json, layout in cards.css.
+After rendering, the script measures every card and shrinks the text as
+far as needed so that nothing gets cut off.
+
+Note on language: identifiers and comments are English, but everything the
+cards and the console say stays German - the cards are read aloud to German
+visitors, and the printed text is the product.
 """
 
 import json
@@ -31,46 +35,47 @@ BASE = pathlib.Path(__file__).parent
 OUT = BASE / "out"
 OUT.mkdir(exist_ok=True)
 
-# Zusatzinfo ("Nachschlag") unten auf die Karte drucken.
-# Auf False setzen, wenn nur der reine Fakt erscheinen soll -
-# dann wird der Text deutlich groesser.
-MIT_NACHSCHLAG = True
+# Print the extra paragraph ("Mehr dazu") at the bottom of the card.
+# Set to False for the plain fact only - the text then gets noticeably
+# larger.
+WITH_MORE = True
 
-# Schnittlinien und Anlegemarken auf die Boegen drucken.
-# Auf False setzen, wenn die Boegen ohne jede Hilfslinie gebraucht werden -
-# dann bleibt aber nichts, woran sich der Schnitt ausrichten laesst.
-SCHNITTLINIEN = True
+# Print cutting lines and registration marks on the sheets.
+# Set to False if the sheets are needed without any guide lines - but then
+# nothing is left to align the cut against.
+CUT_LINES = True
 
-# Duplexmodus: Vorderseite zeigt nur Thema und Titel, der Fakt steht auf der
-# Rueckseite. Die Boegen wechseln sich ab (Vorderseite, Rueckseite, ...) und
-# die Rueckseiten sind fuer das Wenden an der langen Kante gespiegelt.
+# Duplex mode: the front shows only theme and title, the fact is on the
+# back. Sheets alternate (front, back, ...) and the back sheets are
+# mirrored for flipping along the long edge.
 DUPLEX = False
 
 data = json.loads((BASE / "facts.json").read_text(encoding="utf-8"))
 CSS = (BASE / "cards.css").read_text(encoding="utf-8")
-THEMEN = data["themen"]
-KARTEN = data["karten"]
-FUSS = data["meta"].get("fusszeile", "Faktenkarte")
+THEMES = data["themes"]
+CARDS = data["cards"]
+FOOTER = data["meta"].get("footer", "Faktenkarte")
 
-# Formatdefinition: Karten pro Bogen, Spalten, Schnittlinien in mm,
-# Mindestschriftgrade fuer den Auto-Fit
-FORMATE = {
-    "a6": {"pro_bogen": 4, "spalten": 2, "quer": False,
-           "vlinien": [105.0], "hlinien": [148.5],
-           "titel_lang": 30, "minText": 11.0, "maxText": 21.0, "minTitel": 14.0,
-           "minVorne": 15.0, "maxVorne": 34.0},
-    "a6q": {"pro_bogen": 4, "spalten": 2, "quer": True,
-            "vlinien": [148.5], "hlinien": [105.0],
-            "titel_lang": 34, "minText": 11.0, "maxText": 20.0, "minTitel": 14.0,
-            "minVorne": 15.0, "maxVorne": 32.0},
-    "a7": {"pro_bogen": 8, "spalten": 2, "quer": False,
-           "vlinien": [105.0], "hlinien": [74.25, 148.5, 222.75],
-           "titel_lang": 26, "minText": 7.5, "maxText": 14.0, "minTitel": 9.0,
-           "minVorne": 10.0, "maxVorne": 22.0},
+# Format definition: cards per sheet, columns, cutting lines in mm,
+# minimum font sizes for the auto-fit
+FORMATS = {
+    "a6": {"per_sheet": 4, "columns": 2, "landscape": False,
+           "vlines": [105.0], "hlines": [148.5],
+           "title_long": 30, "minText": 11.0, "maxText": 21.0, "minTitle": 14.0,
+           "minFront": 15.0, "maxFront": 34.0},
+    "a6q": {"per_sheet": 4, "columns": 2, "landscape": True,
+            "vlines": [148.5], "hlines": [105.0],
+            "title_long": 34, "minText": 11.0, "maxText": 20.0, "minTitle": 14.0,
+            "minFront": 15.0, "maxFront": 32.0},
+    "a7": {"per_sheet": 8, "columns": 2, "landscape": False,
+           "vlines": [105.0], "hlines": [74.25, 148.5, 222.75],
+           "title_long": 26, "minText": 7.5, "maxText": 14.0, "minTitle": 9.0,
+           "minFront": 10.0, "maxFront": 22.0},
 }
 
+
 def esc(s: str) -> str:
-    """Escaped alles ausser den erlaubten <sup>-Tags."""
+    """Escapes everything except the permitted <sup> tags."""
     s = htmlmod.escape(s, quote=False)
     return s.replace("&lt;sup&gt;", "<sup>").replace("&lt;/sup&gt;", "</sup>")
 
@@ -79,258 +84,258 @@ def plain_len(s: str) -> int:
     return len(s.replace("<sup>", "").replace("</sup>", ""))
 
 
-def stufe(text: str) -> str:
+def level(text: str) -> str:
     n = plain_len(text)
     return "s1" if n < 170 else "s2" if n < 215 else "s3" if n < 265 else "s4"
 
 
-def thema_anzeige(t: str) -> str:
+def theme_label(t: str) -> str:
     return t.replace("LOECHER", "LÖCHER")
 
 
-def kopf(k: dict, beschriftung: str = None) -> str:
+def head(k: dict, label: str = None) -> str:
     return (f'<div class="card-head">'
-            f'<div class="thema">{esc(beschriftung or thema_anzeige(k["thema"]))}</div>'
-            f'<div class="nummer">{k["nr"]}</div></div>')
+            f'<div class="theme">{esc(label or theme_label(k["theme"]))}</div>'
+            f'<div class="number">{k["no"]}</div></div>')
 
 
-def karte(k: dict, fmt: dict, key: str, seite: str = None) -> str:
-    """seite: None = einseitige Karte, "vorne" = nur Titel, "hinten" = Text."""
-    tk = "titel long" if len(k["titel"]) > fmt["titel_lang"] else "titel"
+def card(k: dict, fmt: dict, key: str, side: str = None) -> str:
+    """side: None = single-sided card, "front" = title only, "back" = text."""
+    title_class = "title long" if len(k["title"]) > fmt["title_long"] else "title"
 
-    if seite == "vorne":
+    if side == "front":
         return f"""
-    <div class="card vorne" data-nr="{k['nr']}"
-         data-max="{fmt['maxVorne']}" data-min="{fmt['minVorne']}">
-      {kopf(k)}
-      <div class="{tk}">{esc(k['titel'])}</div>
+    <div class="card front" data-no="{k['no']}"
+         data-max="{fmt['maxFront']}" data-min="{fmt['minFront']}">
+      {head(k)}
+      <div class="{title_class}">{esc(k['title'])}</div>
       <div class="card-foot">bitte wenden</div>
     </div>"""
 
-    mehr = ""
-    if MIT_NACHSCHLAG:
-        mehr = (f'<div class="mehr"><div class="mehr-label">Mehr dazu</div>'
-                f'<div class="nachschlag">{esc(k["nachschlag"])}</div></div>')
-    klasse = "card hinten" if seite == "hinten" else "card"
-    fuss = (f'<div class="card-foot">{esc(thema_anzeige(k["thema"]))}</div>'
-            if seite == "hinten"
-            else f'<div class="card-foot">{esc(FUSS)} {k["nr"]} / {len(KARTEN)}</div>')
+    more = ""
+    if WITH_MORE:
+        more = (f'<div class="more"><div class="more-label">Mehr dazu</div>'
+                f'<div class="more-text">{esc(k["more"])}</div></div>')
+    css_class = "card back" if side == "back" else "card"
+    foot = (f'<div class="card-foot">{esc(theme_label(k["theme"]))}</div>'
+            if side == "back"
+            else f'<div class="card-foot">{esc(FOOTER)} {k["no"]} / {len(CARDS)}</div>')
     return f"""
-    <div class="{klasse}" data-nr="{k['nr']}">
-      {kopf(k, "Antwort" if seite == "hinten" else None)}
-      <div class="{tk}">{esc(k['titel'])}</div>
-      <div class="fakt {stufe(k['text'])}">{esc(k['text'])}</div>
-      {mehr}
-      {fuss}
+    <div class="{css_class}" data-no="{k['no']}">
+      {head(k, "Antwort" if side == "back" else None)}
+      <div class="{title_class}">{esc(k['title'])}</div>
+      <div class="fact {level(k['text'])}">{esc(k['text'])}</div>
+      {more}
+      {foot}
     </div>"""
 
 
-def marken(fmt: dict) -> str:
-    if not SCHNITTLINIEN:
+def marks(fmt: dict) -> str:
+    if not CUT_LINES:
         return ""
     m = []
-    for x in fmt["vlinien"]:
+    for x in fmt["vlines"]:
         m.append(f'<div class="cut v" style="left:{x}mm"></div>')
         m.append(f'<div class="tick v-top" style="left:{x}mm"></div>')
         m.append(f'<div class="tick v-bottom" style="left:{x}mm"></div>')
-    for y in fmt["hlinien"]:
+    for y in fmt["hlines"]:
         m.append(f'<div class="cut h" style="top:{y}mm"></div>')
         m.append(f'<div class="tick h-left" style="top:{y}mm"></div>')
         m.append(f'<div class="tick h-right" style="top:{y}mm"></div>')
     return "".join(m)
 
 
-LEER = '<div class="card"></div>'
+EMPTY = '<div class="card"></div>'
 
 
-def spiegeln(zellen: list, spalten: int) -> list:
-    """Rueckseiten fuers Wenden an der langen Kante zeilenweise spiegeln:
+def mirror(cells: list, columns: int) -> list:
+    """Mirror the back sheets row by row for flipping along the long edge:
        1 2 / 3 4  ->  2 1 / 4 3"""
     out = []
-    for i in range(0, len(zellen), spalten):
-        out.extend(reversed(zellen[i:i + spalten]))
+    for i in range(0, len(cells), columns):
+        out.extend(reversed(cells[i:i + columns]))
     return out
 
 
-def bogen(key: str) -> str:
-    """Fortlaufende Belegung: Karte 1 links oben, dann zeilenweise weiter.
-    Im Duplexmodus folgt auf jeden Vorderseitenbogen der passende Rueckseitenbogen."""
-    fmt = FORMATE[key]
-    n = fmt["pro_bogen"]
-    q = " quer" if fmt["quer"] else ""
+def sheet(key: str) -> str:
+    """Consecutive layout: card 1 top left, then row by row.
+    In duplex mode every front sheet is followed by its matching back sheet."""
+    fmt = FORMATS[key]
+    n = fmt["per_sheet"]
+    land = " landscape" if fmt["landscape"] else ""
     out = []
-    for i in range(0, len(KARTEN), n):
-        gruppe = KARTEN[i:i + n]
-        fehlt = [LEER] * (n - len(gruppe))
+    for i in range(0, len(CARDS), n):
+        group = CARDS[i:i + n]
+        missing = [EMPTY] * (n - len(group))
         if not DUPLEX:
-            zellen = [karte(k, fmt, key) for k in gruppe] + fehlt
-            out.append(f'<div class="sheet f-{key}{q}">{marken(fmt)}{"".join(zellen)}</div>')
+            cells = [card(k, fmt, key) for k in group] + missing
+            out.append(f'<div class="sheet f-{key}{land}">{marks(fmt)}{"".join(cells)}</div>')
             continue
-        v = [karte(k, fmt, key, "vorne") for k in gruppe] + fehlt
-        h = spiegeln([karte(k, fmt, key, "hinten") for k in gruppe] + fehlt, fmt["spalten"])
-        out.append(f'<div class="sheet f-{key}{q}">{marken(fmt)}{"".join(v)}</div>')
-        out.append(f'<div class="sheet f-{key}{q}">{marken(fmt)}{"".join(h)}</div>')
+        front = [card(k, fmt, key, "front") for k in group] + missing
+        back = mirror([card(k, fmt, key, "back") for k in group] + missing, fmt["columns"])
+        out.append(f'<div class="sheet f-{key}{land}">{marks(fmt)}{"".join(front)}</div>')
+        out.append(f'<div class="sheet f-{key}{land}">{marks(fmt)}{"".join(back)}</div>')
     return "".join(out)
 
 
 def index_html() -> str:
     parts = []
-    for t in THEMEN:
-        rows = [k for k in KARTEN if k["thema"] == t]
+    for t in THEMES:
+        rows = [k for k in CARDS if k["theme"] == t]
         if not rows:
             continue
-        nrn = [k["nr"] for k in rows]
-        spanne = (f"Karten {nrn[0]}\u2013{nrn[-1]}"
-                  if nrn == list(range(nrn[0], nrn[-1] + 1)) else f"{len(rows)} Karten")
-        parts.append(f"<h2>{esc(thema_anzeige(t))} "
-                     f"<span class='spanne'>{spanne}</span></h2>")
+        nos = [k["no"] for k in rows]
+        span = (f"Karten {nos[0]}–{nos[-1]}"
+                if nos == list(range(nos[0], nos[-1] + 1)) else f"{len(rows)} Karten")
+        parts.append(f"<h2>{esc(theme_label(t))} "
+                     f"<span class='range'>{span}</span></h2>")
         parts.append('<div class="index-cols">')
         for k in rows:
-            parts.append(f'<div class="index-row"><span class="n">{k["nr"]}</span>'
-                         f'<span>{esc(k["titel"])}</span></div>')
+            parts.append(f'<div class="index-row"><span class="n">{k["no"]}</span>'
+                         f'<span>{esc(k["title"])}</span></div>')
         parts.append("</div>")
-    return (f'<div class="index-sheet"><h1>{esc(data["meta"]["titel"])} '
-            f'&ndash; \u00dcbersicht</h1><div class="sub">{len(KARTEN)} Karten '
+    return (f'<div class="index-sheet"><h1>{esc(data["meta"]["title"])} '
+            f'&ndash; Übersicht</h1><div class="sub">{len(CARDS)} Karten '
             f'&middot; nach Themen sortiert</div>{"".join(parts)}</div>')
 
 
-def seite(body: str, key: str = None) -> str:
-    # Schrift mit einbetten: DejaVu Sans ist auf Windows meist nicht
-    # installiert, ohne Einbettung braeche der Satz dort anders um.
-    # Querformate brauchen zusaetzlich eine eigene Seitengroesse.
-    quer = FORMATE.get(key, {}).get("quer") if key else False
-    seitenregel = "@page { size: A4 landscape; margin: 0; }" if quer else ""
+def page(body: str, key: str = None) -> str:
+    # Embed the font: DejaVu Sans is usually not installed on Windows, and
+    # without embedding the text would break differently there.
+    # Landscape formats additionally need their own page size.
+    landscape = FORMATS.get(key, {}).get("landscape") if key else False
+    page_rule = "@page { size: A4 landscape; margin: 0; }" if landscape else ""
     return (f'<!doctype html><html lang="de"><head><meta charset="utf-8">'
-            f'<style>{fonts.fontface_css(still=True)}{CSS}{seitenregel}</style>'
+            f'<style>{fonts.fontface_css(quiet=True)}{CSS}{page_rule}</style>'
             f'</head><body>{body}</body></html>')
 
 
-# Auto-Fit: misst jede Karte im Browser und passt die Schriftgrade an die
-# tatsaechlich vorhandene Hoehe an - kleine Texte wachsen, lange schrumpfen.
-# Reine Zeichenzahl reicht als Schaetzung nicht: deutsche Komposita
-# ("Hintergrundstrahlung") brechen frueh um und erzeugen Extrazeilen.
+# Auto-fit: measures every card in the browser and adapts the font sizes to
+# the height actually available - short texts grow, long ones shrink.
+# Character count alone is not a good enough estimate: German compounds
+# ("Hintergrundstrahlung") break early and produce extra lines.
 AUTOFIT_JS = r"""(g) => {
   const PT = 96 / 72;
-  const zuGross = c => c.scrollHeight - c.clientHeight > 0.5;
+  const tooTall = c => c.scrollHeight - c.clientHeight > 0.5;
 
-  // Passt ein Wort selbst mit Silbentrennung nicht in die Spaltenbreite?
-  // Dann greift der Notumbruch aus cards.css und trennt mitten im Wort.
-  // Geprueft wird, indem der Notumbruch kurz abgeschaltet und gemessen wird,
-  // ob eine Zeile ueber den Rand laeuft. Das beruecksichtigt die deutsche
-  // Silbentrennung korrekt - "Donaudampfschifffahrt..." bricht sauber um,
-  // eine Zeichenkette ohne Trennstellen nicht.
-  const notumbruch = c => {
-    let treffer = null;
-    c.querySelectorAll(".titel,.fakt,.nachschlag").forEach(e => {
-      if (treffer || !e.textContent.trim()) return;
-      const alt = e.style.overflowWrap;
+  // Does a word fail to fit the column width even with hyphenation? Then
+  // the emergency break from cards.css kicks in and splits mid-word.
+  // Tested by switching the emergency break off briefly and measuring
+  // whether a line runs past the edge. That accounts for German
+  // hyphenation correctly - "Donaudampfschifffahrt..." breaks cleanly,
+  // a string without break points does not.
+  const hardBreak = c => {
+    let hit = null;
+    c.querySelectorAll(".title,.fact,.more-text").forEach(e => {
+      if (hit || !e.textContent.trim()) return;
+      const prev = e.style.overflowWrap;
       e.style.overflowWrap = "normal";
       const r = document.createRange(); r.selectNodeContents(e);
       let b = 0; for (const q of r.getClientRects()) b = Math.max(b, q.width);
-      const ueber = b - e.clientWidth > 0.5;
-      e.style.overflowWrap = alt;
-      if (ueber) treffer = {el: e, wort: e.textContent.trim().split(/\s+/)
-                              .reduce((a, w) => w.length > a.length ? w : a, "")};
+      const over = b - e.clientWidth > 0.5;
+      e.style.overflowWrap = prev;
+      if (over) hit = {el: e, word: e.textContent.trim().split(/\s+/)
+                            .reduce((a, w) => w.length > a.length ? w : a, "")};
     });
-    return treffer;
+    return hit;
   };
   const px = el => parseFloat(getComputedStyle(el).fontSize);
-  const setz = (el, d) => { if (el) el.style.fontSize = (px(el) + d) + 'px'; };
-  const bericht = [];
-  document.querySelectorAll('.card[data-nr]').forEach(c => {
-    // Auf der Duplex-Titelseite gibt es keinen Fliesstext - dort wird der
-    // Titel selbst skaliert, mit eigenen Grenzen aus data-min/data-max.
-    const zusatz = c.querySelector('.nachschlag');
-    const titel  = c.querySelector('.titel');
-    const fakt   = c.querySelector('.fakt') || titel;
-    if (!fakt) return;
-    const unten = +c.dataset.min || g.minText;
-    const oben  = +c.dataset.max || g.maxText;
+  const bump = (el, d) => { if (el) el.style.fontSize = (px(el) + d) + 'px'; };
+  const report = [];
+  document.querySelectorAll('.card[data-no]').forEach(c => {
+    // The duplex title side has no body text - there the title itself is
+    // scaled, with its own limits from data-min/data-max.
+    const more  = c.querySelector('.more-text');
+    const title = c.querySelector('.title');
+    const fact  = c.querySelector('.fact') || title;
+    if (!fact) return;
+    const low  = +c.dataset.min || g.minText;
+    const high = +c.dataset.max || g.maxText;
 
-    // 1. wachsen, solange Platz ist
+    // 1. grow while there is room
     let guard = 400;
-    while (!zuGross(c) && px(fakt) < oben * PT && guard-- > 0) {
-      setz(fakt, 0.5); setz(zusatz, 0.5);
+    while (!tooTall(c) && px(fact) < high * PT && guard-- > 0) {
+      bump(fact, 0.5); bump(more, 0.5);
     }
-    // 2. einen Schritt zurueck, falls dabei uebergelaufen
+    // 2. one step back if that overflowed
     guard = 400;
-    while (zuGross(c) && px(fakt) > unten * PT && guard-- > 0) {
-      setz(fakt, -0.5); setz(zusatz, -0.5);
+    while (tooTall(c) && px(fact) > low * PT && guard-- > 0) {
+      bump(fact, -0.5); bump(more, -0.5);
     }
-    // 3. Notbremse: Titel verkleinern, wenn es immer noch nicht passt
+    // 3. last resort: shrink the title if it still does not fit
     guard = 200;
-    while (zuGross(c) && titel && titel !== fakt && px(titel) > g.minTitel * PT && guard-- > 0) {
-      setz(titel, -0.5);
+    while (tooTall(c) && title && title !== fact && px(title) > g.minTitle * PT && guard-- > 0) {
+      bump(title, -0.5);
     }
-    // 4. Zu breite Woerter: das betroffene Element verkleinern, bis das
-    //    laengste Wort in die Spalte passt. Verkleinern senkt auch die
-    //    Hoehe, der Fit aus Schritt 1-3 bleibt also gueltig.
+    // 4. Words that are too wide: shrink the affected element until the
+    //    longest word fits the column. Shrinking also lowers the height,
+    //    so the fit from steps 1-3 stays valid.
     guard = 200;
     let n;
-    while ((n = notumbruch(c)) && guard-- > 0) {
-      const grenze = n.el === fakt ? unten
-                   : n.el.classList.contains("titel") ? g.minTitel : g.minText;
-      if (px(n.el) - 0.5 < grenze * PT) break;
-      setz(n.el, -0.5);
+    while ((n = hardBreak(c)) && guard-- > 0) {
+      const limit = n.el === fact ? low
+                  : n.el.classList.contains("title") ? g.minTitle : g.minText;
+      if (px(n.el) - 0.5 < limit * PT) break;
+      bump(n.el, -0.5);
     }
-    const rest = notumbruch(c);
-    bericht.push({nr: c.dataset.nr,
-                  pt: Math.round(px(fakt) / PT * 10) / 10,
-                  eng: zuGross(c),
-                  langwort: rest ? rest.wort : null});
+    const rest = hardBreak(c);
+    report.push({no: c.dataset.no,
+                 pt: Math.round(px(fact) / PT * 10) / 10,
+                 tight: tooTall(c),
+                 longWord: rest ? rest.word : null});
   });
-  return bericht;
+  return report;
 }"""
 
 
-def render(html_str: str, pdf: pathlib.Path, pg, grenzen: dict = None):
+def render(html_str: str, pdf: pathlib.Path, pg, limits: dict = None):
     tmp = OUT / (pdf.stem + ".html")
     tmp.write_text(html_str, encoding="utf-8")
     pg.goto(tmp.as_uri())
     pg.emulate_media(media="print")
-    if grenzen:
-        b = pg.evaluate(AUTOFIT_JS, grenzen)
+    if limits:
+        b = pg.evaluate(AUTOFIT_JS, limits)
         if b:
             g = sorted(x["pt"] for x in b)
             print(f"    Auto-Fit: Textgrad {g[0]}–{g[-1]} pt "
                   f"(Median {g[len(g) // 2]} pt)")
         for x in b:
-            if x.get("langwort"):
-                w = x["langwort"]
-                print(f"    ACHTUNG Karte {x['nr']}: „{w[:30]}{'...' if len(w) > 30 else ''}“ "
+            if x.get("longWord"):
+                w = x["longWord"]
+                print(f"    ACHTUNG Karte {x['no']}: „{w[:30]}{'...' if len(w) > 30 else ''}“ "
                       f"({len(w)} Zeichen) ist breiter als die Karte und wird "
                       f"mitten im Wort umbrochen.")
-            if x["eng"]:
-                print(f"    ACHTUNG Karte {x['nr']} passt auch bei {x['pt']} pt "
+            if x["tight"]:
+                print(f"    ACHTUNG Karte {x['no']} passt auch bei {x['pt']} pt "
                       f"nicht - Text kuerzen!")
     pg.pdf(path=str(pdf), print_background=True,
            margin={"top": "0", "right": "0", "bottom": "0", "left": "0"},
-           prefer_css_page_size=True)   # Groesse kommt aus @page
+           prefer_css_page_size=True)   # size comes from @page
     print(f"    {pdf.name}")
 
 
 def main():
-    wunsch = [a.lower() for a in sys.argv[1:]] or list(FORMATE)
+    wanted = [a.lower() for a in sys.argv[1:]] or list(FORMATS)
     with sync_playwright() as pw:
         br = pw.chromium.launch()
         pg = br.new_page(viewport={"width": 1400, "height": 1200})
-        for key in wunsch:
-            if key not in FORMATE:
+        for key in wanted:
+            if key not in FORMATS:
                 print(f"Unbekanntes Format: {key}")
                 continue
-            up, f = key.upper(), FORMATE[key]
-            boegen = -(-len(KARTEN) // f["pro_bogen"])
-            art = "Duplex, " if DUPLEX else ""
-            print(f"Format {up}: {art}{f['pro_bogen']} Karten je Bogen, "
-                  f"{boegen * (2 if DUPLEX else 1)} Bögen")
+            up, f = key.upper(), FORMATS[key]
+            sheets = -(-len(CARDS) // f["per_sheet"])
+            kind = "Duplex, " if DUPLEX else ""
+            print(f"Format {up}: {kind}{f['per_sheet']} Karten je Bogen, "
+                  f"{sheets * (2 if DUPLEX else 1)} Bögen")
             g = {"minText": f["minText"], "maxText": f["maxText"],
-                 "minTitel": f["minTitel"]}
-            render(seite(bogen(key), key),
+                 "minTitle": f["minTitle"]}
+            render(page(sheet(key), key),
                    OUT / f"astro-karten-{up}{'-duplex' if DUPLEX else ''}.pdf", pg, g)
         print("Index:")
-        render(seite(index_html()), OUT / "astro-karten-index.pdf", pg)
+        render(page(index_html()), OUT / "astro-karten-index.pdf", pg)
         br.close()
-    print(f"Fertig: {len(KARTEN)} Karten, einseitig.")
+    print(f"Fertig: {len(CARDS)} Karten, einseitig.")
 
 
 if __name__ == "__main__":

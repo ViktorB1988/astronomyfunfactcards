@@ -24,6 +24,9 @@ Dazu `astro-karten-index.pdf` (Übersicht nach Themen), der Editor
 `karten-editor.html` sowie die Quellen `facts.json`, `cards.css`,
 `build_cards.py`, `build_editor.py`, `editor_template.html`, `fonts.py`.
 
+Für die Fassung im Netz zusätzlich `build_web.py`, `web/`, `firestore.rules`
+und `fetch_facts.py` – siehe [Die Seite im Netz](#die-seite-im-netz).
+
 ## Welche Variante?
 
 Die **„nur-fakt"-Varianten** enthalten nur den eigentlichen Fakt. Die
@@ -95,7 +98,7 @@ Der letzte A7-Bogen enthält die Karten 97–100 und vier Leerfelder.
 
 - Schnittlinien: die feinen grauen Linien auf dem Bogen.
   A7: eine senkrechte, drei waagerechte. A6: je eine.
-  Abschaltbar über `SCHNITTLINIEN = False` in `build_cards.py`
+  Abschaltbar über `CUT_LINES = False` in `build_cards.py`
   bzw. das Kästchen „Schnittlinien drucken" im Editor.
 - Zusätzlich schwarze Marken an den Bogenrändern zum Anlegen.
 - Außenkanten müssen nicht geschnitten werden – die Karten liegen
@@ -137,11 +140,184 @@ Das Thema steht oben links auf jeder Karte im Klartext. Eine zusätzliche
 Randmarke gibt es nicht; da der Stapel nach Themen sortiert ist, findet
 man ein Thema über seinen Nummernblock oder über `astro-karten-index.pdf`.
 
-Die Reihenfolge der Themen steht in `facts.json` unter `themen`. Wer sie
+Die Reihenfolge der Themen steht in `facts.json` unter `themes`. Wer sie
 dort umstellt, ändert damit die Reihenfolge der Karten im Stapel.
 
 Jeder Textblock nennt sein Thema selbst und ist ohne die anderen Karten
 verständlich – auch der Zusatzabsatz, wenn man ihn allein vorliest.
+
+## Die Seite im Netz
+
+Es gibt den Editor zweimal, mit demselben Aussehen und derselben Rechnung:
+
+| | Offline | Online |
+|---|---|---|
+| Datei | `karten-editor.html` herunterladen | Adresse aufrufen |
+| Daten | in der Datei, Sichern per Download | Firestore, für alle gleich |
+| Ändern | immer | nur angemeldete Redaktion |
+| Braucht | nichts | Internet |
+
+Die Online-Fassung liegt auf GitHub Pages und holt die Karten aus einer
+Firestore-Datenbank. **Lesen, Blättern und Drucken kann jeder**, auch ohne
+Konto – der Link lässt sich also einfach weitergeben, wenn jemand einen
+Satz Karten ausdrucken soll. **Ändern kann nur, wer angemeldet und als
+Redaktion eingetragen ist.**
+
+Wer online etwas ändert, drückt **„In die Datenbank speichern"**
+(oder Strg+S). Danach sehen alle anderen den neuen Stand sofort.
+
+### Einmalige Einrichtung
+
+Einmal von oben nach unten durcharbeiten, dann läuft es. Die Reihenfolge
+ist nicht beliebig – Schritt 4 muss vor Schritt 5 stehen, sonst sperren
+sich die Regeln selbst aus (siehe Kasten dort).
+
+Alles bleibt im kostenlosen **Spark-Tarif**. Eine Kreditkarte wird nicht
+gebraucht.
+
+#### A · In der Firebase-Konsole
+
+**1. Firestore anlegen.**
+*Build* → *Firestore Database* → *Datenbank erstellen*.
+Region **europe-west3** (Frankfurt), Start im **Produktionsmodus**.
+
+> Die Region lässt sich später **nicht** ändern. Produktionsmodus heißt:
+> erst einmal ist alles gesperrt – genau richtig, die Freigaben kommen in
+> Schritt 5.
+
+**2. Google-Anmeldung einschalten.**
+*Build* → *Authentication* → *Get started* → Reiter *Sign-in method* →
+*Google* → aktivieren → Support-Mail wählen → *Speichern*.
+
+**3. Adresse freigeben.**
+*Authentication* → *Settings* → *Authorized domains* → *Add domain* →
+
+```
+viktorb1988.github.io
+```
+
+Nur der Rechnername: ohne `https://`, ohne Pfad, ohne Repo-Namen. Die
+Adresse darf ruhig schon jetzt eingetragen werden, auch wenn die Seite
+noch gar nicht steht – Firebase prüft nicht, ob es sie gibt.
+
+**4. Redaktion eintragen.**
+Das ist die Liste derer, die ändern dürfen. Sie existiert noch nicht, sie
+wird hier angelegt:
+
+*Firestore Database* → Reiter *Daten* → *Sammlung starten*
+
+| Feld | Wert |
+|---|---|
+| Sammlungs-ID | `config` |
+| Dokument-ID | `editors` — **selbst eintippen, nicht „Auto-ID"** |
+| Feldname | `emails` |
+| Typ | `array` |
+| Werte | je ein `string` pro Person, **klein geschrieben** |
+
+Ergebnis: ein Dokument `config/editors` mit einem einzigen Array-Feld.
+
+> **Kleinschreibung ist Pflicht.** Die Regel vergleicht
+> `request.auth.token.email.lower()` mit dieser Liste – `Max@Gmail.com`
+> passt dann nie.
+>
+> **Es muss die Google-Adresse sein,** mit der man sich anmeldet, nicht
+> die GitHub-Adresse.
+>
+> **Dieses Dokument über die Seite zu ändern ist absichtlich unmöglich.**
+> Sonst könnte ein Redaktionskonto stillschweigend weitere Konten
+> eintragen. Neue Leute kommen nur hier in der Konsole dazu.
+
+**5. Regeln veröffentlichen.**
+Inhalt von [`firestore.rules`](firestore.rules) kopieren, *Firestore
+Database* → Reiter *Regeln* → alles ersetzen → *Veröffentlichen*.
+
+Alternativ ohne Konsole, einmalig eingerichtet:
+
+```bash
+npm install -g firebase-tools
+firebase login
+firebase use --add
+firebase deploy --only firestore:rules
+```
+
+`firebase login` öffnet den Browser; die Anmeldung passiert dort, nicht im
+Terminal. Danach genügt nach jeder Regeländerung die letzte Zeile.
+`firebase.json` im Projektordner sagt dem Befehl, welche Datei gemeint ist.
+
+> **Erst Schritt 4, dann Schritt 5.** Die Regeln schlagen für die
+> Schreibprüfung in `config/editors` nach. Fehlt das Dokument, schlägt
+> die Prüfung fehl und **niemand** darf schreiben – auch Sie nicht. Das
+> sieht dann aus wie ein kaputtes Login, ist aber nur die fehlende Liste.
+
+**6. Zugangsdaten abschreiben.**
+*Projekteinstellungen* (Zahnrad) → *Allgemein* → *Meine Apps*. Gibt es
+noch keine Web-App, eine anlegen (`</>`-Symbol, Hosting nicht ankreuzen).
+Den Block *SDK-Einrichtung und Konfiguration* → *Konfiguration* in
+[`web/firebase-config.js`](web/firebase-config.js) übertragen.
+
+> Diese Werte sind **kein Geheimnis** und gehören ins Repository. Ein
+> Firebase-Web-Schlüssel benennt nur das Projekt, er berechtigt zu
+> nichts. Wer was darf, steht ausschließlich in den Regeln aus Schritt 5.
+> Sie in ein Secret zu verstecken bringt nichts und bricht den Bau.
+
+#### B · Im GitHub-Repository
+
+**7. Pages einschalten.**
+*Settings* → *Pages* → *Source*: **GitHub Actions** – nicht
+„Deploy from a branch". Die Seite wird gebaut, nicht aus einem Ordner
+ausgeliefert.
+
+Vor dem ersten Push einschalten, sonst scheitert der Arbeitsablauf beim
+Veröffentlichen.
+
+**8. Committen und pushen.**
+
+```bash
+git add -A && git commit -m "Firebase-Zugangsdaten eintragen" && git push
+```
+
+Erst der Push baut die Seite. Solange die ausgefüllte
+`web/firebase-config.js` nur lokal liegt, meldet die veröffentlichte
+Seite weiterhin „keine Firebase-Konfiguration".
+
+Der Fortschritt steht unter *Actions*. Beim ersten Lauf dauert es ein
+bis zwei Minuten. Danach steht die Seite unter
+
+<https://viktorb1988.github.io/AstronomyFunFactCards/>
+
+#### C · Datenbank befüllen
+
+**9.** Seite aufrufen → **Anmelden** → **„In die Datenbank speichern"**.
+
+Die Seite startet mit dem Stand aus `facts.json` und meldet
+„Datenbank leer". Der Klick legt die 170 Karten einmalig an. **Ab jetzt
+ist die Datenbank die Quelle**, nicht mehr die Datei.
+
+### Wenn es nicht geht
+
+Alle Meldungen erscheinen unten in der Mitte der Seite.
+
+| Meldung oder Symptom | Ursache |
+|---|---|
+| „keine Firebase-Konfiguration" | Schritt 6 fehlt – oder Schritt 8: die Werte liegen nur lokal |
+| `auth/unauthorized-domain` | Schritt 3 fehlt, oder mit `https://`/Pfad eingetragen |
+| „… ist nicht als Redaktion eingetragen" | Adresse fehlt in `config/editors`, ist groß geschrieben, oder es ist eine andere Google-Adresse als gedacht |
+| „Die Sicherheitsregeln lassen das Lesen nicht zu" | Schritt 5 fehlt – die Regeln stehen noch auf Produktionsmodus |
+| „Dieses Konto darf laut Sicherheitsregeln nicht schreiben" | Regeln veröffentlicht, aber `config/editors` fehlt oder heißt anders |
+| Anmeldefenster geht auf und sofort wieder zu | Pop-up-Blocker |
+| Startmeldung bleibt stehen | JavaScript blockiert – Seite direkt im Browser öffnen, nicht in einer Vorschau |
+
+### PDFs nach einer Online-Änderung
+
+Der PDF-Bau liest weiterhin `facts.json`. Den aktuellen Stand holt man
+sich vorher:
+
+```bash
+python3 fetch_facts.py
+python3 build_cards.py
+```
+
+`fetch_facts.py` braucht keine Anmeldung – Lesen ist öffentlich.
 
 ## Karten ändern: der Editor
 
@@ -200,6 +376,11 @@ Zum Schluss **„facts.json sichern“** (oder Strg+S) und die
 heruntergeladene Datei über die alte `facts.json` legen. Danach
 `python3 build_cards.py` für die neuen PDFs.
 
+In der Online-Fassung liegt auf Strg+S dagegen **„In die Datenbank
+speichern“** – dort ist die Datenbank die Quelle, nicht die Datei.
+„facts.json sichern“ gibt es auch dort weiterhin, als Ausweg für ein
+Sicherheitsduplikat oder den PDF-Bau ohne `fetch_facts.py`.
+
 Umgekehrt holt **„facts.json laden“** einen vorhandenen Stand in den
 Editor – wahlweise über den Knopf oder indem man die Datei einfach aufs
 Fenster zieht. Nach dem Laden erscheint unten eine Meldung mit Dateiname
@@ -219,13 +400,16 @@ Alles steht in `facts.json`:
 
 ```json
 {
-  "nr": 101,
-  "thema": "SONNENSYSTEM",
-  "titel": "Kurzer Titel",
+  "no": 101,
+  "theme": "SONNENSYSTEM",
+  "title": "Kurzer Titel",
   "text": "Der Fakt, zwei bis drei Sätze, in sich verständlich.",
-  "nachschlag": "Ein Satz Zusatzinfo für den Absatz „Mehr dazu\"."
+  "more": "Ein Satz Zusatzinfo für den Absatz „Mehr dazu\"."
 }
 ```
+
+Die Feldnamen sind englisch, die Inhalte deutsch – im ganzen Projekt so
+gehalten: Code englisch, alles Sichtbare deutsch.
 
 Danach neu bauen:
 
@@ -240,7 +424,7 @@ python3 build_editor.py         # Editor neu bauen
 Für den Editor wird zusätzlich `fonttools` und `brotli` gebraucht
 (`pip install fonttools brotli`).
 
-Für die Varianten ohne Zusatzabsatz `MIT_NACHSCHLAG = False` oben in
+Für die Varianten ohne Zusatzabsatz `WITH_MORE = False` oben in
 `build_cards.py` setzen.
 
 **Auto-Fit:** Das Skript misst nach dem Rendern jede einzelne Karte im
@@ -257,13 +441,13 @@ zu lang und sollte gekürzt werden.
 Weitere Hinweise:
 
 - Für Hochzahlen `10<sup>67</sup>` schreiben.
-- `thema` muss einem Eintrag aus der Liste `themen` entsprechen. Neue Themen
+- `theme` muss einem Eintrag aus der Liste `themes` entsprechen. Neue Themen
   dort ergänzen; die Position in dieser Liste bestimmt, wo der Themenblock
   im Stapel liegt.
-- Die Fußzeile lässt sich unter `meta.fusszeile` ändern, z. B. auf den
+- Die Fußzeile lässt sich unter `meta.footer` ändern, z. B. auf den
   Vereinsnamen. Auf A7 ist sie ausgeblendet, dort fehlt der Platz.
 - Ober- und Untergrenze der Schriftgröße stehen als `minText` / `maxText`
-  im Dictionary `FORMATE` in `build_cards.py`.
+  im Dictionary `FORMATS` in `build_cards.py`.
 - Ein neues Format ergänzt man dort plus einem `.f-xx`-Block in `cards.css`.
   Der Editor übernimmt beides automatisch beim nächsten Bauen.
 - Die Schrift DejaVu Sans wird über `fonts.py` in PDF *und* Editor
