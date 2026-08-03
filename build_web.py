@@ -22,9 +22,9 @@ the offline editor. Do not reimplement: preview, print and PDF have to use
 the same computation.
 """
 
+import hashlib
 import json
 import pathlib
-import shutil
 
 BASE = pathlib.Path(__file__).parent
 TARGET = BASE / "site"
@@ -33,7 +33,13 @@ WEB = BASE / "web"
 # Inserted into editor_template.html at the <!--__FIREBASE__--> marker.
 # A module always runs after the classic script, so the window.Editor
 # interface is guaranteed to be in place.
-INCLUDE = '<script type="module" src="firebase-app.js"></script>'
+#
+# The ?v= is a content stamp and it matters: GitHub Pages hands out assets
+# with a ten-minute cache lifetime, and the page and its module expire
+# separately. Without the stamp a returning visitor can end up running a
+# stale module against fresh HTML - which looks exactly like a bug that
+# will not reproduce. A changed module gets a new address and is fetched.
+INCLUDE = '<script type="module" src="firebase-app.js?v={stamp}"></script>'
 
 
 def main():
@@ -57,22 +63,33 @@ def main():
     # the print area, so that it does not paint over the editor interface.
     css = css.replace("html, body {", ".stage, .printarea {")
 
+    # One stamp for both files: the module and its configuration are only
+    # ever correct as a pair, so a change to either has to invalidate both.
+    app_js = (WEB / "firebase-app.js").read_text(encoding="utf-8")
+    config_js = (WEB / "firebase-config.js").read_text(encoding="utf-8")
+    stamp = hashlib.sha256((app_js + config_js).encode("utf-8")).hexdigest()[:10]
+    include = INCLUDE.format(stamp=stamp)
+
     html = (template
             .replace("/*__FONTS__*/", font_css)
             .replace("/*__CARDS_CSS__*/", css)
             .replace("/*__FORMATS__*/", json.dumps(B.FORMATS, ensure_ascii=False))
             .replace("/*__AUTOFIT__*/", B.AUTOFIT_JS)
             .replace("/*__DATA__*/", data.strip())
-            .replace("<!--__FIREBASE__-->", INCLUDE))
+            .replace("<!--__FIREBASE__-->", include))
 
-    if INCLUDE not in html:
+    if include not in html:
         raise SystemExit("editor_template.html no longer contains <!--__FIREBASE__--> - "
                          "without that marker the page gets no database.")
 
     (TARGET / "index.html").write_text(html, encoding="utf-8")
 
-    for name in ("firebase-app.js", "firebase-config.js"):
-        shutil.copy2(WEB / name, TARGET / name)
+    # The module imports its configuration itself, so that address needs the
+    # same stamp - otherwise a fresh module could pick up a stale config.
+    (TARGET / "firebase-app.js").write_text(
+        app_js.replace('"./firebase-config.js"', f'"./firebase-config.js?v={stamp}"'),
+        encoding="utf-8")
+    (TARGET / "firebase-config.js").write_text(config_js, encoding="utf-8")
 
     # GitHub Pages runs everything through Jekyll, which swallows files
     # starting with an underscore. Does not affect us today, costs nothing.

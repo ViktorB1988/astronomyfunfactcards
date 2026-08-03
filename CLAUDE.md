@@ -259,6 +259,16 @@ sich beim Tippen der Cursor um.
 den eingebauten Stand aus `facts.json`, und genau der lässt sich mit einem
 Klick hochspielen. Ein leerer Schnappschuss darf die Anzeige nicht leeren.
 
+**Die Modul-Adresse trägt einen Inhaltsstempel** (`firebase-app.js?v=…`,
+vergeben in `build_web.py`). GitHub Pages liefert Dateien mit zehn Minuten
+Cache-Lebensdauer aus, und Seite und Modul laufen getrennt ab. Ohne den
+Stempel bekommt ein wiederkehrender Besucher ein altes Modul zu frischem
+HTML – das sieht aus wie ein Fehler, der sich nicht nachstellen lässt, denn
+im ersten Fenster ist alles richtig. Genau das ist einmal passiert: der
+Knopf blieb versteckt, obwohl der Server längst die neue Fassung hatte.
+Den Stempel bekommt auch der Import von `firebase-config.js` im Modul,
+sonst könnte ein frisches Modul eine alte Konfiguration erwischen.
+
 **Gebaut wird auf Ubuntu.** `fonts.py` sucht DejaVu Sans unter
 `/usr/share/fonts`; unter Windows liegt sie dort nicht. Der Workflow prüft
 nach dem Bauen, ob wirklich eine Schrift eingebettet wurde – ohne sie sähe
