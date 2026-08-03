@@ -510,6 +510,9 @@ body.dragover::after{
            tabindex="-1" aria-hidden="true">
     <button class="btn" id="print">PDF drucken</button>
     <button class="btn primary" id="save">facts.json sichern</button>
+    <button class="btn" id="import" hidden>JSON einspielen</button>
+    <input type="file" id="importfile" class="visually-hidden" accept=".json,application/json"
+           tabindex="-1" aria-hidden="true">
     <button class="btn" id="signin" hidden>Anmelden</button>
   </div>
 </header>
@@ -660,6 +663,11 @@ function setWritable(on){
    download is what preserves it. The online version hooks in here. */
 let store = null;        // explicit save (button)
 let storeNow = null;     // write through at once after a structural change
+
+/* The import button is a convenience for one person, not a barrier: whoever
+   may write can do the same thing from the console anyway. What actually
+   decides who may change the data stays firestore.rules. */
+function setImportAllowed(on){ $("#import").hidden = !on; }
 
 function setDatabase(h){
   store = h && h.save;
@@ -1259,6 +1267,62 @@ function loadFile(file){
   reader.readAsText(file, "utf-8");
 }
 
+/* Merges a facts.json into what is currently loaded, matching on title.
+   Not a replacement: a matched card keeps its id, so the save afterwards
+   writes only what really differs instead of deleting every document and
+   creating it again under a new id. Cards that the file does not mention
+   are kept - an import adds and updates, it does not clear out. */
+function importJson(file){
+  if (!requireWrite()) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    let d;
+    try { d = JSON.parse(reader.result); }
+    catch(e){ status("Die Datei ist kein gültiges JSON: " + e.message, true); return; }
+    if (!Array.isArray(d.cards) || !Array.isArray(d.themes)){
+      status("In der Datei fehlen die Felder „cards“ und „themes“. "
+           + "Erwartet wird eine facts.json wie im Projektordner.", true); return;
+    }
+
+    const schluessel = s => String(s || "").trim().toLowerCase();
+    const offen = new Map();
+    S.cards.forEach(k => { if (!offen.has(schluessel(k.title))) offen.set(schluessel(k.title), k); });
+
+    let neu = 0, geaendert = 0, gleich = 0;
+    const cards = d.cards.map(k => {
+      const feld = {theme: k.theme || "", title: k.title || "",
+                    text: k.text || "", more: k.more || ""};
+      const s = schluessel(feld.title);
+      const alt = offen.get(s);
+      // Jede vorhandene Karte nur einmal beanspruchen, sonst bekämen zwei
+      // gleichnamige Karten aus der Datei dieselbe Kennung.
+      if (!alt){ neu++; return {id: newId(), no: 0, ...feld}; }
+      offen.delete(s);
+      if (alt.theme === feld.theme && alt.title === feld.title
+          && alt.text === feld.text && alt.more === feld.more) gleich++;
+      else geaendert++;
+      return {id: alt.id, no: 0, ...feld};
+    });
+
+    const bleiben = [...offen.values()];
+    const zeilen = [`${neu} neu`, `${geaendert} geändert`, `${gleich} unverändert`];
+    if (bleiben.length) zeilen.push(`${bleiben.length} nicht in der Datei – bleiben erhalten`);
+    if (!confirm(`${file.name} einspielen?\n\n` + zeilen.join("\n")
+               + `\n\nGeschrieben wird erst mit „Speichern“.`)) return;
+
+    S.cards = cards.concat(bleiben.map(k => ({...k})));
+    S.themes = [...d.themes, ...S.themes.filter(t => !d.themes.includes(t))];
+    if (d.meta) S.meta = d.meta;
+    S.sel = 0; S.theme = ""; S.query = "";
+    $("#search").value = "";
+    renumber(); setDirty(true); fillThemeFilter(); redrawAll();
+    status(`${file.name} eingespielt: ${neu} neu, ${geaendert} geändert. `
+         + `Jetzt ${S.cards.length} Karten – zum Schreiben „Speichern“ drücken.`);
+  };
+  reader.onerror = () => status("Die Datei konnte nicht gelesen werden.", true);
+  reader.readAsText(file, "utf-8");
+}
+
 /* ---------- Wiring ---------- */
 function fillThemeFilter(){
   const s = $("#themefilter"); s.innerHTML = "";
@@ -1356,6 +1420,8 @@ $("#print").onclick = printSheets;
 $("#save").onclick = saveFile;
 $("#load").onclick = () => $("#file").click();
 $("#file").addEventListener("change", e => { if (e.target.files[0]) loadFile(e.target.files[0]); e.target.value = ""; });
+$("#import").onclick = () => $("#importfile").click();
+$("#importfile").addEventListener("change", e => { if (e.target.files[0]) importJson(e.target.files[0]); e.target.value = ""; });
 
 // Dragging a file onto the window works too
 let dragDepth = 0;
@@ -1417,7 +1483,7 @@ redrawAll();
    exactly as before. */
 window.Editor = {
   S, status, redrawAll, setDirty, renumber, fillThemeFilter, newId,
-  setWritable, setDatabase,
+  setWritable, setDatabase, setImportAllowed,
   seedData: DATA,
 
   /* The state as it belongs in the database: with an id and an explicit

@@ -234,7 +234,10 @@ etwas ändert, prüft **beide** Fassungen.
 
 **Der Dateiimport muss online gesperrt bleiben.** Eine abgelegte
 `facts.json` würde die Liste ersetzen, und der nächste Struktureingriff
-schriebe sie über die Datenbank – ein stiller Totalverlust.
+schriebe sie über die Datenbank – ein stiller Totalverlust. Der Knopf
+„JSON einspielen" ist die Ausnahme, und er *ersetzt nicht*: er führt über
+den Titel zusammen und lässt vorhandene Kennungen stehen. Nur deshalb
+schreibt das Speichern danach die Unterschiede statt alles neu.
 
 ### Aufteilung in der Datenbank
 
@@ -242,7 +245,7 @@ schriebe sie über die Datenbank – ein stiller Totalverlust.
 |---|---|
 | `cards/<id>` | je Karte ein Dokument: `pos`, `theme`, `title`, `text`, `more` |
 | `config/meta` | `title`, `footer`, `themes` (Liste, Reihenfolge zählt) |
-| `config/editors` | `emails`: wer schreiben darf. **Nur von Hand in der Konsole** |
+| `config/editors` | `emails`: wer schreiben darf. `import`: wem der Einspiel-Knopf gezeigt wird. **Nur von Hand in der Konsole** |
 
 `no` steht **nicht** in der Datenbank. Sie ist abgeleitet – würde man sie
 speichern, fasste jedes Umsortieren alle 170 Dokumente an. Geordnet wird

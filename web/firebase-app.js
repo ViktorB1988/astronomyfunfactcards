@@ -108,8 +108,11 @@ function start(){
   onAuthStateChanged(auth, async account => {
     user = account;
     mayWrite = false;
+    let darfEinspielen = false;
     if (account){
-      mayWrite = await isEditor(account);
+      const erlaubt = await rights(account);
+      mayWrite = erlaubt.write;
+      darfEinspielen = erlaubt.write && erlaubt.mayImport;
       bSignIn.textContent = "Abmelden (" + (account.email || "angemeldet") + ")";
       if (!mayWrite){
         E.status(`${account.email} ist nicht als Redaktion eingetragen und kann `
@@ -122,20 +125,27 @@ function start(){
     /* setWritable redraws the form, and the save button is drawn greyed or
        active from `writable` there - nothing to toggle by hand here. */
     E.setWritable(mayWrite);
+    E.setImportAllowed(darfEinspielen);
     if (mayWrite && isEmpty) reportEmpty();
   });
 
-  /* The list lives in the database, not in the source: the security rules
+  /* The lists live in the database, not in the source: the security rules
      read the same place, and the addresses therefore stay out of a public
-     repository. Only signed-in accounts may read it. */
-  async function isEditor(account){
+     repository. Only signed-in accounts may read the document.
+
+     `emails` decides who may write - that one the rules enforce too.
+     `import` only decides who is shown the import button, and is pure
+     convenience: anyone who may write can do the same from the console. */
+  async function rights(account){
+    const mail = (account.email || "").toLowerCase();
     try {
       const d = await getDoc(doc(db, "config", "editors"));
-      const list = d.exists() ? (d.data().emails || []) : [];
-      return list.includes((account.email || "").toLowerCase());
+      const data = d.exists() ? d.data() : {};
+      return {write: (data.emails || []).includes(mail),
+              mayImport: (data.import || []).includes(mail)};
     } catch (e){
       console.warn("config/editors not readable:", e.code || e.message);
-      return false;
+      return {write: false, mayImport: false};
     }
   }
 

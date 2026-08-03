@@ -206,6 +206,26 @@ online nicht: dort ist die Datenbank die Quelle, und eine zweite Fassung
 als Datei danebenzulegen würde nur auseinanderlaufen. Für den PDF-Bau
 holt `fetch_facts.py` den Stand, ganz ohne Browser.
 
+### Größere Änderungen einspielen
+
+Für den umgekehrten Weg – viele Karten auf einmal in die Datenbank – gibt
+es **„JSON einspielen"**. Der Knopf erscheint nur für Konten, die in
+`config/editors` zusätzlich unter `import` eingetragen sind.
+
+Eingespielt wird **zusammengeführt, nicht ersetzt**: Karten werden über
+ihren Titel wiedererkannt und behalten dann ihre Kennung, sodass das
+anschließende Speichern nur die tatsächlichen Unterschiede schreibt.
+Karten, die in der Datei fehlen, bleiben erhalten – ein Import fügt hinzu
+und ändert, er räumt nicht auf. Vor dem Übernehmen zeigt eine Rückfrage,
+wie viele Karten neu, geändert und unverändert sind.
+
+> Ohne das Zusammenführen wäre es ein Totalaustausch: `facts.json` enthält
+> keine Kennungen, jede Karte käme als neues Dokument an, und alle
+> bisherigen würden gelöscht.
+
+Den Eintrag legt man in der Firebase-Konsole an: *Firestore* → `config` →
+`editors` → Feld `import` (Array) mit den Adressen, klein geschrieben.
+
 **Umsortieren und Löschen speichern sich selbst.** Beides ist eine
 Entscheidung, kein Zwischenstand – es geht sofort in die Datenbank. Nur
 getippter Text wartet auf „Speichern".
