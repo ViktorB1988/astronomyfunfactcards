@@ -164,8 +164,13 @@ Satz Karten ausdrucken soll. **Ändern kann nur, wer angemeldet und als
 Redaktion eingetragen ist.**
 
 Wer online etwas ändert, drückt **„Speichern"** (oder Strg+S) – der Knopf
-steht oben rechts und noch einmal unter jeder Karte. Danach sehen alle
+steht unter der Karte, bei den übrigen Kartenbefehlen. Danach sehen alle
 anderen den neuen Stand sofort.
+
+Die Knöpfe **„facts.json laden"** und **„facts.json sichern"** gibt es
+online nicht: dort ist die Datenbank die Quelle, und eine zweite Fassung
+als Datei danebenzulegen würde nur auseinanderlaufen. Für den PDF-Bau
+holt `fetch_facts.py` den Stand, ganz ohne Browser.
 
 **Umsortieren und Löschen speichern sich selbst.** Beides ist eine
 Entscheidung, kein Zwischenstand – es geht sofort in die Datenbank. Nur
@@ -445,10 +450,8 @@ Zum Schluss **„facts.json sichern“** (oder Strg+S) und die
 heruntergeladene Datei über die alte `facts.json` legen. Danach
 `python3 build_cards.py` für die neuen PDFs.
 
-In der Online-Fassung liegt auf Strg+S dagegen **„In die Datenbank
-speichern“** – dort ist die Datenbank die Quelle, nicht die Datei.
-„facts.json sichern“ gibt es auch dort weiterhin, als Ausweg für ein
-Sicherheitsduplikat oder den PDF-Bau ohne `fetch_facts.py`.
+Dieser Abschnitt gilt für die **Offline-Fassung**. Online gibt es die
+beiden Dateiknöpfe nicht, und Strg+S schreibt in die Datenbank.
 
 Umgekehrt holt **„facts.json laden“** einen vorhandenen Stand in den
 Editor – wahlweise über den Knopf oder indem man die Datei einfach aufs

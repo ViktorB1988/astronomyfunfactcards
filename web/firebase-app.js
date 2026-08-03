@@ -31,8 +31,9 @@ const E = window.Editor;
 const $ = s => document.querySelector(s);
 const cloud    = $("#cloud");
 const bSignIn  = $("#signin");
-const bStore   = $("#store");
-const bSave    = $("#save");
+/* The save button lives in the form and is rebuilt on every redraw, so it
+   has to be looked up fresh rather than held on to. */
+const saveButton = () => document.getElementById("formsave");
 
 /* The editor is running; only the database is not wired up yet. If this
    module fails, a usable - if mute - page is left standing. */
@@ -113,14 +114,8 @@ function start(){
     } else {
       bSignIn.textContent = "Anmelden";
     }
-    /* Greyed out rather than hidden, same as the buttons in the form: a
-       locked "Speichern" tells a reader that editing exists here and only
-       needs a sign-in. A button that vanishes tells them nothing. */
-    bStore.hidden = false;
-    bStore.disabled = !mayWrite;
-    bStore.title = mayWrite ? "" : "Zum Speichern anmelden";
-    bStore.classList.toggle("primary", mayWrite);
-    bSave.classList.toggle("primary", !mayWrite);
+    /* setWritable redraws the form, and the save button is drawn greyed or
+       active from `writable` there - nothing to toggle by hand here. */
     E.setWritable(mayWrite);
     if (mayWrite && isEmpty) reportEmpty();
   });
@@ -226,8 +221,8 @@ function start(){
        more afterwards, with the state as it is by then. */
     if (saving){ queued = true; return; }
     saving = true;
-    bStore.disabled = true;
-    bStore.textContent = "speichert …";
+    const b = saveButton();
+    if (b){ b.disabled = true; b.textContent = "speichert …"; }
     try {
       const state = E.getState();
       const n = await push(state);
@@ -249,13 +244,12 @@ function start(){
       E.status(t, true);
     } finally {
       saving = false;
-      bStore.disabled = !mayWrite;
-      bStore.textContent = "Speichern";
+      // Look it up again: adopting a snapshot may have rebuilt the form.
+      const done = saveButton();
+      if (done){ done.disabled = !mayWrite; done.textContent = "Speichern"; }
       if (queued){ queued = false; save(auto); }
     }
   }
-
-  bStore.onclick = () => save(false);
 
   /* Hand the editor both ways in. From here on the form shows a
      "Speichern" button, and reordering and deleting write themselves. */
@@ -296,11 +290,6 @@ function start(){
     return ops.length;
   }
 
-  // Online, Ctrl+S should go to the database rather than download a file.
-  document.addEventListener("keydown", e => {
-    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s" && mayWrite){
-      e.preventDefault(); e.stopImmediatePropagation();
-      bStore.click();
-    }
-  }, true);
+  // Ctrl+S is routed by the editor itself: with a database attached it
+  // comes here, without one it downloads a file. Nothing to override.
 }

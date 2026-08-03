@@ -361,7 +361,6 @@ body.dragover::after{
     <button class="btn" id="print">PDF drucken</button>
     <button class="btn primary" id="save">facts.json sichern</button>
     <button class="btn" id="signin" hidden>Anmelden</button>
-    <button class="btn" id="store" hidden>Speichern</button>
   </div>
 </header>
 
@@ -506,6 +505,13 @@ let storeNow = null;     // write through at once after a structural change
 function setDatabase(h){
   store = h && h.save;
   storeNow = h && h.auto;
+  /* With a database the file route disappears: it exists to carry the data
+     somewhere, and online the database already is that somewhere. Leaving
+     it would invite a second, diverging copy - and worse, a dropped file
+     would land in the list and the next reorder would write it over the
+     database. Saving now lives in one place, under the card. */
+  $("#load").hidden = !!store;
+  $("#save").hidden = !!store;
   redrawAll();
 }
 
@@ -690,6 +696,7 @@ function drawForm(){
   // themselves through, so this button is really for the typed text.
   if (store){
     const b = mk("Speichern", "primary", () => store());
+    b.id = "formsave";          // the database layer shows progress on it
     if (!writable) b.title = "Zum Speichern anmelden";
   }
   mk("Nach oben",   "", () => move(-1), S.sel === 0);
@@ -1063,7 +1070,7 @@ $("#file").addEventListener("change", e => { if (e.target.files[0]) loadFile(e.t
 let dragDepth = 0;
 const hasFiles = e => e.dataTransfer && [...e.dataTransfer.types].indexOf("Files") >= 0;
 addEventListener("dragenter", e => {
-  if (!hasFiles(e)) return;                  // internal reordering, not a file import
+  if (!hasFiles(e) || store) return;         // internal reordering, not a file import
   e.preventDefault();
   if (++dragDepth === 1) document.body.classList.add("dragover");
 });
@@ -1073,6 +1080,13 @@ addEventListener("dragleave", e => { if (!hasFiles(e)) return;
 addEventListener("drop", e => {
   if (!hasFiles(e)) return;
   e.preventDefault(); dragDepth = 0; document.body.classList.remove("dragover");
+  /* Not online. A dropped file would replace the list, and the next
+     reorder would write that over the database. */
+  if (store){
+    status("Diese Fassung arbeitet mit der Datenbank – eine Datei wird nicht "
+         + "geladen.", true);
+    return;
+  }
   const f = e.dataTransfer.files[0];
   if (!f) return;
   if (!/\.json$/i.test(f.name)){ status(`„${f.name}“ ist keine JSON-Datei.`, true); return; }
@@ -1089,7 +1103,11 @@ $("#formatpick").addEventListener("click", e => {
   preview();
 });
 document.addEventListener("keydown", e => {
-  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s"){ e.preventDefault(); saveFile(); }
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s"){
+    e.preventDefault();
+    // Online into the database, offline into a file - whichever exists.
+    if (store) store(); else saveFile();
+  }
 });
 window.addEventListener("beforeunload", e => { if (S.dirty){ e.preventDefault(); e.returnValue = ""; } });
 

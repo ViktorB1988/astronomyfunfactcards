@@ -204,8 +204,19 @@ Bleibt die Stelle leer, entsteht der unveränderte Offline-Editor. Nicht
 in zwei Vorlagen aufteilen – dann driften Auto-Fit und Layout auseinander.
 
 **Das Modul fasst den Zustand nie direkt an,** nur über `window.Editor`
-(`holeStand`, `setzeStand`, `setzeSchreibrecht`, …). Es läuft als
+(`getState`, `setState`, `setWritable`, `setDatabase`, …). Es läuft als
 `type="module"` und damit garantiert nach dem Hauptskript.
+
+**`store` entscheidet über die halbe Oberfläche.** Setzt das Modul über
+`setDatabase()` eine Datenbank, verschwinden „facts.json laden" und
+„facts.json sichern", der Dateiimport per Ziehen wird abgewiesen, Strg+S
+geht in die Datenbank, und unter der Karte erscheint „Speichern". Ohne
+Datenbank bleibt alles beim Alten – das ist die Offline-Fassung. Wer hier
+etwas ändert, prüft **beide** Fassungen.
+
+**Der Dateiimport muss online gesperrt bleiben.** Eine abgelegte
+`facts.json` würde die Liste ersetzen, und der nächste Struktureingriff
+schriebe sie über die Datenbank – ein stiller Totalverlust.
 
 ### Aufteilung in der Datenbank
 
