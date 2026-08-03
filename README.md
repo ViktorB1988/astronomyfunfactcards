@@ -293,7 +293,15 @@ Seite weiterhin „keine Firebase-Konfiguration".
 Der Fortschritt steht unter *Actions*. Beim ersten Lauf dauert es ein
 bis zwei Minuten. Danach steht die Seite unter
 
-<https://viktorb1988.github.io/AstronomyFunFactCards/>
+<https://viktorb1988.github.io/astronomyfunfactcards/>
+
+> **Groß- und Kleinschreibung zählt.** Der Rechnername davor ist
+> gleichgültig, der Pfad dahinter nicht: `.../astronomyfunfactcards/`
+> führt zur Seite, `.../AstronomyFunFactCards/` nicht. So arbeiten
+> Web-Adressen, daran lässt sich nichts einstellen. Der Name des
+> Repositorys ist deshalb durchgehend klein geschrieben – dann stimmt,
+> was man ohnehin tippt. Am sichersten bleibt es, die Adresse als Link
+> weiterzugeben statt sie zu diktieren.
 
 #### C · Datenbank befüllen
 
