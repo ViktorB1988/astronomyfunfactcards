@@ -37,11 +37,16 @@ const saveButton = () => document.getElementById("formsave");
 
 /* The editor is running; only the database is not wired up yet. If this
    module fails, a usable - if mute - page is left standing. */
+/* Only speaks up when something is wrong. In the normal case the cards are
+   simply there - a permanent counter next to them says nothing anyone acts
+   on. A failure does need somewhere lasting to show: the status line clears
+   itself after a few seconds, so "nicht verbunden" would vanish and leave a
+   page that looks fine and quietly is not. */
 function report(text, kind){
+  if (kind !== "error"){ cloud.hidden = true; return; }
   cloud.hidden = false;
   cloud.textContent = text;
-  cloud.classList.toggle("connected", kind === "ok");
-  cloud.classList.toggle("error", kind === "error");
+  cloud.classList.add("error");
 }
 
 if (!E){

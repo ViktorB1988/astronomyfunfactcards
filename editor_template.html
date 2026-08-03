@@ -54,8 +54,6 @@ button,input,select,textarea{font:inherit;color:inherit}
   box-shadow:2px 2px 0 rgba(255,255,255,.16);
 }
 .brand span{color:var(--faint);font-weight:400}
-.tally{display:flex;gap:18px;flex-wrap:wrap;font:11.5px/1.4 var(--mono);color:var(--faint)}
-.tally b{color:var(--text);font-weight:600}
 .topbar .right{margin-left:auto;display:flex;gap:9px;align-items:center;
                flex-wrap:wrap;justify-content:flex-end}
 
@@ -87,7 +85,6 @@ button,input,select,textarea{font:inherit;color:inherit}
   display:flex;align-items:center;gap:6px;white-space:nowrap;
 }
 .cloud::before{content:"";width:7px;height:7px;border-radius:99px;background:currentColor}
-.cloud.connected{color:var(--good)}
 .cloud.error{color:var(--cramped)}
 [hidden]{display:none !important}
 
@@ -351,7 +348,6 @@ body.dragover::after{
 
 <header class="topbar">
   <div class="brand">Faktenkarten <span>· Editor</span></div>
-  <div class="tally" id="tally"></div>
   <div class="right">
     <span class="cloud" id="cloud" hidden></span>
     <span class="unsaved" id="unsaved">nicht gesichert</span>
@@ -545,18 +541,6 @@ function status(text, isError){
 
 function renumber(){ S.cards.forEach((k, i) => k.no = i + 1); }
 
-/* ---------- Top bar ---------- */
-function tally(){
-  const n = S.cards.length;
-  const parts = [`<b>${n}</b> ${n === 1 ? "Karte" : "Karten"}`];
-  for (const key of ["a7","a6"]){
-    const per = FORMATS[key].per_sheet;
-    const s = Math.ceil(n / per), free = s * per - n;
-    parts.push(`<b>${s}</b> ${s === 1 ? "Bogen" : "Bögen"} ${key.toUpperCase()}`
-      + (free ? ` (${free} ${free === 1 ? "Leerfeld" : "Leerfelder"})` : ""));
-  }
-  $("#tally").innerHTML = parts.join("");
-}
 
 /* ---------- List ---------- */
 function matches(k){
@@ -1055,7 +1039,7 @@ function fillThemeFilter(){
   s.value = S.theme;
 }
 
-function redrawAll(){ tally(); drawList(); drawForm(); preview(); }
+function redrawAll(){ drawList(); drawForm(); preview(); }
 
 $("#search").addEventListener("input", e => { S.query = e.target.value; drawList(); });
 $("#themefilter").addEventListener("change", e => { S.theme = e.target.value; drawList(); });
