@@ -8,6 +8,12 @@
 # playwright is installed only because build_cards.py imports it - the
 # browser itself (playwright install) is not needed here, the page builds
 # no PDF.
+#
+# Renaming the repository changes the address of the site, and GitHub only
+# publishes it under the new path on the next run - in between, both the
+# old and the new path answer 404. Press "Run workflow" under Actions then.
+# A documentation-only commit will not do it: the paths filter below keeps
+# such a commit from triggering a build.
 
 name: Build and publish the site
 
