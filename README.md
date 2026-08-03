@@ -1,7 +1,7 @@
-# Astronomie-Faktenkarten – 170 Karten
+# Astronomie-Faktenkarten – 202 Karten
 
 Karten zum Vorlesen für Besucherinnen und Besucher auf der Sternwarte.
-Fortlaufend von 1 bis 170. Standardmäßig **einseitig**; wahlweise auch
+Fortlaufend von 1 bis 202. Standardmäßig **einseitig**; wahlweise auch
 als **Duplex-Fassung** mit Titel vorn und Text hinten.
 Layout bewusst rein schwarz/weiß: Unter Rotlicht verschwinden Farben,
 neutrale Graustufen bleiben lesbar.
@@ -13,15 +13,15 @@ Die Schriftgrade unten sind Anhaltswerte. Den genauen Bereich meldet
 
 | Datei | Karten/Bogen | Bögen | Schriftgrad Fakt ≈ |
 |---|---|---|---|
-| `astro-karten-A7.pdf` | 8 | 22 | 10,3–13,7 pt |
-| `astro-karten-A7-nur-fakt.pdf` | 8 | 22 | **13,3–14,1 pt** |
-| `astro-karten-A6.pdf` | 4 | 43 | 12,1–18,1 pt |
-| `astro-karten-A6-nur-fakt.pdf` | 4 | 43 | **15,1–21,1 pt** |
-| `astro-karten-A6Q.pdf` | 4 | 43 | 14,3–18,8 pt |
-| `astro-karten-A6Q-nur-fakt.pdf` | 4 | 43 | **18,0–20,3 pt** |
-| `astro-karten-A7-duplex.pdf` | 8 | 44 | 10,3–13,7 pt (Rückseite) |
-| `astro-karten-A6-duplex.pdf` | 4 | 86 | 14,0–19,3 pt (Rückseite) |
-| `astro-karten-A6Q-duplex.pdf` | 4 | 86 | 14,3–19,4 pt (Rückseite) |
+| `astro-karten-A7.pdf` | 8 | 26 | 10,3–13,7 pt |
+| `astro-karten-A7-nur-fakt.pdf` | 8 | 26 | **13,3–14,1 pt** |
+| `astro-karten-A6.pdf` | 4 | 51 | 12,1–18,1 pt |
+| `astro-karten-A6-nur-fakt.pdf` | 4 | 51 | **15,1–21,1 pt** |
+| `astro-karten-A6Q.pdf` | 4 | 51 | 14,3–18,8 pt |
+| `astro-karten-A6Q-nur-fakt.pdf` | 4 | 51 | **18,0–20,3 pt** |
+| `astro-karten-A7-duplex.pdf` | 8 | 52 | 10,3–13,7 pt (Rückseite) |
+| `astro-karten-A6-duplex.pdf` | 4 | 102 | 14,0–19,3 pt (Rückseite) |
+| `astro-karten-A6Q-duplex.pdf` | 4 | 102 | 14,3–19,4 pt (Rückseite) |
 
 Dazu `astro-karten-index.pdf` (Übersicht nach Themen), der Editor
 `karten-editor.html` sowie die Quellen `facts.json`, `cards.css`,
@@ -100,7 +100,7 @@ Im Skript steht der Schalter als `DUPLEX` oben in `build_cards.py`.
 
 Die Karten stehen fortlaufend auf dem Bogen, zeilenweise von links oben:
 A7-Bogen 1 trägt die Karten 1–8, Bogen 2 die Karten 9–16 und so weiter.
-Der letzte A7-Bogen trägt die Karten 169–170 und sechs Leerfelder.
+Der letzte A7-Bogen trägt die Karten 201–202 und sechs Leerfelder.
 
 ## Schneiden
 
@@ -146,6 +146,17 @@ eigenen Nummernblock:
 | Star Trek | 20 | 101–120 |
 | Star Wars | 20 | 121–140 |
 | Project Hail Mary | 30 | 141–170 |
+| Terraforming Mars | 8 | 171–178 |
+| Artemis 2 | 8 | 179–186 |
+| Warpantrieb | 8 | 187–194 |
+| Fiktion wird wirklich | 8 | 195–202 |
+
+Die vier jüngsten Themen hängen zusammen: **Terraforming Mars** sammelt,
+woran ein Umbau des Nachbarplaneten scheitert, **Artemis 2** beschreibt den
+ersten bemannten Mondflug seit 1972, **Warpantrieb** geht der Frage nach,
+warum überlichtschnelles Reisen zwar rechenbar, aber nicht baubar ist, und
+**Fiktion wird wirklich** sammelt Technik, die zuerst in Romanen und Filmen
+auftauchte – vom Mobiltelefon bis zur senkrecht landenden Rakete.
 
 Die Karten zu Star Trek, Star Wars und Project Hail Mary nennen jeweils
 einen Bezug aus den Filmen und daneben den astronomischen Sachverhalt
