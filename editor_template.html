@@ -1,0 +1,999 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faktenkarten – Editor</title>
+<style>
+/*__FONTS__*/
+
+/* ===== Layout der Karten, unveraendert aus cards.css ===== */
+/*__KARTEN_CSS__*/
+
+/* ===== Oberflaeche: Nachtpult ==================================
+   Dunkel gehalten, damit die Karte als einziges helles Element
+   heraussticht - sie ist das Produkt, alles andere ist Werkzeug.
+   Farbe gibt es nur an einer Stelle: an der Lesbarkeitsanzeige.
+   ================================================================ */
+:root{
+  --nacht:#0e111a; --tafel:#151a26; --hebung:#1c2231; --hebung2:#232a3b;
+  --kante:#2a3244; --kante-hell:#39435a;
+  --text:#e7eaf3; --matt:#9aa3b8; --leise:#8892a8;
+  --akzent:#e0b661; --akzent-tief:#8a6d2f;
+  --gut:#5fce9b; --knapp:#e8b64a; --eng:#ef7361;
+  --ui:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Consolas,"DejaVu Sans Mono",monospace;
+  --rund:5px;
+}
+*{box-sizing:border-box}
+html{background:var(--nacht)}
+body{
+  margin:0;background:var(--nacht);color:var(--text);
+  font:14px/1.55 var(--ui);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--akzent);outline-offset:2px;border-radius:3px}
+::selection{background:var(--akzent-tief);color:#fff}
+
+/* --- Kopfzeile --- */
+.kopf{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;gap:22px;flex-wrap:wrap;
+  padding:13px 20px;background:rgba(21,26,38,.88);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--kante);
+}
+.marke{
+  font-weight:650;letter-spacing:-.015em;font-size:15px;
+  display:flex;align-items:center;gap:9px;
+}
+.marke::before{ /* kleiner Kartenstapel als Zeichen */
+  content:"";width:13px;height:17px;border-radius:2px;
+  background:linear-gradient(105deg,#fff 0 62%,var(--matt) 62%);
+  box-shadow:2px 2px 0 rgba(255,255,255,.16);
+}
+.marke span{color:var(--leise);font-weight:400}
+.bilanz{display:flex;gap:18px;flex-wrap:wrap;font:11.5px/1.4 var(--mono);color:var(--leise)}
+.bilanz b{color:var(--text);font-weight:600}
+.kopf .rechts{margin-left:auto;display:flex;gap:9px;align-items:center;
+              flex-wrap:wrap;justify-content:flex-end}
+
+.knopf{
+  border:1px solid var(--kante-hell);background:var(--hebung);color:var(--text);
+  border-radius:var(--rund);padding:7px 14px;cursor:pointer;white-space:nowrap;
+}
+.knopf:hover{background:var(--hebung2);border-color:var(--akzent-tief)}
+.knopf:active{transform:translateY(1px)}
+.knopf.primaer{
+  background:var(--akzent);border-color:var(--akzent);color:#221a08;font-weight:600;
+}
+.knopf.primaer:hover{background:#eec474;border-color:#eec474}
+.knopf.gefahr:hover{border-color:var(--eng);color:var(--eng);background:var(--hebung)}
+.knopf[disabled]{opacity:.35;cursor:default;background:var(--hebung);border-color:var(--kante)}
+.merker{
+  font:11px/1 var(--mono);color:var(--knapp);
+  border:1px solid currentColor;border-radius:99px;padding:5px 10px;
+  visibility:hidden;
+}
+.merker.an{visibility:visible}
+
+.versteckt{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* --- Dreispalter --- */
+main{
+  display:grid;gap:1px;background:var(--kante);
+  grid-template-columns:minmax(258px,1fr) minmax(360px,1.4fr) auto;
+  align-items:start;min-height:calc(100vh - 53px);
+}
+main>*{background:var(--tafel);min-height:100%}
+
+/* --- Spalte 1: Liste --- */
+.liste{display:flex;flex-direction:column;max-height:calc(100vh - 53px);position:sticky;top:53px}
+.filter{padding:12px;display:flex;gap:7px;border-bottom:1px solid var(--kante)}
+.filter input,.filter select{
+  flex:1;min-width:0;padding:7px 10px;border:1px solid var(--kante-hell);
+  border-radius:var(--rund);background:var(--nacht);color:var(--text);
+}
+.filter input::placeholder{color:var(--leise)}
+.rollen{overflow-y:auto;flex:1;list-style:none;margin:0;padding:6px}
+.rollen li+li{margin-top:2px}
+.rollen li{position:relative}
+.zeile{
+  display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;
+  width:100%;text-align:left;padding:9px 34px 9px 10px;border:0;background:none;
+  color:inherit;cursor:pointer;border-radius:var(--rund);position:relative;
+}
+.zeile{cursor:grab}
+.zeile:active{cursor:grabbing}
+.zeile:hover{background:var(--hebung)}
+.zeile.zieht{opacity:.35}
+/* Einfügemarke beim Ziehen */
+.zeile.ziel-vor::after,.zeile.ziel-nach::after{
+  content:"";position:absolute;left:6px;right:6px;height:2px;
+  background:var(--akzent);border-radius:2px;
+}
+.zeile.ziel-vor::after{top:-2px}
+.zeile.ziel-nach::after{bottom:-2px}
+.griff{
+  position:absolute;right:30px;top:50%;transform:translateY(-50%);
+  width:9px;height:12px;opacity:0;pointer-events:none;
+  background:radial-gradient(circle,var(--leise) 1px,transparent 1px) 0 0/4.5px 4px;
+}
+.zeile:hover .griff{opacity:.9}
+
+/* Loeschen direkt aus der Liste. Liegt neben der Zeile, nicht darin -
+   ein Knopf im Knopf waere ungueltiges Markup. */
+.weg{
+  position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  width:22px;height:22px;padding:0;border:0;border-radius:4px;
+  background:none;color:var(--leise);cursor:pointer;
+  font:16px/1 var(--ui);opacity:0;
+}
+.rollen li:hover .weg,.weg:focus-visible{opacity:1}
+.weg:hover{background:var(--eng);color:#fff}
+@media (hover:none){ .weg{opacity:.8} }
+.zeile[aria-current="true"]{background:var(--hebung2)}
+.zeile[aria-current="true"]::before{
+  content:"";position:absolute;left:0;top:9px;bottom:9px;width:2px;
+  background:var(--akzent);border-radius:2px;
+}
+.zeile .nr{font:600 12px/1.5 var(--mono);color:var(--leise);text-align:right}
+.zeile[aria-current="true"] .nr{color:var(--akzent)}
+.zeile .txt{overflow:hidden}
+.zeile .tl{display:block;font-weight:550;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.thema-name{display:block;margin-top:5px;
+  font:10px/1 var(--mono);color:var(--leise);letter-spacing:.05em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.leer{padding:28px 14px;color:var(--leise);text-align:center;font-size:13px}
+.listenfuss{padding:12px;border-top:1px solid var(--kante);display:flex;gap:7px}
+.listenfuss .knopf{flex:1;text-align:center;padding-left:8px;padding-right:8px}
+
+/* --- Spalte 2: Formular --- */
+.form{padding:22px 24px 48px;display:flex;flex-direction:column;gap:18px}
+.form h2{
+  margin:0;font-size:13px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--matt);display:flex;align-items:baseline;gap:9px;
+  padding-bottom:12px;border-bottom:1px solid var(--kante);
+}
+.form h2 em{font-style:normal;color:var(--leise);font-family:var(--mono);letter-spacing:0}
+.feld{display:flex;flex-direction:column;gap:7px}
+.feld label{font-size:11px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--matt)}
+.feld .hilfe{color:var(--leise);font-weight:400;text-transform:none;letter-spacing:0;font-size:12px}
+.feld input,.feld select,.feld textarea{
+  padding:10px 12px;border:1px solid var(--kante-hell);border-radius:var(--rund);
+  background:var(--nacht);color:var(--text);font-family:var(--ui);
+}
+.feld textarea{resize:vertical;line-height:1.6}
+.feld input:focus,.feld textarea:focus,.feld select:focus{
+  border-color:var(--akzent-tief);outline:none;
+  box-shadow:0 0 0 3px rgba(224,182,97,.13);
+}
+.zaehler{font:11px/1 var(--mono);color:var(--leise);align-self:flex-end}
+.werkzeuge{display:flex;gap:7px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--kante)}
+
+/* --- Spalte 3: Vorschau --- */
+.vorschau{
+  padding:22px;position:sticky;top:53px;
+  display:flex;flex-direction:column;gap:14px;width:max-content;
+  background:
+    radial-gradient(120% 60% at 50% 22%, rgba(224,182,97,.055), transparent 70%),
+    var(--tafel);
+}
+.schalter{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.schalter .satz{display:flex;border:1px solid var(--kante-hell);border-radius:var(--rund);overflow:hidden}
+.schalter .satz button{
+  border:0;background:var(--hebung);color:var(--matt);
+  padding:6px 14px;cursor:pointer;font:12px/1.4 var(--mono);
+}
+.schalter .satz button+button{border-left:1px solid var(--kante-hell)}
+.schalter .satz button[aria-pressed="true"]{background:var(--akzent);color:#221a08;font-weight:600}
+.schalter label{display:flex;gap:7px;align-items:center;font-size:12px;color:var(--matt);cursor:pointer}
+.schalter input[type=checkbox]{accent-color:var(--akzent);width:14px;height:14px}
+
+/* Millimeterleiste: zeigt, dass die Vorschau echte Groesse hat */
+.leiste{position:relative;height:14px}
+.leiste .strich{position:absolute;top:0;width:1px;height:5px;background:var(--kante-hell)}
+.leiste .strich.zehn{height:9px;background:var(--matt)}
+.leiste .zahl{position:absolute;top:0;font:9px/1 var(--mono);color:var(--leise);transform:translateX(3px)}
+
+/* Buehne: die Karte liegt beleuchtet auf dem dunklen Pult */
+.rahmen{position:relative;padding:10px}
+.rahmen::before,.rahmen::after{
+  content:"";position:absolute;width:18px;height:18px;pointer-events:none;
+  border:1px solid var(--kante-hell);
+}
+.rahmen::before{left:0;top:0;border-right:0;border-bottom:0}
+.rahmen::after{right:0;bottom:0;border-left:0;border-top:0}
+.stapel{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.seitenlabel{
+  font:10px/1 var(--mono);color:var(--leise);letter-spacing:.12em;
+  text-transform:uppercase;margin-bottom:5px;display:block;
+}
+.buehne{
+  width:fit-content;
+  background:#fff;border-radius:2px;
+  box-shadow:0 0 0 1px rgba(255,255,255,.09), 0 18px 40px -12px rgba(0,0,0,.75),
+             0 3px 10px rgba(0,0,0,.4);
+}
+.buehne .card{background:#fff}
+
+/* Lesbarkeitsanzeige: Zahl plus Skala mit den drei Bereichen */
+.anzeige{
+  display:flex;align-items:center;gap:16px;
+  padding:13px 15px;background:var(--hebung);
+  border:1px solid var(--kante-hell);border-radius:var(--rund);
+}
+.ablesung{display:flex;align-items:baseline;gap:4px;font-family:var(--mono)}
+.ablesung .wert{font-size:26px;font-weight:700;letter-spacing:-.03em;line-height:1}
+.ablesung .einheit{font-size:11px;color:var(--leise)}
+.skala{flex:1;min-width:190px;display:flex;flex-direction:column;gap:5px}
+.zonen{position:relative;display:flex;height:5px;border-radius:99px;overflow:hidden;background:var(--nacht)}
+.zonen i{display:block;height:100%;opacity:.42}
+.zonen .z-eng{background:var(--eng)} .zonen .z-knapp{background:var(--knapp)} .zonen .z-gut{background:var(--gut)}
+.nadel{
+  position:absolute;top:-3px;width:3px;height:11px;border-radius:2px;
+  background:var(--text);box-shadow:0 0 0 2px var(--hebung);
+  transform:translateX(-50%);left:0;
+}
+.skala-text{display:flex;justify-content:space-between;font:10px/1 var(--mono);color:var(--leise)}
+.skala-text .lage{letter-spacing:.1em;text-transform:uppercase;font-weight:600}
+.anzeige.gut   .wert,.anzeige.gut   .lage{color:var(--gut)}
+.anzeige.knapp .wert,.anzeige.knapp .lage{color:var(--knapp)}
+.anzeige.eng   .wert,.anzeige.eng   .lage{color:var(--eng)}
+@media (prefers-reduced-motion:no-preference){ .nadel{transition:left .18s ease-out} }
+
+.hinweise{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px;max-width:min(420px,100%)}
+.hinweise li{
+  font-size:12.5px;line-height:1.5;padding:9px 11px;background:var(--hebung);
+  border:1px solid var(--kante);border-left:2px solid var(--kante-hell);
+  border-radius:var(--rund);color:var(--matt);
+}
+.hinweise li.warn{border-left-color:var(--knapp);color:var(--text)}
+.hinweise li.fehler{border-left-color:var(--eng);color:var(--text)}
+.hinweise li.ok{border-left-color:var(--gut)}
+
+/* Rueckmeldung nach Laden und Sichern */
+.status{
+  position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:60;
+  max-width:min(560px,92vw);padding:12px 18px;border-radius:var(--rund);
+  background:var(--hebung2);color:var(--text);border:1px solid var(--kante-hell);
+  font-size:13px;line-height:1.45;
+  box-shadow:0 14px 36px -10px rgba(0,0,0,.8);
+  opacity:0;pointer-events:none;
+}
+.status.an{opacity:1}
+.status.fehler{border-color:var(--eng);color:#ffd9d2}
+@media (prefers-reduced-motion:no-preference){ .status{transition:opacity .2s} }
+
+/* Datei auf das Fenster ziehen */
+body.ziehen::after{
+  content:"facts.json hier ablegen";
+  position:fixed;inset:12px;z-index:70;display:grid;place-items:center;
+  border:2px dashed var(--akzent);border-radius:8px;
+  background:rgba(14,17,26,.9);color:var(--akzent);font-weight:600;letter-spacing:.02em;
+}
+
+/* Startmeldung: bleibt stehen, wenn das Skript nicht laeuft. */
+.startmeldung{
+  position:fixed;inset:0;z-index:100;display:grid;place-items:center;
+  padding:26px;background:var(--nacht);
+}
+.startmeldung .kasten{
+  max-width:560px;background:var(--tafel);border:1px solid var(--kante-hell);
+  border-left:3px solid var(--eng);border-radius:var(--rund);padding:24px 26px;
+}
+.startmeldung h1{margin:0 0 12px;font-size:17px;letter-spacing:-.01em}
+.startmeldung p{margin:0 0 11px;line-height:1.6;color:var(--matt)}
+.startmeldung ol{margin:0 0 11px;padding-left:20px;line-height:1.7;color:var(--matt)}
+.startmeldung code{
+  font:12px/1.4 var(--mono);background:var(--hebung2);color:var(--text);
+  padding:2px 6px;border-radius:3px;
+}
+.startmeldung .klein{font-size:12px;color:var(--leise)}
+.startmeldung pre{
+  font:11px/1.5 var(--mono);background:rgba(239,115,97,.09);color:#ffb3a7;
+  border:1px solid var(--eng);border-radius:var(--rund);padding:10px;margin:12px 0 0;
+  white-space:pre-wrap;word-break:break-word;
+}
+
+/* Druckflaeche: liegt normalerweise ausserhalb des Sichtfelds, wird aber
+   ausgelegt - nur so lassen sich die Karten vor dem Druck vermessen. */
+.druckflaeche{position:absolute;left:-20000px;top:0;width:210mm}
+.druckflaeche:empty{display:none}
+
+@media print{
+  body>*{display:none !important}
+  body>.druckflaeche{
+    display:block !important;position:static;left:auto;width:auto;
+  }
+  .druckflaeche .sheet{box-shadow:none}
+}
+
+@media (max-width:1100px){
+  main{grid-template-columns:minmax(0,1fr)}
+  .liste,.vorschau{position:static;max-height:none;width:auto}
+  .rollen{max-height:340px}
+  .vorschau{max-width:100%;overflow-x:auto}
+  .rahmen,.leiste{flex:0 0 auto}
+}
+@media (prefers-reduced-motion:no-preference){
+  .zeile,.knopf,.filter input,.feld input,.feld textarea{transition:background .13s,color .13s,border-color .13s,box-shadow .13s}
+}
+</style>
+</head>
+<body>
+
+<header class="kopf">
+  <div class="marke">Faktenkarten <span>· Editor</span></div>
+  <div class="bilanz" id="bilanz"></div>
+  <div class="rechts">
+    <span class="merker" id="merker">nicht gesichert</span>
+    <button class="knopf" id="laden">facts.json laden</button>
+    <input type="file" id="datei" class="versteckt" accept=".json,application/json"
+           tabindex="-1" aria-hidden="true">
+    <button class="knopf" id="drucken">PDF drucken</button>
+    <button class="knopf primaer" id="sichern">facts.json sichern</button>
+  </div>
+</header>
+
+<main>
+  <section class="liste">
+    <div class="filter">
+      <input id="suche" type="search" placeholder="Suchen …" aria-label="Karten durchsuchen">
+      <select id="themenfilter" aria-label="Nach Thema filtern"></select>
+    </div>
+    <ol class="rollen" id="rollen"></ol>
+    <div class="listenfuss">
+      <button class="knopf" id="neu">Karte hinzufügen</button>
+      <button class="knopf" id="sortieren" title="Karten nach der Themenreihenfolge gruppieren und neu durchnummerieren">Nach Thema sortieren</button>
+    </div>
+  </section>
+
+  <section class="form" id="form"></section>
+
+  <aside class="vorschau">
+    <div class="schalter">
+      <div class="satz" id="formatwahl">
+        <button data-fmt="a7" aria-pressed="true">A7</button>
+        <button data-fmt="a6" aria-pressed="false">A6 hoch</button>
+        <button data-fmt="a6q" aria-pressed="false">A6 quer</button>
+      </div>
+      <label><input type="checkbox" id="zusatz" checked> „Mehr dazu“ mitdrucken</label>
+      <label title="Feine Linien zwischen den Karten und Anlegemarken am Bogenrand"><input type="checkbox" id="schnitt" checked> Schnittlinien drucken</label>
+      <label title="Vorderseite zeigt nur Thema und Titel, der Text steht auf der Rückseite"><input type="checkbox" id="duplex"> Duplex: Titel vorn, Text hinten</label>
+    </div>
+    <div class="leiste" id="leiste"></div>
+    <div class="rahmen"><div class="stapel" id="stapel"></div></div>
+    <div class="anzeige" id="anzeige">
+      <div class="ablesung"><span class="wert">–</span><span class="einheit">pt</span></div>
+      <div class="skala">
+        <div class="zonen">
+          <i class="z-eng"></i><i class="z-knapp"></i><i class="z-gut"></i>
+          <span class="nadel" id="nadel"></span>
+        </div>
+        <div class="skala-text">
+          <span id="skala-min"></span><span class="lage"></span><span id="skala-max"></span>
+        </div>
+      </div>
+    </div>
+    <ul class="hinweise" id="hinweise"></ul>
+  </aside>
+</main>
+
+<style id="druckseite"></style>
+<div class="druckflaeche" id="druckflaeche" aria-hidden="true"></div>
+
+<div class="status" id="status" role="status" aria-live="polite"></div>
+
+<div class="startmeldung" id="startmeldung">
+  <div class="kasten">
+    <h1>Der Editor läuft gerade nicht</h1>
+    <p>Diese Seite braucht JavaScript. Bleibt diese Meldung stehen, wird das
+       Skript blockiert – meistens, weil die Datei in einer Vorschau
+       angezeigt wird statt im Browser geöffnet zu sein.</p>
+    <ol>
+      <li><code>karten-editor.html</code> herunterladen und lokal speichern.</li>
+      <li>Die gespeicherte Datei doppelklicken.</li>
+    </ol>
+    <p class="klein">Erscheint hier gleich eine rote Fehlermeldung, dann ist es
+       kein Vorschauproblem, sondern ein Fehler im Editor – dann bitte den
+       Text melden.</p>
+    <pre id="startfehler" hidden></pre>
+  </div>
+</div>
+
+
+<script>
+"use strict";
+
+// Fehler sichtbar machen statt die Seite leer stehen zu lassen
+addEventListener("error", e => {
+  const k = document.getElementById("startmeldung");
+  const f = document.getElementById("startfehler");
+  if (!k || !f) return;
+  k.style.display = "grid";
+  k.querySelector("h1").textContent = "Fehler im Editor";
+  f.hidden = false;
+  f.textContent = (e.message || e.error) + "\n" + (e.filename || "") + ":" + (e.lineno || "?");
+});
+
+const DATEN   = /*__DATEN__*/;
+const FORMATE = /*__FORMATE__*/;
+const autofit = /*__AUTOFIT__*/;
+
+// Ab diesen Druckgroessen ist Vorlesen im Halbdunkel erfahrungsgemaess machbar
+const LESBAR = { a7: {gut: 12.5, knapp: 10.5}, a6: {gut: 15, knapp: 12.5},
+                 a6q: {gut: 15, knapp: 12.5} };
+
+const S = {
+  karten: DATEN.karten.map(k => ({...k})),
+  themen: DATEN.themen.slice(),
+  meta:   {...DATEN.meta},
+  sel: 0, fmt: "a7", zusatz: true, schnitt: true, duplex: false,
+  suche: "", thema: "", dirty: false
+};
+
+const $  = s => document.querySelector(s);
+const el = (t, c, txt) => { const n = document.createElement(t);
+  if (c) n.className = c; if (txt != null) n.textContent = txt; return n; };
+const esc = s => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+// <sup> bleibt erhalten, alles andere wird escaped – wie im Druckskript
+const inhalt = s => esc(s).replace(/&lt;sup&gt;/g, "<sup>").replace(/&lt;\/sup&gt;/g, "</sup>");
+const roh = s => String(s).replace(/<\/?sup>/g, "");
+const stufe = t => { const n = roh(t).length;
+  return n < 170 ? "s1" : n < 215 ? "s2" : n < 265 ? "s3" : "s4"; };
+
+function schmutzig(an = true){ S.dirty = an; $("#merker").classList.toggle("an", an); }
+
+let statusUhr;
+function status(text, fehler){
+  const n = $("#status");
+  n.textContent = text;
+  n.classList.toggle("fehler", !!fehler);
+  n.classList.add("an");
+  clearTimeout(statusUhr);
+  statusUhr = setTimeout(() => n.classList.remove("an"), fehler ? 8000 : 4500);
+}
+
+function nummerieren(){ S.karten.forEach((k, i) => k.nr = i + 1); }
+
+/* ---------- Kopfzeile ---------- */
+function bilanz(){
+  const n = S.karten.length;
+  const teile = [`<b>${n}</b> ${n === 1 ? "Karte" : "Karten"}`];
+  for (const key of ["a7","a6"]){
+    const pro = FORMATE[key].pro_bogen;
+    const b = Math.ceil(n / pro), leer = b * pro - n;
+    teile.push(`<b>${b}</b> ${b === 1 ? "Bogen" : "Bögen"} ${key.toUpperCase()}`
+      + (leer ? ` (${leer} ${leer === 1 ? "Leerfeld" : "Leerfelder"})` : ""));
+  }
+  $("#bilanz").innerHTML = teile.join("");
+}
+
+/* ---------- Liste ---------- */
+function passt(k){
+  if (S.thema && k.thema !== S.thema) return false;
+  if (!S.suche) return true;
+  const q = S.suche.toLowerCase();
+  return [k.titel, k.text, k.nachschlag, String(k.nr)]
+    .some(v => String(v).toLowerCase().includes(q));
+}
+
+// Umsortieren per Ziehen. Funktioniert auch bei gefilterter Liste:
+// abgelegt wird immer relativ zur Karte, auf der man loslaesst.
+let zieht = null;
+
+function listeAnbinden(){
+  const ol = $("#rollen");
+  ol.addEventListener("dragstart", e => {
+    const z = e.target.closest(".zeile"); if (!z) return;
+    zieht = +z.dataset.pos;
+    z.classList.add("zieht");
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/plain", "karte:" + zieht);
+  });
+  ol.addEventListener("dragend", () => {
+    zieht = null;
+    ol.querySelectorAll(".zieht,.ziel-vor,.ziel-nach")
+      .forEach(z => z.classList.remove("zieht", "ziel-vor", "ziel-nach"));
+  });
+  ol.addEventListener("dragover", e => {
+    if (zieht === null) return;
+    const z = e.target.closest(".zeile"); if (!z) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    const r = z.getBoundingClientRect();
+    const oben = e.clientY < r.top + r.height / 2;
+    ol.querySelectorAll(".ziel-vor,.ziel-nach").forEach(x => x.classList.remove("ziel-vor","ziel-nach"));
+    if (+z.dataset.pos !== zieht) z.classList.add(oben ? "ziel-vor" : "ziel-nach");
+  });
+  ol.addEventListener("drop", e => {
+    if (zieht === null) return;
+    const z = e.target.closest(".zeile"); if (!z) return;
+    e.preventDefault(); e.stopPropagation();
+    const ziel = +z.dataset.pos;
+    if (ziel === zieht) return;
+    const r = z.getBoundingClientRect();
+    const oben = e.clientY < r.top + r.height / 2;
+    const karte = S.karten[zieht];
+    const zielkarte = z._karte;
+    S.karten.splice(zieht, 1);
+    // Zielposition nach dem Herausnehmen neu bestimmen
+    const neu = S.karten.indexOf(zielkarte);
+    S.karten.splice(oben ? neu : neu + 1, 0, karte);
+    S.sel = S.karten.indexOf(karte);
+    zieht = null;
+    nummerieren(); schmutzig(); alles();
+    status(`„${karte.titel}“ ist jetzt Karte ${karte.nr}.`);
+  });
+}
+
+function listeZeichnen(){
+  const ol = $("#rollen"); ol.innerHTML = "";
+  const sichtbar = S.karten.filter(passt);
+  if (!sichtbar.length){
+    ol.append(el("li", "leer", "Keine Karte gefunden. Suche oder Themenfilter ändern."));
+    return;
+  }
+  for (const k of sichtbar){
+    const i = S.karten.indexOf(k);
+    const li = el("li");
+    const b = el("button", "zeile");
+    b.type = "button";
+    b.setAttribute("aria-current", i === S.sel ? "true" : "false");
+    b.append(el("span", "nr", k.nr));
+    const t = el("span", "txt");
+    t.append(el("span", "tl", k.titel || "Ohne Titel"));
+    t.append(el("span", "thema-name",
+                (k.thema || "ohne Thema").replace("LOECHER", "LÖCHER")));
+    b.append(t);
+    b.onclick = () => { S.sel = i; alles(); };
+    b.draggable = true;
+    b.dataset.pos = i;
+    b._karte = k;
+    b.append(el("span", "griff"));
+    const weg = el("button", "weg", "\u00d7");
+    weg.type = "button";
+    weg.title = `Karte ${k.nr} löschen`;
+    weg.setAttribute("aria-label", `Karte ${k.nr} „${k.titel}“ löschen`);
+    weg.onclick = ev => { ev.stopPropagation(); loeschen(S.karten.indexOf(k)); };
+    li.append(b, weg); ol.append(li);
+  }
+}
+
+/* ---------- Formular ---------- */
+function feld(id, label, hilfe, wert, mehrzeilig, zeilen){
+  const d = el("div", "feld");
+  const l = el("label", null, label); l.htmlFor = id;
+  if (hilfe) l.append(el("span", "hilfe", " – " + hilfe));
+  const inp = mehrzeilig ? el("textarea") : el("input");
+  inp.id = id; inp.value = wert || "";
+  if (mehrzeilig) inp.rows = zeilen || 4;
+  d.append(l, inp);
+  if (mehrzeilig){ const z = el("div", "zaehler"); d.append(z); }
+  return d;
+}
+
+function formZeichnen(){
+  const f = $("#form"); f.innerHTML = "";
+  const k = S.karten[S.sel];
+  if (!k){
+    f.append(el("p", "leer", "Keine Karte ausgewählt. Links eine Karte anklicken oder eine neue hinzufügen."));
+    return;
+  }
+  const h = el("h2", null, "Karte " + k.nr + " ");
+  h.append(el("em", null, "von " + S.karten.length));
+  f.append(h);
+
+  const dTh = el("div", "feld");
+  const lTh = el("label", null, "Thema"); lTh.htmlFor = "f-thema";
+  lTh.append(el("span", "hilfe", " – bestimmt Reihenfolge und Nummernblock"));
+  const sel = el("select"); sel.id = "f-thema";
+  S.themen.forEach(t => { const o = el("option", null, t.replace("LOECHER","LÖCHER"));
+    o.value = t; if (t === k.thema) o.selected = true; sel.append(o); });
+  dTh.append(lTh, sel); f.append(dTh);
+
+  f.append(feld("f-titel", "Titel", "kurz, steht groß auf der Karte", k.titel));
+  f.append(feld("f-text", "Fakt", "zwei bis drei Sätze, ohne die anderen Karten verständlich",
+                k.text, true, 6));
+  f.append(feld("f-nach", "Mehr dazu", "Zusatz für Rückfragen, muss ebenfalls für sich stehen",
+                k.nachschlag, true, 4));
+
+  const w = el("div", "werkzeuge");
+  const mk = (txt, cls, fn, aus) => { const b = el("button", "knopf" + (cls ? " " + cls : ""), txt);
+    b.type = "button"; b.onclick = fn; b.disabled = !!aus; w.append(b); return b; };
+  mk("Nach oben",   "", () => schieben(-1), S.sel === 0);
+  mk("Nach unten",  "", () => schieben(1),  S.sel === S.karten.length - 1);
+  mk("Duplizieren", "", duplizieren);
+  mk("Löschen", "gefahr", loeschen);
+  f.append(w);
+
+  const bind = (id, schluessel) => {
+    const n = document.getElementById(id);
+    n.addEventListener("input", () => {
+      k[schluessel] = n.value;
+      schmutzig();
+      zaehlerAktualisieren();
+      vorschau();
+      listeZeichnen();
+    });
+  };
+  bind("f-titel", "titel"); bind("f-text", "text"); bind("f-nach", "nachschlag");
+  sel.addEventListener("change", () => { k.thema = sel.value; schmutzig(); alles(); });
+  zaehlerAktualisieren();
+}
+
+function zaehlerAktualisieren(){
+  [["f-text", 265], ["f-nach", 170]].forEach(([id, weich]) => {
+    const n = document.getElementById(id); if (!n) return;
+    const z = n.parentElement.querySelector(".zaehler");
+    const l = roh(n.value).length;
+    z.textContent = l + " Zeichen" + (l > weich ? " · länger als üblich" : "");
+    z.style.color = l > weich ? "var(--gelb)" : "";
+  });
+}
+
+/* ---------- Bearbeiten ---------- */
+function schieben(d){
+  const i = S.sel, j = i + d;
+  if (j < 0 || j >= S.karten.length) return;
+  [S.karten[i], S.karten[j]] = [S.karten[j], S.karten[i]];
+  S.sel = j; nummerieren(); schmutzig(); alles();
+}
+function duplizieren(){
+  const k = S.karten[S.sel];
+  S.karten.splice(S.sel + 1, 0, {...k, titel: k.titel + " (Kopie)"});
+  S.sel += 1; nummerieren(); schmutzig(); alles();
+}
+function loeschen(index){
+  const i = index === undefined ? S.sel : index;
+  const k = S.karten[i];
+  if (!k) return;
+  if (!confirm(`Karte ${k.nr} „${k.titel}“ löschen? Die folgenden Karten rücken auf.`)) return;
+  S.karten.splice(i, 1);
+  // Auswahl mitziehen: gelöschte Karte -> gleiche Position, sonst Abstand halten
+  S.sel = S.sel > i ? S.sel - 1 : S.sel;
+  S.sel = Math.max(0, Math.min(S.sel, S.karten.length - 1));
+  nummerieren(); schmutzig(); alles();
+  status(`Karte „${k.titel}“ gelöscht. Noch ${S.karten.length} Karten.`);
+}
+function sortieren(){
+  const gemerkt = S.karten[S.sel];
+  const rang = {};
+  S.themen.forEach((t, i) => { rang[t] = i; });
+  // stabil: innerhalb eines Themas bleibt die Reihenfolge erhalten
+  S.karten.sort((a, b) => (rang[a.thema] === undefined ? 999 : rang[a.thema])
+                        - (rang[b.thema] === undefined ? 999 : rang[b.thema]));
+  nummerieren();
+  if (gemerkt) S.sel = S.karten.indexOf(gemerkt);
+  schmutzig(); alles();
+  const bloecke = S.themen
+    .map(t => { const n = S.karten.filter(k => k.thema === t); return n.length
+        ? `${t.replace("LOECHER","LÖCHER")} ${n[0].nr}–${n[n.length - 1].nr}` : null; })
+    .filter(Boolean);
+  status("Nach Themen sortiert und neu durchnummeriert: " + bloecke.join(", ") + ".");
+}
+
+function neu(){
+  S.karten.push({nr: 0, thema: S.thema || S.themen[0], titel: "Neue Karte",
+                 text: "", nachschlag: ""});
+  S.sel = S.karten.length - 1;
+  S.suche = ""; $("#suche").value = "";
+  nummerieren(); schmutzig(); alles();
+  const t = document.getElementById("f-titel"); if (t){ t.focus(); t.select(); }
+}
+
+/* ---------- Vorschau in echter Groesse ---------- */
+function leisteZeichnen(){
+  const breite = FORMATE[S.fmt].quer ? 148.5 : 105;
+  const l = $("#leiste"); l.innerHTML = "";
+  l.style.width = breite + "mm";
+  for (let mm = 0; mm <= breite; mm += 5){
+    const s = el("i", "strich" + (mm % 10 === 0 ? " zehn" : ""));
+    s.style.left = mm + "mm"; l.append(s);
+    if (mm % 20 === 0 && mm < breite - 8){
+      const z = el("span", "zahl", mm); z.style.left = mm + "mm"; l.append(z);
+    }
+  }
+}
+
+// Baut eine Karte genau so auf wie build_cards.py
+// seite: null = einseitig, "vorne" = nur Titel, "hinten" = Text
+function kartenHtml(k, fmt, seite){
+  const f = FORMATE[fmt];
+  const lang = (k.titel || "").length > f.titel_lang ? " long" : "";
+  const thema = esc((k.thema || "").replace("LOECHER", "LÖCHER"));
+  const kopf = b => `<div class="card-head"><div class="thema">${b || thema}</div>`
+                  + `<div class="nummer">${k.nr}</div></div>`;
+
+  if (seite === "vorne"){
+    return `
+    <div class="card vorne" data-nr="${k.nr}"
+         data-max="${f.maxVorne}" data-min="${f.minVorne}">
+      ${kopf()}
+      <div class="titel${lang}">${inhalt(k.titel || "")}</div>
+      <div class="card-foot">bitte wenden</div>
+    </div>`;
+  }
+  const mehr = S.zusatz
+    ? `<div class="mehr"><div class="mehr-label">Mehr dazu</div>`
+      + `<div class="nachschlag">${inhalt(k.nachschlag || "")}</div></div>` : "";
+  const fuss = seite === "hinten" ? thema
+             : `${esc(S.meta.fusszeile || "Faktenkarte")} ${k.nr} / ${S.karten.length}`;
+  return `
+    <div class="card${seite === "hinten" ? " hinten" : ""}" data-nr="${k.nr}">
+      ${kopf(seite === "hinten" ? "Antwort" : null)}
+      <div class="titel${lang}">${inhalt(k.titel || "")}</div>
+      <div class="fakt ${stufe(k.text || "")}">${inhalt(k.text || "")}</div>
+      ${mehr}
+      <div class="card-foot">${fuss}</div>
+    </div>`;
+}
+
+function grenzen(fmt){
+  const f = FORMATE[fmt];
+  return {minText: f.minText, maxText: f.maxText, minTitel: f.minTitel};
+}
+
+function vorschau(){
+  const k = S.karten[S.sel], st = $("#stapel");
+  if (!k){ st.innerHTML = ""; anzeigen(null); return; }
+  const blatt = (label, seite) =>
+    `<div class="seite">${label ? `<span class="seitenlabel">${label}</span>` : ""}`
+    + `<div class="buehne f-${S.fmt}">${kartenHtml(k, S.fmt, seite)}</div></div>`;
+  st.innerHTML = S.duplex
+    ? blatt("Vorderseite", "vorne") + blatt("Rückseite", "hinten")
+    : blatt(null, null);
+  // exakt dieselbe Rechnung wie beim PDF-Bau
+  const bericht = autofit(grenzen(S.fmt));
+  // Im Duplexmodus zaehlt die Textseite - dort steht der Fliesstext
+  anzeigen(bericht[bericht.length - 1] || null);
+}
+
+/* ---------- Drucken ---------- */
+function schnittmarken(f){
+  if (!S.schnitt) return "";
+  let m = "";
+  f.vlinien.forEach(x => {
+    m += `<div class="cut v" style="left:${x}mm"></div>`
+       + `<div class="tick v-top" style="left:${x}mm"></div>`
+       + `<div class="tick v-bottom" style="left:${x}mm"></div>`;
+  });
+  f.hlinien.forEach(y => {
+    m += `<div class="cut h" style="top:${y}mm"></div>`
+       + `<div class="tick h-left" style="top:${y}mm"></div>`
+       + `<div class="tick h-right" style="top:${y}mm"></div>`;
+  });
+  return m;
+}
+
+// Rueckseiten fuers Wenden an der langen Kante zeilenweise spiegeln
+function spiegeln(zellen, spalten){
+  const out = [];
+  for (let i = 0; i < zellen.length; i += spalten)
+    out.push(...zellen.slice(i, i + spalten).reverse());
+  return out;
+}
+
+function drucken(){
+  const f = FORMATE[S.fmt], n = f.pro_bogen, flaeche = $("#druckflaeche");
+  const leer = '<div class="card"></div>';
+  const quer = f.quer ? " quer" : "";
+  $("#druckseite").textContent = f.quer
+    ? "@page { size: A4 landscape; margin: 0; }" : "@page { size: A4 portrait; margin: 0; }";
+  const bogen = zellen =>
+    `<div class="sheet f-${S.fmt}${quer}">${schnittmarken(f)}${zellen.join("")}</div>`;
+  const boegen = [];
+  for (let i = 0; i < S.karten.length; i += n){
+    const gruppe = S.karten.slice(i, i + n);
+    const fehlt = Array(n - gruppe.length).fill(leer);
+    if (!S.duplex){
+      boegen.push(bogen(gruppe.map(k => kartenHtml(k, S.fmt, null)).concat(fehlt)));
+      continue;
+    }
+    boegen.push(bogen(gruppe.map(k => kartenHtml(k, S.fmt, "vorne")).concat(fehlt)));
+    boegen.push(bogen(spiegeln(gruppe.map(k => kartenHtml(k, S.fmt, "hinten")).concat(fehlt), f.spalten)));
+  }
+  flaeche.innerHTML = boegen.join("");
+
+  // Vorschaukarten kurz aus der Messung nehmen, sonst zaehlen sie doppelt
+  const weg = [...$("#stapel").querySelectorAll(".card[data-nr]")];
+  const merk = weg.map(c => c.dataset.nr);
+  weg.forEach(c => delete c.dataset.nr);
+  const bericht = autofit(grenzen(S.fmt));
+  weg.forEach((c, i) => { c.dataset.nr = merk[i]; });
+
+  const eng = bericht.filter(x => x.eng || x.langwort).map(x => x.nr);
+  status(`${boegen.length} Bögen ${S.fmt.toUpperCase()} vorbereitet`
+       + (S.duplex ? ", Duplex (Wenden an der langen Kante)" : "")
+       + (S.schnitt ? ", mit Schnittlinien" : ", ohne Schnittlinien")
+       + `. Im Druckdialog „Als PDF speichern“ wählen, Skalierung 100 %, `
+       + `Ränder auf „keine“.`
+       + (eng.length ? ` Achtung: Karte ${eng.join(", ")} zu lang.` : ""));
+
+  setTimeout(() => {
+    window.print();
+    setTimeout(() => { flaeche.innerHTML = ""; vorschau(); }, 400);
+  }, 60);
+}
+
+function anzeigen(r){
+  const a = $("#anzeige"), g = LESBAR[S.fmt], f = FORMATE[S.fmt];
+  const wert = a.querySelector(".wert"), lage = a.querySelector(".lage");
+  const von = f.minText, bis = f.maxText, spanne = bis - von;
+
+  // Skala einteilen: zu klein | grenzwertig | gut lesbar
+  a.querySelector(".z-eng").style.flex   = (g.knapp - von) / spanne;
+  a.querySelector(".z-knapp").style.flex = (g.gut - g.knapp) / spanne;
+  a.querySelector(".z-gut").style.flex   = (bis - g.gut) / spanne;
+  $("#skala-min").textContent = von.toFixed(1).replace(".", ",") + " pt";
+  $("#skala-max").textContent = bis.toFixed(1).replace(".", ",") + " pt";
+
+  a.className = "anzeige";
+  if (!r){
+    wert.textContent = "–"; lage.textContent = "";
+    $("#nadel").style.display = "none"; hinweise(null); return;
+  }
+  wert.textContent = r.pt.toFixed(1).replace(".", ",");
+  const stand = r.eng ? "eng" : r.pt >= g.gut ? "gut" : r.pt >= g.knapp ? "knapp" : "eng";
+  a.classList.add(stand);
+  lage.textContent = {gut: "gut lesbar", knapp: "grenzwertig", eng: "zu klein"}[stand];
+  const n = $("#nadel");
+  n.style.display = "";
+  n.style.left = Math.max(0, Math.min(100, (r.pt - von) / spanne * 100)) + "%";
+  hinweise(r, stand);
+}
+
+/* ---------- Hinweise ---------- */
+// Textblock beginnt mit einem Wort, das ohne die Vorderseite ins Leere laeuft
+const HAENGT = /^(Er|Sie|Es|Ihn|Ihr|Ihre|Ihrer|Dieser|Diese|Dieses|Dort|Dabei|Damit|Dadurch|Deshalb|Trotzdem|Dasselbe|Derselbe|Dieselbe)\b/;
+
+function hinweise(r, stand){
+  const u = $("#hinweise"); u.innerHTML = "";
+  const k = S.karten[S.sel];
+  const sag = (txt, cls) => u.append(el("li", cls, txt));
+  if (!k) return;
+
+  if (!String(k.titel || "").trim()) sag("Der Titel fehlt.", "fehler");
+  if (!String(k.text || "").trim())  sag("Der Fakt fehlt.", "fehler");
+  if (S.zusatz && !String(k.nachschlag || "").trim())
+    sag("„Mehr dazu“ ist leer – der Absatz bleibt auf der Karte weg.", "warn");
+
+  if (r && r.eng)
+    sag(`Der Text passt selbst bei ${r.pt.toFixed(1).replace(".",",")} pt nicht auf die Karte. Kürzen.`, "fehler");
+  else if (stand === "knapp")
+    sag("Im Halbdunkel grenzwertig. Kürzen, A6 wählen oder „Mehr dazu“ abschalten.", "warn");
+  else if (stand === "eng")
+    sag("Zum Vorlesen unter Rotlicht zu klein.", "fehler");
+  else if (stand === "gut")
+    sag("Größe reicht zum Vorlesen.", "ok");
+
+  if (r && r.langwort){
+    const w = r.langwort;
+    const kurz = w.length > 26 ? w.slice(0, 26) + "…" : w;
+    sag(`Das Wort „${kurz}“ (${w.length} Zeichen) ist breiter als die Karte `
+      + `und wird mitten im Wort umbrochen. Kürzeres Wort wählen – oder mit `
+      + `einem bedingten Trennstrich (Windows: Alt + 0173) selbst festlegen, `
+      + `wo getrennt wird.`, "fehler");
+  }
+
+  [["Fakt", k.text], ["„Mehr dazu“", k.nachschlag]].forEach(([name, t]) => {
+    if (t && HAENGT.test(t.trim()))
+      sag(`${name} beginnt mit „${t.trim().split(/\s+/)[0]}“ – jede Karte wird einzeln vorgelesen, das Wort braucht sein Bezugswort auf derselben Karte.`, "warn");
+  });
+
+  const doppelt = S.karten.filter((x, i) => i !== S.sel &&
+    (x.titel || "").trim().toLowerCase() === (k.titel || "").trim().toLowerCase());
+  if (doppelt.length) sag(`Titel doppelt – auch auf Karte ${doppelt.map(d => d.nr).join(", ")}.`, "warn");
+}
+
+/* ---------- Laden und Sichern ---------- */
+function sichern(){
+  nummerieren();
+  const inhalt = JSON.stringify({meta: S.meta, themen: S.themen, karten: S.karten}, null, 2) + "\n";
+  const a = el("a");
+  a.href = URL.createObjectURL(new Blob([inhalt], {type: "application/json"}));
+  a.download = "facts.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+  schmutzig(false);
+  status(`facts.json gesichert – ${S.karten.length} `
+       + `${S.karten.length === 1 ? "Karte" : "Karten"}. `
+       + `Datei über die alte legen, dann build_cards.py laufen lassen.`);
+}
+
+function laden(datei){
+  const leser = new FileReader();
+  leser.onload = () => {
+    let d;
+    try { d = JSON.parse(leser.result); }
+    catch(e){ status("Die Datei ist kein gültiges JSON: " + e.message, true); return; }
+    if (!Array.isArray(d.karten) || !Array.isArray(d.themen)){
+      status("In der Datei fehlen die Felder „karten“ und „themen“. "
+           + "Erwartet wird eine facts.json wie im Projektordner.", true); return;
+    }
+    S.karten = d.karten.map(k => ({nr: 0, thema: k.thema || "", titel: k.titel || "",
+                                   text: k.text || "", nachschlag: k.nachschlag || ""}));
+    S.themen = d.themen.slice();
+    S.meta = d.meta || S.meta;
+    S.sel = 0; S.thema = ""; S.suche = "";
+    $("#suche").value = "";
+    nummerieren(); schmutzig(false); themenfilter(); alles();
+    status(`${datei.name} geladen: ${S.karten.length} `
+         + `${S.karten.length === 1 ? "Karte" : "Karten"}, ${S.themen.length} `
+         + `${S.themen.length === 1 ? "Thema" : "Themen"}.`);
+  };
+  leser.onerror = () => status("Die Datei konnte nicht gelesen werden.", true);
+  leser.readAsText(datei, "utf-8");
+}
+
+/* ---------- Aufbau ---------- */
+function themenfilter(){
+  const s = $("#themenfilter"); s.innerHTML = "";
+  const alle = el("option", null, "Alle Themen"); alle.value = ""; s.append(alle);
+  S.themen.forEach(t => { const o = el("option", null, t.replace("LOECHER","LÖCHER"));
+    o.value = t; s.append(o); });
+  s.value = S.thema;
+}
+
+function alles(){ bilanz(); listeZeichnen(); formZeichnen(); vorschau(); }
+
+$("#suche").addEventListener("input", e => { S.suche = e.target.value; listeZeichnen(); });
+$("#themenfilter").addEventListener("change", e => { S.thema = e.target.value; listeZeichnen(); });
+$("#neu").onclick = neu;
+$("#sortieren").onclick = sortieren;
+$("#drucken").onclick = drucken;
+$("#sichern").onclick = sichern;
+$("#laden").onclick = () => $("#datei").click();
+$("#datei").addEventListener("change", e => { if (e.target.files[0]) laden(e.target.files[0]); e.target.value = ""; });
+
+// Datei aufs Fenster ziehen geht auch
+let ziehZaehler = 0;
+const hatDatei = e => e.dataTransfer && [...e.dataTransfer.types].indexOf("Files") >= 0;
+addEventListener("dragenter", e => {
+  if (!hatDatei(e)) return;                  // internes Umsortieren, kein Dateiimport
+  e.preventDefault();
+  if (++ziehZaehler === 1) document.body.classList.add("ziehen");
+});
+addEventListener("dragover", e => { if (hatDatei(e)) e.preventDefault(); });
+addEventListener("dragleave", e => { if (!hatDatei(e)) return;
+  if (--ziehZaehler <= 0){ ziehZaehler = 0; document.body.classList.remove("ziehen"); } });
+addEventListener("drop", e => {
+  if (!hatDatei(e)) return;
+  e.preventDefault(); ziehZaehler = 0; document.body.classList.remove("ziehen");
+  const f = e.dataTransfer.files[0];
+  if (!f) return;
+  if (!/\.json$/i.test(f.name)){ status(`„${f.name}“ ist keine JSON-Datei.`, true); return; }
+  laden(f);
+});
+$("#zusatz").addEventListener("change", e => { S.zusatz = e.target.checked; vorschau(); });
+$("#schnitt").addEventListener("change", e => { S.schnitt = e.target.checked; });
+$("#duplex").addEventListener("change", e => { S.duplex = e.target.checked; vorschau(); });
+$("#formatwahl").addEventListener("click", e => {
+  const b = e.target.closest("button[data-fmt]"); if (!b) return;
+  S.fmt = b.dataset.fmt;
+  [...e.currentTarget.children].forEach(x => x.setAttribute("aria-pressed", x === b));
+  leisteZeichnen();
+  vorschau();
+});
+document.addEventListener("keydown", e => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s"){ e.preventDefault(); sichern(); }
+});
+window.addEventListener("beforeunload", e => { if (S.dirty){ e.preventDefault(); e.returnValue = ""; } });
+
+nummerieren();
+listeAnbinden();
+themenfilter();
+leisteZeichnen();
+alles();
+
+// Ab hier laeuft alles. Die Startmeldung wird nur ausgeblendet, nicht
+// entfernt - so kann sie bei einem spaeteren Fehler wieder auftauchen.
+document.getElementById("startmeldung").style.display = "none";
+</script>
+</body>
+</html>

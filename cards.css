@@ -1,0 +1,170 @@
+/* ============================================================
+   Astronomie-Faktenkarten – Drucklayout
+   Zwei Formate aus derselben Datenquelle:
+     .f-a6  105 x 148,5  mm   4 Karten pro A4-Bogen (2 x 2)
+     .f-a7  105 x  74,25 mm   8 Karten pro A4-Bogen (2 x 4)
+   Rein Schwarz/Weiss: Unter Rotlicht bleiben nur neutrale
+   Graustufen unterscheidbar, Farben nicht.
+   ============================================================ */
+
+/* Standard ist Hochformat. Fuer Querformate ergaenzt build_cards.py
+   bzw. der Editor eine eigene @page-Regel. */
+@page { size: A4 portrait; margin: 0; }
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  background: #fff; color: #000;
+  font-family: "DejaVu Sans", "Inter", "Source Sans 3", Arial, sans-serif;
+  line-height: 1.3;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Bogen ---------- */
+
+.sheet {
+  position: relative;
+  width: 210mm; height: 297mm;
+  display: grid;
+  page-break-after: always;
+  overflow: hidden;
+}
+.sheet:last-child { page-break-after: auto; }
+
+.sheet.f-a6 { grid-template-columns: 105mm 105mm; grid-template-rows: 148.5mm 148.5mm; }
+.sheet.f-a7 { grid-template-columns: 105mm 105mm; grid-template-rows: repeat(4, 74.25mm); }
+
+/* A6 quer: der Bogen selbst liegt im Querformat */
+.sheet.quer { width: 297mm; height: 210mm; }
+.sheet.f-a6q { grid-template-columns: 148.5mm 148.5mm; grid-template-rows: 105mm 105mm; }
+
+/* Schnitthilfen. Als Rahmen gezeichnet, nicht als farbige Flaeche:
+   Hintergrundfarben druckt der Browser nur, wenn im Druckdialog
+   "Hintergrundgrafiken" angehakt ist. Rahmen kommen immer mit. */
+.cut { position: absolute; z-index: 5; }
+.cut.v { top: 0; bottom: 0; width: 0; margin-left: -0.1mm;
+         border-left: 0.2mm solid #8c8c8c; }
+.cut.h { left: 0; right: 0; height: 0; margin-top: -0.1mm;
+         border-top: 0.2mm solid #8c8c8c; }
+
+.tick { position: absolute; z-index: 6; }
+.tick.v-top    { top: 0;    width: 0; height: 5mm; margin-left: -0.17mm;
+                 border-left: 0.35mm solid #000; }
+.tick.v-bottom { bottom: 0; width: 0; height: 5mm; margin-left: -0.17mm;
+                 border-left: 0.35mm solid #000; }
+.tick.h-left   { left: 0;   height: 0; width: 5mm; margin-top: -0.17mm;
+                 border-top: 0.35mm solid #000; }
+.tick.h-right  { right: 0;  height: 0; width: 5mm; margin-top: -0.17mm;
+                 border-top: 0.35mm solid #000; }
+
+/* ---------- Karte, gemeinsame Grundlage ---------- */
+
+.card { position: relative; display: flex; flex-direction: column; overflow: hidden; }
+
+.card-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  border-bottom: 0.45mm solid #000;
+}
+.thema { font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; line-height: 1.2; }
+.nummer { font-weight: 700; line-height: 0.85; letter-spacing: -0.02em; white-space: nowrap; }
+.titel { font-weight: 700; letter-spacing: -0.01em; hyphens: manual;
+         overflow-wrap: break-word; }
+.fakt, .nachschlag { hyphens: manual; overflow-wrap: break-word; text-align: left; }
+sup { font-size: 0.62em; line-height: 0; vertical-align: 0.5em; }
+
+.card-foot {
+  margin-top: auto; line-height: 1.3;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  color: #555; border-top: 0.2mm solid #bbb;
+}
+.mehr { margin-top: auto; }
+.mehr-label { font-weight: 700; line-height: 1.25; letter-spacing: 0.14em; text-transform: uppercase; color: #555; }
+
+/* ---------- Duplex: Titelseite und Textseite ---------- */
+/* Vorderseite zeigt nur Thema, Nummer und Titel - der Titel steht gross
+   in der Kartenmitte. Die Antwort steht auf der Rueckseite. */
+.card.vorne .titel { margin: auto 0; }
+.card.vorne .card-foot { color: #777; }
+.card.hinten .titel { color: #333; }
+
+/* ---------- Format A6 ---------- */
+
+.f-a6 .card { width: 105mm; height: 148.5mm; padding: 10mm 10mm 10mm 10mm; }
+.f-a6 .card-head { padding-bottom: 2.5mm; margin-bottom: 5mm; gap: 4mm; }
+.f-a6 .thema  { font-size: 8.5pt; }
+.f-a6 .nummer { font-size: 30pt; }
+.f-a6 .titel  { font-size: 21pt; line-height: 1.13; margin: 0 0 5mm 0; }
+.f-a6 .titel.long { font-size: 18pt; }
+.f-a6 .fakt.s1 { font-size: 18.5pt; line-height: 1.42; }
+.f-a6 .fakt.s2 { font-size: 17pt;   line-height: 1.40; }
+.f-a6 .fakt.s3 { font-size: 15.5pt; line-height: 1.38; }
+.f-a6 .fakt.s4 { font-size: 14pt;   line-height: 1.36; }
+.f-a6 .card-foot { padding-top: 3.5mm; font-size: 7.5pt; }
+.f-a6 .card.vorne .titel { font-size: 30pt; line-height: 1.1; }
+.f-a6 .card.hinten .titel { font-size: 12pt; line-height: 1.2; margin-bottom: 4mm; }
+.f-a6 .mehr { padding-top: 5mm; margin-bottom: 4mm; border-top: 0.2mm solid #bbb; }
+.f-a6 .mehr-label { font-size: 7.5pt; margin-bottom: 2mm; }
+.f-a6 .nachschlag { font-size: 13pt; line-height: 1.35; }
+
+/* ---------- Format A6 quer ---------- */
+/* Gleiche Flaeche wie A6 hoch, aber eine deutlich breitere Textspalte:
+   128,5 statt 85 mm. Das ergibt weniger Zeilenumbrueche. */
+
+.f-a6q .card { width: 148.5mm; height: 105mm; padding: 8mm 10mm 6.5mm 10mm; }
+.f-a6q .card-head { padding-bottom: 1.8mm; margin-bottom: 3.5mm; gap: 4mm; }
+.f-a6q .thema  { font-size: 8.5pt; }
+.f-a6q .nummer { font-size: 23pt; }
+.f-a6q .titel  { font-size: 18pt; line-height: 1.12; margin: 0 0 3.5mm 0; }
+.f-a6q .titel.long { font-size: 16pt; }
+.f-a6q .fakt.s1 { font-size: 18pt;   line-height: 1.40; }
+.f-a6q .fakt.s2 { font-size: 16.5pt; line-height: 1.38; }
+.f-a6q .fakt.s3 { font-size: 15pt;   line-height: 1.36; }
+.f-a6q .fakt.s4 { font-size: 14pt;   line-height: 1.34; }
+.f-a6q .card-foot { padding-top: 2.5mm; font-size: 7pt; }
+.f-a6q .mehr { padding-top: 3mm; margin-bottom: 2mm; border-top: 0.2mm solid #bbb; }
+.f-a6q .mehr-label { font-size: 7pt; margin-bottom: 1.4mm; }
+.f-a6q .nachschlag { font-size: 11.5pt; line-height: 1.34; }
+.f-a6q .card.vorne .titel { font-size: 28pt; line-height: 1.1; }
+.f-a6q .card.hinten .titel { font-size: 12pt; line-height: 1.2; margin-bottom: 3.5mm; }
+
+/* ---------- Format A7 ---------- */
+/* Halbe Flaeche gegenueber A6 – Schriftgrade entsprechend kleiner.
+   Die Fusszeile entfaellt, Titel und Text ruecken enger zusammen. */
+
+.f-a7 .card { width: 105mm; height: 74.25mm; padding: 5.5mm 7mm 4.5mm 7mm; }
+.f-a7 .card-head { padding-bottom: 1.3mm; margin-bottom: 2.4mm; gap: 3mm; }
+.f-a7 .thema  { font-size: 6.2pt; }
+.f-a7 .nummer { font-size: 16pt; }
+.f-a7 .titel  { font-size: 12pt; line-height: 1.12; margin: 0 0 2.2mm 0; }
+.f-a7 .titel.long { font-size: 10.5pt; }
+.f-a7 .fakt.s1 { font-size: 11.5pt; line-height: 1.33; }
+.f-a7 .fakt.s2 { font-size: 10.7pt; line-height: 1.31; }
+.f-a7 .fakt.s3 { font-size: 9.9pt;  line-height: 1.29; }
+.f-a7 .fakt.s4 { font-size: 9.2pt;  line-height: 1.27; }
+.f-a7 .card-foot { display: none; }
+.f-a7 .card.vorne .titel { font-size: 19pt; line-height: 1.1; }
+.f-a7 .card.vorne .card-foot { display: block; padding-top: 2mm; font-size: 6pt; }
+.f-a7 .card.hinten .titel { font-size: 9.5pt; line-height: 1.2; margin-bottom: 2mm; }
+.f-a7 .mehr { padding-top: 2.4mm; margin-bottom: 1mm; border-top: 0.2mm solid #bbb; }
+.f-a7 .mehr-label { font-size: 5.6pt; margin-bottom: 1mm; }
+.f-a7 .nachschlag { font-size: 9.2pt; line-height: 1.28; }
+
+/* ---------- Index ---------- */
+
+.index-sheet { width: 210mm; height: 297mm; padding: 15mm 15mm 12mm 15mm; page-break-after: always; }
+.index-sheet:last-child { page-break-after: auto; }
+.index-sheet h1 { font-size: 16pt; margin: 0 0 2mm 0; letter-spacing: -0.01em; }
+.index-sheet .sub { font-size: 8.5pt; color: #555; margin-bottom: 6mm;
+                    text-transform: uppercase; letter-spacing: 0.08em; }
+.index-sheet h2 { font-size: 10pt; letter-spacing: 0.1em; text-transform: uppercase;
+                  margin: 5mm 0 1.5mm 0; padding-bottom: 1mm;
+                  border-bottom: 0.4mm solid #000; break-after: avoid;
+                  display: flex; justify-content: space-between; align-items: baseline; }
+.index-sheet h2 .spanne { font-weight: 400; letter-spacing: 0.04em; color: #555;
+                          text-transform: none; font-size: 9pt; }
+.index-row { display: flex; gap: 3mm; font-size: 9.5pt; line-height: 1.55; break-inside: avoid; }
+.index-row .n { font-weight: 700; min-width: 8mm; text-align: right; }
+.index-cols { column-count: 2; column-gap: 10mm; }
