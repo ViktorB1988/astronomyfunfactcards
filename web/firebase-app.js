@@ -193,7 +193,7 @@ function start(){
       return;
     }
     E.setDirty(true);
-    E.status(`Die Datenbank ist leer. „In die Datenbank speichern“ legt die `
+    E.status(`Die Datenbank ist leer. „Speichern“ legt die `
            + `${E.S.cards.length} Karten aus facts.json dort an.`);
   }
 
@@ -206,18 +206,35 @@ function start(){
     E.status(t, true);
   }
 
-  /* ---------- Writing ---------- */
-  bStore.onclick = async () => {
+  /* ---------- Writing ----------
+     Two ways in: the button, and reordering or deleting, which write
+     through at once. Both end up here. */
+  let saving = false;
+  let queued = false;
+
+  async function save(auto){
     if (!mayWrite){ E.status("Zum Speichern anmelden.", true); return; }
-    const state = E.getState();
+
+    /* An immediate write can arrive while the previous one is still in
+       flight - drag two rows in quick succession and the second lands
+       mid-commit. Do not interleave batches: note it down and run once
+       more afterwards, with the state as it is by then. */
+    if (saving){ queued = true; return; }
+    saving = true;
     bStore.disabled = true;
     bStore.textContent = "speichert …";
     try {
+      const state = E.getState();
       const n = await push(state);
       E.setDirty(false);
-      E.status(n ? `${n} ${n === 1 ? "Änderung" : "Änderungen"} gespeichert. `
-                 + `${state.cards.length} Karten in der Datenbank.`
-                 : "Nichts zu speichern, alles ist schon aktuell.");
+      if (auto){
+        E.status(n ? `Gespeichert (${n} ${n === 1 ? "Änderung" : "Änderungen"}).`
+                   : "Gespeichert.");
+      } else {
+        E.status(n ? `${n} ${n === 1 ? "Änderung" : "Änderungen"} gespeichert. `
+                   + `${state.cards.length} Karten in der Datenbank.`
+                   : "Nichts zu speichern, alles ist schon aktuell.");
+      }
       if (pending){ const p = pending; pending = null; E.setState(p); }
     } catch (e){
       const t = e.code === "permission-denied"
@@ -226,10 +243,18 @@ function start(){
         : "Speichern fehlgeschlagen: " + (e.code || e.message);
       E.status(t, true);
     } finally {
+      saving = false;
       bStore.disabled = false;
-      bStore.textContent = "In die Datenbank speichern";
+      bStore.textContent = "Speichern";
+      if (queued){ queued = false; save(auto); }
     }
-  };
+  }
+
+  bStore.onclick = () => save(false);
+
+  /* Hand the editor both ways in. From here on the form shows a
+     "Speichern" button, and reordering and deleting write themselves. */
+  E.setDatabase({save: () => save(false), auto: () => save(true)});
 
   /* Diff, not a blanket rewrite. One batch holds at most 500 operations,
      hence the chunking - 170 cards fit in one, but the limit should not

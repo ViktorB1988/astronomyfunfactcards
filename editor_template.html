@@ -361,7 +361,7 @@ body.dragover::after{
     <button class="btn" id="print">PDF drucken</button>
     <button class="btn primary" id="save">facts.json sichern</button>
     <button class="btn" id="signin" hidden>Anmelden</button>
-    <button class="btn" id="store" hidden>In die Datenbank speichern</button>
+    <button class="btn" id="store" hidden>Speichern</button>
   </div>
 </header>
 
@@ -496,6 +496,25 @@ function setWritable(on){
   redrawAll();
 }
 
+/* ---------- Database hook ----------
+   Offline there is none: `store` stays null, the save button in the form
+   does not appear, and reordering only takes effect locally - there the
+   download is what preserves it. The online version hooks in here. */
+let store = null;        // explicit save (button)
+let storeNow = null;     // write through at once after a structural change
+
+function setDatabase(h){
+  store = h && h.save;
+  storeNow = h && h.auto;
+  redrawAll();
+}
+
+/* Reordering and deleting go into the database immediately. Both are
+   decisions, not intermediate states - unlike a half-typed sentence, which
+   should stay local until it is saved. Whoever changes the order and then
+   closes the browser expects to find it that way next time. */
+function structureChanged(){ if (storeNow) storeNow(); }
+
 const $  = s => document.querySelector(s);
 const el = (t, c, txt) => { const n = document.createElement(t);
   if (c) n.className = c; if (txt != null) n.textContent = txt; return n; };
@@ -589,6 +608,7 @@ function bindList(){
     dragFrom = null;
     renumber(); setDirty(); redrawAll();
     status(`„${card.title}“ ist jetzt Karte ${card.no}.`);
+    structureChanged();
   });
 }
 
@@ -666,6 +686,9 @@ function drawForm(){
   const w = el("div", "tools");
   const mk = (txt, cls, fn, off) => { const b = el("button", "btn" + (cls ? " " + cls : ""), txt);
     b.type = "button"; b.onclick = fn; b.disabled = !!off; w.append(b); return b; };
+  // Only online, and only where it is needed: reordering and deleting write
+  // themselves through, so this button is really for the typed text.
+  if (store) mk("Speichern", "primary", () => store());
   mk("Nach oben",   "", () => move(-1), S.sel === 0);
   mk("Nach unten",  "", () => move(1),  S.sel === S.cards.length - 1);
   mk("Duplizieren", "", duplicate);
@@ -712,6 +735,7 @@ function move(d){
   if (j < 0 || j >= S.cards.length) return;
   [S.cards[i], S.cards[j]] = [S.cards[j], S.cards[i]];
   S.sel = j; renumber(); setDirty(); redrawAll();
+  structureChanged();
 }
 function duplicate(){
   if (!requireWrite()) return;
@@ -732,6 +756,7 @@ function removeCard(index){
   S.sel = Math.max(0, Math.min(S.sel, S.cards.length - 1));
   renumber(); setDirty(); redrawAll();
   status(`Karte „${k.title}“ gelöscht. Noch ${S.cards.length} Karten.`);
+  structureChanged();
 }
 function sortByTheme(){
   if (!requireWrite()) return;
@@ -749,6 +774,7 @@ function sortByTheme(){
         ? `${t.replace("LOECHER","LÖCHER")} ${n[0].no}–${n[n.length - 1].no}` : null; })
     .filter(Boolean);
   status("Nach Themen sortiert und neu durchnummeriert: " + blocks.join(", ") + ".");
+  structureChanged();
 }
 
 function addCard(){
@@ -1078,7 +1104,7 @@ redrawAll();
    exactly as before. */
 window.Editor = {
   S, status, redrawAll, setDirty, renumber, fillThemeFilter, newId,
-  setWritable,
+  setWritable, setDatabase,
   seedData: DATA,
 
   /* The state as it belongs in the database: with an id and an explicit

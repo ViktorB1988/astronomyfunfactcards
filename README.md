@@ -163,8 +163,13 @@ Konto – der Link lässt sich also einfach weitergeben, wenn jemand einen
 Satz Karten ausdrucken soll. **Ändern kann nur, wer angemeldet und als
 Redaktion eingetragen ist.**
 
-Wer online etwas ändert, drückt **„In die Datenbank speichern"**
-(oder Strg+S). Danach sehen alle anderen den neuen Stand sofort.
+Wer online etwas ändert, drückt **„Speichern"** (oder Strg+S) – der Knopf
+steht oben rechts und noch einmal unter jeder Karte. Danach sehen alle
+anderen den neuen Stand sofort.
+
+**Umsortieren und Löschen speichern sich selbst.** Beides ist eine
+Entscheidung, kein Zwischenstand – es geht sofort in die Datenbank. Nur
+getippter Text wartet auf „Speichern".
 
 ### Einmalige Einrichtung
 
@@ -287,7 +292,7 @@ bis zwei Minuten. Danach steht die Seite unter
 
 #### C · Datenbank befüllen
 
-**9.** Seite aufrufen → **Anmelden** → **„In die Datenbank speichern"**.
+**9.** Seite aufrufen → **Anmelden** → **„Speichern"**.
 
 Die Seite startet mit dem Stand aus `facts.json` und meldet
 „Datenbank leer". Der Klick legt die 170 Karten einmalig an. **Ab jetzt
@@ -307,17 +312,81 @@ Alle Meldungen erscheinen unten in der Mitte der Seite.
 | Anmeldefenster geht auf und sofort wieder zu | Pop-up-Blocker |
 | Startmeldung bleibt stehen | JavaScript blockiert – Seite direkt im Browser öffnen, nicht in einer Vorschau |
 
-### PDFs nach einer Online-Änderung
+## Alltag
 
-Der PDF-Bau liest weiterhin `facts.json`. Den aktuellen Stand holt man
-sich vorher:
+Nach der Einrichtung gibt es im Wesentlichen vier Handgriffe.
+
+### Karten online ändern
+
+Seite aufrufen, **Anmelden**, tippen, **„Speichern"** (oder Strg+S).
+Alle anderen sehen den neuen Stand beim nächsten Laden.
+
+**Reihenfolge ändern und Karten löschen wird sofort geschrieben** – auch
+ohne „Speichern". Wer eine Karte an eine andere Stelle zieht und den
+Browser schließt, findet sie beim nächsten Mal dort wieder.
+
+Gespeichert wird nur, was sich geändert hat. Ändern zwei Leute
+gleichzeitig, bleibt die Arbeit des anderen also erhalten – solange nicht
+beide dieselbe Karte anfassen. Kommt während des Tippens eine fremde
+Änderung herein, wartet sie: es erscheint ein Hinweis, und übernommen
+wird sie erst nach dem eigenen Speichern.
+
+### PDFs neu bauen
+
+Der PDF-Bau liest `facts.json`, nicht die Datenbank. Den aktuellen Stand
+also erst holen:
 
 ```bash
 python3 fetch_facts.py
 python3 build_cards.py
 ```
 
-`fetch_facts.py` braucht keine Anmeldung – Lesen ist öffentlich.
+`fetch_facts.py` braucht keine Anmeldung – Lesen ist öffentlich. Es fragt
+nach, bevor es `facts.json` überschreibt.
+
+### `facts.json` im Repo aktuell halten
+
+Die Datenbank kennt keine Versionsgeschichte: Wer eine Karte löscht und
+speichert, hat sie endgültig gelöscht. Git kennt sie sehr wohl. Deshalb
+lohnt es sich, den geholten Stand hin und wieder mitzucommitten:
+
+```bash
+python3 fetch_facts.py
+git add facts.json && git commit -m "Kartenstand aus der Datenbank" && git push
+```
+
+Das kostet nichts und bringt dreierlei:
+
+- **Sicherung.** Jeder Commit ist ein Wiederherstellungspunkt.
+- **Startbestand.** Aus dieser Datei wird eine leere Datenbank befüllt.
+- **Rückfallebene.** Ist Firestore einmal nicht erreichbar, zeigt die
+  Seite diesen Stand an, statt leer zu bleiben.
+
+Der Push baut die Seite neu – `facts.json` steht in der Auslöserliste des
+Arbeitsablaufs.
+
+### Jemanden zur Redaktion hinzufügen
+
+Nur in der Firebase-Konsole, nicht über die Seite: *Firestore Database* →
+*Daten* → `config` → `editors` → Feld `emails` → *Element hinzufügen* →
+Google-Adresse **klein geschrieben**.
+
+Wirkt sofort; die betreffende Person muss die Seite nur neu laden. Zum
+Entfernen den Eintrag aus dem Array löschen.
+
+> Dass das nicht über die Seite geht, ist Absicht: sonst könnte ein
+> Redaktionskonto stillschweigend weitere Konten eintragen.
+
+### Und offline?
+
+`out/karten-editor.html` gibt es weiterhin – eine einzelne Datei ohne
+Server, Internet und Konto. Sie kennt die Datenbank nicht: Sie enthält
+den Stand aus `facts.json` zum Zeitpunkt des Bauens und sichert per
+Download. Praktisch im Bus, in der Kuppel ohne Empfang, oder wenn jemand
+ohne Google-Konto etwas vorbereiten soll.
+
+Neu bauen mit `python3 build_editor.py` – am besten direkt nach einem
+`fetch_facts.py`, sonst ist der Stand darin veraltet.
 
 ## Karten ändern: der Editor
 
