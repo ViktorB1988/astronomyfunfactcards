@@ -35,13 +35,16 @@ service cloud.firestore {
           && request.auth.token.email.lower() in editors();
     }
 
+    /* hasOnly permits a subset, so documents written before `source`
+       existed still pass - it only forbids fields nobody knows about. */
     function isCard(d) {
-      return d.keys().hasOnly(['pos', 'theme', 'title', 'text', 'more'])
+      return d.keys().hasOnly(['pos', 'theme', 'title', 'text', 'more', 'source'])
           && d.pos is number
           && d.theme is string && d.theme.size() <= 100
           && d.title is string && d.title.size() <= 300
           && d.text is string && d.text.size() <= 4000
-          && d.more is string && d.more.size() <= 4000;
+          && d.more is string && d.more.size() <= 4000
+          && (!('source' in d) || (d.source is string && d.source.size() <= 500));
     }
 
     /* Anyone may read the cards: the page should be shareable so that

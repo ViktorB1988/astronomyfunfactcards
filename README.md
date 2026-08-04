@@ -541,9 +541,13 @@ Alles steht in `facts.json`:
   "theme": "SONNENSYSTEM",
   "title": "Kurzer Titel",
   "text": "Der Fakt, zwei bis drei Sätze, in sich verständlich.",
-  "more": "Ein Satz Zusatzinfo für den Absatz „Mehr dazu\"."
+  "more": "Ein Satz Zusatzinfo für den Absatz „Mehr dazu\".",
+  "source": ""
 }
 ```
+
+`source` ist ein Notizfeld für die Redaktion: woher der Fakt stammt. Es
+erscheint im Editor unter „Mehr dazu", **nicht auf der gedruckten Karte**.
 
 Die `id` bleibt, wie sie ist. Daran wird die Karte beim Einspielen
 wiedererkannt – auch dann, wenn Titel und Text sich geändert haben. Neue

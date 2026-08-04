@@ -64,7 +64,7 @@ lassen, sonst enthalten Editor und Seite einen veralteten Stand.
   "themes": ["SONNENSYSTEM", "..."],
   "cards": [
     { "id": "kmsdl1jave79g39", "no": 1, "theme": "SONNENSYSTEM",
-      "title": "...", "text": "...", "more": "..." }
+      "title": "...", "text": "...", "more": "...", "source": "" }
   ]
 }
 ```
@@ -73,6 +73,9 @@ lassen, sonst enthalten Editor und Seite einen veralteten Stand.
   Datenbank. Nicht von Hand vergeben, nicht ändern: daran wird eine Karte
   beim Einspielen wiedererkannt, auch wenn Titel und Text sich geändert
   haben.
+- `source` ist redaktionell: woher der Fakt stammt. Steht im Editor und
+  in der Datenbank, **nicht auf der gedruckten Karte** – `build_cards.py`
+  liest das Feld gar nicht erst.
 - `theme` **muss** in `themes` vorkommen.
 - Reihenfolge in `themes` bestimmt die Reihenfolge der Karten im Stapel.
 - `no` wird beim Sortieren neu vergeben, nie von Hand pflegen.
@@ -124,6 +127,13 @@ mitgelieferten PDFs. Betrifft PDF *und* Editor.
 davon ab, ob das System ein deutsches Trennwörterbuch mitbringt – Windows
 ja, Linux-Container nein. Sonst wäre die Ausgabe maschinenabhängig.
 Selbst gesetzte bedingte Trennstriche (U+00AD) wirken weiterhin.
+
+**Neue Kartenfelder brauchen eine Regeländerung.** `isCard()` in
+`firestore.rules` zählt die erlaubten Felder mit `hasOnly` auf. Ein Feld,
+das dort fehlt, lässt Firestore beim Speichern abblitzen – die Oberfläche
+meldet dann nur „darf nicht schreiben“, obwohl das Konto alles darf. Die
+geänderten Regeln müssen veröffentlicht werden, sonst nützt der Code
+nichts.
 
 **Der Bogen hat 8 mm Rand, und der muss bleiben.** Kein Bürodrucker
 druckt bis an die Papierkante. Füllt das Layout den Bogen exakt aus,
@@ -247,7 +257,7 @@ schreibt das Speichern danach die Unterschiede statt alles neu.
 
 | Ort | Inhalt |
 |---|---|
-| `cards/<id>` | je Karte ein Dokument: `pos`, `theme`, `title`, `text`, `more` |
+| `cards/<id>` | je Karte ein Dokument: `pos`, `theme`, `title`, `text`, `more`, `source` |
 | `config/meta` | `title`, `footer`, `themes` (Liste, Reihenfolge zählt) |
 | `config/editors` | `emails`: wer schreiben darf. `import`: wem der Einspiel-Knopf gezeigt wird. **Nur von Hand in der Konsole** |
 

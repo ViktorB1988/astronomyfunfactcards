@@ -5,7 +5,9 @@
  * offline editor (a single file without this module) stays untouched.
  *
  * Layout in the database:
- *   cards/<id>       one document per card: pos, theme, title, text, more.
+ *   cards/<id>       one document per card: pos, theme, title, text, more,
+ *                    source. `source` is editorial only - it never reaches
+ *                    the printed card.
  *                    `no` deliberately is not stored - it is derived and
  *                    would touch every document on each reorder. Ordering
  *                    happens through `pos`.
@@ -278,12 +280,15 @@ function start(){
 
     for (const k of state.cards){
       const old = remote.get(k.id);
+      // `source` is compared against "" for documents written before the
+      // field existed - otherwise every one of them would look changed.
       if (old
           && old.pos === k.pos && old.theme === k.theme && old.title === k.title
-          && old.text === k.text && old.more === k.more) continue;
+          && old.text === k.text && old.more === k.more
+          && (old.source || "") === (k.source || "")) continue;
       ops.push(b => b.set(doc(db, "cards", k.id), {
         pos: k.pos, theme: k.theme, title: k.title,
-        text: k.text, more: k.more
+        text: k.text, more: k.more, source: k.source || ""
       }));
     }
 

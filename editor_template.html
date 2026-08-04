@@ -879,6 +879,8 @@ function drawForm(){
                  k.text, true, 6));
   f.append(field("f-more", "Mehr dazu", "Zusatz für Rückfragen, muss ebenfalls für sich stehen",
                  k.more, true, 4));
+  f.append(field("f-source", "Quelle", "woher der Fakt stammt – steht nicht auf der Karte",
+                 k.source));
 
   const w = el("div", "tools");
   const mk = (txt, cls, fn, off) => { const b = el("button", "btn" + (cls ? " " + cls : ""), txt);
@@ -907,6 +909,7 @@ function drawForm(){
     });
   };
   bind("f-title", "title"); bind("f-text", "text"); bind("f-more", "more");
+  bind("f-source", "source");
   sel.addEventListener("change", () => { k.theme = sel.value; setDirty(); redrawAll(); });
 
   // Without write permission, freeze the fields rather than hide them:
@@ -984,7 +987,7 @@ function sortByTheme(){
 function addCard(){
   if (!requireWrite()) return;
   S.cards.push({id: newId(), no: 0, theme: S.theme || S.themes[0],
-                title: "Neue Karte", text: "", more: ""});
+                title: "Neue Karte", text: "", more: "", source: ""});
   S.sel = S.cards.length - 1;
   S.query = ""; $("#search").value = "";
   renumber(); setDirty(); redrawAll();
@@ -1232,7 +1235,8 @@ function saveFile(){
      handle left is the title, and renaming a card would silently split it
      into an old one and a new one. */
   const cards = S.cards.map(k => ({id: k.id, no: k.no, theme: k.theme,
-                                   title: k.title, text: k.text, more: k.more}));
+                                   title: k.title, text: k.text, more: k.more,
+                                   source: k.source || ""}));
   const json = JSON.stringify({meta: S.meta, themes: S.themes, cards}, null, 2) + "\n";
   const a = el("a");
   a.href = URL.createObjectURL(new Blob([json], {type: "application/json"}));
@@ -1262,7 +1266,8 @@ function loadFile(file){
     }
     S.cards = d.cards.map(k => ({id: k.id || newId(), no: 0,
                                  theme: k.theme || "", title: k.title || "",
-                                 text: k.text || "", more: k.more || ""}));
+                                 text: k.text || "", more: k.more || "",
+                                 source: k.source || ""}));
     S.themes = d.themes.slice();
     S.meta = d.meta || S.meta;
     S.sel = 0; S.theme = ""; S.query = "";
@@ -1317,7 +1322,8 @@ function importJson(file){
     let neu = 0, geaendert = 0, gleich = 0, ueberTitel = 0;
     const cards = d.cards.map(k => {
       const feld = {theme: k.theme || "", title: k.title || "",
-                    text: k.text || "", more: k.more || ""};
+                    text: k.text || "", more: k.more || "",
+                    source: k.source || ""};
       let alt = k.id ? offen.get(k.id) : null;
       if (!alt){
         const treffer = nachTitel.get(schluessel(feld.title));
@@ -1335,7 +1341,8 @@ function importJson(file){
       offen.delete(alt.id);
       nachTitel.delete(schluessel(alt.title));
       if (alt.theme === feld.theme && alt.title === feld.title
-          && alt.text === feld.text && alt.more === feld.more) gleich++;
+          && alt.text === feld.text && alt.more === feld.more
+          && (alt.source || "") === feld.source) gleich++;
       else geaendert++;
       return {id: alt.id, no: 0, ...feld};
     });
@@ -1533,7 +1540,7 @@ window.Editor = {
       cards: S.cards.map((k, i) => ({
         id: k.id, pos: i,
         theme: k.theme || "", title: k.title || "",
-        text: k.text || "", more: k.more || ""
+        text: k.text || "", more: k.more || "", source: k.source || ""
       }))
     };
   },
@@ -1547,7 +1554,7 @@ window.Editor = {
     S.cards = d.cards.map(k => ({
       id: k.id || newId(), no: 0,
       theme: k.theme || "", title: k.title || "",
-      text: k.text || "", more: k.more || ""
+      text: k.text || "", more: k.more || "", source: k.source || ""
     }));
     if (Array.isArray(d.themes) && d.themes.length) S.themes = d.themes.slice();
     if (d.meta) S.meta = {...S.meta, ...d.meta};

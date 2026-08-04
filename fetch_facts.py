@@ -130,7 +130,8 @@ def main():
                    "theme": k.get("theme", ""),
                    "title": k.get("title", ""),
                    "text": k.get("text", ""),
-                   "more": k.get("more", "")}
+                   "more": k.get("more", ""),
+                   "source": k.get("source", "")}
                   for i, k in enumerate(cards)],
     }
 
