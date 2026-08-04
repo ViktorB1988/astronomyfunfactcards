@@ -31,7 +31,8 @@
       "title": "Venus: Tag länger als Jahr",
       "text": "Die Venus dreht sich so langsam, dass eine Umdrehung 243 Erdtage dauert. Ihr Umlauf um die Sonne dauert nur 225 Erdtage – ein Venustag ist also länger als ein Venusjahr.",
       "more": "Warum die Venus so langsam rotiert, ist ungeklärt. Vermutlich hat ein gewaltiger Einschlag in der Frühzeit ihre Drehung fast gestoppt.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javcf11dl",
@@ -40,7 +41,8 @@
       "title": "Sonnenaufgang im Westen",
       "text": "Die Venus rotiert als einziger großer Planet rückwärts. Von ihrer Oberfläche aus würde die Sonne im Westen aufgehen und im Osten untergehen.",
       "more": "Die Sonne wäre von der Venusoberfläche aus allerdings nie zu sehen: Die Wolkendecke des Planeten ist dauerhaft geschlossen.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav9pa0xk",
@@ -49,7 +51,8 @@
       "title": "Die Sonne ist fast alles",
       "text": "Die Sonne enthält 99,86 % der gesamten Masse des Sonnensystems. Alle Planeten, Monde, Asteroiden und Kometen zusammen sind nur der Rest.",
       "more": "Von der restlichen Masse des Sonnensystems entfällt wiederum der größte Teil auf Jupiter allein.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javp6jquo",
@@ -58,7 +61,8 @@
       "title": "Saturn schwimmt",
       "text": "Saturn besteht überwiegend aus Wasserstoff und Helium und hat eine mittlere Dichte von 0,69 g/cm³ – weniger als Wasser. In einer ausreichend großen Wanne würde er obenauf treiben.",
       "more": "Der dichteste Körper im Sonnensystem ist übrigens die Erde mit 5,5 g/cm³.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javf0zzp0",
@@ -67,7 +71,8 @@
       "title": "Ringe aus Papier",
       "text": "Saturns Ringsystem ist rund 280.000 km breit, an vielen Stellen aber nur wenige Meter dick. Im Maßstab wäre es dünner als ein Blatt Papier von der Größe eines Fußballfeldes.",
       "more": "Saturns Ringe bestehen fast vollständig aus Wassereis. Die einzelnen Brocken reichen von Staubkorn- bis Hausgröße.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javc6alh9",
@@ -76,7 +81,8 @@
       "title": "Verschwindende Ringe",
       "text": "Etwa alle 15 Jahre blickt die Erde exakt auf die Kante von Saturns Ringen. Sie sind dann so dünn, dass sie selbst in großen Teleskopen praktisch unsichtbar werden.",
       "more": "Saturns Ringe standen zuletzt im Frühjahr 2025 exakt auf der Kante. Das nächste Mal passiert das Ende der 2030er Jahre.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javf2sygg",
@@ -85,7 +91,8 @@
       "title": "Diamantregen",
       "text": "In den Tiefen von Uranus und Neptun herrschen Druck und Hitze, die Methan zerlegen. Der freiwerdende Kohlenstoff kristallisiert vermutlich zu Diamanten, die langsam nach innen sinken.",
       "more": "Die Entstehung von Diamanten unter solchem Druck ließ sich im Labor mit Laser-Schockwellen tatsächlich nachstellen.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javw3e3dj",
@@ -94,7 +101,8 @@
       "title": "Der rollende Planet",
       "text": "Uranus' Rotationsachse ist um 98 Grad gekippt, er liegt also praktisch auf der Seite. Dadurch dauern an seinen Polen Tag und Nacht jeweils 42 Erdjahre.",
       "more": "Vermutlich hat ein erdgroßer Körper den Uranus in der Frühzeit des Sonnensystems umgestoßen.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javcdpjs4",
@@ -103,7 +111,8 @@
       "title": "Neptuns erste Runde",
       "text": "Neptun braucht 165 Erdjahre für einen Sonnenumlauf. Seit seiner Entdeckung im Jahr 1846 hat er erst eine einzige vollständige Runde geschafft – 2011 war es so weit.",
       "more": "Neptun wurde zuerst berechnet und dann gefunden: aus unerklärlichen Störungen der Uranusbahn.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javunkov3",
@@ -112,7 +121,8 @@
       "title": "Plutos halbe Runde",
       "text": "Pluto umrundet die Sonne in 248 Erdjahren. Seit seiner Entdeckung 1930 hat er noch nicht einmal die Hälfte seiner Bahn hinter sich.",
       "more": "Plutos Bahn ist so langgestreckt, dass er zeitweise näher an der Sonne steht als Neptun – zuletzt von 1979 bis 1999.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javvoihvm",
@@ -121,7 +131,8 @@
       "title": "Jupiter, das Schwergewicht",
       "text": "Jupiter ist 2,5-mal massereicher als alle anderen sieben Planeten des Sonnensystems zusammengenommen. Trotzdem hat er nur ein Tausendstel der Sonnenmasse.",
       "more": "Um als Stern zu zünden, hätte Jupiter etwa das 80-Fache seiner heutigen Masse gebraucht.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javud8uzg",
@@ -130,7 +141,8 @@
       "title": "Die Sonne eiert",
       "text": "Sonne und Jupiter kreisen um ihren gemeinsamen Schwerpunkt. Weil Jupiter so schwer ist, liegt dieser Punkt knapp außerhalb der Sonnenoberfläche – die Sonne umkreist also einen Punkt im leeren Raum.",
       "more": "Am Wackeln eines Sterns erkennt man umgekehrt, dass ihn ein schwerer Planet umkreist. So wurden viele Exoplaneten entdeckt.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javzn9ewl",
@@ -139,7 +151,8 @@
       "title": "Landung unmöglich",
       "text": "Jupiter ist ein Gasplanet ohne feste Oberfläche. Eine Sonde würde immer tiefer fallen, bis Druck und Hitze sie zerstören – einen „Boden“ zum Aufsetzen gibt es nicht.",
       "more": "Die Eintauchsonde der Galileo-Mission hielt in Jupiters Atmosphäre 1995 knapp 58 Minuten durch.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javd4t5nx",
@@ -148,7 +161,8 @@
       "title": "Der höchste Berg",
       "text": "Der Marsvulkan Olympus Mons ist rund 22 km hoch, fast dreimal so hoch wie der Mount Everest. Sein Fuß hätte etwa die Fläche von Italien.",
       "more": "So groß werden konnte der Olympus Mons, weil der Mars keine Plattentektonik hat: Der Vulkan blieb Milliarden Jahre über derselben Magmaquelle.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav00f1ol",
@@ -157,7 +171,8 @@
       "title": "Ein Canyon von Küste zu Küste",
       "text": "Die Valles Marineris auf dem Mars sind rund 4.000 km lang und bis zu 7 km tief. Auf die Erde übertragen würden sie von Lissabon bis Moskau reichen.",
       "more": "In den Valles Marineris auf dem Mars würde der Grand Canyon gleich mehrfach verschwinden.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javwygid7",
@@ -166,7 +181,8 @@
       "title": "Blaue Sonnenuntergänge",
       "text": "Der feine Staub in der Marsatmosphäre streut rotes Licht stark und blaues kaum. Deshalb ist der Marshimmel tagsüber rötlich – und die Sonne geht in einem blauen Schimmer unter.",
       "more": "Auf dem Mars ist der Himmel rötlich und der Sonnenuntergang blau – auf der Erde ist es genau umgekehrt.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javjaenc6",
@@ -175,7 +191,8 @@
       "title": "Merkurs endloser Tag",
       "text": "Merkur dreht sich extrem langsam und umkreist die Sonne sehr schnell. Von Sonnenaufgang zu Sonnenaufgang vergehen dort 176 Erdtage – in einen Merkurtag passen zwei Merkurjahre.",
       "more": "Auf Merkur könnte ein Beobachter die Sonne zeitweise sogar rückwärts über den Himmel laufen sehen.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav1wjbi8",
@@ -184,7 +201,8 @@
       "title": "Eis neben 430 Grad",
       "text": "Auf Merkur wird es tagsüber 430 °C heiß. In Kratern an seinen Polen scheint die Sonne jedoch nie hinein – dort liegt seit Milliarden Jahren Wassereis.",
       "more": "Erste Hinweise auf Eis an den Merkurpolen lieferte 1992 eine Radarmessung von der Erde aus.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav0hmbri",
@@ -193,7 +211,8 @@
       "title": "Heißer als Merkur",
       "text": "Die Venus ist fast doppelt so weit von der Sonne entfernt wie Merkur, mit 465 °C aber deutlich heißer. Grund ist ihre dichte CO₂-Atmosphäre und der stärkste Treibhauseffekt im Sonnensystem.",
       "more": "Der Bodendruck auf der Venus beträgt das 92-Fache des irdischen – wie in 900 Metern Meerestiefe.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javc21wgg",
@@ -202,7 +221,8 @@
       "title": "Regen, der nie ankommt",
       "text": "In den Wolken der Venus fällt Schwefelsäureregen. Er verdunstet schon in großer Höhe, weil es darunter über 400 °C heiß ist, und erreicht den Boden nie.",
       "more": "Regen, der verdunstet, bevor er den Boden erreicht, heißt Virga. Auch auf der Erde kommt das vor – dort allerdings mit Wasser.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javm5vawj",
@@ -211,7 +231,8 @@
       "title": "Flüsse aus Methan",
       "text": "Auf Saturns Mond Titan ist es minus 180 °C kalt. Dort gibt es Wolken, Regen, Flüsse und Seen – jedoch nicht aus Wasser, sondern aus flüssigem Methan und Ethan.",
       "more": "Die Sonde Huygens landete 2005 auf Titan. Es ist bis heute die fernste Landung der Raumfahrtgeschichte.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javatro0q",
@@ -220,7 +241,8 @@
       "title": "Ein Mond baut einen Ring",
       "text": "Der Saturnmond Enceladus schießt aus Rissen an seinem Südpol Wasserfontänen ins All. Dieses Material speist dauerhaft Saturns äußeren E-Ring.",
       "more": "In den Fontänen von Enceladus fand man organische Moleküle. Der Mond gilt als einer der besten Kandidaten für Leben im Sonnensystem.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javvrf3zq",
@@ -229,7 +251,8 @@
       "title": "Der leere Asteroidengürtel",
       "text": "Im Asteroidengürtel zwischen Mars und Jupiter kreisen Millionen Objekte, aber der Abstand zwischen ihnen beträgt im Schnitt Hunderttausende Kilometer. Raumsonden fliegen ohne jedes Ausweichmanöver hindurch.",
       "more": "Alle Asteroiden des Gürtels zusammen wögen weniger als 5 % des Erdmonds.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javwuj5oy",
@@ -238,7 +261,8 @@
       "title": "Der Mond flieht",
       "text": "Durch die Gezeitenreibung entfernt sich der Mond jedes Jahr um 3,8 cm von der Erde – etwa so schnell, wie Fingernägel wachsen.",
       "more": "Der Abstand zum Mond wird per Laser an Reflektoren gemessen, die die Apollo-Missionen dort aufgestellt haben.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav3m6zoe",
@@ -247,7 +271,8 @@
       "title": "Kürzere Tage in der Urzeit",
       "text": "Die Erdrotation wird durch die Gezeiten langsam abgebremst. Vor 1,4 Milliarden Jahren dauerte ein Erdtag deshalb nur rund 18 Stunden.",
       "more": "Die früher schnellere Erddrehung ist an fossilen Gezeitenablagerungen und an Wachstumsstreifen versteinerter Korallen nachweisbar.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javgflonp",
@@ -256,7 +281,8 @@
       "title": "Alle Planeten passen dazwischen",
       "text": "Reiht man die sieben anderen Planeten des Sonnensystems nebeneinander auf, ergibt das rund 388.000 km. Steht der Mond gerade im erdfernsten Punkt seiner Bahn, passen sie damit knapp in die Lücke zwischen Erde und Mond.",
       "more": "Zwei Drittel dieser aneinandergereihten Planetendurchmesser entfallen allein auf Jupiter und Saturn.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javgdvo4p",
@@ -265,7 +291,8 @@
       "title": "Ein neuer Polarstern",
       "text": "Die Erdachse taumelt in einem Zyklus von rund 26.000 Jahren. In etwa 13.000 Jahren wird deshalb nicht mehr Polaris, sondern Wega unser Polarstern sein.",
       "more": "Vor 4.700 Jahren war Thuban im Sternbild Drache der Polarstern. Die Ägypter richteten ihre Pyramiden danach aus.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javhb95nw",
@@ -274,7 +301,8 @@
       "title": "Vier Millionen Tonnen pro Sekunde",
       "text": "Bei der Kernfusion in ihrem Inneren wandelt die Sonne jede Sekunde rund 4 Millionen Tonnen Masse in Energie um. Sie tut das seit 4,6 Milliarden Jahren.",
       "more": "Trotz dieses gewaltigen Umsatzes hat die Sonne bisher erst etwa 0,03 % ihrer Gesamtmasse verloren.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javl2fj6o",
@@ -283,7 +311,8 @@
       "title": "Das langsamste Licht",
       "text": "Licht braucht von der Sonnenoberfläche zur Erde 8 Minuten. Vom Sonnenkern bis zur Oberfläche braucht die Energie jedoch zehntausende Jahre, weil sie unterwegs unzählige Male gestreut wird.",
       "more": "Würde der Sonnenkern heute erlöschen, leuchtete die Sonnenoberfläche noch sehr lange weiter. Nur Neutrinos verrieten es innerhalb von 8 Minuten.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav5vkkvi",
@@ -292,7 +321,8 @@
       "title": "Unsere Sonne ist überdurchschnittlich",
       "text": "Rund 95 % aller Sterne der Milchstraße sind lichtschwächer als die Sonne. Die meisten Sterne sind kleine, kühle Rote Zwerge, die man ohne Teleskop nie sieht.",
       "more": "Auch der nächste Stern, Proxima Centauri, ist ein Roter Zwerg – trotz nur 4,2 Lichtjahren Abstand mit bloßem Auge unsichtbar.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javdmgb0h",
@@ -301,7 +331,8 @@
       "title": "Sterne, die noch nie starben",
       "text": "Rote Zwerge verbrennen ihren Wasserstoff so sparsam, dass sie Billionen Jahre leuchten. Bei einem Alter des Universums von 13,8 Milliarden Jahren ist noch kein einziger von ihnen gestorben.",
       "more": "Die kleinsten Roten Zwerge sind kaum größer als der Planet Saturn.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav500s3r",
@@ -310,7 +341,8 @@
       "title": "Ein Teelöffel Neutronenstern",
       "text": "Neutronensterne sind Reste explodierter Sterne, in denen Materie extrem verdichtet ist. Ein einziger Teelöffel davon würde auf der Erde etwa eine Milliarde Tonnen wiegen.",
       "more": "Ein Teelöffel Wasser wiegt dagegen 5 Gramm. Neutronensterne bestehen aus dem dichtesten bekannten Material im Universum.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1java7xfyp",
@@ -319,7 +351,8 @@
       "title": "716 Umdrehungen pro Sekunde",
       "text": "Der schnellste bekannte Pulsar ist ein Neutronenstern von rund 20 km Durchmesser und dreht sich 716-mal pro Sekunde um sich selbst. Sein Äquator rast dabei mit etwa einem Viertel der Lichtgeschwindigkeit.",
       "more": "So schnelle Pulsare heißen Millisekundenpulsare. Sie wurden von einem Begleitstern „aufgezogen“, der Materie auf sie übertrug.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javc45n6d",
@@ -328,7 +361,8 @@
       "title": "Eine Sonne in einer Stadt",
       "text": "Ein typischer Neutronenstern enthält etwa 1,4 Sonnenmassen, komprimiert auf einen Durchmesser von nur rund 20 km – die Ausdehnung einer Großstadt.",
       "more": "Neutronensterne wurden 1967 durch ein extrem regelmäßiges Radiosignal entdeckt, das man kurz für außerirdisch hielt.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav4xm902",
@@ -337,7 +371,8 @@
       "title": "Gold aus Neutronensternen",
       "text": "Schwere Elemente wie Gold entstehen nicht in normalen Sternen. Das Gold in deinem Schmuck stammt vermutlich aus der Kollision zweier Neutronensterne, lange bevor sich die Erde bildete.",
       "more": "Bestätigt wurde die Entstehung von Gold 2017, als bei einer beobachteten Neutronenstern-Kollision schwere Elemente nachgewiesen wurden.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javmm0gx0",
@@ -346,7 +381,8 @@
       "title": "Die Sonne als Schwarzes Loch",
       "text": "Würde man die Sonne zu einem Schwarzen Loch komprimieren, hätte dieses nur 3 km Radius. Ihre Masse bliebe gleich, deshalb würde die Erde völlig unverändert weiterkreisen – nur eben im Dunkeln.",
       "more": "Tatsächlich wird die Sonne nie ein Schwarzes Loch. Dafür ist sie zu leicht – sie endet als Weißer Zwerg.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javvxcbbw",
@@ -355,7 +391,8 @@
       "title": "Kein Objekt, nur Geometrie",
       "text": "Der Ereignishorizont eines Schwarzen Lochs ist keine Oberfläche und besteht aus nichts. Er ist nur die Grenze, ab der selbst Licht nicht mehr entkommen kann.",
       "more": "Bei einem Schwarzen Loch von 10 Sonnenmassen liegt der Ereignishorizont bei rund 30 km Radius.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javin9p74",
@@ -364,7 +401,8 @@
       "title": "Für immer eingefroren",
       "text": "Fällt jemand in ein Schwarzes Loch, sieht ein entfernter Beobachter ihn nie ankommen. Sein Bild wird immer langsamer, immer röter und verblasst – es scheint am Horizont zu erstarren.",
       "more": "Für den Fallenden selbst dauert der Sturz in ein Schwarzes Loch nur Sekundenbruchteile.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav4w5omv",
@@ -373,7 +411,8 @@
       "title": "Der unbemerkte Übertritt",
       "text": "Wer in ein Schwarzes Loch fällt, spürt beim Passieren des Ereignishorizonts nichts Besonderes. Es gibt dort kein Signal und keine Schwelle – erst später merkt man, dass es keinen Rückweg gibt.",
       "more": "Aus dem Inneren eines Schwarzen Lochs sieht man den Sternenhimmel weiterhin – nur zunehmend verzerrt.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javh7z5xd",
@@ -382,7 +421,8 @@
       "title": "Spaghettifizierung",
       "text": "Nahe einem Schwarzen Loch ist die Schwerkraft an den Füßen deutlich stärker als am Kopf. Dieser Unterschied zieht einen Körper in die Länge, bis er zu einem dünnen Faden zerrissen wird.",
       "more": "Den Begriff Spaghettifizierung prägte Stephen Hawking in seinem Buch „Eine kurze Geschichte der Zeit“.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javsmlp20",
@@ -391,7 +431,8 @@
       "title": "Sanfter Eintritt bei Riesen",
       "text": "Je massereicher ein Schwarzes Loch, desto schwächer sind die Gezeitenkräfte an seinem Ereignishorizont. Bei den größten Exemplaren könnte man den Horizont unversehrt passieren und erst tief im Inneren zerrissen werden.",
       "more": "Beim Schwarzen Loch Sagittarius A* im Zentrum der Milchstraße wäre ein solcher unversehrter Eintritt möglich.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javd4sguu",
@@ -400,7 +441,8 @@
       "title": "Das Zentrum ist eine Zukunft",
       "text": "Hinter dem Ereignishorizont ist die Singularität keine Richtung im Raum mehr, sondern ein Zeitpunkt. Man kann ihr genauso wenig ausweichen wie dem morgigen Tag.",
       "more": "Im Inneren eines Schwarzen Lochs bringt selbst stärkstes Beschleunigen nichts – jede Bewegung verkürzt die verbleibende Zeit sogar.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javljdl2k",
@@ -409,7 +451,8 @@
       "title": "Schwarze Löcher verdampfen",
       "text": "Stephen Hawking zeigte 1974, dass Schwarze Löcher durch Quanteneffekte an ihrem Rand ganz schwach strahlen. Dadurch verlieren sie Masse und schrumpfen über gewaltige Zeiträume.",
       "more": "Die Hawking-Strahlung verbindet erstmals Schwerkraft, Quantentheorie und Wärmelehre – bis heute ein Ausgangspunkt moderner Physik.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav6ko1ve",
@@ -418,7 +461,8 @@
       "title": "10<sup>67</sup> Jahre Geduld",
       "text": "Ein Schwarzes Loch von einer Sonnenmasse bräuchte durch Hawking-Strahlung etwa 10<sup>67</sup> Jahre zum vollständigen Verdampfen – unvorstellbar viel länger als das bisherige Alter des Universums.",
       "more": "Das gilt nur, wenn nichts mehr hineinfällt. Heute wachsen Schwarze Löcher noch deutlich schneller, als sie verdampfen.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javwy3jco",
@@ -427,7 +471,8 @@
       "title": "Kleiner heißt heißer",
       "text": "Anders als gewohnt werden Schwarze Löcher beim Schrumpfen immer heißer und strahlen stärker. Am Ende ihres Lebens verlöschen sie in einem kurzen, hellen Ausbruch.",
       "more": "Winzige Schwarze Löcher aus der Frühzeit des Universums müssten gerade jetzt explodieren – gesucht, aber nie gefunden.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javvftlw8",
@@ -436,7 +481,8 @@
       "title": "Schwarze Löcher haben keine Haare",
       "text": "Egal woraus ein Schwarzes Loch entstanden ist – aus Sternen, Gas oder Büchern: Von außen lassen sich nur drei Eigenschaften messen, nämlich Masse, Ladung und Drehimpuls.",
       "more": "Was mit der Information über das geschieht, was ein Schwarzes Loch verschluckt hat, ist bis heute ungelöst – das Informationsparadoxon.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javyr1m2v",
@@ -445,7 +491,8 @@
       "title": "Das Monster im Zentrum",
       "text": "Im Zentrum der Milchstraße sitzt das Schwarze Loch Sagittarius A* mit 4,3 Millionen Sonnenmassen. Entdeckt hat man es, indem man Sterne beobachtete, die um ein unsichtbares Zentrum kreisen.",
       "more": "Für die über 30 Jahre laufende Vermessung der Sterne im Milchstraßenzentrum gab es 2020 den Physik-Nobelpreis.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javri3mjf",
@@ -454,7 +501,8 @@
       "title": "Überraschend kompakt",
       "text": "Obwohl Sagittarius A* im Zentrum der Milchstraße 4,3 Millionen Sonnenmassen enthält, ist sein Ereignishorizont nur etwa so groß wie die Umlaufbahn des Merkur.",
       "more": "Von der Erde aus gesehen ist das Schwarze Loch im Milchstraßenzentrum so klein wie ein Apfel auf dem Mond.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javu1q022",
@@ -463,7 +511,8 @@
       "title": "Das erste Foto",
       "text": "2019 veröffentlichte das Event Horizon Telescope das erste Bild eines Schwarzen Lochs: M87* in 55 Millionen Lichtjahren Entfernung, mit 6,5 Milliarden Sonnenmassen.",
       "more": "Für dieses Bild wurden Radioteleskope rund um die Welt zusammengeschaltet. Die Datenmenge war so groß, dass die Festplatten per Flugzeug transportiert wurden.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javjb8pp4",
@@ -472,7 +521,8 @@
       "title": "Die hellsten Objekte im All",
       "text": "Materie, die in ein Schwarzes Loch stürzt, wird durch Reibung Millionen Grad heiß. Solche Quasare überstrahlen ganze Galaxien mit Hunderten Milliarden Sternen.",
       "more": "Der hellste bekannte Quasar leuchtet so stark wie mehrere hundert Billionen Sonnen.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javcjtq5a",
@@ -481,7 +531,8 @@
       "title": "Leichter als Wasser",
       "text": "Teilt man die Masse eines supermassereichen Schwarzen Lochs durch das Volumen innerhalb seines Ereignishorizonts, ergibt sich eine Dichte geringer als die von Wasser.",
       "more": "Grund ist, dass der Ereignishorizont proportional zur Masse wächst, das eingeschlossene Volumen aber mit der dritten Potenz.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav1qgqrk",
@@ -490,7 +541,8 @@
       "title": "Heller als alle Sterne",
       "text": "Als 2015 erstmals zwei verschmelzende Schwarze Löcher gemessen wurden, gaben sie kurzzeitig mehr Leistung ab als alle Sterne des sichtbaren Universums zusammen – allerdings völlig unsichtbar, als Gravitationswellen.",
       "more": "Für den ersten Nachweis von Gravitationswellen gab es 2017 den Physik-Nobelpreis.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav7byetb",
@@ -499,7 +551,8 @@
       "title": "Messung im Protonenmaßstab",
       "text": "Gravitationswellen stauchen den Raum selbst. Der Detektor LIGO misst diese Verformung an 4 km langen Armen – die Längenänderung ist kleiner als ein Tausendstel eines Protondurchmessers.",
       "more": "Um Störungen auszuschließen, betreibt LIGO zwei baugleiche Detektoren im Abstand von rund 3.000 km.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javik0a3f",
@@ -508,7 +561,8 @@
       "title": "Mitgerissene Raumzeit",
       "text": "Ein rotierendes Schwarzes Loch zieht die Raumzeit um sich herum mit. In der sogenannten Ergosphäre außerhalb des Ereignishorizonts kann kein Objekt stillstehen – es muss sich mitdrehen.",
       "more": "Der Effekt heißt Frame-Dragging. Selbst die rotierende Erde erzeugt ihn – winzig, aber im Orbit messbar.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javfgrg83",
@@ -517,7 +571,8 @@
       "title": "Energie aus dem Nichts",
       "text": "Roger Penrose zeigte, dass man einem rotierenden Schwarzen Loch Energie entziehen kann: Wirft man Materie richtig hinein, kommt ein Teil mit mehr Energie zurück – auf Kosten der Rotation.",
       "more": "Für seine Arbeiten zu Schwarzen Löchern erhielt Roger Penrose 2020 den Physik-Nobelpreis.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javo2ytoe",
@@ -526,7 +581,8 @@
       "title": "Kein kosmischer Staubsauger",
       "text": "Schwarze Löcher saugen nichts an. Aus der Ferne wirkt ihre Schwerkraft genauso wie die eines normalen Sterns gleicher Masse – gefährlich wird es erst sehr nah dran.",
       "more": "Um in ein Schwarzes Loch zu fallen, muss man ziemlich genau zielen. Das meiste Material geht stattdessen in eine Umlaufbahn.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav255bqa",
@@ -535,7 +591,8 @@
       "title": "Die Erde bliebe auf Kurs",
       "text": "Würde man die Sonne durch ein Schwarzes Loch derselben Masse ersetzen, änderte sich die Erdbahn nicht im Geringsten. Es würde nur schlagartig dunkel und kalt.",
       "more": "Ohne Sonnenlicht fiele die Temperatur auf der Erde innerhalb weniger Wochen unter minus 100 °C.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javhlnkte",
@@ -544,7 +601,8 @@
       "title": "Astronauten altern langsamer",
       "text": "Wer sich schnell bewegt, für den vergeht die Zeit langsamer. Die ISS-Crew umkreist die Erde mit 28.000 km/h und altert dadurch pro halbem Jahr etwa 0,005 Sekunden weniger als wir.",
       "more": "Auf der ISS lässt gleichzeitig die schwächere Schwerkraft in 400 km Höhe die Zeit schneller laufen – der Geschwindigkeitseffekt gewinnt knapp.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javlr7yd9",
@@ -553,7 +611,8 @@
       "title": "Zeitreise-Rekordhalter",
       "text": "Der Kosmonaut Gennadi Padalka verbrachte insgesamt 878 Tage im Orbit. Durch die Zeitdilatation seiner hohen Bahngeschwindigkeit ist er rund 0,02 Sekunden in die Zukunft gereist.",
       "more": "Ein Astronaut merkt von der Zeitdilatation nichts. Der Effekt zeigt sich nur beim Vergleich hochpräziser Uhren.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javwwrohp",
@@ -562,7 +621,8 @@
       "title": "GPS braucht Einstein",
       "text": "Die Uhren der GPS-Satelliten laufen relativistisch bedingt täglich 38 Mikrosekunden anders als auf der Erde. Ohne diese Korrektur wäre jede Navigation schon nach einem Tag um rund 10 km falsch.",
       "more": "Die relativistische Korrektur steckt fest einprogrammiert in jedem GPS-Empfänger – auch in jedem Handy.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javvj1a8n",
@@ -571,7 +631,8 @@
       "title": "Zwei Effekte gegeneinander",
       "text": "Bei GPS-Satelliten wirken zwei relativistische Effekte gegensätzlich: Ihre hohe Geschwindigkeit verlangsamt die Zeit, die schwächere Schwerkraft in 20.000 km Höhe beschleunigt sie. Unterm Strich gehen ihre Uhren vor.",
       "more": "GPS-Satellitenuhren werden deshalb schon vor dem Start bewusst etwas langsamer eingestellt.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javstc2st",
@@ -580,7 +641,8 @@
       "title": "Kopf und Füße altern unterschiedlich",
       "text": "Je näher an einer Masse, desto langsamer vergeht die Zeit. Moderne Atomuhren sind so genau, dass sie diesen Unterschied schon bei wenigen Zentimetern Höhenunterschied messen können.",
       "more": "Der Nachweis gelang 2010 erstmals bei nur 33 Zentimetern Höhenunterschied zwischen zwei Atomuhren.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javajz46q",
@@ -589,7 +651,8 @@
       "title": "Zeitstillstand am Horizont",
       "text": "Am Ereignishorizont eines Schwarzen Lochs ist die Gravitation so stark, dass die Zeit aus Sicht eines entfernten Beobachters vollständig stehenbleibt.",
       "more": "Für denjenigen, der in ein Schwarzes Loch fällt, vergeht die Zeit dagegen ganz normal weiter.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javzb2p0j",
@@ -598,7 +661,8 @@
       "title": "Zeit um Faktor 224 gedehnt",
       "text": "Wer mit 99,999 % der Lichtgeschwindigkeit reist, für den vergeht die Zeit 224-mal langsamer als für die Zurückgebliebenen. Ein Bordjahr entspricht 224 Jahren auf der Erde.",
       "more": "Nach zehn Jahren an Bord eines solchen Schiffs käme man auf eine Erde zurück, auf der 2.240 Jahre vergangen sind.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javvzqgcy",
@@ -607,7 +671,8 @@
       "title": "Fast Lichtgeschwindigkeit",
       "text": "Je näher man der Lichtgeschwindigkeit kommt, desto extremer wird die Zeitdehnung. Bei 99,99999999 % der Lichtgeschwindigkeit erlebt eine Crew die 100.000 Lichtjahre lange Reise durch die Milchstraße als wenige Monate.",
       "more": "Der Haken solcher Reisen: Nahe der Lichtgeschwindigkeit hätte schon ein einzelnes Staubkorn die Wirkung einer Explosion.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav763472",
@@ -616,7 +681,8 @@
       "title": "Andromeda in einem Menschenleben",
       "text": "Mit konstanter Beschleunigung von 1 g – also Erdanziehung an Bord – erreicht ein Raumschiff die 2,5 Millionen Lichtjahre entfernte Andromedagalaxie in etwa 28 Bordjahren. Auf der Erde vergehen dabei Millionen Jahre.",
       "more": "Ein Rückweg wäre bei solchen Reisen sinnlos: Die Heimat, die man verlassen hat, existierte längst nicht mehr.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javerdme3",
@@ -625,7 +691,8 @@
       "title": "Teilchen, die es nicht schaffen dürften",
       "text": "Myonen entstehen hoch in der Atmosphäre und zerfallen nach zwei Millionstel Sekunden. Rechnerisch könnten sie den Boden nie erreichen – dank Zeitdilatation bei ihrer hohen Geschwindigkeit tun sie es doch.",
       "more": "Aus Sicht des Myons dehnt sich nicht die Zeit – für es schrumpft die Atmosphäre.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javxghraf",
@@ -634,7 +701,8 @@
       "title": "Das Zwillingsparadoxon",
       "text": "Von zwei Zwillingen fliegt einer mit nahezu Lichtgeschwindigkeit ins All und kehrt zurück. Er ist dann tatsächlich jünger als sein Bruder – die Symmetrie wird gebrochen, weil nur er beschleunigt hat.",
       "more": "Das Zwillingsparadoxon wurde 1971 mit Atomuhren in Linienflugzeugen überprüft und bestätigt.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javtphnac",
@@ -643,7 +711,8 @@
       "title": "30 Prozent langsamer",
       "text": "Auf der Oberfläche eines Neutronensterns ist die Schwerkraft so extrem, dass die Zeit dort rund 30 % langsamer vergeht als auf der Erde.",
       "more": "Ein Beobachter auf einem Neutronenstern sähe das übrige Universum entsprechend im Zeitraffer.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav4qjnsf",
@@ -652,7 +721,8 @@
       "title": "Sichtbare Zeitdehnung",
       "text": "Licht, das ein starkes Gravitationsfeld verlässt, verliert Energie und wird röter. Diese Gravitationsrotverschiebung ist im Grunde Zeitdilatation, die man direkt im Spektrum messen kann.",
       "more": "Der Nachweis der Gravitationsrotverschiebung gelang schon 1959 auf der Erde – in einem nur 22 Meter hohen Turm.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javcvwxev",
@@ -661,7 +731,8 @@
       "title": "Reise nach Andromeda",
       "text": "Die Andromedagalaxie ist 2,5 Millionen Lichtjahre entfernt. Mit 99,999 % der Lichtgeschwindigkeit würde die Crew an Bord dank Zeitdilatation nur rund 11.000 Jahre altern – auf der Erde vergehen trotzdem 2,5 Millionen Jahre.",
       "more": "Von einem Flug zur Andromedagalaxie gäbe es keine sinnvolle Rückkehr: Auf der Erde wären nach Hin- und Rückflug 5 Millionen Jahre vergangen.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javpe8wze",
@@ -670,7 +741,8 @@
       "title": "Der nächste Stern",
       "text": "Proxima Centauri, der sonnennächste Stern, ist 4,2 Lichtjahre entfernt. Bei 99,999 % der Lichtgeschwindigkeit dauert der Flug an Bord nur knapp 7 Tage.",
       "more": "Der Flug zu Proxima Centauri scheitert nicht an der Zeit, sondern an der Energie: Ein Schiff auf nahezu Lichtgeschwindigkeit zu beschleunigen übersteigt jede heutige Vorstellung.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javtq3omw",
@@ -679,7 +751,8 @@
       "title": "Quer durch die Milchstraße",
       "text": "Unsere Galaxie misst rund 100.000 Lichtjahre. Bei 99,999 % der Lichtgeschwindigkeit würde eine Crew die Durchquerung als etwa 450 Jahre erleben.",
       "more": "Für die 100.000 Lichtjahre quer durch die Milchstraße bräuchte die Sonde Voyager 1 rund 1,7 Milliarden Jahre.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav9pbust",
@@ -688,7 +761,8 @@
       "title": "Fußabdrücke für die Ewigkeit",
       "text": "Der Mond hat weder Atmosphäre noch Wasser noch Wind. Die Fußspuren der Apollo-Astronauten von 1969 werden daher noch Millionen Jahre unverändert dort liegen.",
       "more": "Nur der ständige Beschuss durch winzige Mikrometeoriten trägt die Mondoberfläche ab – extrem langsam.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javmi0mji",
@@ -697,7 +771,8 @@
       "title": "Ein Tag Funkverzögerung",
       "text": "Die 1977 gestartete Sonde Voyager 1 ist über 25 Milliarden km entfernt – das am weitesten entfernte menschliche Objekt. Ein Funksignal von ihr braucht fast einen Tag bis zur Erde.",
       "more": "Voyager 1 funkt mit rund 20 Watt Sendeleistung – weniger als eine Kühlschranklampe.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav854q7h",
@@ -706,7 +781,8 @@
       "title": "Der wahre Rand des Sonnensystems",
       "text": "Die Oortsche Wolke, eine Hülle aus Kometen, umgibt das Sonnensystem. Voyager 1 bräuchte bei ihrer Geschwindigkeit rund 300 Jahre bis zu ihrem Beginn und etwa 30.000 Jahre hindurch.",
       "more": "Der äußere Rand der Oortschen Wolke liegt vermutlich bei einem Lichtjahr – ein Viertel des Weges zum nächsten Stern.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javxtc5eq",
@@ -715,7 +791,8 @@
       "title": "16 Sonnenaufgänge pro Tag",
       "text": "Die Raumstation ISS umkreist die Erde in nur 90 Minuten. Ihre Besatzung erlebt deshalb an einem einzigen Tag 16 Sonnenauf- und -untergänge.",
       "more": "Nach Sonne und Mond ist die ISS das hellste Objekt am Himmel – mit bloßem Auge gut zu verfolgen.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javxtqzvn",
@@ -724,7 +801,8 @@
       "title": "Größer, als sein Alter erlaubt",
       "text": "Das Universum ist 13,8 Milliarden Jahre alt, der beobachtbare Teil misst aber 93 Milliarden Lichtjahre. Der Raum selbst hat sich gedehnt, während das Licht unterwegs war.",
       "more": "Der Rand des beobachtbaren Universums ist keine Wand, sondern ein Horizont: Von dahinter hat uns bislang noch kein Licht erreicht.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav19idrp",
@@ -733,7 +811,8 @@
       "title": "Urknall im Fernseher",
       "text": "Das Rauschen alter Analogfernseher stammte zu einem kleinen Teil aus der kosmischen Hintergrundstrahlung – dem 13,8 Milliarden Jahre alten Nachglühen des Urknalls.",
       "more": "Die kosmische Hintergrundstrahlung wurde 1964 zufällig entdeckt. Die Forscher hielten das Störsignal zunächst für Taubendreck in ihrer Antenne.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javrmd8ol",
@@ -742,7 +821,8 @@
       "title": "Geisterteilchen im Körper",
       "text": "Neutrinos sind Elementarteilchen, die kaum mit Materie wechselwirken. Jede Sekunde durchqueren zig Milliarden von ihnen jeden Quadratzentimeter deines Körpers, ohne Spuren zu hinterlassen.",
       "more": "Um überhaupt einzelne Neutrinos nachzuweisen, baut man Detektoren tief unter Bergen oder im antarktischen Eis.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javzn8ebj",
@@ -751,7 +831,8 @@
       "title": "Mehr Sterne als Sandkörner",
       "text": "Schätzungen zufolge gibt es im beobachtbaren Universum rund 10<sup>23</sup> Sterne – mehr, als es Sandkörner an allen Stränden und in allen Wüsten der Erde gibt.",
       "more": "Zählen kann man die Sterne des Universums natürlich nicht. Man rechnet über die Zahl der Galaxien und ihre typische Sternenzahl.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1java9zilx",
@@ -760,7 +841,8 @@
       "title": "Mehr Bäume als Sterne",
       "text": "Die Milchstraße enthält etwa 200 Milliarden Sterne. Auf der Erde wachsen jedoch rund 3 Billionen Bäume – fünfzehnmal so viele.",
       "more": "Der Vergleich zwischen Bäumen und Sternen hinkt trotzdem: Im gesamten Universum gibt es unvorstellbar viel mehr Sterne als Bäume auf der Erde.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javft7jlc",
@@ -769,7 +851,8 @@
       "title": "Kollision ohne Zusammenstoß",
       "text": "In rund 4 Milliarden Jahren verschmelzen Milchstraße und Andromedagalaxie. Weil die Abstände zwischen Sternen enorm sind, wird dabei voraussichtlich kein einziger Stern einen anderen treffen.",
       "more": "Die Sonne wird die Verschmelzung von Milchstraße und Andromeda noch erleben – sie leuchtet danach noch etwa eine weitere Milliarde Jahre.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav2rmsxu",
@@ -778,7 +861,8 @@
       "title": "Das Fernste, was du siehst",
       "text": "Bei dunklem Himmel ist die Andromedagalaxie mit bloßem Auge als schwacher Fleck erkennbar. Ihr Licht ist 2,5 Millionen Jahre alt – es startete, als es noch keine modernen Menschen gab.",
       "more": "Die Andromedagalaxie steht am Herbsthimmel hoch. Schon ein Fernglas zeigt sie als deutliches längliches Oval.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javx1odxb",
@@ -787,7 +871,8 @@
       "title": "Kein Zentrum, kein Rand",
       "text": "Das Universum dehnt sich nicht in etwas hinein, sondern überall gleichzeitig. Von jedem beliebigen Punkt aus sieht es so aus, als würden sich alle Galaxien von einem entfernen.",
       "more": "Der Urknall fand deshalb nicht an einem bestimmten Ort statt, sondern überall auf einmal.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javdzjzpv",
@@ -796,7 +881,8 @@
       "title": "Schneller als Licht – erlaubt",
       "text": "Sehr ferne Galaxien entfernen sich schneller von uns, als Licht fliegen kann. Das widerspricht Einstein nicht: Sie bewegen sich nicht durch den Raum, sondern der Raum zwischen uns dehnt sich.",
       "more": "Das Licht solcher Galaxien kann uns trotzdem erreichen – vorausgesetzt, es ist früh genug losgeflogen.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javskvhqp",
@@ -805,7 +891,8 @@
       "title": "95 Prozent sind unbekannt",
       "text": "Nur etwa 5 % des Universums bestehen aus gewöhnlicher Materie. Der Rest ist Dunkle Materie und Dunkle Energie – beide bisher nur indirekt nachgewiesen und in ihrer Natur unverstanden.",
       "more": "Dunkle Materie verrät sich dadurch, dass Galaxien schneller rotieren, als ihre sichtbare Masse erlaubt.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javkk5xoy",
@@ -814,7 +901,8 @@
       "title": "Erst seit 1998",
       "text": "Bis 1998 nahm man an, die Ausdehnung des Universums werde langsamer. Supernova-Messungen zeigten das Gegenteil: Sie beschleunigt sich. Wie das Universum endet, wissen wir also erst seit wenigen Jahrzehnten ansatzweise.",
       "more": "Die Entdeckung der beschleunigten Ausdehnung brachte 2011 den Physik-Nobelpreis – und ein Rätsel, das bis heute ungelöst ist.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javmtyhuj",
@@ -823,7 +911,8 @@
       "title": "Big Freeze",
       "text": "Das derzeit wahrscheinlichste Ende des Universums: Es dehnt sich ewig weiter aus, die Sterne erlöschen nacheinander, und zurück bleibt ein kalter, dunkler, endlos leerer Raum.",
       "more": "Im Fachjargon heißt das Big-Freeze-Szenario auch Wärmetod – obwohl es dabei eiskalt zugeht.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javypkpp8",
@@ -832,7 +921,8 @@
       "title": "Big Rip",
       "text": "Sollte die Dunkle Energie mit der Zeit stärker werden, würde die Ausdehnung immer heftiger. Sie würde erst Galaxien, dann Sterne und Planeten und zuletzt sogar Atome auseinanderreißen.",
       "more": "Im Big-Rip-Modell hätte das Universum ein Ablaufdatum – je nach Annahme in etwa 20 Milliarden Jahren.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javf72dt9",
@@ -841,7 +931,8 @@
       "title": "Big Crunch",
       "text": "Falls die Schwerkraft eines Tages über die Ausdehnung siegt, fällt das Universum wieder in sich zusammen. Alles endet in einem extrem heißen, dichten Punkt – einem umgekehrten Urknall.",
       "more": "Ein solcher Kollaps gilt heute als unwahrscheinlich: Die Ausdehnung des Universums wird nicht langsamer, sondern schneller.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javiwvyxy",
@@ -850,7 +941,8 @@
       "title": "Big Bounce",
       "text": "Manche Modelle vermuten, dass auf einen Kollaps des Universums sofort ein neuer Urknall folgt. Das All wäre dann ein ewiger Zyklus aus Ausdehnung und Zusammenfall.",
       "more": "Ein Problem der Zyklus-Idee: Jeder neue Durchgang müsste die Unordnung seines Vorgängers erben.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javuwuiok",
@@ -859,7 +951,8 @@
       "title": "Vakuumzerfall",
       "text": "Sollte der Zustand unseres Vakuums nur scheinbar stabil sein, könnte irgendwo spontan eine Blase „echten“ Vakuums entstehen. Sie würde sich mit Lichtgeschwindigkeit ausbreiten – niemand würde sie kommen sehen.",
       "more": "Ob unser Vakuum stabil ist, hängt an der Masse des Higgs-Teilchens. Ihr gemessener Wert liegt unangenehm nah an der Grenze zur Instabilität.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javo1z9qb",
@@ -868,7 +961,8 @@
       "title": "Der Wärmetod",
       "text": "Am Ende ist die Energie im Universum vollkommen gleichmäßig verteilt. Ohne Temperaturunterschiede kann kein Prozess mehr ablaufen: kein Licht, keine Bewegung, kein Leben.",
       "more": "In einem vollkommen gleichmäßigen Universum wäre auch Zeit nicht mehr messbar – es gäbe schlicht kein Ereignis mehr.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javt7pyrq",
@@ -877,7 +971,8 @@
       "title": "Der letzte Stern",
       "text": "Sterne entstehen nur, solange Gas vorhanden ist. In etwa 100 Billionen Jahren erlischt der letzte – die gesamte Sternenära ist nur ein winziger Anfang der kosmischen Geschichte.",
       "more": "Die letzten leuchtenden Sterne wären Rote Zwerge, die ihren Brennstoff extrem sparsam verbrauchen.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javmiilbu",
@@ -886,7 +981,8 @@
       "title": "Die Ära der Schwarzen Löcher",
       "text": "Lange nachdem alle Sterne erloschen sind, sind Schwarze Löcher für gigantische Zeiträume die einzigen nennenswerten Strukturen im Universum – bis auch sie verdampfen.",
       "more": "Die Ära der Schwarzen Löcher dauert rund 10<sup>67</sup> Jahre – unvorstellbar viel länger als alles, was davor passiert ist.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javm53o4w",
@@ -895,7 +991,8 @@
       "title": "Diamanten sind nicht ewig",
       "text": "Manche Theorien sagen voraus, dass Protonen nach etwa 10<sup>34</sup> Jahren zerfallen. Dann würde jede Form von Materie langsam verschwinden – auch Diamanten und Neutronensterne.",
       "more": "Beobachtet wurde noch kein einziger Protonenzerfall. Riesige Detektoren in Japan warten seit Jahrzehnten darauf.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jave11bm9",
@@ -904,7 +1001,8 @@
       "title": "Der einsame Himmel der Zukunft",
       "text": "Durch die beschleunigte Ausdehnung entfernen sich ferne Galaxien immer schneller. In rund 150 Milliarden Jahren sind alle außerhalb unserer eigenen unsichtbar – der Himmel wäre leer.",
       "more": "Für Beobachter in dieser fernen Zukunft wäre die eigene Galaxie schlicht das ganze Universum.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javkx9jvh",
@@ -913,7 +1011,8 @@
       "title": "Wir haben Glück mit der Zeit",
       "text": "Spuren des Urknalls wie die Hintergrundstrahlung und ferne Galaxien sind nur in einem begrenzten Zeitfenster beobachtbar. Zukünftige Zivilisationen könnten die Entstehung des Universums nie herausfinden.",
       "more": "Dass das Universum einen Anfang hatte, erscheint uns heute selbstverständlich. Für spätere Beobachter wäre es prinzipiell unbeweisbar.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javmxuve9",
@@ -922,7 +1021,8 @@
       "title": "„Big Bang“ war ein Spottname",
       "text": "Der Astronom Fred Hoyle prägte den Begriff 1949 in einer Radiosendung – abwertend, denn er hielt die Theorie für falsch. Der Name blieb trotzdem hängen.",
       "more": "Fred Hoyle vertrat die Steady-State-Theorie, nach der das Universum immer schon so aussah wie heute.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav2ydj14",
@@ -931,7 +1031,8 @@
       "title": "Vulkan gibt es wirklich",
       "text": "Gene Roddenberry legte 1991 gemeinsam mit Astronomen in einer Fachzeitschrift fest, dass Spocks Heimatwelt den Stern 40 Eridani A umkreist. Den gibt es tatsächlich: ein Dreifachsystem in 16,3 Lichtjahren Entfernung.",
       "more": "2018 meldeten Forscher dort einen Planeten. Spätere Messungen zeigten, dass das Signal von der Aktivität des Sterns stammte.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav9jf8fc",
@@ -940,7 +1041,8 @@
       "title": "Der andere Planet Vulkan",
       "text": "Lange vor Star Trek gab es schon einen Planeten Vulkan: 1859 postulierte Urbain Le Verrier einen Planeten innerhalb der Merkurbahn, um dessen seltsame Bahndrehung zu erklären. Gefunden wurde er nie.",
       "more": "Einsteins Allgemeine Relativitätstheorie erklärte die Bahndrehung 1915 ohne zusätzlichen Planeten. Vulkan war damit überflüssig.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javzpspj7",
@@ -949,7 +1051,8 @@
       "title": "Ein Pluto-Mond hätte fast Vulcan geheißen",
       "text": "2013 durfte das Publikum über die Namen zweier neuer Pluto-Monde abstimmen. Auf Vorschlag von William Shatner gewann „Vulcan“ mit deutlichem Abstand.",
       "more": "Die Internationale Astronomische Union lehnte ab, weil der Name in der Astronomie längst vergeben war. Die Monde heißen heute Kerberos und Styx.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javke14b9",
@@ -958,7 +1061,8 @@
       "title": "Wolf 359 ist ein Winzling",
       "text": "Der Schauplatz der berühmten Raumschlacht ist ein realer Stern: Wolf 359 steht nur 7,9 Lichtjahre entfernt und gehört zu den nächsten Nachbarn der Sonne.",
       "more": "Wolf 359 ist ein Roter Zwerg mit weniger als einem Zehntel der Sonnenmasse und so lichtschwach, dass man ihn nur im Teleskop sieht.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javc0t8j0",
@@ -967,7 +1071,8 @@
       "title": "Tau Ceti wäre kein guter Wohnort",
       "text": "Der sonnenähnliche Stern Tau Ceti in 11,9 Lichtjahren Entfernung galt lange als Hoffnungsträger für bewohnbare Planeten. Er ist von einer Trümmerscheibe umgeben, die zehnmal mehr Material enthält als unser Kuipergürtel.",
       "more": "Planeten dort stünden unter Dauerbeschuss durch Kometen und Asteroiden – ein ähnlich lebensfeindliches Los wie das von Khans Exilwelt.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javkf922q",
@@ -976,7 +1081,8 @@
       "title": "Omicron Ceti ist ein pulsierender Stern",
       "text": "Omicron Ceti heißt in Wirklichkeit Mira und ist ein Veränderlicher: Seine Helligkeit schwankt im Rhythmus von 332 Tagen um etwa das Tausendfache.",
       "more": "2007 entdeckte der Satellit GALEX, dass Mira einen kometenartigen Schweif von rund 13 Lichtjahren Länge hinter sich herzieht.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javv1hvgf",
@@ -985,7 +1091,8 @@
       "title": "Rigel ist zu jung für Leben",
       "text": "Rigel im Orion, in Star Trek gleich mehrfach als Planetensystem im Einsatz, ist ein blauer Überriese in rund 860 Lichtjahren Entfernung mit etwa der hunderttausendfachen Leuchtkraft der Sonne.",
       "more": "Der Stern ist erst wenige Millionen Jahre alt. Für die Entstehung von Leben blieb dort schlicht keine Zeit.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav3rnnw4",
@@ -994,7 +1101,8 @@
       "title": "Denebs Licht ist älter als jede Geschichte",
       "text": "Deneb im Schwan, in Star Trek der Zielort der ersten Mission der Enterprise-D, ist je nach Messung rund 2.600 Lichtjahre entfernt – einer der leuchtkräftigsten Sterne am Nachthimmel.",
       "more": "Sein Licht, das heute bei uns ankommt, startete zur Zeit der frühen griechischen Antike.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javmzr8as",
@@ -1003,7 +1111,8 @@
       "title": "Antares würde das halbe Sonnensystem füllen",
       "text": "Antares im Skorpion, häufiger Namensgeber in Star Trek, ist ein Roter Überriese in rund 550 Lichtjahren Entfernung.",
       "more": "Stünde er anstelle der Sonne, reichte seine Oberfläche über die Marsbahn hinaus. Erde und Mars lägen im Inneren des Sterns.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javtloyia",
@@ -1012,7 +1121,8 @@
       "title": "Epsilon Eridani war der erste Kandidat",
       "text": "Frühe Star-Trek-Quellen ordneten Vulkan dem Stern Epsilon Eridani zu, bevor sich 40 Eridani A durchsetzte. Epsilon Eridani ist real und mit 10,5 Lichtjahren einer der nächsten sonnenähnlichen Sterne.",
       "more": "Bei Epsilon Eridani wurde tatsächlich ein Riesenplanet nachgewiesen. Der Stern ist allerdings sehr jung und von einer dichten Trümmerscheibe umgeben.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javucf61o",
@@ -1021,7 +1131,8 @@
       "title": "Der Warpantrieb hat eine Fachveröffentlichung",
       "text": "1994 veröffentlichte der Physiker Miguel Alcubierre eine Arbeit, die einen Warpantrieb im Rahmen der Allgemeinen Relativitätstheorie beschreibt: Der Raum wird vorn gestaucht und hinten gedehnt.",
       "more": "Alcubierre nannte Star Trek ausdrücklich als Anregung. Sein Antrieb bräuchte Materie mit negativer Energiedichte, von der niemand weiß, ob es sie gibt.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javt5dymq",
@@ -1030,7 +1141,8 @@
       "title": "Dilithium gibt es tatsächlich",
       "text": "Der Treibstoffkristall aus Star Trek trägt einen echten chemischen Namen: Dilithium ist ein Molekül aus zwei Lithiumatomen, das in der Gasphase nachgewiesen wurde.",
       "more": "Mit Antimaterie hat es nichts zu tun. Es ist ein schwach gebundenes Molekül, das sich nur unter besonderen Bedingungen hält.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javc0813n",
@@ -1039,7 +1151,8 @@
       "title": "Wurmlöcher sind seit 1935 im Gespräch",
       "text": "Albert Einstein und Nathan Rosen beschrieben 1935 eine Verbindung zwischen zwei Orten der Raumzeit. Solche Brücken kollabieren allerdings, bevor irgendetwas hindurchfliegen könnte.",
       "more": "1988 zeigten Michael Morris und Kip Thorne, wie ein durchquerbares Wurmloch aussehen müsste – es bräuchte exotische Materie, um offen zu bleiben.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav3fogr4",
@@ -1048,7 +1161,8 @@
       "title": "Die Dyson-Sphäre ist eine ernsthafte Idee",
       "text": "Die Kugelschale um einen ganzen Stern, in Star Trek einmal als Schauplatz genutzt, geht auf einen Vorschlag des Physikers Freeman Dyson von 1960 zurück.",
       "more": "Astronomen suchen tatsächlich nach solchen Bauwerken – sie müssten Wärmestrahlung abgeben. Ein 2015 verdächtigter Stern entpuppte sich als von Staub umgeben.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1java6dnlr",
@@ -1057,7 +1171,8 @@
       "title": "V'Ger hat ein reales Vorbild",
       "text": "Die Sonde, die im ersten Star-Trek-Kinofilm zur Bedrohung wird, ist als Voyager 6 ausgegeben. Die echten Sonden Voyager 1 und 2 starteten 1977 und funken bis heute.",
       "more": "Voyager 1 ist über 25 Milliarden Kilometer entfernt. Ein Funkspruch von dort braucht fast einen Tag bis zur Erde.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javcp8etd",
@@ -1066,7 +1181,8 @@
       "title": "Es gab eine echte Enterprise",
       "text": "Die erste Raumfähre der NASA hieß Enterprise. Nach einer Zuschriftenkampagne von Fans wurde sie 1976 auf diesen Namen getauft.",
       "more": "Ins All flog sie nie: Sie diente Gleit- und Landeversuchen in der Erdatmosphäre. Ihr Rumpf hatte kein Hitzeschild.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javjoydlq",
@@ -1075,7 +1191,8 @@
       "title": "Asteroiden tragen Star-Trek-Namen",
       "text": "Im Asteroidengürtel zwischen Mars und Jupiter kreisen Kleinplaneten, die nach Darstellern der Serie benannt sind – etwa der Asteroid 4864 Nimoy.",
       "more": "Namen für Kleinplaneten vergibt die Internationale Astronomische Union. Sie sind endgültig und lassen sich nicht zurücknehmen.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javu62led",
@@ -1084,7 +1201,8 @@
       "title": "Der Transporter existiert im Kleinen",
       "text": "1997 gelang Physikern erstmals die Quantenteleportation: Der Zustand eines Teilchens wurde auf ein anderes übertragen, ohne dass etwas den Weg dazwischen zurücklegte.",
       "more": "Materie wird dabei nicht bewegt. Der ursprüngliche Zustand wird zerstört – teleportiert wird die Information, nicht das Objekt.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javt57h1z",
@@ -1093,7 +1211,8 @@
       "title": "Im All ist es still",
       "text": "Raumschiffe rauschen in Star Trek an der Kamera vorbei und Explosionen krachen. Im Vakuum gibt es dafür kein Medium: Schall braucht Materie, die schwingt.",
       "more": "Hörbar wird es erst wieder in dichten Gaswolken. Dort haben Astronomen Druckwellen nachgewiesen, allerdings viele Oktaven unterhalb des Hörbaren.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javbd9604",
@@ -1102,7 +1221,8 @@
       "title": "Klasse M hat ein echtes Vorbild",
       "text": "Star Treks „Klasse-M-Planeten“ entsprechen dem, was die Astronomie habitable Zone nennt: der Abstandsbereich um einen Stern, in dem flüssiges Wasser auf einer Oberfläche bestehen kann.",
       "more": "Den Begriff prägte der Astronom Su-Shu Huang 1959, sieben Jahre vor der ersten Star-Trek-Folge.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javhvrpsg",
@@ -1111,7 +1231,8 @@
       "title": "Tatooine gibt es wirklich",
       "text": "2011 entdeckte das Kepler-Teleskop den Planeten Kepler-16b, der zwei Sterne gleichzeitig umkreist. Von seiner Bahn aus gehen tatsächlich zwei Sonnen unter.",
       "more": "Die NASA taufte ihn inoffiziell Tatooine. Wüste gibt es dort allerdings keine: Kepler-16b ist ein kalter Gasplanet von Saturnmasse.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav988uh2",
@@ -1120,7 +1241,8 @@
       "title": "Der echte Doppelsonnenuntergang",
       "text": "Die beiden Sonnen von Kepler-16b sind ein orangefarbener Zwergstern und ein deutlich kleinerer roter. Zusammen liefern sie nur wenige Prozent der Strahlung unserer Sonne.",
       "more": "Auf dem Planeten herrschen rund minus 70 Grad. Der berühmte Sonnenuntergang wäre rötlich und ziemlich dunkel.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javvkm95t",
@@ -1129,7 +1251,8 @@
       "title": "Doppelsonnen sind der Normalfall",
       "text": "Etwa die Hälfte aller sonnenähnlichen Sterne gehört zu einem Doppel- oder Mehrfachsystem. Ein Himmel mit zwei Sonnen ist im Universum nichts Besonderes.",
       "more": "Unsere Sonne ist der Sonderfall: Sie zieht ihre Bahn allein durch die Milchstraße.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javi6hex0",
@@ -1138,7 +1261,8 @@
       "title": "Ein Tatooine in der habitablen Zone",
       "text": "Kepler-1647b, 2016 entdeckt, ist der größte bekannte Planet, der zwei Sterne umkreist. Er braucht dafür gut drei Jahre und liegt im Abstandsbereich, in dem flüssiges Wasser möglich wäre.",
       "more": "Der Planet selbst ist ein Gasriese von Jupitergröße. Ein Mond in seiner Umlaufbahn wäre der bessere Kandidat für Leben.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javasq8a3",
@@ -1147,7 +1271,8 @@
       "title": "Ein Praktikant fand einen Doppelsonnen-Planeten",
       "text": "Der Planet TOI-1338 b umkreist ebenfalls zwei Sterne. Entdeckt hat ihn 2020 ein 17-jähriger Praktikant der NASA, der in seinen ersten Arbeitstagen Messkurven durchsah.",
       "more": "Solche Planeten sind schwer zu finden, weil ihre Verdunkelungen unregelmäßig ausfallen – die beiden Sterne bewegen sich ja mit.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javyez78p",
@@ -1156,7 +1281,8 @@
       "title": "Hoth steht im Katalog",
       "text": "Ein 2006 entdeckter Planet mit der Katalognummer OGLE-2005-BLG-390Lb ist rund fünfeinhalbmal so schwer wie die Erde und etwa minus 220 Grad kalt.",
       "more": "Die NASA führt ihn unter dem Spitznamen Hoth. Er ist rund 21.000 Lichtjahre entfernt und wurde nur über eine kurzzeitige Lichtverstärkung entdeckt.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav73x5cp",
@@ -1165,7 +1291,8 @@
       "title": "Durch ein Asteroidenfeld zu fliegen ist langweilig",
       "text": "Im echten Asteroidengürtel zwischen Mars und Jupiter liegen im Schnitt Hunderttausende Kilometer zwischen zwei Brocken. Sonden fliegen ohne Ausweichmanöver hindurch.",
       "more": "Die Wahrscheinlichkeit, dabei auf einen Asteroiden zu treffen, ist verschwindend gering. Alle Ausweichmanöver müssten geplant angeflogen werden.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav7edigk",
@@ -1174,7 +1301,8 @@
       "title": "Der Todesstern wäre kleiner als ein Mond",
       "text": "Die Kampfstation hat je nach Quelle rund 120 bis 160 Kilometer Durchmesser. Der Saturnmond Mimas misst 396 Kilometer – er wäre mehr als doppelt so groß.",
       "more": "Kurios: Mimas trägt einen 130 Kilometer weiten Einschlagkrater und sieht dadurch selbst aus wie der Todesstern. Fotografiert wurde er erst 1980, drei Jahre nach dem ersten Film.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav308sf3",
@@ -1183,7 +1311,8 @@
       "title": "Einen Planeten zu sprengen kostet viel",
       "text": "Um eine erdgroße Welt vollständig auseinanderzureißen, müsste man ihre Gravitationsbindung überwinden – rund 2 mal 10<sup>32</sup> Joule.",
       "more": "Die Sonne strahlt diese Energie in etwa einer Woche ab. Eine Waffe müsste sie in Sekunden aufbringen und gebündelt abgeben.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javbpxa8i",
@@ -1192,7 +1321,8 @@
       "title": "Ein Parsec ist keine Zeit",
       "text": "Der Parsec ist eine Längeneinheit: 3,26 Lichtjahre. Er ist definiert über die Parallaxe, also die scheinbare Verschiebung eines Sterns, während die Erde die Sonne umrundet.",
       "more": "Eine Strecke in Parsec anzugeben ist deshalb sinnvoll – als Angabe für einen Rekord in Bestzeit dagegen nicht.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav8820ck",
@@ -1201,7 +1331,8 @@
       "title": "Der Asteroidengürtel ist kein zerstörter Planet",
       "text": "Zwischen Mars und Jupiter kreisen Millionen Brocken, aber sie stammen nicht von einer gesprengten Welt. Jupiters Schwerkraft verhinderte von Anfang an, dass sich dort ein Planet zusammenballte.",
       "more": "Alle Asteroiden zusammen wiegen weniger als fünf Prozent des Erdmonds – für einen Planeten viel zu wenig Material.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jave2zf2u",
@@ -1210,7 +1341,8 @@
       "title": "Mustafar liegt im Sonnensystem",
       "text": "Der Jupitermond Io ist der vulkanisch aktivste Körper des Sonnensystems. Hunderte Vulkane schleudern Schwefel kilometerweit ins All.",
       "more": "Angetrieben wird das durch Gezeitenkräfte: Jupiter und die Nachbarmonde walken Io durch, die Reibungswärme hält das Innere flüssig.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav4995h8",
@@ -1219,7 +1351,8 @@
       "title": "Eine Wolkenstadt würde absinken",
       "text": "Gasriesen haben keine feste Oberfläche, ihre Atmosphäre besteht überwiegend aus Wasserstoff und Helium. Atemluft ist deutlich schwerer als dieses Gemisch.",
       "more": "Eine mit Luft gefüllte Stadt würde dort also nicht schweben, sondern sinken. Auf der Venus mit ihrer schweren CO₂-Atmosphäre funktionierte es dagegen.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javp23azx",
@@ -1228,7 +1361,8 @@
       "title": "Waldmonde sind noch unbestätigt",
       "text": "Um einen Gasriesen kreisende Monde sind in unserem Sonnensystem der Normalfall. Außerhalb wurde bislang kein einziger sicher nachgewiesen.",
       "more": "Der bekannteste Kandidat wurde 2018 beim Planeten Kepler-1625b gemeldet, wäre so groß wie Neptun – und ist bis heute umstritten.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javw2uyou",
@@ -1237,7 +1371,8 @@
       "title": "Eine Stadtwelt würde man von weitem sehen",
       "text": "Jede Energie, die eine Zivilisation verbraucht, wird am Ende zu Wärme und muss abgestrahlt werden. Ein vollständig bebauter Planet müsste im Infraroten auffällig hell leuchten.",
       "more": "Genau danach suchen Astronomen bei der Fahndung nach außerirdischen Zivilisationen – nach Wärme, die nicht zum Stern passt.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javjuipjm",
@@ -1246,7 +1381,8 @@
       "title": "Der Sprung in den Hyperraum sähe anders aus",
       "text": "Bei nahezu Lichtgeschwindigkeit würden die Sterne nicht als Streifen nach hinten ziehen. Die Aberration schiebt alles Licht nach vorn zusammen, und die Farben verschieben sich ins Blaue.",
       "more": "Vor dem Schiff bliebe ein heller Fleck: die kosmische Hintergrundstrahlung, hochverschoben ins Sichtbare. Der Rest des Himmels wäre dunkel.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javnh5swb",
@@ -1255,7 +1391,8 @@
       "title": "Lichtschwerter bestehen aus dem häufigsten Zustand",
       "text": "Plasma ist Gas, dem die Elektronen entrissen wurden. Über 99 Prozent der sichtbaren Materie im Universum liegen in diesem Zustand vor, denn alle Sterne bestehen daraus.",
       "more": "Frei geformtes Plasma leuchtet zwar, hält aber ohne Magnetfeld keine Form – und schon gar nicht auf einer festen Länge.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javamr6vl",
@@ -1264,7 +1401,8 @@
       "title": "Planeten ohne Sonne gibt es zuhauf",
       "text": "Nicht jeder Planet gehört zu einem Stern. Frei durch die Galaxis treibende Welten wurden vielfach nachgewiesen und könnten sogar zahlreicher sein als die Sterne selbst.",
       "more": "2023 fand das James-Webb-Teleskop im Orionnebel Dutzende solcher Objekte, viele davon paarweise unterwegs – bis heute unerklärt.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav5y8au9",
@@ -1273,7 +1411,8 @@
       "title": "Sandstürme kann der Mars besser",
       "text": "Auf dem Mars wachsen Staubstürme gelegentlich so weit an, dass sie den ganzen Planeten einhüllen. Wochenlang dringt dann kaum Sonnenlicht bis zum Boden.",
       "more": "Ein solcher Sturm beendete 2018 die Mission des Rovers Opportunity: Seine Solarzellen bekamen zu wenig Licht.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javu5a9zb",
@@ -1282,7 +1421,8 @@
       "title": "Ewiger Tag auf der einen Seite",
       "text": "Planeten, die einen Roten Zwerg eng umkreisen, geraten meist in gebundene Rotation: Sie wenden dem Stern immer dieselbe Seite zu.",
       "more": "Auf der einen Hälfte steht die Sonne dann für immer am selben Punkt, auf der anderen ist ewige Nacht. Leben wäre am ehesten im Dämmerungsgürtel dazwischen denkbar.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javtu7hge",
@@ -1291,7 +1431,8 @@
       "title": "Das Ziel liegt 11,9 Lichtjahre entfernt",
       "text": "Der Stern Tau Ceti, Ziel der Reise in „Project Hail Mary“, steht 11,9 Lichtjahre von uns entfernt. Sein Licht, das heute bei uns ankommt, ist zur Zeit der Jahrtausendwende gestartet.",
       "more": "Tau Ceti gehört damit zu den zwei Dutzend Sternsystemen in unserer unmittelbaren Nachbarschaft. Auf galaktischen Maßstäben liegt er praktisch nebenan.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javpf5nas",
@@ -1300,7 +1441,8 @@
       "title": "Warum ausgerechnet Tau Ceti",
       "text": "Unter den nahen Sternen ist Tau Ceti einer der wenigen, die der Sonne wirklich ähneln: etwas kleiner, etwas kühler, rund 55 Prozent ihrer Leuchtkraft – und vor allem ein Einzelstern ohne störenden Begleiter.",
       "more": "Die meisten nahen Sterne sind entweder Rote Zwerge oder Teil eines Doppelsystems. Sonnenähnliche Einzelsterne sind in Reichweite selten.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav80vkcz",
@@ -1309,7 +1451,8 @@
       "title": "Zwei Dutzend Nachbarn",
       "text": "Innerhalb von zwölf Lichtjahren um die Sonne liegen ungefähr zwei Dutzend Sternsysteme. Die allermeisten davon sind Rote Zwerge, die man ohne Teleskop nie zu sehen bekommt.",
       "more": "Mit bloßem Auge sichtbar sind aus dieser Nachbarschaft nur eine Handvoll, darunter Sirius, Prokyon und Tau Ceti.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javi0brbi",
@@ -1318,7 +1461,8 @@
       "title": "Die Sonnenkonstante",
       "text": "Am Ort der Erde treffen pro Quadratmeter rund 1.361 Watt Sonnenstrahlung ein. Dieser Wert heißt Sonnenkonstante und ist die Grundlage jeder Klimarechnung.",
       "more": "Gemessen wird er seit 1978 von Satelliten. Vom Boden aus ginge es nicht: Die Atmosphäre schluckt einen erheblichen Teil der Strahlung.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javrpnxkh",
@@ -1327,7 +1471,8 @@
       "title": "So konstant ist die Sonne gar nicht",
       "text": "Im Rhythmus des elfjährigen Sonnenfleckenzyklus schwankt die Strahlungsleistung der Sonne um etwa ein Promille. Für das Klima ist das wenig, messbar ist es trotzdem.",
       "more": "Erstaunlich dabei: Bei vielen Sonnenflecken strahlt die Sonne insgesamt etwas stärker, obwohl die Flecken selbst dunkel sind.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javjizeq8",
@@ -1336,7 +1481,8 @@
       "title": "Als die Sonnenflecken verschwanden",
       "text": "Zwischen 1645 und 1715 wurden über Jahrzehnte kaum Sonnenflecken beobachtet. Diese Phase heißt Maunder-Minimum und fiel mit einem besonders kalten Abschnitt in Europa zusammen.",
       "more": "Ob und wie stark die Sonne daran schuld war, ist bis heute umstritten. Gleichzeitig gab es zahlreiche große Vulkanausbrüche.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javfsnocs",
@@ -1345,7 +1491,8 @@
       "title": "Ein Prozent weniger würde reichen",
       "text": "Sänke die Sonneneinstrahlung dauerhaft um nur ein Prozent, kühlte die Erde spürbar ab. Der Effekt bliebe nicht bei einem Prozent stehen, denn das Klima verstärkt solche Anstöße selbst.",
       "more": "Genau davon lebt die Ausgangslage in „Project Hail Mary“: Nicht die Sonne muss erlöschen, sie muss nur ein wenig schwächer werden.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav8a0lhk",
@@ -1354,7 +1501,8 @@
       "title": "Eis macht mehr Eis",
       "text": "Schnee und Eis werfen Sonnenlicht zurück, dunkles Wasser und dunkler Boden schlucken es. Wird es kälter, wächst die Eisfläche – und die größere Eisfläche kühlt weiter ab.",
       "more": "Die Rückkopplung zwischen Eisfläche und Temperatur wirkt in beide Richtungen und macht das Klima empfindlich gegenüber kleinen Änderungen der Einstrahlung.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javlxf8pi",
@@ -1363,7 +1511,8 @@
       "title": "Die Sonne wird von selbst heller",
       "text": "Seit ihrer Entstehung ist die Sonne rund 30 Prozent heller geworden, und sie legt weiter zu – etwa zehn Prozent pro Milliarde Jahre.",
       "more": "In rund einer Milliarde Jahren dürfte das reichen, um die Ozeane verdampfen zu lassen. Die Erde wird also unbewohnbar, lange bevor die Sonne stirbt.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javq2ypey",
@@ -1372,7 +1521,8 @@
       "title": "Ein Leuchten in der Ekliptik",
       "text": "Zwischen den Planeten schwebt feiner Staub, der Sonnenlicht streut. Bei sehr dunklem Himmel sieht man ihn als schwachen Lichtkegel entlang der Tierkreisbahn: das Zodiakallicht.",
       "more": "Am besten sichtbar ist es im Frühjahr nach der Dämmerung und im Herbst vor Sonnenaufgang – ganz ohne Teleskop.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav63cvxp",
@@ -1381,7 +1531,8 @@
       "title": "Jeder Stoff hat einen Fingerabdruck",
       "text": "Zerlegt man Licht in seine Farben, fehlen an ganz bestimmten Stellen Linien. Dieses Muster ist für jedes Element und jedes Molekül einmalig.",
       "more": "Deshalb wissen wir, woraus Sterne bestehen, ohne je einen berührt zu haben. Entdeckt wurde das Prinzip in den 1860er Jahren.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javy9kolq",
@@ -1390,7 +1541,8 @@
       "title": "Wärmestrahlung sieht man nur von oben",
       "text": "Das mittlere Infrarot, in dem warme Objekte strahlen, wird von der Erdatmosphäre fast vollständig geschluckt. Vom Boden aus ist dieser Bereich praktisch blind.",
       "more": "Deshalb steht das James-Webb-Teleskop im All und wird auf unter minus 230 Grad gekühlt – sonst würde es sich selbst überstrahlen.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav6ob7cj",
@@ -1399,7 +1551,8 @@
       "title": "40 Eridani ist doppelt vergeben",
       "text": "Die Heimat des Außerirdischen in „Project Hail Mary“ liegt bei 40 Eridani. Denselben Stern hatte Star Trek Jahrzehnte zuvor bereits als Sonne von Spocks Heimatwelt Vulkan festgelegt.",
       "more": "Den Stern gibt es wirklich: ein Dreifachsystem in 16,3 Lichtjahren Entfernung, gut sichtbar im Sternbild Eridanus.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javgua0e8",
@@ -1408,7 +1561,8 @@
       "title": "Ein Weißer Zwerg zum Selbersehen",
       "text": "40 Eridani B ist einer der am leichtesten zu beobachtenden Weißen Zwerge überhaupt. Mit rund 9,5 Größenklassen zeigt ihn schon ein kleines Teleskop.",
       "more": "Ein Weißer Zwerg ist der ausgeglühte Rest eines Sterns: etwa so groß wie die Erde, aber mit ungefähr der halben Masse der Sonne.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javy7m29c",
@@ -1417,7 +1571,8 @@
       "title": "Der dritte Stern flackert",
       "text": "Zum System 40 Eridani gehört noch ein Roter Zwerg. Er ist ein Flarestern: Innerhalb von Minuten kann er sich deutlich aufhellen und wieder abklingen.",
       "more": "Solche Ausbrüche schleudern Strahlung und Teilchen ins All. Für Planeten in der Nähe wären sie ein ernsthaftes Problem.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javkraj4d",
@@ -1426,7 +1581,8 @@
       "title": "Druck wie in 290 Metern Tiefe",
       "text": "Die Heimatwelt des Außerirdischen hat im Roman einen Luftdruck von etwa 29 bar. Auf der Erde herrscht dieser Druck erst in rund 290 Metern Wassertiefe.",
       "more": "Extrem ist das im Sonnensystem nicht: Auf der Venus liegt der Bodendruck bei 92 bar, dem Dreifachen davon.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javiaw6zo",
@@ -1435,7 +1591,8 @@
       "title": "Dichte Luft macht laut, nicht schnell",
       "text": "Wie schnell Schall ist, hängt vor allem von Temperatur und Gasart ab, kaum vom Druck. Sehr wohl vom Druck abhängt jedoch, wie viel Energie eine Schallwelle trägt.",
       "more": "In einer dichten Atmosphäre wäre dasselbe Geräusch also deutlich lauter und trüge weiter – Verständigung über Töne läge dort nahe.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav16e5dz",
@@ -1444,7 +1601,8 @@
       "title": "Ammoniak statt Wasser",
       "text": "Wasser gilt als ideales Lösungsmittel für Leben, ist aber nicht das einzig denkbare. Ammoniak bleibt bei tieferen Temperaturen flüssig und löst ebenfalls viele Stoffe.",
       "more": "Unter höherem Druck erweitert sich sein flüssiger Bereich zusätzlich. In der Astrobiologie wird Ammoniak deshalb ernsthaft diskutiert.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav8bslqy",
@@ -1453,7 +1611,8 @@
       "title": "Der kälteste bekannte Nachbar",
       "text": "In 7,2 Lichtjahren Entfernung steht das Objekt WISE 0855: ein Brauner Zwerg, zu leicht zum Zünden der Kernfusion, mit einer Temperatur von etwa minus 20 bis minus 40 Grad.",
       "more": "WISE 0855 ist kälter als jeder bekannte Stern und wurde erst 2014 entdeckt – trotz der geringen Entfernung, weil das Objekt fast nur im Infraroten strahlt.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javb14a2q",
@@ -1462,7 +1621,8 @@
       "title": "Der schnellste Stern am Himmel",
       "text": "Barnards Pfeilstern in knapp sechs Lichtjahren Entfernung wandert schneller über den Himmel als jeder andere Stern: Er legt in rund 180 Jahren die Breite des Vollmonds zurück.",
       "more": "Alle Sterne bewegen sich, nur sind sie meist zu weit weg, um das zu bemerken. Die Sternbilder verändern sich über Jahrtausende hinweg.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javh6gtfd",
@@ -1471,7 +1631,8 @@
       "title": "Sirius ist ein Doppelstern",
       "text": "Der hellste Stern des Nachthimmels hat einen Begleiter: einen Weißen Zwerg, der 1862 entdeckt wurde. Vorhergesagt hatte man ihn schon 1844, weil Sirius merkwürdig taumelte.",
       "more": "Der Begleiter ist zehntausendmal lichtschwächer und geht im Glanz des Hauptsterns fast unter – ein schwieriges, aber lohnendes Teleskopziel.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav57r6pb",
@@ -1480,7 +1641,8 @@
       "title": "Fünf Jahre an Bord, dreizehn auf der Erde",
       "text": "Ein Schiff mit 92 Prozent der Lichtgeschwindigkeit bräuchte für die 11,9 Lichtjahre nach Tau Ceti knapp 13 Jahre. An Bord vergingen dabei nur etwa fünf.",
       "more": "Der Unterschied ist keine technische Frage, sondern folgt direkt aus der Relativitätstheorie. Wer zurückkäme, fände eine um Jahrzehnte gealterte Heimat vor.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javrrnmzy",
@@ -1489,7 +1651,8 @@
       "title": "Das eigentliche Problem ist die Energie",
       "text": "Nicht die Entfernung macht interstellare Reisen schwierig, sondern der Antrieb. Um überhaupt in die Nähe der Lichtgeschwindigkeit zu kommen, braucht es unvorstellbare Energiemengen.",
       "more": "Chemische Raketen scheiden aus: Ihr Treibstoff setzt pro Kilogramm nur einige Millionen Joule frei, benötigt würde das Milliardenfache.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javwscclb",
@@ -1498,7 +1661,8 @@
       "title": "Antimaterie wäre der dichteste Treibstoff",
       "text": "Treffen ein Gramm Materie und ein Gramm Antimaterie aufeinander, wird die gesamte Masse in Energie umgewandelt: rund 1,8 mal 10<sup>14</sup> Joule.",
       "more": "Das entspricht etwa der Sprengkraft von 40.000 Tonnen TNT. Herstellen lassen sich bisher nur winzigste Mengen, mit gewaltigem Aufwand.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javu837p1",
@@ -1507,7 +1671,8 @@
       "title": "Sonnensegel fliegen wirklich",
       "text": "Licht übt Druck aus. Zwar ist er winzig, wirkt aber ununterbrochen – ein großes, dünnes Segel kann ein Raumfahrzeug damit beschleunigen, ganz ohne Treibstoff.",
       "more": "Japan zeigte das 2010 mit der Sonde IKAROS, 2019 folgte die private Mission LightSail 2 in der Erdumlaufbahn.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1jav6ivjw6",
@@ -1516,7 +1681,8 @@
       "title": "Ein Staubkorn wird zur Bombe",
       "text": "Bei 92 Prozent der Lichtgeschwindigkeit trägt schon ein Staubkorn von einem Milligramm die Energie von etwa 30 Tonnen TNT.",
       "more": "Ein Schutzschild gegen solche Treffer ist eines der ungelösten Probleme jeder ernsthaften Planung interstellarer Reisen.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javpgdlxg",
@@ -1525,7 +1691,8 @@
       "title": "Zwischen den Sternen ist fast nichts",
       "text": "Im interstellaren Raum schwebt im Schnitt etwa ein Atom pro Kubikzentimeter. Das ist ein besseres Vakuum, als sich auf der Erde herstellen lässt.",
       "more": "Auf Strecken von Lichtjahren summiert sich selbst das: Ein Schiff durchpflügt dabei erhebliche Mengen Material.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javnt1z9l",
@@ -1534,7 +1701,8 @@
       "title": "Eine Antwort bräuchte 24 Jahre",
       "text": "Ein Funkspruch zum Stern Tau Ceti ist 11,9 Jahre unterwegs. Auf eine Antwort müsste man noch einmal genauso lange warten.",
       "more": "Ein Gespräch ist damit ausgeschlossen. Jede Nachricht müsste für sich allein verständlich sein – wie eine Flaschenpost.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javhav8y6",
@@ -1543,7 +1711,8 @@
       "title": "Schwerkraft durch Drehung",
       "text": "Ein rotierendes Raumschiff erzeugt eine nach außen gerichtete Kraft, die sich wie Schwerkraft anfühlt. Für volle Erdschwere bei vier Umdrehungen pro Minute bräuchte es einen Radius von rund 56 Metern.",
       "more": "Dreht sich der Ring schneller, genügt weniger Radius – dann aber unterscheidet sich die Kraft an Kopf und Füßen so stark, dass vielen übel wird.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kmsdl1javfkqsdv",
@@ -1552,7 +1721,8 @@
       "title": "Strahlung ist der stille Begleiter",
       "text": "Der Rover Curiosity maß auf dem Flug zum Mars die Strahlenbelastung im freien Raum. Für Hin- und Rückflug ergaben sich etwa 0,66 Sievert.",
       "more": "Das liegt nahe an dem, was Raumfahrtbehörden als Lebenszeitgrenze ansetzen. Für Jahre im interstellaren Raum bräuchte es massive Abschirmung.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "ksn9ih43ba3qy",
@@ -1561,7 +1731,8 @@
       "title": "Der Luftdruck reicht nicht",
       "text": "Die Marsatmosphäre besteht zu 95 Prozent aus Kohlendioxid, drückt aber nur mit 6 Millibar auf den Boden. Ein Mensch ohne Anzug würde dort nicht ersticken – seine Körperflüssigkeiten begännen bei Körpertemperatur zu sieden.",
       "more": "Die Grenze heißt Armstrong-Linie und liegt bei rund 63 Millibar, dem Druck in 19 Kilometern Höhe über der Erde.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "km30t0u1niit8",
@@ -1570,7 +1741,8 @@
       "title": "Das Kohlendioxid reicht auch nicht",
       "text": "Der Plan, das gefrorene Kohlendioxid der Marspole zu verdampfen, wurde 2018 durchgerechnet. Alles zugängliche Kohlendioxid zusammen ergäbe 15 Millibar Druck. Für eine atembare Atmosphäre bräuchte es das Sechzigfache.",
       "more": "Die Rechnung stammt von Bruce Jakosky und Christopher Edwards und erschien in Nature Astronomy.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "ktu9l8tkcf6v7",
@@ -1579,7 +1751,8 @@
       "title": "Der Sonnenwind trägt die Luft davon",
       "text": "Mars hat kein globales Magnetfeld. Der Sonnenwind trifft die Atmosphäre deshalb ungebremst und reißt beständig Gas ins All. Eine neu aufgebaute Lufthülle würde ohne Schutz auf lange Sicht dasselbe Schicksal erleiden.",
       "more": "Die Raumsonde MAVEN vermaß den Verlust auf rund 100 Gramm pro Sekunde, bei Sonnenstürmen deutlich mehr.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kjoi8hm4w1nmo",
@@ -1588,7 +1761,8 @@
       "title": "Ein Magnetschild vor dem Planeten",
       "text": "2017 schlug der NASA-Wissenschaftler Jim Green vor, zwischen Sonne und Mars ein künstliches Magnetfeld aufzuspannen. Der Schild stünde weit vor dem Planeten und lenkte den Sonnenwind um ihn herum. Die Atmosphäre könnte sich dann von selbst wieder verdichten.",
       "more": "Der Vorschlag ist eine Studie geblieben. Ein Magnetfeld dieser Größe hat noch niemand gebaut.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kcaa23j26yzl1",
@@ -1597,7 +1771,8 @@
       "title": "Der Boden ist giftig",
       "text": "Im Marsstaub stecken Perchlorate, Salze der Überchlorsäure. Der Lander Phoenix wies sie 2008 nach, spätere Messungen fanden sie überall. Schon unter einem Prozent stört die Schilddrüse und macht den Boden ohne Behandlung für Pflanzen unbrauchbar.",
       "more": "Manche irdischen Bakterien atmen Perchlorat und könnten den Boden womöglich entgiften.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "ksc7a6bz86fzs",
@@ -1606,7 +1781,8 @@
       "title": "Wärmer wird es nicht von allein",
       "text": "Auf dem Mars liegt die mittlere Temperatur bei etwa minus 63 Grad. Selbst am Äquator fällt sie nachts unter minus 70 Grad. Damit flüssiges Wasser dauerhaft bestehen könnte, müsste das Mittel um mehr als 60 Grad steigen.",
       "more": "Zum Vergleich: Auf der Erde liegt die mittlere Temperatur bei rund 15 Grad.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "k2jxkn35eqm98",
@@ -1615,7 +1791,8 @@
       "title": "Wasser ist genug da, nur gefroren",
       "text": "An Wasser mangelt es dem Mars nicht. In den Polkappen und unter der Oberfläche steckt so viel Eis, dass es den ganzen Planeten mehrere Meter hoch bedecken würde. Beim heutigen Luftdruck bliebe es nur nicht flüssig.",
       "more": "Radarmessungen der Sonde Mars Express fanden 2018 Hinweise auf Wasser unter dem Südpol; die Deutung ist umstritten.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "ks4g6p559yj80",
@@ -1624,7 +1801,8 @@
       "title": "Weniger Schwerkraft, unbekannte Folgen",
       "text": "Auf dem Mars wiegt ein Mensch nur 38 Prozent dessen, was er auf der Erde wiegt. Wie sich das über Jahre auswirkt, weiß niemand: Alle Daten stammen aus der Schwerelosigkeit oder von wenigen Tagen auf dem Mond.",
       "more": "Auf der Raumstation verlieren Menschen ohne tägliches Training rund ein Prozent Knochenmasse im Monat.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kka915t8pxla8",
@@ -1633,7 +1811,8 @@
       "title": "Vier Menschen um den Mond",
       "text": "Artemis 2 ist der erste bemannte Flug des Raumschiffs Orion. An Bord sind vier Menschen: Reid Wiseman, Victor Glover, Christina Koch und der Kanadier Jeremy Hansen. Der Weg führt einmal um den Mond herum und zurück, ohne in eine Umlaufbahn einzuschwenken.",
       "more": "Christina Koch hält mit 328 Tagen am Stück den Rekord für den längsten Raumflug einer Frau.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kwxvis4e8xc14",
@@ -1642,7 +1821,8 @@
       "title": "Der weiteste Ausflug seit 1972",
       "text": "Seit Apollo 17 im Dezember 1972 kam kein Mensch mehr weiter hinaus als in eine Erdumlaufbahn. Artemis 2 führt wieder darüber hinaus, hinter den Mond und zurück. Zwischen den beiden Flügen liegen mehr als fünfzig Jahre.",
       "more": "Die zwölf Menschen, die auf dem Mond gestanden haben, waren alle zwischen 1969 und 1972 dort.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "k98ansb4bf0pk",
@@ -1651,7 +1831,8 @@
       "title": "Die Bahn bringt sie von selbst zurück",
       "text": "Artemis 2 fliegt auf einer freien Rückkehrbahn. Die Schwerkraft des Mondes lenkt das Raumschiff dabei so um, dass es ohne weiteres Zünden von allein zur Erde zurückfällt. Fällt unterwegs der Antrieb aus, kommt die Besatzung trotzdem heim.",
       "more": "Eine solche Bahn rettete 1970 die Besatzung von Apollo 13, nachdem ein Sauerstofftank explodiert war.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "k2h2287jxnuti",
@@ -1660,7 +1841,8 @@
       "title": "Zehn Tage, kein Landeanflug",
       "text": "Der Flug ist auf rund zehn Tage angelegt, gelandet wird nicht. Artemis 2 soll zeigen, dass Orion Menschen sicher hinaus und zurückbringt und dass Lebenserhaltung, Navigation und Funk über diese Entfernung arbeiten. Das Landen bleibt späteren Flügen vorbehalten.",
       "more": "Der Vorgänger Artemis 1 flog dieselbe Strecke 2022 unbemannt, mit Messpuppen auf den Sitzen.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "k47a04ebjf34y",
@@ -1669,7 +1851,8 @@
       "title": "Die Rückkehr ist der heißeste Teil",
       "text": "Orion kommt mit fast 40.000 Kilometern pro Stunde in die Erdatmosphäre zurück. Der Hitzeschild muss dabei rund 2.800 Grad aushalten. Beim unbemannten Vorgängerflug löste sich mehr Material vom Schild als erwartet.",
       "more": "Der Schild besteht aus Avcoat, einem Material, das gezielt verglüht und die Wärme mit sich fortträgt.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "k0zasckxglsax",
@@ -1678,7 +1861,8 @@
       "title": "Jedes Gespräch hat eine Pause",
       "text": "Vom Mond zur Erde braucht ein Funksignal etwa 1,3 Sekunden. Zwischen einer Frage und ihrer Antwort liegen also mindestens zweieinhalb Sekunden. Gespräche zwischen Besatzung und Bodenkontrolle bekommen dadurch ihren stockenden Rhythmus.",
       "more": "Zum Mars dauert dasselbe je nach Stellung der Planeten zwischen drei und 22 Minuten je Richtung.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kcj7d9mqloffd",
@@ -1687,7 +1871,8 @@
       "title": "Eine Rakete, die nur einmal fliegt",
       "text": "Getragen wird Artemis 2 von der Rakete Space Launch System. Sie ist gut 98 Meter hoch und liefert beim Start rund 39 Meganewton Schub. Jede dieser Raketen fliegt genau einmal, wiederverwendet wird nichts.",
       "more": "Die Saturn V der Apollo-Flüge war mit 110 Metern höher, hatte aber weniger Schub beim Start.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kph65zg063dt0",
@@ -1696,7 +1881,8 @@
       "title": "Warum überhaupt zurück zum Mond",
       "text": "Artemis zielt nicht auf einen Besuch, sondern auf ein Bleiben. Am Südpol des Mondes liegt in nie besonnten Kratern Wassereis. Wasser lässt sich trinken, atmen und zu Treibstoff verarbeiten.",
       "more": "Ein Kilogramm zum Mond zu bringen kostet ein Vielfaches dessen, was ein Kilogramm in die Erdumlaufbahn kostet.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "ktlcke3z5p6f1",
@@ -1705,7 +1891,8 @@
       "title": "Nicht das Schiff bewegt sich",
       "text": "Ein Warpantrieb umgeht das Tempolimit der Lichtgeschwindigkeit, indem er nicht das Schiff beschleunigt, sondern den Raum darum. Vor dem Schiff wird der Raum gestaucht, dahinter gedehnt. Das Schiff selbst ruht in seiner Blase.",
       "more": "Für den Raum gilt kein Tempolimit. Kurz nach dem Urknall dehnte er sich weit schneller aus, als Licht fliegt.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "k1qs340eqz0vx",
@@ -1714,7 +1901,8 @@
       "title": "1994 wurde es vorgerechnet",
       "text": "Der Physiker Miguel Alcubierre veröffentlichte 1994 eine Lösung der einsteinschen Feldgleichungen, die genau so eine Blase beschreibt. Die Rechnung ist mathematisch sauber. Über die Frage, ob sich das Nötige beschaffen lässt, sagt sie nichts.",
       "more": "Alcubierre gab später an, die Idee beim Ansehen von Star Trek gehabt zu haben.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kpa3p25gdtjjs",
@@ -1723,7 +1911,8 @@
       "title": "Es braucht Materie, die es nicht gibt",
       "text": "Die Blase hält nur zusammen, wenn man Materie mit negativer Energiedichte hineinsteckt, also etwas, das weniger als nichts wiegt. Beobachtet wurde so etwas nie. Bekannt ist lediglich ein schwacher verwandter Effekt zwischen zwei Metallplatten im Vakuum.",
       "more": "Der Casimir-Effekt erzeugt zwischen zwei Platten einen winzigen Bereich negativer Energiedichte.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kxl47luscbxqj",
@@ -1732,7 +1921,8 @@
       "title": "Erst ein Universum, dann ein paar Zentner",
       "text": "Alcubierres erste Abschätzung verlangte negative Energie in der Größenordnung des ganzen sichtbaren Universums. Spätere Arbeiten drückten den Bedarf auf die Masse des Jupiter, dann auf einige Hundert Kilogramm.",
       "more": "Die Verkleinerung gelang durch dünnere Blasenwände und eine schwingende Blase, nicht durch neue Physik.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kelmggbx9l7bj",
@@ -1741,7 +1931,8 @@
       "title": "Die Blase sammelt unterwegs ein",
       "text": "2012 rechneten Physiker durch, was eine Warpblase auf ihrem Weg aufliest. Teilchen, die ihr in die Quere kommen, stauen sich an der Blasenwand. Beim Anhalten würden sie nach vorn losgelassen und alles vor dem Schiff verglühen lassen.",
       "more": "Die Arbeit stammt von Brendan McMonigal, Geraint Lewis und Philip O'Byrne.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "k1romgrrodgnl",
@@ -1750,7 +1941,8 @@
       "title": "Und die Zeit gerät durcheinander",
       "text": "Wer schneller als das Licht reist, reist von manchen Standpunkten aus gesehen rückwärts in der Zeit. Zwei Warpflüge nacheinander könnten ein Schiff zurückschicken, bevor es losgeflogen ist.",
       "more": "Stephen Hawking vermutete, die Physik verhindere Zeitreisen von selbst, und nannte das Chronologieschutz.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "k3f56xozkl4f8",
@@ -1759,7 +1951,8 @@
       "title": "Eine Warpblase ohne Überlichtgeschwindigkeit",
       "text": "2021 zeigten Alexey Bobrick und Gianni Martire, dass sich Warpblasen auch ohne negative Energie beschreiben lassen. Der Preis ist hoch: Solche Blasen bleiben langsamer als das Licht. Als Antrieb taugen sie damit nicht, als Rechenbeispiel schon.",
       "more": "Nötig wären trotzdem Massen in der Größenordnung ganzer Planeten.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kw968nixspqve",
@@ -1768,7 +1961,8 @@
       "title": "Gemessen wurde bisher nichts",
       "text": "Kein Experiment hat je eine Warpblase erzeugt oder eine Spur davon gefunden. Ein NASA-Labor suchte jahrelang mit Laserinterferometern nach winzigen Verzerrungen des Raums, ohne Ergebnis.",
       "more": "Der Warpantrieb ist Rechnung geblieben, anders als der Ionenantrieb, der ebenfalls aus der Literatur kam und heute fliegt.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "keege52ohhhmd",
@@ -1777,7 +1971,8 @@
       "title": "Der Kommunikator wurde zum Handy",
       "text": "Martin Cooper baute 1973 bei Motorola das erste Mobiltelefon. Als Vorbild nannte er den Kommunikator aus Star Trek, den er wenige Jahre zuvor im Fernsehen gesehen hatte. Das Gerät wog rund ein Kilogramm und hielt eine halbe Stunde durch.",
       "more": "Cooper führte den ersten Anruf auf offener Straße in New York, und zwar bei einem Konkurrenten.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kvol0bhn6jjpx",
@@ -1786,7 +1981,8 @@
       "title": "Jules Verne traf beinahe alles",
       "text": "In Jules Vernes Roman von 1865 startet eine Kapsel mit drei Mann von Florida aus zum Mond und fällt am Ende in den Pazifik. Apollo 11 startete gut hundert Jahre später aus Florida, mit drei Mann, und wasserte im Pazifik.",
       "more": "Verne rechnete auch die nötige Startgeschwindigkeit aus und lag nur wenige Prozent daneben.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kjcp2los5gx4j",
@@ -1795,7 +1991,8 @@
       "title": "Der geostationäre Satellit stand im Aufsatz",
       "text": "1945 beschrieb der Schriftsteller Arthur C. Clarke in einer Fachzeitschrift, wie drei Satelliten in 36.000 Kilometern Höhe die ganze Erde mit Funk versorgen könnten. In dieser Höhe braucht ein Satellit genau einen Tag pro Umlauf und steht deshalb still über einem Punkt.",
       "more": "Die Bahn heißt heute Clarke-Gürtel. Clarke selbst hat die Idee nie patentieren lassen.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kviro3qbl2v4b",
@@ -1804,7 +2001,8 @@
       "title": "Das Tablet lief 1968 im Kino",
       "text": "In Stanley Kubricks Film 2001 essen zwei Astronauten und schauen dabei auf flache Bildschirme, die lose auf dem Tisch liegen. Als Samsung 2011 von Apple wegen des Aussehens des iPad verklagt wurde, führte der Konzern diese Szene an, um zu zeigen, dass die Form älter sei.",
       "more": "Das Gericht ließ den Einwand nicht zu.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "k07mzy9mywlqb",
@@ -1813,7 +2011,8 @@
       "title": "Der Taser heißt nach einem Romanhelden",
       "text": "Der Erfinder Jack Cover benannte seine Elektrowaffe nach einem Jugendbuch: Tom Swift and His Electric Rifle. Aus dem Titel wurde die Abkürzung TSER, die sich schlecht sprechen ließ. Cover schob ein A dazwischen, und daraus wurde Taser.",
       "more": "Die Bücher um den jungen Erfinder Tom Swift erscheinen seit 1910.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "kx2llmvp87sce",
@@ -1822,7 +2021,8 @@
       "title": "Das Bildtelefon aus dem Stummfilm",
       "text": "In Fritz Langs Film Metropolis von 1927 telefoniert der Herrscher der Stadt mit Bild. Die Wirklichkeit war schneller als gedacht: Ab 1936 betrieb die Deutsche Reichspost Bildtelefonstuben zwischen Berlin und Leipzig.",
       "more": "Die Verbindung lief über eigens verlegte Breitbandkabel. Der Betrieb endete im Krieg.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "km55llart5a3f",
@@ -1831,7 +2031,8 @@
       "title": "Raketen, die auf dem Heck landen",
       "text": "Rückwärts landende Raketen waren jahrzehntelang ein Bild aus Comics und Filmen, während die Raumfahrt ihre Stufen im Meer versenkte. Seit 2015 landet die erste Stufe der Falcon 9 regelmäßig senkrecht, auf einer Betonplatte oder auf einem Schiff.",
       "more": "Einzelne Exemplare sind mehr als zwanzigmal geflogen.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "k99ys83wgxj3w",
@@ -1840,7 +2041,8 @@
       "title": "Der Roboterarm hieß erst Waldo",
       "text": "Robert Heinlein beschrieb 1942 in einer Erzählung ferngesteuerte Greifarme, mit denen ein kranker Erfinder schwere Arbeit verrichtet. Die Technik steht heute in jedem Labor mit radioaktivem Material. In der Fachsprache heißen solche Manipulatoren bis heute Waldos.",
       "more": "Heinlein veröffentlichte die Geschichte unter dem Namen Anson MacDonald.",
-      "source": ""
+      "source": "",
+      "level": ""
     },
     {
       "id": "k6dmj8bgduz17",
@@ -1849,7 +2051,8 @@
       "title": "Milliarden durch jeden Fingernagel",
       "text": "Durch jeden Quadratzentimeter der Erdoberfläche fliegen pro Sekunde rund 65 Milliarden Neutrinos aus der Sonne. Körper, Gebäude und der ganze Planet stehen ihnen dabei kaum im Weg.",
       "more": "Ein Neutrino müsste ein Lichtjahr Blei durchqueren, damit es mit einiger Wahrscheinlichkeit überhaupt hängen bleibt.",
-      "source": "John Bahcall, Neutrino Astrophysics, Cambridge University Press"
+      "source": "John Bahcall, Neutrino Astrophysics, Cambridge University Press",
+      "level": ""
     },
     {
       "id": "keh7uk1mxd2se",
@@ -1858,7 +2061,8 @@
       "title": "Nachts kommen sie von unten",
       "text": "Neutrinos hält die Erde nicht auf. Nachts, wenn die Sonne auf der anderen Seite des Planeten steht, treffen sie einen Menschen von unten – nachdem sie 12.700 Kilometer Gestein durchquert haben.",
       "more": "Detektoren nutzen das aus und suchen gezielt nach Teilchen von unten. Die Erde filtert alles andere weg.",
-      "source": "IceCube Neutrino Observatory, icecube.wisc.edu"
+      "source": "IceCube Neutrino Observatory, icecube.wisc.edu",
+      "level": ""
     },
     {
       "id": "kqyldmqok4y5p",
@@ -1867,7 +2071,8 @@
       "title": "Drei Sorten, die sich verwandeln",
       "text": "Neutrinos treten in drei Sorten auf und wandeln sich unterwegs ineinander um. Ein Teilchen kann als Elektron-Neutrino starten und als Myon-Neutrino ankommen.",
       "more": "Von der Sonne kamen dadurch scheinbar zu wenige an – ein Rätsel, das die Physik dreißig Jahre beschäftigte.",
-      "source": "Nobelpreis für Physik 2015, Takaaki Kajita und Arthur McDonald"
+      "source": "Nobelpreis für Physik 2015, Takaaki Kajita und Arthur McDonald",
+      "level": ""
     },
     {
       "id": "kjdr7ks5027je",
@@ -1876,7 +2081,8 @@
       "title": "Ein Kubikkilometer Eis als Fernrohr",
       "text": "Am Südpol steckt ein Kubikkilometer Eis voller Lichtsensoren. IceCube wartet darauf, dass ein Neutrino im Eis ein geladenes Teilchen erzeugt, das blaues Licht abstrahlt. Aus dem Muster der Blitze folgt die Richtung, aus der es kam.",
       "more": "Das Eis in zwei Kilometern Tiefe ist so klar, dass Licht dort über hundert Meter weit kommt.",
-      "source": "IceCube Neutrino Observatory, icecube.wisc.edu"
+      "source": "IceCube Neutrino Observatory, icecube.wisc.edu",
+      "level": ""
     },
     {
       "id": "k6tm0696kkunb",
@@ -1885,7 +2091,8 @@
       "title": "Drei Stunden vor dem Licht",
       "text": "Als 1987 in der Großen Magellanschen Wolke ein Stern explodierte, fingen drei Detektoren rund zwei Dutzend Neutrinos auf – etwa drei Stunden bevor das Licht eintraf. Dem stürzenden Kern entkommen sie sofort, das Licht braucht länger.",
       "more": "Aus diesen zwei Dutzend Teilchen entstand ein ganzer Zweig der Astronomie.",
-      "source": "Supernova 1987A, Nachweise durch Kamiokande-II, IMB und Baksan"
+      "source": "Supernova 1987A, Nachweise durch Kamiokande-II, IMB und Baksan",
+      "level": ""
     },
     {
       "id": "k9sq1ppzyazot",
@@ -1894,7 +2101,8 @@
       "title": "Leichter als alles andere",
       "text": "Neutrinos haben eine Masse, aber eine unfassbar kleine: weniger als ein Millionstel der Masse eines Elektrons. Warum sie so leicht sind und trotzdem nicht masselos, weiß bis heute niemand.",
       "more": "Das Experiment KATRIN in Karlsruhe wiegt sie, indem es den Zerfall von Tritium äußerst genau vermisst.",
-      "source": "KATRIN-Experiment, Karlsruher Institut für Technologie"
+      "source": "KATRIN-Experiment, Karlsruher Institut für Technologie",
+      "level": ""
     },
     {
       "id": "kromt047uuw19",
@@ -1903,7 +2111,8 @@
       "title": "Der Sonne beim Brennen zusehen",
       "text": "Licht braucht Zehntausende Jahre, um aus dem Sonnenkern an die Oberfläche zu gelangen. Neutrinos sind in gut zwei Sekunden draußen. Wer sie misst, sieht die Kernfusion von heute statt der von vorgestern.",
       "more": "Das Experiment Borexino wies 2020 erstmals Neutrinos aus einem zweiten Fusionsweg der Sonne nach.",
-      "source": "Borexino Collaboration, Nature 587, 577 (2020)"
+      "source": "Borexino Collaboration, Nature 587, 577 (2020)",
+      "level": ""
     },
     {
       "id": "kb3bpyxosvkou",
@@ -1912,7 +2121,8 @@
       "title": "Eines pro Leben bleibt hängen",
       "text": "Pro Sekunde durchqueren einige hundert Billionen Neutrinos einen Menschen. Im Lauf eines ganzen Lebens bleibt davon statistisch etwa ein einziges in ihm hängen. Alle anderen fliegen weiter, als wäre er nicht da.",
       "more": "Genau diese Gleichgültigkeit macht sie zu Boten aus Orten, aus denen kein Licht herausfindet.",
-      "source": "Abschätzung aus dem solaren Neutrinofluss"
+      "source": "Abschätzung aus dem solaren Neutrinofluss",
+      "level": ""
     },
     {
       "id": "kw2o12oirq2ww",
@@ -1921,7 +2131,8 @@
       "title": "Der Raum selbst schwingt",
       "text": "Zwei umeinander kreisende Schwarze Löcher stauchen und dehnen den Raum um sich herum. Diese Wellen laufen mit Lichtgeschwindigkeit nach außen. Trifft eine die Erde, wird alles kurz ein wenig länger und quer dazu ein wenig kürzer.",
       "more": "Einstein sagte die Wellen 1916 voraus und hielt sie für viel zu schwach, um je gemessen zu werden.",
-      "source": "Albert Einstein, Näherungsweise Integration der Feldgleichungen der Gravitation, 1916"
+      "source": "Albert Einstein, Näherungsweise Integration der Feldgleichungen der Gravitation, 1916",
+      "level": ""
     },
     {
       "id": "kpau61xwvqyon",
@@ -1930,7 +2141,8 @@
       "title": "Gemessen wird ein Bruchteil eines Protons",
       "text": "Die LIGO-Detektoren messen mit vier Kilometer langen Laserarmen. Eine Gravitationswelle ändert deren Länge um etwa ein Zehntausendstel des Durchmessers eines Protons. Genauer misst niemand irgendetwas.",
       "more": "Auf die Entfernung zum nächsten Stern hochgerechnet entspräche das der Breite eines menschlichen Haares.",
-      "source": "LIGO Scientific Collaboration, ligo.caltech.edu"
+      "source": "LIGO Scientific Collaboration, ligo.caltech.edu",
+      "level": ""
     },
     {
       "id": "kc20eao05ucuq",
@@ -1939,7 +2151,8 @@
       "title": "Hundert Jahre bis zum ersten Nachweis",
       "text": "Am 14. September 2015 sahen beide LIGO-Detektoren dasselbe Signal, sieben Millisekunden versetzt. Es stammte von zwei Schwarzen Löchern, die 1,3 Milliarden Jahre zuvor verschmolzen waren.",
       "more": "Das Signal dauerte zwei Zehntelsekunden. Mehr brauchte es nicht, um Massen und Entfernung zu bestimmen.",
-      "source": "Abbott et al., Physical Review Letters 116, 061102 (2016)"
+      "source": "Abbott et al., Physical Review Letters 116, 061102 (2016)",
+      "level": ""
     },
     {
       "id": "kafyuccbvsmfh",
@@ -1948,7 +2161,8 @@
       "title": "Drei Sonnen wurden zu Energie",
       "text": "Bei der ersten gemessenen Verschmelzung wogen die beiden Schwarzen Löcher zusammen 65 Sonnenmassen, das Ergebnis nur 62. Die fehlenden drei Sonnenmassen gingen in Sekundenbruchteilen als Gravitationswellen weg.",
       "more": "In diesem Augenblick übertraf die abgestrahlte Leistung die aller Sterne im sichtbaren Universum zusammen.",
-      "source": "Abbott et al., Physical Review Letters 116, 061102 (2016)"
+      "source": "Abbott et al., Physical Review Letters 116, 061102 (2016)",
+      "level": ""
     },
     {
       "id": "k8pe9swsrtwi9",
@@ -1957,7 +2171,8 @@
       "title": "Als Wellen und Licht zusammenkamen",
       "text": "2017 registrierten die Detektoren zwei verschmelzende Neutronensterne. Kurz darauf sahen Teleskope rund um die Welt dieselbe Stelle am Himmel aufleuchten. Zum ersten Mal wurde ein Ereignis in Wellen und in Licht zugleich beobachtet.",
       "more": "In den Trümmern entstanden Gold und Platin. Ein guter Teil der schweren Elemente stammt aus solchen Zusammenstößen.",
-      "source": "Abbott et al., Physical Review Letters 119, 161101 (2017)"
+      "source": "Abbott et al., Physical Review Letters 119, 161101 (2017)",
+      "level": ""
     },
     {
       "id": "kiosppdeew8kf",
@@ -1966,7 +2181,8 @@
       "title": "Das Brummen des ganzen Himmels",
       "text": "2023 meldeten mehrere Gruppen ein Rauschen aus Gravitationswellen, deren Wellenlängen in Lichtjahren gemessen werden. Gefunden wurde es nicht mit Lasern, sondern an Pulsaren, deren Ticken sich um Millionstel Sekunden verschiebt.",
       "more": "Als Quelle gelten Paare gigantischer Schwarzer Löcher in den Zentren verschmelzender Galaxien.",
-      "source": "NANOGrav, 15-Jahres-Datensatz, Astrophysical Journal Letters 2023"
+      "source": "NANOGrav, 15-Jahres-Datensatz, Astrophysical Journal Letters 2023",
+      "level": ""
     },
     {
       "id": "kc35j4uns7eqp",
@@ -1975,7 +2191,8 @@
       "title": "Warum es zwei Anlagen braucht",
       "text": "Ein einzelner Detektor kann nicht unterscheiden, ob er eine Welle registriert oder einen vorbeifahrenden Lastwagen. Erst wenn zwei Anlagen tausende Kilometer voneinander dasselbe im passenden Zeitabstand sehen, zählt ein Signal.",
       "more": "Aus dem Laufzeitunterschied ergibt sich zugleich grob die Richtung, aus der die Welle kam.",
-      "source": "LIGO Scientific Collaboration, ligo.caltech.edu"
+      "source": "LIGO Scientific Collaboration, ligo.caltech.edu",
+      "level": ""
     },
     {
       "id": "ktqmfe3oci6k8",
@@ -1984,7 +2201,8 @@
       "title": "Ein Detektor zwischen den Planeten",
       "text": "Wellen von sehr großen Schwarzen Löchern schwingen zu langsam für Anlagen auf der Erde. Die europäische Raumfahrtbehörde plant deshalb LISA: drei Sonden, die in Millionen Kilometern Abstand ein Dreieck bilden und ihren Abstand per Laser überwachen.",
       "more": "Vorgesehen ist ein Start in den 2030er Jahren.",
-      "source": "ESA, Mission LISA"
+      "source": "ESA, Mission LISA",
+      "level": ""
     }
   ]
 }

@@ -100,7 +100,10 @@ html, body {
   border-bottom: 0.45mm solid #000;
 }
 .theme { font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; line-height: 1.2; }
-.number { font-weight: 700; line-height: 0.85; letter-spacing: -0.02em; white-space: nowrap; }
+/* Small: a quiet index number, not a headline. It only has to be findable
+   when the stack is fanned out. */
+.number { font-weight: 700; line-height: 1.2; letter-spacing: 0; color: #555;
+          white-space: nowrap; }
 .title { font-weight: 700; letter-spacing: -0.01em; hyphens: manual;
          overflow-wrap: break-word; }
 .fact, .more-text { hyphens: manual; overflow-wrap: break-word; text-align: left; }
@@ -126,7 +129,7 @@ sup { font-size: 0.62em; line-height: 0; vertical-align: 0.5em; }
 .f-a6 .card { width: 97mm; height: 140.5mm; padding: 8.5mm 8mm 8.5mm 8mm; }
 .f-a6 .card-head { padding-bottom: 2.5mm; margin-bottom: 5mm; gap: 4mm; }
 .f-a6 .theme  { font-size: 8.5pt; }
-.f-a6 .number { font-size: 30pt; }
+.f-a6 .number { font-size: 12pt; }
 .f-a6 .title  { font-size: 21pt; line-height: 1.13; margin: 0 0 5mm 0; }
 .f-a6 .title.long { font-size: 18pt; }
 .f-a6 .fact.s1 { font-size: 18.5pt; line-height: 1.42; }
@@ -147,7 +150,7 @@ sup { font-size: 0.62em; line-height: 0; vertical-align: 0.5em; }
 .f-a6q .card { width: 140.5mm; height: 97mm; padding: 7mm 8mm 5.5mm 8mm; }
 .f-a6q .card-head { padding-bottom: 1.8mm; margin-bottom: 3.5mm; gap: 4mm; }
 .f-a6q .theme  { font-size: 8.5pt; }
-.f-a6q .number { font-size: 23pt; }
+.f-a6q .number { font-size: 11pt; }
 .f-a6q .title  { font-size: 18pt; line-height: 1.12; margin: 0 0 3.5mm 0; }
 .f-a6q .title.long { font-size: 16pt; }
 .f-a6q .fact.s1 { font-size: 18pt;   line-height: 1.40; }
@@ -168,7 +171,7 @@ sup { font-size: 0.62em; line-height: 0; vertical-align: 0.5em; }
 .f-a7 .card { width: 97mm; height: 70.25mm; padding: 5mm 5.5mm 4mm 5.5mm; }
 .f-a7 .card-head { padding-bottom: 1.3mm; margin-bottom: 2.4mm; gap: 3mm; }
 .f-a7 .theme  { font-size: 6.2pt; }
-.f-a7 .number { font-size: 16pt; }
+.f-a7 .number { font-size: 8pt; }
 .f-a7 .title  { font-size: 12pt; line-height: 1.12; margin: 0 0 2.2mm 0; }
 .f-a7 .title.long { font-size: 10.5pt; }
 .f-a7 .fact.s1 { font-size: 11.5pt; line-height: 1.33; }

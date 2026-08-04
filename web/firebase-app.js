@@ -6,8 +6,8 @@
  *
  * Layout in the database:
  *   cards/<id>       one document per card: pos, theme, title, text, more,
- *                    source. `source` is editorial only - it never reaches
- *                    the printed card.
+ *                    source, level. The last two are editorial only - they
+ *                    never reach the printed card.
  *                    `no` deliberately is not stored - it is derived and
  *                    would touch every document on each reorder. Ordering
  *                    happens through `pos`.
@@ -285,10 +285,11 @@ function start(){
       if (old
           && old.pos === k.pos && old.theme === k.theme && old.title === k.title
           && old.text === k.text && old.more === k.more
-          && (old.source || "") === (k.source || "")) continue;
+          && (old.source || "") === (k.source || "")
+          && (old.level || "") === (k.level || "")) continue;
       ops.push(b => b.set(doc(db, "cards", k.id), {
         pos: k.pos, theme: k.theme, title: k.title,
-        text: k.text, more: k.more, source: k.source || ""
+        text: k.text, more: k.more, source: k.source || "", level: k.level || ""
       }));
     }
 

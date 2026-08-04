@@ -55,7 +55,6 @@ data = json.loads((BASE / "facts.json").read_text(encoding="utf-8"))
 CSS = (BASE / "cards.css").read_text(encoding="utf-8")
 THEMES = data["themes"]
 CARDS = data["cards"]
-FOOTER = data["meta"].get("footer", "Faktenkarte")
 
 # Distance from the paper edge to the card block, in mm. Has to match
 # --rand in cards.css; checked below, because the two drifting apart would
@@ -152,9 +151,11 @@ def card(k: dict, fmt: dict, key: str, side: str = None) -> str:
         more = (f'<div class="more"><div class="more-label">Mehr dazu</div>'
                 f'<div class="more-text">{esc(k["more"])}</div></div>')
     css_class = "card back" if side == "back" else "card"
+    # No footer on a single-sided card: "Faktenkarte 7 / 218" told the reader
+    # nothing, and the space is better spent on the text. The duplex back
+    # keeps its footer, which names the theme.
     foot = (f'<div class="card-foot">{esc(theme_label(k["theme"]))}</div>'
-            if side == "back"
-            else f'<div class="card-foot">{esc(FOOTER)} {k["no"]} / {len(CARDS)}</div>')
+            if side == "back" else "")
     return f"""
     <div class="{css_class}" data-no="{k['no']}">
       {head(k, "Antwort" if side == "back" else None)}

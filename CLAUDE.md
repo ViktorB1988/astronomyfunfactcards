@@ -64,7 +64,8 @@ lassen, sonst enthalten Editor und Seite einen veralteten Stand.
   "themes": ["SONNENSYSTEM", "..."],
   "cards": [
     { "id": "kmsdl1jave79g39", "no": 1, "theme": "SONNENSYSTEM",
-      "title": "...", "text": "...", "more": "...", "source": "" }
+      "title": "...", "text": "...", "more": "...",
+      "source": "", "level": "" }
   ]
 }
 ```
@@ -73,9 +74,11 @@ lassen, sonst enthalten Editor und Seite einen veralteten Stand.
   Datenbank. Nicht von Hand vergeben, nicht ändern: daran wird eine Karte
   beim Einspielen wiedererkannt, auch wenn Titel und Text sich geändert
   haben.
-- `source` ist redaktionell: woher der Fakt stammt. Steht im Editor und
-  in der Datenbank, **nicht auf der gedruckten Karte** – `build_cards.py`
-  liest das Feld gar nicht erst.
+- `source` und `level` sind redaktionell: Herkunft des Fakts und
+  Schwierigkeit (`""`, `easy`, `medium`, `expert`). Beide stehen im Editor
+  und in der Datenbank, **nicht auf der gedruckten Karte** –
+  `build_cards.py` liest sie gar nicht erst. Die drei Stufen sind auch in
+  `firestore.rules` festgenagelt.
 - `theme` **muss** in `themes` vorkommen.
 - Reihenfolge in `themes` bestimmt die Reihenfolge der Karten im Stapel.
 - `no` wird beim Sortieren neu vergeben, nie von Hand pflegen.
@@ -144,6 +147,12 @@ auf **jeder** Kartenkante, die äußeren eingeschlossen, und geschnitten
 wird rundherum. Der Rand steht in `cards.css` als `--rand` und in
 `build_cards.py` als `RAND`; laufen sie auseinander, sitzen die Linien
 nicht mehr auf den Kartenkanten – der Bau prüft das und bricht ab.
+
+**Einseitige Karten haben keine Fußzeile.** „Faktenkarte 7 / 218" stand
+früher unten links und sagte niemandem etwas; der Platz gehört dem Text.
+Das brachte auf A6 gut einen Punkt Schriftgröße. Die Duplex-Rückseite
+behält ihre Fußzeile, dort steht das Thema. `meta.footer` in `facts.json`
+wird seither von nichts mehr gelesen.
 
 **Alle Linien und Marken sind Rahmen, keine Hintergrundflächen.**
 Browser drucken Hintergründe nur, wenn im Dialog „Hintergrundgrafiken"
@@ -257,7 +266,7 @@ schreibt das Speichern danach die Unterschiede statt alles neu.
 
 | Ort | Inhalt |
 |---|---|
-| `cards/<id>` | je Karte ein Dokument: `pos`, `theme`, `title`, `text`, `more`, `source` |
+| `cards/<id>` | je Karte ein Dokument: `pos`, `theme`, `title`, `text`, `more`, `source`, `level` |
 | `config/meta` | `title`, `footer`, `themes` (Liste, Reihenfolge zählt) |
 | `config/editors` | `emails`: wer schreiben darf. `import`: wem der Einspiel-Knopf gezeigt wird. **Nur von Hand in der Konsole** |
 

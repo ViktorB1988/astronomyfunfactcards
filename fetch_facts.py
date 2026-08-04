@@ -131,7 +131,8 @@ def main():
                    "title": k.get("title", ""),
                    "text": k.get("text", ""),
                    "more": k.get("more", ""),
-                   "source": k.get("source", "")}
+                   "source": k.get("source", ""),
+                   "level": k.get("level", "")}
                   for i, k in enumerate(cards)],
     }
 

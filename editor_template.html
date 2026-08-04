@@ -882,6 +882,18 @@ function drawForm(){
   f.append(field("f-source", "Quelle", "woher der Fakt stammt – steht nicht auf der Karte",
                  k.source));
 
+  const dSt = el("div", "field");
+  const lSt = el("label", null, "Schwierigkeit"); lSt.htmlFor = "f-level";
+  lSt.append(el("span", "hint", " – für später, steht nicht auf der Karte"));
+  const stufe = el("select"); stufe.id = "f-level";
+  [["", "(offen)"], ["easy", "easy"], ["medium", "medium"], ["expert", "expert"]]
+    .forEach(([wert, text]) => {
+      const o = el("option", null, text); o.value = wert;
+      if (wert === (k.level || "")) o.selected = true;
+      stufe.append(o);
+    });
+  dSt.append(lSt, stufe); f.append(dSt);
+
   const w = el("div", "tools");
   const mk = (txt, cls, fn, off) => { const b = el("button", "btn" + (cls ? " " + cls : ""), txt);
     b.type = "button"; b.onclick = fn; b.disabled = !!off; w.append(b); return b; };
@@ -911,12 +923,14 @@ function drawForm(){
   bind("f-title", "title"); bind("f-text", "text"); bind("f-more", "more");
   bind("f-source", "source");
   sel.addEventListener("change", () => { k.theme = sel.value; setDirty(); redrawAll(); });
+  stufe.addEventListener("change", () => { k.level = stufe.value; setDirty(); });
 
   // Without write permission, freeze the fields rather than hide them:
   // reading and reading aloud is the more common case online.
   if (!writable){
     f.querySelectorAll("input, textarea").forEach(n => { n.readOnly = true; });
     sel.disabled = true;
+    stufe.disabled = true;
     w.querySelectorAll("button").forEach(b => { b.disabled = true; });
   }
   updateCounters();
@@ -987,7 +1001,7 @@ function sortByTheme(){
 function addCard(){
   if (!requireWrite()) return;
   S.cards.push({id: newId(), no: 0, theme: S.theme || S.themes[0],
-                title: "Neue Karte", text: "", more: "", source: ""});
+                title: "Neue Karte", text: "", more: "", source: "", level: ""});
   S.sel = S.cards.length - 1;
   S.query = ""; $("#search").value = "";
   renumber(); setDirty(); redrawAll();
@@ -1029,15 +1043,16 @@ function cardHtml(k, fmt, side){
   const more = S.withMore
     ? `<div class="more"><div class="more-label">Mehr dazu</div>`
       + `<div class="more-text">${markup(k.more || "")}</div></div>` : "";
-  const foot = side === "back" ? theme
-             : `${esc(S.meta.footer || "Faktenkarte")} ${k.no} / ${S.cards.length}`;
+  // Single-sided cards carry no footer - same as the print. Only the duplex
+  // back keeps one, naming the theme.
+  const foot = side === "back" ? `<div class="card-foot">${theme}</div>` : "";
   return `
     <div class="card${side === "back" ? " back" : ""}" data-no="${k.no}">
       ${head(side === "back" ? "Antwort" : null)}
       <div class="title${long}">${markup(k.title || "")}</div>
       <div class="fact ${level(k.text || "")}">${markup(k.text || "")}</div>
       ${more}
-      <div class="card-foot">${foot}</div>
+      ${foot}
     </div>`;
 }
 
@@ -1236,7 +1251,7 @@ function saveFile(){
      into an old one and a new one. */
   const cards = S.cards.map(k => ({id: k.id, no: k.no, theme: k.theme,
                                    title: k.title, text: k.text, more: k.more,
-                                   source: k.source || ""}));
+                                   source: k.source || "", level: k.level || ""}));
   const json = JSON.stringify({meta: S.meta, themes: S.themes, cards}, null, 2) + "\n";
   const a = el("a");
   a.href = URL.createObjectURL(new Blob([json], {type: "application/json"}));
@@ -1267,7 +1282,7 @@ function loadFile(file){
     S.cards = d.cards.map(k => ({id: k.id || newId(), no: 0,
                                  theme: k.theme || "", title: k.title || "",
                                  text: k.text || "", more: k.more || "",
-                                 source: k.source || ""}));
+                                 source: k.source || "", level: k.level || ""}));
     S.themes = d.themes.slice();
     S.meta = d.meta || S.meta;
     S.sel = 0; S.theme = ""; S.query = "";
@@ -1323,7 +1338,7 @@ function importJson(file){
     const cards = d.cards.map(k => {
       const feld = {theme: k.theme || "", title: k.title || "",
                     text: k.text || "", more: k.more || "",
-                    source: k.source || ""};
+                    source: k.source || "", level: k.level || ""};
       let alt = k.id ? offen.get(k.id) : null;
       if (!alt){
         const treffer = nachTitel.get(schluessel(feld.title));
@@ -1342,7 +1357,8 @@ function importJson(file){
       nachTitel.delete(schluessel(alt.title));
       if (alt.theme === feld.theme && alt.title === feld.title
           && alt.text === feld.text && alt.more === feld.more
-          && (alt.source || "") === feld.source) gleich++;
+          && (alt.source || "") === feld.source
+          && (alt.level || "") === feld.level) gleich++;
       else geaendert++;
       return {id: alt.id, no: 0, ...feld};
     });
@@ -1540,7 +1556,8 @@ window.Editor = {
       cards: S.cards.map((k, i) => ({
         id: k.id, pos: i,
         theme: k.theme || "", title: k.title || "",
-        text: k.text || "", more: k.more || "", source: k.source || ""
+        text: k.text || "", more: k.more || "", source: k.source || "",
+        level: k.level || ""
       }))
     };
   },
@@ -1554,7 +1571,8 @@ window.Editor = {
     S.cards = d.cards.map(k => ({
       id: k.id || newId(), no: 0,
       theme: k.theme || "", title: k.title || "",
-      text: k.text || "", more: k.more || "", source: k.source || ""
+      text: k.text || "", more: k.more || "", source: k.source || "",
+      level: k.level || ""
     }));
     if (Array.isArray(d.themes) && d.themes.length) S.themes = d.themes.slice();
     if (d.meta) S.meta = {...S.meta, ...d.meta};

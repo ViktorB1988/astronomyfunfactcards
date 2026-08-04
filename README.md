@@ -550,12 +550,15 @@ Alles steht in `facts.json`:
   "title": "Kurzer Titel",
   "text": "Der Fakt, zwei bis drei Sätze, in sich verständlich.",
   "more": "Ein Satz Zusatzinfo für den Absatz „Mehr dazu\".",
-  "source": ""
+  "source": "",
+  "level": ""
 }
 ```
 
-`source` ist ein Notizfeld für die Redaktion: woher der Fakt stammt. Es
-erscheint im Editor unter „Mehr dazu", **nicht auf der gedruckten Karte**.
+`source` und `level` sind Notizfelder für die Redaktion: Herkunft des
+Fakts und Schwierigkeit (`easy`, `medium`, `expert` oder leer). Beide
+erscheinen im Editor unter „Mehr dazu", **nicht auf der gedruckten
+Karte**.
 
 Die `id` bleibt, wie sie ist. Daran wird die Karte beim Einspielen
 wiedererkannt – auch dann, wenn Titel und Text sich geändert haben. Neue
@@ -597,8 +600,8 @@ Weitere Hinweise:
 - `theme` muss einem Eintrag aus der Liste `themes` entsprechen. Neue Themen
   dort ergänzen; die Position in dieser Liste bestimmt, wo der Themenblock
   im Stapel liegt.
-- Die Fußzeile lässt sich unter `meta.footer` ändern, z. B. auf den
-  Vereinsnamen. Auf A7 ist sie ausgeblendet, dort fehlt der Platz.
+- Einseitige Karten haben keine Fußzeile mehr. Die Kartennummer steht
+  klein oben rechts, `meta.footer` wird nicht mehr gedruckt.
 - Ober- und Untergrenze der Schriftgröße stehen als `minText` / `maxText`
   im Dictionary `FORMATS` in `build_cards.py`.
 - Ein neues Format ergänzt man dort plus einem `.f-xx`-Block in `cards.css`.
