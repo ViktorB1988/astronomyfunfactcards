@@ -97,6 +97,9 @@ body.readonly .form select{opacity:.7;cursor:default}
 body.readonly .remove,
 body.readonly .move,
 body.readonly .fav{display:none}
+/* Ohne Schreibrecht bleibt ein gesetzter Stern sichtbar - sonst stuenden
+   die Favoriten oben, ohne dass zu sehen waere, warum. */
+body.readonly .fav.on{display:flex;opacity:.8;cursor:default}
 body.readonly .grip{visibility:hidden}
 
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
@@ -163,18 +166,20 @@ main>*{background:var(--panel);min-height:100%}
 .remove:hover{background:var(--cramped);color:#fff}
 @media (hover:none){ .remove{opacity:.8} }
 
-/* Favourite. Unlike the delete cross this one shows its state, so an
-   active star stays visible without hovering - hiding it would hide the
-   very thing it records. */
+/* Favourite. Always faintly there, unlike the delete cross that hides
+   until hovered: the cross is a thing to be protected from, the star is a
+   thing to be used, and a control nobody can see is a control nobody
+   uses. Set, it goes full strength in the accent colour. */
 .fav{
   width:22px;height:22px;padding:0;border:0;border-radius:4px;
   background:none;color:var(--faint);cursor:pointer;
-  font:14px/1 var(--ui);opacity:0;
+  font:14px/1 var(--ui);opacity:.3;
 }
-.rows li:hover .fav,.fav:focus-visible{opacity:.9}
-.fav.on{opacity:1;color:var(--accent)}
+.rows li:hover .fav{opacity:.8}
+.fav:focus-visible{opacity:1}
 .fav:hover{color:var(--accent)}
-@media (hover:none){ .fav{opacity:.75} }
+.fav.on,.rows li:hover .fav.on{opacity:1;color:var(--accent)}
+@media (hover:none){ .fav{opacity:.45} }
 
 /* The line between pinned favourites and the rest. Subtle on purpose: it
    separates two groups, it does not announce a section. */
