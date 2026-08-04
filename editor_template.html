@@ -1252,6 +1252,11 @@ function loadFile(file){
     try { d = JSON.parse(reader.result); }
     catch(e){ status("Die Datei ist kein gültiges JSON: " + e.message, true); return; }
     if (!Array.isArray(d.cards) || !Array.isArray(d.themes)){
+      if (Array.isArray(d.karten) || Array.isArray(d.themen)){
+        status("Diese Datei benutzt die alten deutschen Feldnamen (karten, themen) "
+             + "und stammt von vor der Umstellung. Gebraucht wird die heutige "
+             + "facts.json aus dem Projektordner.", true); return;
+      }
       status("In der Datei fehlen die Felder „cards“ und „themes“. "
            + "Erwartet wird eine facts.json wie im Projektordner.", true); return;
     }
@@ -1284,6 +1289,14 @@ function importJson(file){
     try { d = JSON.parse(reader.result); }
     catch(e){ status("Die Datei ist kein gültiges JSON: " + e.message, true); return; }
     if (!Array.isArray(d.cards) || !Array.isArray(d.themes)){
+      /* Die alte Fassung hieß karten/themen. Solche Dateien liegen noch in
+         manchem Download-Ordner, und „Feld fehlt“ hilft dann niemandem
+         weiter - der Grund ist ja nicht, dass etwas fehlt. */
+      if (Array.isArray(d.karten) || Array.isArray(d.themen)){
+        status("Diese Datei benutzt die alten deutschen Feldnamen (karten, themen) "
+             + "und stammt von vor der Umstellung. Gebraucht wird die heutige "
+             + "facts.json aus dem Projektordner.", true); return;
+      }
       status("In der Datei fehlen die Felder „cards“ und „themes“. "
            + "Erwartet wird eine facts.json wie im Projektordner.", true); return;
     }
