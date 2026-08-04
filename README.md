@@ -555,10 +555,16 @@ Alles steht in `facts.json`:
 }
 ```
 
-`source` und `level` sind Notizfelder für die Redaktion: Herkunft des
-Fakts und Schwierigkeit (`easy`, `medium`, `expert` oder leer). Beide
-erscheinen im Editor unter „Mehr dazu", **nicht auf der gedruckten
-Karte**.
+`source` ist ein Notizfeld für die Redaktion und erscheint nur im Editor.
+`level` ist die Schwierigkeit – `easy`, `medium`, `expert` oder leer – und
+**steht oben auf der Karte**, mittig zwischen Thema und Nummer:
+
+```
+SONNENSYSTEM        EINFACH        1
+```
+
+Auf der Karte steht deutsch (Einfach, Mittel, Experte), in den Daten
+englisch. Karten ohne Stufe zeigen an der Stelle nichts.
 
 Die `id` bleibt, wie sie ist. Daran wird die Karte beim Einspielen
 wiedererkannt – auch dann, wenn Titel und Text sich geändert haben. Neue

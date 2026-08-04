@@ -74,11 +74,13 @@ lassen, sonst enthalten Editor und Seite einen veralteten Stand.
   Datenbank. Nicht von Hand vergeben, nicht ändern: daran wird eine Karte
   beim Einspielen wiedererkannt, auch wenn Titel und Text sich geändert
   haben.
-- `source` und `level` sind redaktionell: Herkunft des Fakts und
-  Schwierigkeit (`""`, `easy`, `medium`, `expert`). Beide stehen im Editor
-  und in der Datenbank, **nicht auf der gedruckten Karte** –
-  `build_cards.py` liest sie gar nicht erst. Die drei Stufen sind auch in
-  `firestore.rules` festgenagelt.
+- `source` ist redaktionell: woher der Fakt stammt. Steht im Editor und in
+  der Datenbank, **nicht auf der gedruckten Karte**.
+- `level` ist die Schwierigkeit: `""`, `easy`, `medium` oder `expert`. Der
+  Wert bleibt englisch, auf der Karte steht deutsch – die Zuordnung steht
+  als `LEVELS` in `build_cards.py` und wird dem Editor eingesetzt, damit
+  der Wortlaut nur an einer Stelle steht. Die drei Werte sind auch in
+  `firestore.rules` festgenagelt. Ohne Stufe erscheint gar kein Element.
 - `theme` **muss** in `themes` vorkommen.
 - Reihenfolge in `themes` bestimmt die Reihenfolge der Karten im Stapel.
 - `no` wird beim Sortieren neu vergeben, nie von Hand pflegen.
@@ -108,7 +110,8 @@ Rückgabe je Karte: `{no, pt, tight, longWord}`.
 breiter als die Spalte.
 
 **Der Editor führt exakt dieselbe Funktion aus.** `build_editor.py`
-kopiert `AUTOFIT_JS` und `FORMATS` aus `build_cards.py` in die HTML-Datei.
+kopiert `AUTOFIT_JS`, `FORMATS` und `LEVELS` aus `build_cards.py` in die
+HTML-Datei.
 Nicht duplizieren, nicht nachbauen – sonst driften Vorschau und Druck
 auseinander.
 

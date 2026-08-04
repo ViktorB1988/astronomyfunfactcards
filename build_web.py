@@ -74,6 +74,7 @@ def main():
             .replace("/*__FONTS__*/", font_css)
             .replace("/*__CARDS_CSS__*/", css)
             .replace("/*__FORMATS__*/", json.dumps(B.FORMATS, ensure_ascii=False))
+            .replace("/*__LEVELS__*/", json.dumps(B.LEVELS, ensure_ascii=False))
             .replace("/*__AUTOFIT__*/", B.AUTOFIT_JS)
             .replace("/*__DATA__*/", data.strip())
             .replace("<!--__FIREBASE__-->", include))

@@ -108,6 +108,12 @@ def _pruefe_rand():
 _pruefe_rand()
 
 
+# Value in the data, wording on the card. The values stay English like the
+# rest of the schema; what a visitor reads is German. The editor gets this
+# table injected rather than repeating it - one place to change a wording.
+LEVELS = {"easy": "Einfach", "medium": "Mittel", "expert": "Experte"}
+
+
 def esc(s: str) -> str:
     """Escapes everything except the permitted <sup> tags."""
     s = htmlmod.escape(s, quote=False)
@@ -128,8 +134,13 @@ def theme_label(t: str) -> str:
 
 
 def head(k: dict, label: str = None) -> str:
+    # The level sits between theme and number, and only if one is set -
+    # an empty middle would leave the head looking oddly spaced.
+    step = LEVELS.get(k.get("level", ""), "")
+    middle = f'<div class="level">{esc(step)}</div>' if step else ""
     return (f'<div class="card-head">'
             f'<div class="theme">{esc(label or theme_label(k["theme"]))}</div>'
+            f'{middle}'
             f'<div class="number">{k["no"]}</div></div>')
 
 

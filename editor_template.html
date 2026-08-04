@@ -609,6 +609,8 @@ addEventListener("error", e => {
 
 const DATA    = /*__DATA__*/;
 const FORMATS = /*__FORMATS__*/;
+// Wertung in den Daten, Wortlaut auf der Karte - aus build_cards.py
+const LEVELS  = /*__LEVELS__*/;
 const autofit = /*__AUTOFIT__*/;
 
 // From these print sizes upwards, reading aloud in near-darkness is
@@ -886,12 +888,11 @@ function drawForm(){
   const lSt = el("label", null, "Schwierigkeit"); lSt.htmlFor = "f-level";
   lSt.append(el("span", "hint", " – für später, steht nicht auf der Karte"));
   const stufe = el("select"); stufe.id = "f-level";
-  [["", "(offen)"], ["easy", "easy"], ["medium", "medium"], ["expert", "expert"]]
-    .forEach(([wert, text]) => {
-      const o = el("option", null, text); o.value = wert;
-      if (wert === (k.level || "")) o.selected = true;
-      stufe.append(o);
-    });
+  [["", "(offen)"], ...Object.entries(LEVELS)].forEach(([wert, text]) => {
+    const o = el("option", null, text); o.value = wert;
+    if (wert === (k.level || "")) o.selected = true;
+    stufe.append(o);
+  });
   dSt.append(lSt, stufe); f.append(dSt);
 
   const w = el("div", "tools");
@@ -923,7 +924,8 @@ function drawForm(){
   bind("f-title", "title"); bind("f-text", "text"); bind("f-more", "more");
   bind("f-source", "source");
   sel.addEventListener("change", () => { k.theme = sel.value; setDirty(); redrawAll(); });
-  stufe.addEventListener("change", () => { k.level = stufe.value; setDirty(); });
+  // redrawAll, weil die Stufe jetzt auf der Karte steht
+  stufe.addEventListener("change", () => { k.level = stufe.value; setDirty(); redrawAll(); });
 
   // Without write permission, freeze the fields rather than hide them:
   // reading and reading aloud is the more common case online.
@@ -1028,8 +1030,11 @@ function cardHtml(k, fmt, side){
   const f = FORMATS[fmt];
   const long = (k.title || "").length > f.title_long ? " long" : "";
   const theme = esc((k.theme || "").replace("LOECHER", "LÖCHER"));
+  // Schwierigkeit zwischen Thema und Nummer, nur wenn eine gesetzt ist
+  const stufe = LEVELS[k.level || ""] || "";
+  const mitte = stufe ? `<div class="level">${esc(stufe)}</div>` : "";
   const head = b => `<div class="card-head"><div class="theme">${b || theme}</div>`
-                  + `<div class="number">${k.no}</div></div>`;
+                  + mitte + `<div class="number">${k.no}</div></div>`;
 
   if (side === "front"){
     return `

@@ -104,6 +104,13 @@ html, body {
    when the stack is fanned out. */
 .number { font-weight: 700; line-height: 1.2; letter-spacing: 0; color: #555;
           white-space: nowrap; }
+
+/* Difficulty, centred between theme and number. The auto margins do the
+   centring: they swallow the free space evenly on both sides, so the theme
+   keeps the width it needs and is never squeezed by a fixed middle column.
+   Absent from the markup entirely when no level is set. */
+.level { margin: 0 auto; font-weight: 700; line-height: 1.2; color: #555;
+         letter-spacing: 0.09em; text-transform: uppercase; white-space: nowrap; }
 .title { font-weight: 700; letter-spacing: -0.01em; hyphens: manual;
          overflow-wrap: break-word; }
 .fact, .more-text { hyphens: manual; overflow-wrap: break-word; text-align: left; }
@@ -129,6 +136,7 @@ sup { font-size: 0.62em; line-height: 0; vertical-align: 0.5em; }
 .f-a6 .card { width: 97mm; height: 140.5mm; padding: 8.5mm 8mm 8.5mm 8mm; }
 .f-a6 .card-head { padding-bottom: 2.5mm; margin-bottom: 5mm; gap: 4mm; }
 .f-a6 .theme  { font-size: 8.5pt; }
+.f-a6 .level  { font-size: 8.5pt; }
 .f-a6 .number { font-size: 12pt; }
 .f-a6 .title  { font-size: 21pt; line-height: 1.13; margin: 0 0 5mm 0; }
 .f-a6 .title.long { font-size: 18pt; }
@@ -150,6 +158,7 @@ sup { font-size: 0.62em; line-height: 0; vertical-align: 0.5em; }
 .f-a6q .card { width: 140.5mm; height: 97mm; padding: 7mm 8mm 5.5mm 8mm; }
 .f-a6q .card-head { padding-bottom: 1.8mm; margin-bottom: 3.5mm; gap: 4mm; }
 .f-a6q .theme  { font-size: 8.5pt; }
+.f-a6q .level  { font-size: 8.5pt; }
 .f-a6q .number { font-size: 11pt; }
 .f-a6q .title  { font-size: 18pt; line-height: 1.12; margin: 0 0 3.5mm 0; }
 .f-a6q .title.long { font-size: 16pt; }
@@ -171,6 +180,7 @@ sup { font-size: 0.62em; line-height: 0; vertical-align: 0.5em; }
 .f-a7 .card { width: 97mm; height: 70.25mm; padding: 5mm 5.5mm 4mm 5.5mm; }
 .f-a7 .card-head { padding-bottom: 1.3mm; margin-bottom: 2.4mm; gap: 3mm; }
 .f-a7 .theme  { font-size: 6.2pt; }
+.f-a7 .level  { font-size: 6.2pt; }
 .f-a7 .number { font-size: 8pt; }
 .f-a7 .title  { font-size: 12pt; line-height: 1.12; margin: 0 0 2.2mm 0; }
 .f-a7 .title.long { font-size: 10.5pt; }
