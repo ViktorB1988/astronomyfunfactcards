@@ -95,11 +95,13 @@ body.readonly .form input,
 body.readonly .form textarea,
 body.readonly .form select{opacity:.7;cursor:default}
 body.readonly .remove,
-body.readonly .move,
-body.readonly .fav{display:none}
-/* Ohne Schreibrecht bleibt ein gesetzter Stern sichtbar - sonst stuenden
-   die Favoriten oben, ohne dass zu sehen waere, warum. */
-body.readonly .fav.on{display:flex;opacity:.8;cursor:default}
+body.readonly .move{display:none}
+/* The star stays put without write access, greyed like the buttons in the
+   form rather than hidden like the cross. Hiding it meant the favourites
+   sat pinned at the top with nothing on screen explaining why - and it
+   made the control impossible to find before signing in. */
+body.readonly .fav{opacity:.2;cursor:default;pointer-events:none}
+body.readonly .fav.on{opacity:.85;color:var(--accent)}
 body.readonly .grip{visibility:hidden}
 
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
