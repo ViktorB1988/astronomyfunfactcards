@@ -82,8 +82,8 @@ lassen, sonst enthalten Editor und Seite einen veralteten Stand.
 - Hochzahlen als `10<sup>67</sup>`. Nur `<sup>` ist erlaubt, alles
   andere wird escaped.
 
-Stand: **202 Karten, 14 Themen**, jedes Thema ein zusammenhängender
-Nummernblock (Sonnensystem 1–27 … Fiktion wird wirklich 195–202).
+Stand: **218 Karten, 16 Themen**, jedes Thema ein zusammenhängender
+Nummernblock (Sonnensystem 1–27 … Gravitationswellen 211–218).
 Neue Themen kommen ans Ende der Liste `themes`; dann behalten die
 vorhandenen Karten ihre Nummern.
 

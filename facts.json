@@ -19,7 +19,9 @@
     "TERRAFORMING MARS",
     "ARTEMIS 2",
     "WARPANTRIEB",
-    "FIKTION WIRD WIRKLICH"
+    "FIKTION WIRD WIRKLICH",
+    "NEUTRINOS",
+    "GRAVITATIONSWELLEN"
   ],
   "cards": [
     {
@@ -1839,6 +1841,150 @@
       "text": "Robert Heinlein beschrieb 1942 in einer Erzählung ferngesteuerte Greifarme, mit denen ein kranker Erfinder schwere Arbeit verrichtet. Die Technik steht heute in jedem Labor mit radioaktivem Material. In der Fachsprache heißen solche Manipulatoren bis heute Waldos.",
       "more": "Heinlein veröffentlichte die Geschichte unter dem Namen Anson MacDonald.",
       "source": ""
+    },
+    {
+      "id": "k6dmj8bgduz17",
+      "no": 203,
+      "theme": "NEUTRINOS",
+      "title": "Milliarden durch jeden Fingernagel",
+      "text": "Durch jeden Quadratzentimeter der Erdoberfläche fliegen pro Sekunde rund 65 Milliarden Neutrinos aus der Sonne. Körper, Gebäude und der ganze Planet stehen ihnen dabei kaum im Weg.",
+      "more": "Ein Neutrino müsste ein Lichtjahr Blei durchqueren, damit es mit einiger Wahrscheinlichkeit überhaupt hängen bleibt.",
+      "source": "John Bahcall, Neutrino Astrophysics, Cambridge University Press"
+    },
+    {
+      "id": "keh7uk1mxd2se",
+      "no": 204,
+      "theme": "NEUTRINOS",
+      "title": "Nachts kommen sie von unten",
+      "text": "Neutrinos hält die Erde nicht auf. Nachts, wenn die Sonne auf der anderen Seite des Planeten steht, treffen sie einen Menschen von unten – nachdem sie 12.700 Kilometer Gestein durchquert haben.",
+      "more": "Detektoren nutzen das aus und suchen gezielt nach Teilchen von unten. Die Erde filtert alles andere weg.",
+      "source": "IceCube Neutrino Observatory, icecube.wisc.edu"
+    },
+    {
+      "id": "kqyldmqok4y5p",
+      "no": 205,
+      "theme": "NEUTRINOS",
+      "title": "Drei Sorten, die sich verwandeln",
+      "text": "Neutrinos treten in drei Sorten auf und wandeln sich unterwegs ineinander um. Ein Teilchen kann als Elektron-Neutrino starten und als Myon-Neutrino ankommen.",
+      "more": "Von der Sonne kamen dadurch scheinbar zu wenige an – ein Rätsel, das die Physik dreißig Jahre beschäftigte.",
+      "source": "Nobelpreis für Physik 2015, Takaaki Kajita und Arthur McDonald"
+    },
+    {
+      "id": "kjdr7ks5027je",
+      "no": 206,
+      "theme": "NEUTRINOS",
+      "title": "Ein Kubikkilometer Eis als Fernrohr",
+      "text": "Am Südpol steckt ein Kubikkilometer Eis voller Lichtsensoren. IceCube wartet darauf, dass ein Neutrino im Eis ein geladenes Teilchen erzeugt, das blaues Licht abstrahlt. Aus dem Muster der Blitze folgt die Richtung, aus der es kam.",
+      "more": "Das Eis in zwei Kilometern Tiefe ist so klar, dass Licht dort über hundert Meter weit kommt.",
+      "source": "IceCube Neutrino Observatory, icecube.wisc.edu"
+    },
+    {
+      "id": "k6tm0696kkunb",
+      "no": 207,
+      "theme": "NEUTRINOS",
+      "title": "Drei Stunden vor dem Licht",
+      "text": "Als 1987 in der Großen Magellanschen Wolke ein Stern explodierte, fingen drei Detektoren rund zwei Dutzend Neutrinos auf – etwa drei Stunden bevor das Licht eintraf. Dem stürzenden Kern entkommen sie sofort, das Licht braucht länger.",
+      "more": "Aus diesen zwei Dutzend Teilchen entstand ein ganzer Zweig der Astronomie.",
+      "source": "Supernova 1987A, Nachweise durch Kamiokande-II, IMB und Baksan"
+    },
+    {
+      "id": "k9sq1ppzyazot",
+      "no": 208,
+      "theme": "NEUTRINOS",
+      "title": "Leichter als alles andere",
+      "text": "Neutrinos haben eine Masse, aber eine unfassbar kleine: weniger als ein Millionstel der Masse eines Elektrons. Warum sie so leicht sind und trotzdem nicht masselos, weiß bis heute niemand.",
+      "more": "Das Experiment KATRIN in Karlsruhe wiegt sie, indem es den Zerfall von Tritium äußerst genau vermisst.",
+      "source": "KATRIN-Experiment, Karlsruher Institut für Technologie"
+    },
+    {
+      "id": "kromt047uuw19",
+      "no": 209,
+      "theme": "NEUTRINOS",
+      "title": "Der Sonne beim Brennen zusehen",
+      "text": "Licht braucht Zehntausende Jahre, um aus dem Sonnenkern an die Oberfläche zu gelangen. Neutrinos sind in gut zwei Sekunden draußen. Wer sie misst, sieht die Kernfusion von heute statt der von vorgestern.",
+      "more": "Das Experiment Borexino wies 2020 erstmals Neutrinos aus einem zweiten Fusionsweg der Sonne nach.",
+      "source": "Borexino Collaboration, Nature 587, 577 (2020)"
+    },
+    {
+      "id": "kb3bpyxosvkou",
+      "no": 210,
+      "theme": "NEUTRINOS",
+      "title": "Eines pro Leben bleibt hängen",
+      "text": "Pro Sekunde durchqueren einige hundert Billionen Neutrinos einen Menschen. Im Lauf eines ganzen Lebens bleibt davon statistisch etwa ein einziges in ihm hängen. Alle anderen fliegen weiter, als wäre er nicht da.",
+      "more": "Genau diese Gleichgültigkeit macht sie zu Boten aus Orten, aus denen kein Licht herausfindet.",
+      "source": "Abschätzung aus dem solaren Neutrinofluss"
+    },
+    {
+      "id": "kw2o12oirq2ww",
+      "no": 211,
+      "theme": "GRAVITATIONSWELLEN",
+      "title": "Der Raum selbst schwingt",
+      "text": "Zwei umeinander kreisende Schwarze Löcher stauchen und dehnen den Raum um sich herum. Diese Wellen laufen mit Lichtgeschwindigkeit nach außen. Trifft eine die Erde, wird alles kurz ein wenig länger und quer dazu ein wenig kürzer.",
+      "more": "Einstein sagte die Wellen 1916 voraus und hielt sie für viel zu schwach, um je gemessen zu werden.",
+      "source": "Albert Einstein, Näherungsweise Integration der Feldgleichungen der Gravitation, 1916"
+    },
+    {
+      "id": "kpau61xwvqyon",
+      "no": 212,
+      "theme": "GRAVITATIONSWELLEN",
+      "title": "Gemessen wird ein Bruchteil eines Protons",
+      "text": "Die LIGO-Detektoren messen mit vier Kilometer langen Laserarmen. Eine Gravitationswelle ändert deren Länge um etwa ein Zehntausendstel des Durchmessers eines Protons. Genauer misst niemand irgendetwas.",
+      "more": "Auf die Entfernung zum nächsten Stern hochgerechnet entspräche das der Breite eines menschlichen Haares.",
+      "source": "LIGO Scientific Collaboration, ligo.caltech.edu"
+    },
+    {
+      "id": "kc20eao05ucuq",
+      "no": 213,
+      "theme": "GRAVITATIONSWELLEN",
+      "title": "Hundert Jahre bis zum ersten Nachweis",
+      "text": "Am 14. September 2015 sahen beide LIGO-Detektoren dasselbe Signal, sieben Millisekunden versetzt. Es stammte von zwei Schwarzen Löchern, die 1,3 Milliarden Jahre zuvor verschmolzen waren.",
+      "more": "Das Signal dauerte zwei Zehntelsekunden. Mehr brauchte es nicht, um Massen und Entfernung zu bestimmen.",
+      "source": "Abbott et al., Physical Review Letters 116, 061102 (2016)"
+    },
+    {
+      "id": "kafyuccbvsmfh",
+      "no": 214,
+      "theme": "GRAVITATIONSWELLEN",
+      "title": "Drei Sonnen wurden zu Energie",
+      "text": "Bei der ersten gemessenen Verschmelzung wogen die beiden Schwarzen Löcher zusammen 65 Sonnenmassen, das Ergebnis nur 62. Die fehlenden drei Sonnenmassen gingen in Sekundenbruchteilen als Gravitationswellen weg.",
+      "more": "In diesem Augenblick übertraf die abgestrahlte Leistung die aller Sterne im sichtbaren Universum zusammen.",
+      "source": "Abbott et al., Physical Review Letters 116, 061102 (2016)"
+    },
+    {
+      "id": "k8pe9swsrtwi9",
+      "no": 215,
+      "theme": "GRAVITATIONSWELLEN",
+      "title": "Als Wellen und Licht zusammenkamen",
+      "text": "2017 registrierten die Detektoren zwei verschmelzende Neutronensterne. Kurz darauf sahen Teleskope rund um die Welt dieselbe Stelle am Himmel aufleuchten. Zum ersten Mal wurde ein Ereignis in Wellen und in Licht zugleich beobachtet.",
+      "more": "In den Trümmern entstanden Gold und Platin. Ein guter Teil der schweren Elemente stammt aus solchen Zusammenstößen.",
+      "source": "Abbott et al., Physical Review Letters 119, 161101 (2017)"
+    },
+    {
+      "id": "kiosppdeew8kf",
+      "no": 216,
+      "theme": "GRAVITATIONSWELLEN",
+      "title": "Das Brummen des ganzen Himmels",
+      "text": "2023 meldeten mehrere Gruppen ein Rauschen aus Gravitationswellen, deren Wellenlängen in Lichtjahren gemessen werden. Gefunden wurde es nicht mit Lasern, sondern an Pulsaren, deren Ticken sich um Millionstel Sekunden verschiebt.",
+      "more": "Als Quelle gelten Paare gigantischer Schwarzer Löcher in den Zentren verschmelzender Galaxien.",
+      "source": "NANOGrav, 15-Jahres-Datensatz, Astrophysical Journal Letters 2023"
+    },
+    {
+      "id": "kc35j4uns7eqp",
+      "no": 217,
+      "theme": "GRAVITATIONSWELLEN",
+      "title": "Warum es zwei Anlagen braucht",
+      "text": "Ein einzelner Detektor kann nicht unterscheiden, ob er eine Welle registriert oder einen vorbeifahrenden Lastwagen. Erst wenn zwei Anlagen tausende Kilometer voneinander dasselbe im passenden Zeitabstand sehen, zählt ein Signal.",
+      "more": "Aus dem Laufzeitunterschied ergibt sich zugleich grob die Richtung, aus der die Welle kam.",
+      "source": "LIGO Scientific Collaboration, ligo.caltech.edu"
+    },
+    {
+      "id": "ktqmfe3oci6k8",
+      "no": 218,
+      "theme": "GRAVITATIONSWELLEN",
+      "title": "Ein Detektor zwischen den Planeten",
+      "text": "Wellen von sehr großen Schwarzen Löchern schwingen zu langsam für Anlagen auf der Erde. Die europäische Raumfahrtbehörde plant deshalb LISA: drei Sonden, die in Millionen Kilometern Abstand ein Dreieck bilden und ihren Abstand per Laser überwachen.",
+      "more": "Vorgesehen ist ein Start in den 2030er Jahren.",
+      "source": "ESA, Mission LISA"
     }
   ]
 }
