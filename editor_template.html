@@ -95,7 +95,8 @@ body.readonly .form input,
 body.readonly .form textarea,
 body.readonly .form select{opacity:.7;cursor:default}
 body.readonly .remove,
-body.readonly .move{display:none}
+body.readonly .move,
+body.readonly .fav{display:none}
 body.readonly .grip{visibility:hidden}
 
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
@@ -161,6 +162,26 @@ main>*{background:var(--panel);min-height:100%}
 .rows li:hover .remove,.remove:focus-visible{opacity:1}
 .remove:hover{background:var(--cramped);color:#fff}
 @media (hover:none){ .remove{opacity:.8} }
+
+/* Favourite. Unlike the delete cross this one shows its state, so an
+   active star stays visible without hovering - hiding it would hide the
+   very thing it records. */
+.fav{
+  width:22px;height:22px;padding:0;border:0;border-radius:4px;
+  background:none;color:var(--faint);cursor:pointer;
+  font:14px/1 var(--ui);opacity:0;
+}
+.rows li:hover .fav,.fav:focus-visible{opacity:.9}
+.fav.on{opacity:1;color:var(--accent)}
+.fav:hover{color:var(--accent)}
+@media (hover:none){ .fav{opacity:.75} }
+
+/* The line between pinned favourites and the rest. Subtle on purpose: it
+   separates two groups, it does not announce a section. */
+.rows li.sep{
+  height:0;margin:9px 12px;border-top:1px solid var(--edge-light);
+  pointer-events:none;
+}
 
 /* Reordering by tapping. Only where dragging does not work - with a mouse
    the row is simply dragged, and two ways to do one thing is one too many. */
@@ -479,8 +500,9 @@ body.dragover::after{
   .btn{padding:11px 16px}
   .tools .btn,.list-foot .btn{min-height:44px}
   .filter input,.filter select{padding:11px 12px}
-  .row{padding:12px 126px 12px 12px;min-height:56px}
+  .row{padding:12px 164px 12px 12px;min-height:56px}
   .remove{width:40px;height:44px;opacity:.75;font-size:20px}
+  .fav{width:38px;height:44px;opacity:.75;font-size:17px}
   .move{
     display:flex;align-items:center;justify-content:center;
     width:38px;height:44px;padding:0;border:0;border-radius:4px;
@@ -775,6 +797,14 @@ function bindList(){
   });
 }
 
+/* Display order only. S.cards keeps the order that the printed stack
+   follows - pinning favourites here must never move a card in the data,
+   or the PDF would come out shuffled. The sort is stable, so within each
+   group the stack order survives. */
+function sortedForDisplay(list){
+  return [...list].sort((a, b) => (b.favourite ? 1 : 0) - (a.favourite ? 1 : 0));
+}
+
 function drawList(){
   const ol = $("#rows");
   /* Rebuilding empties the list for a moment, and an empty list has no
@@ -788,12 +818,19 @@ function drawList(){
   const box = ol.closest(".list");
   const keepRows = ol.scrollTop, keepBox = box ? box.scrollTop : 0;
   ol.innerHTML = "";
-  const visible = S.cards.filter(matches);
+  const visible = sortedForDisplay(S.cards.filter(matches));
   if (!visible.length){
     ol.append(el("li", "empty", "Keine Karte gefunden. Suche oder Themenfilter ändern."));
     return;
   }
+  // Only draw the line when both groups are actually on screen.
+  const trennerNoetig = visible[0].favourite && visible.some(k => !k.favourite);
+  let trennerGesetzt = false;
   for (const k of visible){
+    if (trennerNoetig && !trennerGesetzt && !k.favourite){
+      ol.append(el("li", "sep"));
+      trennerGesetzt = true;
+    }
     const i = S.cards.indexOf(k);
     const li = el("li");
     const b = el("button", "row");
@@ -812,6 +849,16 @@ function drawList(){
     b.append(el("span", "grip"));
 
     const tools = el("div", "rowtools");
+
+    const stern = el("button", "fav" + (k.favourite ? " on" : ""),
+                     k.favourite ? "★" : "☆");
+    stern.type = "button";
+    stern.title = k.favourite ? "Aus den Favoriten nehmen" : "Zu den Favoriten";
+    stern.setAttribute("aria-pressed", String(!!k.favourite));
+    stern.setAttribute("aria-label", `Karte ${k.no} „${k.title}“ als Favorit`);
+    stern.onclick = ev => { ev.stopPropagation(); toggleFavourite(S.cards.indexOf(k)); };
+    tools.append(stern);
+
     const arrow = (dir, wohin, off) => {
       const a = el("button", "move", dir < 0 ? "↑" : "↓");
       a.type = "button";
@@ -981,6 +1028,20 @@ function removeCard(index){
   status(`Karte „${k.title}“ gelöscht. Noch ${S.cards.length} Karten.`);
   structureChanged();
 }
+/* A favourite is a decision, not a draft, so it writes through at once -
+   same as reordering and deleting. */
+function toggleFavourite(i){
+  if (!requireWrite()) return;
+  const k = S.cards[i];
+  if (!k) return;
+  k.favourite = !k.favourite;
+  S.sel = i;
+  setDirty(); redrawAll();
+  status(k.favourite ? `„${k.title}“ ist jetzt ein Favorit.`
+                     : `„${k.title}“ ist kein Favorit mehr.`);
+  structureChanged();
+}
+
 function sortByTheme(){
   if (!requireWrite()) return;
   const kept = S.cards[S.sel];
@@ -1003,7 +1064,8 @@ function sortByTheme(){
 function addCard(){
   if (!requireWrite()) return;
   S.cards.push({id: newId(), no: 0, theme: S.theme || S.themes[0],
-                title: "Neue Karte", text: "", more: "", source: "", level: ""});
+                title: "Neue Karte", text: "", more: "", source: "", level: "",
+                favourite: false});
   S.sel = S.cards.length - 1;
   S.query = ""; $("#search").value = "";
   renumber(); setDirty(); redrawAll();
@@ -1256,7 +1318,8 @@ function saveFile(){
      into an old one and a new one. */
   const cards = S.cards.map(k => ({id: k.id, no: k.no, theme: k.theme,
                                    title: k.title, text: k.text, more: k.more,
-                                   source: k.source || "", level: k.level || ""}));
+                                   source: k.source || "", level: k.level || "",
+                                   favourite: !!k.favourite}));
   const json = JSON.stringify({meta: S.meta, themes: S.themes, cards}, null, 2) + "\n";
   const a = el("a");
   a.href = URL.createObjectURL(new Blob([json], {type: "application/json"}));
@@ -1287,7 +1350,8 @@ function loadFile(file){
     S.cards = d.cards.map(k => ({id: k.id || newId(), no: 0,
                                  theme: k.theme || "", title: k.title || "",
                                  text: k.text || "", more: k.more || "",
-                                 source: k.source || "", level: k.level || ""}));
+                                 source: k.source || "", level: k.level || "",
+                                 favourite: !!k.favourite}));
     S.themes = d.themes.slice();
     S.meta = d.meta || S.meta;
     S.sel = 0; S.theme = ""; S.query = "";
@@ -1343,7 +1407,8 @@ function importJson(file){
     const cards = d.cards.map(k => {
       const feld = {theme: k.theme || "", title: k.title || "",
                     text: k.text || "", more: k.more || "",
-                    source: k.source || "", level: k.level || ""};
+                    source: k.source || "", level: k.level || "",
+                    favourite: !!k.favourite};
       let alt = k.id ? offen.get(k.id) : null;
       if (!alt){
         const treffer = nachTitel.get(schluessel(feld.title));
@@ -1363,7 +1428,8 @@ function importJson(file){
       if (alt.theme === feld.theme && alt.title === feld.title
           && alt.text === feld.text && alt.more === feld.more
           && (alt.source || "") === feld.source
-          && (alt.level || "") === feld.level) gleich++;
+          && (alt.level || "") === feld.level
+          && !!alt.favourite === feld.favourite) gleich++;
       else geaendert++;
       return {id: alt.id, no: 0, ...feld};
     });
@@ -1562,7 +1628,7 @@ window.Editor = {
         id: k.id, pos: i,
         theme: k.theme || "", title: k.title || "",
         text: k.text || "", more: k.more || "", source: k.source || "",
-        level: k.level || ""
+        level: k.level || "", favourite: !!k.favourite
       }))
     };
   },
@@ -1577,7 +1643,7 @@ window.Editor = {
       id: k.id || newId(), no: 0,
       theme: k.theme || "", title: k.title || "",
       text: k.text || "", more: k.more || "", source: k.source || "",
-      level: k.level || ""
+      level: k.level || "", favourite: !!k.favourite
     }));
     if (Array.isArray(d.themes) && d.themes.length) S.themes = d.themes.slice();
     if (d.meta) S.meta = {...S.meta, ...d.meta};

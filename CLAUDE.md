@@ -81,6 +81,10 @@ lassen, sonst enthalten Editor und Seite einen veralteten Stand.
   als `LEVELS` in `build_cards.py` und wird dem Editor eingesetzt, damit
   der Wortlaut nur an einer Stelle steht. Die drei Werte sind auch in
   `firestore.rules` festgenagelt. Ohne Stufe erscheint gar kein Element.
+- `favourite` ist ein Merker der Redaktion. Favoriten stehen in der Liste
+  oben, durch eine feine Linie vom Rest getrennt. **Nur die Anzeige wird
+  umsortiert** – `S.cards` behält die Reihenfolge des Stapels, sonst käme
+  das PDF durcheinander. Steht in der Datenbank, ist also für alle gleich.
 - `theme` **muss** in `themes` vorkommen.
 - Reihenfolge in `themes` bestimmt die Reihenfolge der Karten im Stapel.
 - `no` wird beim Sortieren neu vergeben, nie von Hand pflegen.
@@ -133,6 +137,11 @@ mitgelieferten PDFs. Betrifft PDF *und* Editor.
 davon ab, ob das System ein deutsches Trennwörterbuch mitbringt – Windows
 ja, Linux-Container nein. Sonst wäre die Ausgabe maschinenabhängig.
 Selbst gesetzte bedingte Trennstriche (U+00AD) wirken weiterhin.
+
+**Favoriten sortieren nur die Anzeige.** `sortedForDisplay()` gibt eine
+Kopie zurück; `S.cards` bleibt in Stapelreihenfolge. Wer stattdessen
+`S.cards` selbst sortiert, ändert `pos` und damit die Reihenfolge im
+gedruckten Stapel – das fällt erst beim Schneiden auf.
 
 **Neue Kartenfelder brauchen eine Regeländerung.** `isCard()` in
 `firestore.rules` zählt die erlaubten Felder mit `hasOnly` auf. Ein Feld,
@@ -269,7 +278,7 @@ schreibt das Speichern danach die Unterschiede statt alles neu.
 
 | Ort | Inhalt |
 |---|---|
-| `cards/<id>` | je Karte ein Dokument: `pos`, `theme`, `title`, `text`, `more`, `source`, `level` |
+| `cards/<id>` | je Karte ein Dokument: `pos`, `theme`, `title`, `text`, `more`, `source`, `level`, `favourite` |
 | `config/meta` | `title`, `footer`, `themes` (Liste, Reihenfolge zählt) |
 | `config/editors` | `emails`: wer schreiben darf. `import`: wem der Einspiel-Knopf gezeigt wird. **Nur von Hand in der Konsole** |
 

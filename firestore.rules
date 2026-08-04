@@ -39,7 +39,7 @@ service cloud.firestore {
        existed still pass - it only forbids fields nobody knows about. */
     function isCard(d) {
       return d.keys().hasOnly(['pos', 'theme', 'title', 'text', 'more',
-                               'source', 'level'])
+                               'source', 'level', 'favourite'])
           && d.pos is number
           && d.theme is string && d.theme.size() <= 100
           && d.title is string && d.title.size() <= 300
@@ -47,7 +47,8 @@ service cloud.firestore {
           && d.more is string && d.more.size() <= 4000
           && (!('source' in d) || (d.source is string && d.source.size() <= 500))
           // Only the three known levels, or empty for "not decided yet".
-          && (!('level' in d) || d.level in ['', 'easy', 'medium', 'expert']);
+          && (!('level' in d) || d.level in ['', 'easy', 'medium', 'expert'])
+          && (!('favourite' in d) || d.favourite is bool);
     }
 
     /* Anyone may read the cards: the page should be shareable so that

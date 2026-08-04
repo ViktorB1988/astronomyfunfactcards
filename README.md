@@ -478,6 +478,11 @@ Passiert das, erscheint jetzt ein Hinweiskasten, der genau das erklärt.
 Steht dort stattdessen ein roter Fehlertext, liegt ein echter Fehler im
 Editor vor.
 
+- **Ganz links in jeder Zeile ein Stern.** Angetippt wird die Karte zum
+  Favoriten und rutscht an den Anfang der Liste; eine feine Linie trennt
+  die Favoriten vom Rest. Das ist reine Anzeige – die Reihenfolge im
+  gedruckten Stapel ändert sich dadurch nicht. Favoriten stehen in der
+  Datenbank, gelten also für alle, die den Editor benutzen.
 - **Links** die Kartenliste mit Suche und Themenfilter. Unter jedem Titel
   steht das zugehörige Thema. Rechts in jeder Zeile erscheint beim
   Überfahren ein **×** zum direkten Löschen – nachgefragt wird trotzdem.
@@ -551,7 +556,8 @@ Alles steht in `facts.json`:
   "text": "Der Fakt, zwei bis drei Sätze, in sich verständlich.",
   "more": "Ein Satz Zusatzinfo für den Absatz „Mehr dazu\".",
   "source": "",
-  "level": ""
+  "level": "",
+  "favourite": false
 }
 ```
 
